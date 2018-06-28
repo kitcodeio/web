@@ -1,0 +1,99 @@
+<body>
+<section class="content-section">
+  <div class="container-fluid">
+    <div class="row">
+      <div class="col-lg-6 col-md-6 col-sm-6">
+        <div class="create-image-container">
+          <h5>Creating Image</h5>
+        </div>
+        <div class="row mt-4">
+          <div class="col-lg-6 col-md-6">
+            <div class="form-group">
+              <input type="email" class="image-name-field form-control" placeholder="Enter the Image Name" [(ngModel)]="label">
+            </div>
+          </div>
+          <div class="col-lg-6 col-md-6"></div>
+          <div class="col-lg-3 col-md-3">
+            <p class="mt-1">OS&nbsp;Environment</p>
+          </div>
+          <div class="col-lg-9 col-md-9">
+            <div class="form-group">
+              <select class="select-os" id="exampleFormControlSelect1">
+                <option #linux>Ubuntu</option>
+              </select>
+            </div>
+          </div>
+          <div class="col-lg-12 col-md-12 mt-5">
+            <p>Components</p>
+          </div>
+          <div class="col-lg-12 col-md-12">
+            <ul class="list-inline">
+              <li class="version-select-item list-inline-item">
+                  <select class="select-os" id="exampleFormControlSelect1"  #select (change)="uniqueV();">
+                    <option value="" selected="" disabled="" id="choose_loc">Dependency</option>
+                    <option>Angular</option>
+                    <option>Node</option>
+                    <option>Python</option>
+                    <option>Jupyter</option>
+                    <option>Tensorflow</option>
+                  </select>
+              </li>
+              <li class="version-select-item list-inline-item">
+                  <select class="select-os" id="exampleFormControlSelect1"  #version>
+                    <option value="" selected="" disabled="" id="choose_loc">Version</option>
+                    <option *ngFor="let tool of versionArray">{{ tool }}</option>
+                  </select>
+              </li>
+              <li class="version-select-item list-inline-item">
+                <button class="btn add-component-button" (click)="addTools();">Add</button>
+              </li>
+            </ul>
+            <div class="component-list-container">
+              <ul class="list-group component-list">
+                  <li class='component-list-item list-group-item d-flex justify-content-between align-items-center' *ngFor="let tool of allTools; let i = index"> 
+                    <span>{{tool.sTool}}{{tool.sVersion}}
+                  </span> 
+                  <span class='remove-list-component'> 
+                    <button class="remove-list-icon" (click)="removeTools(i);">
+                      <i class="fa fa-times-circle-o" aria-hidden="true"></i>
+                    </button>
+                    </span>
+                </li>
+              </ul>
+            </div>
+          </div>
+          <br>
+          <div class="col-lg-12 col-md-12 mt-5">
+            <button class="btn generate-button" (click)="createDockerfile();">Generate</button>
+          </div>
+        </div>
+      </div>
+      <div class="col-lg-6 col-md-6 col-sm-6">
+        <div>
+          <ace-editor
+       [(text)]="text"
+        #editor style="height:400px;"></ace-editor>
+        </div>
+        <br/>
+          <button class="btn save-image-button mt-3" (click)="createImage();">Save</button>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!--image upload and color change section modal section-->
+<div class="modal fade" id="getKeyInfo" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header" style="border:none;">
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true"><i class="fa fa-times-circle" aria-hidden="true"></i></span>
+        </button>
+      </div>
+      <div class="modal-body">
+      </div>
+    </div>
+  </div>
+</div>
+</body>
+<div toastContainer></div>

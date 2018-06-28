@@ -1,0 +1,83 @@
+<body>
+<section>
+	<div class="row no-gutters">
+		<div class="col-lg-6 col-md-6 col-sm-6">
+			<div class="login-img-grid"></div>
+		</div>
+		<div class="col-lg-6 col-md-6 col-sm-6">
+			<div class="login-container p-5">
+				<div class="mb-5">
+					<h2 class="text-center">Sign In</h2>
+				</div>
+				<div class="login-form-container ml-5 mr-5 pt-5">
+					<form>
+		              <div class="md-input login-email-input">
+		                <input class="md-form-control" required="" type="email" [(ngModel)]="emailLogin" name="email">
+		                <span class="highlight"></span>
+		                <span class="bar"></span>
+		                <label>Email ID</label>
+		              </div>
+		              <div class="md-input">
+		                <input class="md-form-control" required="" type="password" [(ngModel)]="passwordLogin" name="password">
+		                <span class="highlight"></span>
+		                <span class="bar"></span>
+		                <label>Password</label>
+		              </div>
+					  <div class="pure-checkbox form-group form-check mb-4 pl-0">
+					    <input type="checkbox" class="form-check-input" id="exampleCheck1">
+					    <label class="form-check-label login-tc-container" for="exampleCheck1">&nbsp;&nbsp;&nbsp;I agree all statement in <a href="#">Terms & Conditions</a></label>
+					  </div>
+								<button type="submit" class="btn login-btn-container pr-4 pl-4" (click)="login();">Sign In</button>
+						<span class="login-register-container">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;New User? <a class="login-register-button" href="#">Create account</a></span>
+					</form>
+				</div>
+			</div>
+			<div class="register-container p-5">
+				<div class="mb-4">
+					<h2 class="text-center">Register</h2>
+				</div>
+				<div class="login-form-container ml-5 mr-5 pt-5">
+					<form>
+		              <div class="md-input register-input">
+		                <input class="md-form-control" required="" type="text" [(ngModel)]="company" name="company">
+		                <span class="highlight"></span>
+		                <span class="bar"></span>
+		                <label>Company Name</label>
+                      </div>
+                      <!-- <div class="md-input register-input">
+		                <input class="md-form-control" required="" type="text" [(ngModel)]="contact" name="contact">
+		                <span class="highlight"></span>
+		                <span class="bar"></span>
+		                <label>Point of contact</label>
+		              </div> -->
+		              <div class="md-input register-input">
+		                <input class="md-form-control" required="" type="email" [(ngModel)]="emailReg" name="email">
+		                <span class="highlight"></span>
+		                <span class="bar"></span>
+		                <label>Email ID</label>
+		              </div>
+		              <div class="md-input register-input">
+		                <input class="md-form-control" required="" type="password" [(ngModel)]="passwordReg" name="password">
+		                <span class="highlight"></span>
+		                <span class="bar"></span>
+		                <label>Password</label>
+		              </div>
+		              <div class="md-input">
+		                <input class="md-form-control" required="" type="password" [(ngModel)]="passwordCon" name="password">
+		                <span class="highlight"></span>
+		                <span class="bar"></span>
+		                <label>Confirm password</label>
+		              </div>
+					  <div class="pure-checkbox form-group form-check mb-4 pl-0">
+					    <input type="checkbox" class="form-check-input" id="exampleCheck2">
+					    <label class="form-check-label login-tc-container" for="exampleCheck2">&nbsp;&nbsp;&nbsp;I agree all statement in <a href="#">Terms & Conditions</a></label>
+					  </div>
+					  <button type="submit" class="btn login-btn-container pr-4 pl-4" (click)="register();">Sign Up</button>
+					  <span class="login-register-container">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Already have an account? <a class="login-sign-button" href="#">Sign In</a></span>
+					</form>
+				</div>
+			</div>
+		</div>
+	</div>
+</section>	
+</body>

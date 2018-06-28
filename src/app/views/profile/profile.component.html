@@ -1,0 +1,26 @@
+<!-- ngx-youtube-player
+<div class="container" style="margin-top: 100px; margin-left: 100px">
+    <youtube-player
+    [videoId]="id"
+    (ready)="savePlayer($event)"
+    (change)="onStateChange($event)"
+    ></youtube-player>
+</div>
+<br />
+<div class="container" style="margin-top: 100; margin-left: 100px">
+   <ul>
+      <li *ngFor="let v of videos; let i = index">
+        <button (click)="play(v);" style="background-color: transparent; border: none">{{v}}</button>
+      </li>
+   </ul>
+</div> -->
+<div [innerHtml]="iframe_html" style="margin-top: 100px; margin-left: 100px">
+</div>
+<div>
+  <ul>
+    <li *ngFor="let v of videos; let i = index">
+      <button style="margin-top: 20px; margin-left: 50px; border: none; background-color: transparent" (click)="play(i);">{{v}}</button>
+    </li>
+  </ul>
+</div>
+

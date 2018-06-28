@@ -1,0 +1,131 @@
+.sidebar {
+    position: fixed;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    z-index: 1031;
+    padding: 48px 0 0;
+    box-shadow: inset -1px 0 0 rgba(0, 0, 0, .1);
+    width: 64px;
+    background-color:#3399cc;
+}
+
+.sidebar-icons{
+	color:#ffffff;
+	padding-bottom:15px;
+	font-size:30px;
+}
+
+.form-control:focus{
+	box-shadow:none;
+	border-color:#ced4da;
+}
+
+.content-section{
+	margin-left: 100px;
+    margin-top: 100px;
+}
+
+.create-image-button{
+	background: transparent;
+    color: #29447f;
+    border: 1px solid #29447f;
+    border-radius: 50px;
+    padding-right: 25px;
+    padding-left: 25px;
+}
+
+.profile-image-container{
+	width:40px;
+	height:40px;
+	border-radius:30px;
+}
+
+.image-container{
+	width: 270px;
+    border-radius: 10px;
+    box-shadow: 0px 3px 13px 1px #cccccc7a;
+    border:none;
+}
+
+.image-desc-container{
+	font-size:14px;
+	color:#cccccc;
+}
+
+.image-running-info{
+	color:#e86d32;
+}
+
+.image-idle-info{
+	border-right: 1px solid #afa6a6;border-left: 1px solid #afa6a6;color:#047afe;
+}
+
+.image-stop-info{
+	color:#63a20f;	
+}
+
+.card-img-top{
+	border-top-left-radius: 10px;border-top-right-radius: 10px;
+}
+
+.image-stats-container{
+	border-bottom-left-radius: 10px;border-bottom-right-radius: 10px;
+}
+
+.getKeyInfo{
+	font-size:14px;
+}
+
+.fa-bell{
+	font-size:20px;
+}
+
+.badge{
+	position: absolute;
+    top: 23px;
+    right:83px;
+    border-radius:10px;
+    text-align: center;
+    font-size: 9px;
+    padding: 2px 3px;
+    line-height: .9;
+    background-color:#3399cc;
+    color:#ffffff;
+}
+
+.search-container{
+	width:40%;
+	margin-right: auto;
+}
+
+.search-input{
+	border-bottom-right-radius:20px;
+	border-top-right-radius:20px;
+	border-left:0;
+}
+
+.search-input::placeholder { /* Chrome, Firefox, Opera, Safari 10.1+ */
+    color: #cccccc;
+    opacity: 1; /* Firefox */
+}
+
+.search-input:-ms-input-placeholder { /* Internet Explorer 10-11 */
+    color:#cccccc;
+}
+
+.search-input::-ms-input-placeholder { /* Microsoft Edge */
+    color:#cccccc;
+}
+
+.search-icon-container{
+	border-bottom-left-radius:20px;
+	border-top-left-radius:20px;
+	border-right:0;
+	background-color:#ffffff;
+	color:#cccccc;
+}
+
+.crud-menu{
+	color:#cccccc;
+}
