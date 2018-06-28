@@ -6,6 +6,7 @@ import { HttpModule, Http } from '@angular/http';
 import * as $ from 'jquery';
 import { NavigationStart } from '@angular/router';
 import { stringify } from '@angular/core/src/util';
+import { ToastContainerDirective, ToastrService } from 'ngx-toastr';
 
 
 @Component({
@@ -23,7 +24,8 @@ export class LoginComponent implements OnInit {
   emailReg: string;
   passwordReg: string;
   company: string;
-  constructor(private router: Router, private authService: AuthserviceService, private route: ActivatedRoute) {
+  passwordCon:string;
+  constructor(private router: Router, private authService: AuthserviceService, private route: ActivatedRoute, private toastrService: ToastrService) {
   
    }
 
@@ -34,7 +36,7 @@ export class LoginComponent implements OnInit {
         e.preventDefault();
         $('.login-container').fadeOut('slow',function(){
           $('.register-container').fadeIn('slow');		
-        });
+        }); 
       });
       $(document).on('click','.login-sign-button',function(e){
         e.preventDefault();
@@ -69,31 +71,39 @@ login(): void {
     }
        });
     } else {
-      this.error = 'Invaild Email format!';
+      this.toastrService.error('Please enter valid email');
     }
   } else {
-    this.error = 'fields are empty';
+    this.toastrService.error('Please enter all feild');
   }
 }
 
   register(): void {
-    if (this.emailReg && this.company && this.passwordReg) {
-      this.authService.register(
-        this.company,
-        this.emailReg,
-        this.passwordReg
-      )
-        .subscribe(response => {
-          if(!response.error) {	    
-            this.authService.setToken(response.token);
-            window.location.reload();
-            //this.router.navigate(['/app/dashboard']);
-      
-          } else {
-            this.error = response.error;
-          }
-       });
-       
+    if(this.passwordCon==this.passwordReg){
+      if (this.emailReg && this.company && this.passwordReg) {
+        this.authService.register(
+          this.company,
+          this.emailReg,
+          this.passwordReg
+        )
+          .subscribe(response => {
+            if(!response.error) {	    
+              this.authService.setToken(response.token);
+              window.location.reload();
+              //this.router.navigate(['/app/dashboard']);
+        
+            } else {
+              this.error = response.error;
+            }
+         });
+         
+      }
+      else{
+        this.toastrService.error('Please enter all feild');
+      }
+    }
+    else{
+      this.toastrService.error('Password does not match');
     }
   }
 

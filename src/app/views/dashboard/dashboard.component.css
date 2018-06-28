@@ -130,3 +130,7 @@
 .crud-menu{
 	color:#cccccc;
 }
+
+.crud-menu-delete:hover{
+	color:#e03939;
+}

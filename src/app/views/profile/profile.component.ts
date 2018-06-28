@@ -9,6 +9,13 @@ import { EmbedVideoService } from 'ngx-embed-video';
 export class ProfileComponent implements OnInit {
 
   iframe_html: any;
+  title:string;
+  titles=[
+    "NodeJS for beginners",
+    "Angular 5",
+    "Test1",
+    "Test2"
+  ]
   videos=[
     "https://www.youtube.com/watch?v=KMX1mFEmM3E",
     "https://www.youtube.com/watch?v=ZWJH7JQCjLM", 
@@ -23,6 +30,7 @@ export class ProfileComponent implements OnInit {
   }
 
   play(index){
+    this.title = this.titles[index] +" "+"is playing";
     this.iframe_html = this.embedService.embed(this.videos[index]);
   }
 

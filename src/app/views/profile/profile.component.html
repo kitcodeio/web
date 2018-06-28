@@ -16,11 +16,21 @@
 </div> -->
 <div [innerHtml]="iframe_html" style="margin-top: 100px; margin-left: 100px">
 </div>
-<div>
+<div style="margin-left: 100px">
+  <p>
+    {{title}}
+  </p>
+</div>
+<div style="margin-top: 20px">
   <ul>
-    <li *ngFor="let v of videos; let i = index">
+    <li *ngFor="let v of titles; let i = index">
       <button style="margin-top: 20px; margin-left: 50px; border: none; background-color: transparent" (click)="play(i);">{{v}}</button>
     </li>
   </ul>
 </div>
+
+<!-- <video width="550" height="500" muted 
+autoplay controls style="margin-top: 100px; margin-left: 100px">
+    <source src="../../../assets/Deadpool_2.mkv" type="video/mp4">
+  </video> -->
 

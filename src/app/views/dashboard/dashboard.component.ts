@@ -6,6 +6,7 @@ import {Router} from '@angular/router';
 import { HttpService } from '../../services/http/http.service'
 import { viewClassName } from '@angular/compiler';
 import '../../../../node_modules/bootstrap/dist/js/bootstrap.min.js'
+import { ToastContainerDirective, ToastrService } from 'ngx-toastr';
 
 @Component({
   selector: 'app-dashboard',
@@ -19,7 +20,7 @@ export class DashboardComponent implements OnInit {
   id:any;
   imageId:any;
 
-  constructor(private userService: UserService, private router: Router, private http :HttpService,private elementRef: ElementRef) {}
+  constructor(private userService: UserService, private router: Router, private http :HttpService,private elementRef: ElementRef, private toastrService: ToastrService) {}
   @ViewChild('ref') ref:ElementRef;
 
   change(image:any): void{
@@ -29,28 +30,40 @@ export class DashboardComponent implements OnInit {
   
   ngOnInit() {
 
-    this.http.getData('Image')
-    .subscribe((res) => {
-      this.allImages=res.entity;
-      console.log('image',this.allImages);
-    })
-    
+    this.populateImage();
+
     $(function(){
     });
     
   }
 
+  populateImage(){
+
+    this.http.getData('Image')
+    .subscribe((res) => {
+      this.allImages=res.entity;
+      console.log('image',this.allImages);
+    })
+
+  }
+
     //Delete image
     deleteImage(imageId) {
-      this.http.deleteData('Image',this.imageId)
-      .subscribe((res) => {
-        console.log('res');
-      })
 
-      console.log('Hi..');
+      console.log(imageId);
+      this.http.deleteData('Image',imageId)
+      .subscribe((res) => {
+        console.log(res);
+        this.populateImage();
+        if(res.error){
+          this.toastrService.error(res.error);
+        }
+        else{
+          this.toastrService.success(res.message);
+        }   
+      })
     }
   
-
   createImage(){
 
     this.router.navigate(['/app/image']);
