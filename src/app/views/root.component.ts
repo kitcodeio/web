@@ -15,8 +15,6 @@ export class RootComponent implements OnInit {
 
   ngOnInit() {
 
-    //this.userName = this.userService.getToken();
-    //console.log(this.userName);
   }
 
   logout(): void {

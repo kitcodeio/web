@@ -34,14 +34,14 @@ export class LoginComponent implements OnInit {
     $(function(){
       $(document).on('click','.login-register-button',function(e){
         e.preventDefault();
-        $('.login-container').fadeOut('slow',function(){
-          $('.register-container').fadeIn('slow');		
+        $('.login-container').fadeOut(200,function(){
+          $('.register-container').fadeIn(200);		
         }); 
       });
       $(document).on('click','.login-sign-button',function(e){
         e.preventDefault();
-        $('.register-container').fadeOut('slow',function(){
-          $('.login-container').fadeIn('slow');
+        $('.register-container').fadeOut(200,function(){
+          $('.login-container').fadeIn(200);
         });
       });
     });
@@ -64,8 +64,6 @@ login(): void {
           window.location.reload();
         //this.router.navigate(['/app/dashboard']);
         
-        console.log('Res',response);
-        
     } else {
       this.error = response.error;
     }
@@ -74,7 +72,7 @@ login(): void {
       this.toastrService.error('Please enter valid email');
     }
   } else {
-    this.toastrService.error('Please enter all feild');
+    this.toastrService.error('Please enter all fields');
   }
 }
 

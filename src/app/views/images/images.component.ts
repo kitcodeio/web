@@ -180,12 +180,10 @@ export class ImagesComponent implements OnInit, AfterViewInit {
 //Create image
   createImage() {
 
-    console.log('label',this.label);
     this.http.postData('Image',{
       label:this.label,
       file:this.editor.value
     }).subscribe((res) => {
-      console.log(res.status);
 
       if(res.status==200)
       {
@@ -206,8 +204,6 @@ export class ImagesComponent implements OnInit, AfterViewInit {
       finalString = finalString + this.docker[tool.sTool];
    });
 
-  // console.log('final',finalString);
-
    this.editor.value =  this.docker.stringOs + finalString;
 
   }
@@ -227,20 +223,7 @@ export class ImagesComponent implements OnInit, AfterViewInit {
 
     let flag:boolean=true;
 
-          
-    if(this.tool.nativeElement.value=='Node'){
-      this.docker.Node = this.docker.Node + this.En_version.nativeElement.value + '.0.0\nRUN curl --silent -o- https://raw.githubusercontent.com/creationix/nvm/v0.31.2/install.sh | bash\nRUN source $NVM_DIR/nvm.sh\&& nvm install $NODE_VERSION\&& nvm alias default $NODE_VERSION\&& nvm use default\nENV NODE_PATH $NVM_DIR/v$NODE_VERSION/lib/node_modules\nENV PATH $NVM_DIR/versions/node/v$NODE_VERSION/bin:$PATH';
-    } 
-    else if(this.tool.nativeElement.value=='Angular'){
-      this.docker.Angular = this.docker.Angular + this.En_version.nativeElement.value + '.0.0\n'; 
-    }
-    else if(this.tool.nativeElement.value=='Python'){
-      this.docker.Python = this.docker.Python + this.En_version.nativeElement.value + '.0 python-dev python-pip python-virtualenv && \ \nrm -rf /var/lib/apt/lists/*\n'
-    }
-    
-
     this.version = this.En_version.nativeElement.value;
-    //console.log(this.allTools);
     if(this.tool.nativeElement.value==""){
       console.log("Please select the tool fist");
     }
@@ -257,6 +240,16 @@ export class ImagesComponent implements OnInit, AfterViewInit {
 
       if(flag){
 
+        if(this.tool.nativeElement.value=='Node'){
+          this.docker.Node = this.docker.Node + this.En_version.nativeElement.value + '.0.0\nRUN curl --silent -o- https://raw.githubusercontent.com/creationix/nvm/v0.31.2/install.sh | bash\nRUN source $NVM_DIR/nvm.sh\&& nvm install $NODE_VERSION\&& nvm alias default $NODE_VERSION\&& nvm use default\nENV NODE_PATH $NVM_DIR/v$NODE_VERSION/lib/node_modules\nENV PATH $NVM_DIR/versions/node/v$NODE_VERSION/bin:$PATH';
+        } 
+        else if(this.tool.nativeElement.value=='Angular' && this.En_version.nativeElement.value!=""){
+          this.docker.Angular = this.docker.Angular + this.En_version.nativeElement.value + '.0.0\n'; 
+        }
+        else if(this.tool.nativeElement.value=='Python'){
+          this.docker.Python = this.docker.Python + this.En_version.nativeElement.value + '.0 python-dev python-pip python-virtualenv && \ \nrm -rf /var/lib/apt/lists/*\n'
+        }
+
         this.allTools.push({sTool: this.tool.nativeElement.value, sVersion:this.En_version.nativeElement.value});
         console.log('version',this.version)
 
@@ -265,7 +258,6 @@ export class ImagesComponent implements OnInit, AfterViewInit {
   }
 
   removeTools(index){
-    console.log('index',index);
 
     this.allTools.splice(index,1);
 
@@ -281,7 +273,6 @@ export class ImagesComponent implements OnInit, AfterViewInit {
    });
 
    this.editor.value =  this.docker.stringOs + finalString;
-   console.log(this.allTools);
 
   }
 
@@ -301,9 +292,7 @@ export class ImagesComponent implements OnInit, AfterViewInit {
     }    
     else if(this.tool.nativeElement.value=='Tensorflow'){
       this.versionArray=[];
-    }     
-
-    console.log(this.versionArray);
+    }
   }
 
 }

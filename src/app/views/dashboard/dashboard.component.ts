@@ -19,13 +19,14 @@ export class DashboardComponent implements OnInit {
   allImages: any=[];
   id:any;
   imageId:any;
+  emptyMessage:string;
+  flag:boolean = false;
 
   constructor(private userService: UserService, private router: Router, private http :HttpService,private elementRef: ElementRef, private toastrService: ToastrService) {}
   @ViewChild('ref') ref:ElementRef;
 
   change(image:any): void{
     this.selected = image;
-    console.log(this.selected.id);
   }
   
   ngOnInit() {
@@ -42,18 +43,18 @@ export class DashboardComponent implements OnInit {
     this.http.getData('Image')
     .subscribe((res) => {
       this.allImages=res.entity;
-      console.log('image',this.allImages);
+      if(this.allImages.length==0){
+        this.emptyMessage='you do not have any image';
+        this.flag=true;
+      }
     })
 
   }
 
     //Delete image
     deleteImage(imageId) {
-
-      console.log(imageId);
       this.http.deleteData('Image',imageId)
-      .subscribe((res) => {
-        console.log(res);
+      .subscribe((res) => { 
         this.populateImage();
         if(res.error){
           this.toastrService.error(res.error);

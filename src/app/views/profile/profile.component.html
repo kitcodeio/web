@@ -14,23 +14,41 @@
       </li>
    </ul>
 </div> -->
-<div [innerHtml]="iframe_html" style="margin-top: 100px; margin-left: 100px">
-</div>
-<div style="margin-left: 100px">
-  <p>
-    {{title}}
-  </p>
-</div>
-<div style="margin-top: 20px">
-  <ul>
-    <li *ngFor="let v of titles; let i = index">
-      <button style="margin-top: 20px; margin-left: 50px; border: none; background-color: transparent" (click)="play(i);">{{v}}</button>
-    </li>
-  </ul>
-</div>
+
 
 <!-- <video width="550" height="500" muted 
 autoplay controls style="margin-top: 100px; margin-left: 100px">
     <source src="../../../assets/Deadpool_2.mkv" type="video/mp4">
   </video> -->
 
+
+  <body>
+      <section class="content-section">
+          <div class="row no-gutters">
+            <div class="col-lg-12 col-md-12 col-sm-12">
+              <div class="create-image-container">
+                  <iframe height = "400" width = "500" src="https://www.youtube.com/embed/iHhcHTlGtRs" frameborder="0" allowfullscreen></iframe>
+              </div>
+            </div>
+          </div>
+          <div class="mt-4"></div>
+          <div class="row no-gutters">
+            <div class="col-lg-4 col-md-4 col-sm-4">
+                <ul class="playlist-container">
+                     <li class="playlist-item" *ngFor="let v of titles; let i = index">
+                       <a (click)="play(i);">
+                          <i style="color:#0606a4;" class="fa fa-play-circle" aria-hidden="true"></i>
+                          &nbsp;&nbsp;&nbsp;<span>{{v}}</span>
+                       </a>
+                     </li>
+                </ul>
+            </div>
+          </div>
+      </section>
+      <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+      <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.1/js/bootstrap.min.js"></script>
+      <script type="text/javascript">
+        $(function(){
+        });
+      </script>	
+      </body>
