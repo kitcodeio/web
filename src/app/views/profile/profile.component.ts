@@ -29,8 +29,9 @@ export class ProfileComponent implements OnInit {
   ngOnInit() {
     this.route.params.subscribe(params=>{
       this.http.getCourse('Course').subscribe((res) => {
-        this.courseDetail=res.entity[params.index];
-        this.videos = this.courseDetail.CourseLinks;
+        this.courseDetail=res.entity[params.index]; 
+	this.courseDetail.CourseLinks = this.courseDetail.CourseLinks.sort(function(a,b) {return (a.index > b.index) ? 1 : ((b.index > a.index) ? -1 : 0);} );
+	this.videos = this.courseDetail.CourseLinks;
 	this.youtubeUrl = this.domSanitizer.bypassSecurityTrustResourceUrl(this.courseDetail.CourseLinks[0].link);
       });     
     });
