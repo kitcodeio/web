@@ -14,9 +14,9 @@ export class ProfileComponent implements OnInit {
   iframe_html: any;
   title:string;
   user:any;
-  videos=[{title: "NodeJS for beginners", link: "https://www.youtube.com/embed/KMX1mFEmM3E"},
+	videos/*=[{title: "NodeJS for beginners", link: "https://www.youtube.com/embed/KMX1mFEmM3E"},
 	  {title:"Angular 5",link:"https://www.youtube.com/embed/ZWJH7JQCjLM" },
-	  {title:"Test1", link: "https://www.youtube.com/embed/RUKcrphvO8I"}];
+	  {title:"Test1", link: "https://www.youtube.com/embed/RUKcrphvO8I"}]*/;
   youtubeUrl;
   ide;
 
