@@ -7,6 +7,7 @@ import * as $ from 'jquery';
 import { NavigationStart } from '@angular/router';
 import { stringify } from '@angular/core/src/util';
 import { ToastContainerDirective, ToastrService } from 'ngx-toastr';
+import '../../../node_modules/font-awesome/css/font-awesome.css'
 
 
 @Component({
