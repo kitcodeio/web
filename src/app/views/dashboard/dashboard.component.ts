@@ -69,13 +69,9 @@ export class DashboardComponent implements OnInit {
   }
 
   populateCourses(){
-      this.http.getCourse('Image')
+      this.http.getCourse('Course')
     .subscribe((res) => {
       this.allImages=res.entity;
-      if(this.allImages.length==0){
-        this.emptyMessage='you do not have any image';
-        this.flag=true;
-      }
       console.log(res);
     })
 
