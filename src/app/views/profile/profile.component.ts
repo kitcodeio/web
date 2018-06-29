@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { EmbedVideoService } from 'ngx-embed-video';
+//import { EmbedVideoService } from 'ngx-embed-video';
 
 @Component({
   selector: 'app-profile',
@@ -25,17 +25,17 @@ export class ProfileComponent implements OnInit {
 
   youtubeUrl = "https://www.youtube.com/watch?v=iHhcHTlGtRs";
 
-  constructor( private embedService: EmbedVideoService ) { 
+	constructor( /*private embedService: EmbedVideoService*/ ) { 
   
   }
 
-  play(index){
-    this.title = this.titles[index] +" "+"is playing";
-    this.iframe_html = this.embedService.embed(this.videos[index]);
-  }
+	//play(index){
+	//    this.title = this.titles[index] +" "+"is playing";
+	//    this.iframe_html = this.embedService.embed(this.videos[index]);
+	//  }
 
   ngOnInit() {
-    this.iframe_html = this.embedService.embed(this.youtubeUrl);
+	  //this.iframe_html = this.embedService.embed(this.youtubeUrl);
   }
 
 }
