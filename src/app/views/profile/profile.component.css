@@ -143,5 +143,8 @@
 
 .playlist-container{
     list-style-type:none;
-    padding-left:0;
+	padding-left:0;
+	overflow-y: auto;
+	height: 150px;
+	width: 500px;
 }

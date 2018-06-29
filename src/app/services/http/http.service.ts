@@ -39,5 +39,11 @@ export class HttpService {
     return this.http.get(this.baseUrl+'read/'+model+'/'+id)
       .pipe(catchError((error)=>{return of(error);}));
   }
+
+  getCourse(model: string): Observable<any> {
+    return this.http.get(this.baseUrl+'read/'+model)
+    .pipe(catchError((error)=>{return of(error);}));
+  }
+
   constructor(private http:CustomHttpService) { }
 }

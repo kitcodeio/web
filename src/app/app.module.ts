@@ -17,8 +17,6 @@ import { AceEditorModule } from 'ng2-ace-editor';
 import { SimpleNotificationsModule } from 'angular2-notifications';
 import { ToastrModule, ToastNoAnimation, ToastNoAnimationModule,} from 'ngx-toastr';
 import { platformBrowserDynamic } from '@angular/platform-browser-dynamic';
-import { YoutubePlayerModule } from 'ngx-youtube-player';
-import { EmbedVideo } from 'ngx-embed-video';
 
 
 @NgModule({
@@ -42,9 +40,7 @@ import { EmbedVideo } from 'ngx-embed-video';
     ToastNoAnimationModule,
     ToastrModule.forRoot({
       toastComponent: ToastNoAnimation,
-    }),
-    YoutubePlayerModule,
-    EmbedVideo.forRoot()
+    })
   ],
   providers: [AuthserviceService],
   bootstrap: [AppComponent]

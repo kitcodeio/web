@@ -1,7 +1,7 @@
 import { Component, OnInit, ElementRef, ViewChild, Input } from '@angular/core';
 import * as $ from 'jquery';
 import { RouterModule, Routes } from '@angular/router';
-import {Router} from '@angular/router';
+import { Router } from '@angular/router';
 import { HttpService } from '../../services/http/http.service'
 import { viewClassName } from '@angular/compiler';
 import '../../../../node_modules/bootstrap/dist/js/bootstrap.min.js'
@@ -27,46 +27,57 @@ export class DashboardComponent implements OnInit {
   change(image:any): void{
     this.selected = image;
   }
-  
-  ngOnInit() {
 
-    this.populateImage();
+  ngOnInit() {
+    this.populateCourses();
+    //this.populateImage();
 
     $(function(){
     });
-    
+
   }
 
-  populateImage(){
+  // populateImage(){
 
-    this.http.getData('Image')
+  //   this.http.getData('Image')
+  //   .subscribe((res) => {
+  //     this.allImages=res.entity;
+  //     if(this.allImages.length==0){
+  //       this.emptyMessage='you do not have any image';
+  //       this.flag=true;
+  //     }
+  //   })
+
+  // }
+
+    //Delete image
+    deleteImage(imageId) {
+      this.http.deleteData('Image',imageId)
+      .subscribe((res) => {
+        //this.populateImage();
+        if(res.error){
+          this.toastrService.error(res.error);
+        }
+        else{
+          this.toastrService.success(res.message);
+        }
+      })
+    }
+
+  createImage(){
+    this.router.navigate(['/app/image']);
+  }
+
+  populateCourses(){
+      this.http.getCourse('Image')
     .subscribe((res) => {
       this.allImages=res.entity;
       if(this.allImages.length==0){
         this.emptyMessage='you do not have any image';
         this.flag=true;
       }
+      console.log(res);
     })
-
-  }
-
-    //Delete image
-    deleteImage(imageId) {
-      this.http.deleteData('Image',imageId)
-      .subscribe((res) => { 
-        this.populateImage();
-        if(res.error){
-          this.toastrService.error(res.error);
-        }
-        else{
-          this.toastrService.success(res.message);
-        }   
-      })
-    }
-  
-  createImage(){
-
-    this.router.navigate(['/app/image']);
 
   }
 }

@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { EmbedVideoService } from 'ngx-embed-video';
+import {DomSanitizer} from "@angular/platform-browser";
 
 @Component({
   selector: 'app-profile',
@@ -17,25 +17,24 @@ export class ProfileComponent implements OnInit {
     "Test2"
   ]
   videos=[
-    "https://www.youtube.com/watch?v=KMX1mFEmM3E",
-    "https://www.youtube.com/watch?v=ZWJH7JQCjLM", 
-    "https://www.youtube.com/watch?v=RUKcrphvO8I",
-    "https://www.youtube.com/watch?v=iHhcHTlGtRs"
+    "https://www.youtube.com/embed/KMX1mFEmM3E",
+    "https://www.youtube.com/embed/ZWJH7JQCjLM", 
+    "https://www.youtube.com/embed/RUKcrphvO8I",
+    "https://www.youtube.com/embed/iHhcHTlGtRs"
   ]
 
-  youtubeUrl = "https://www.youtube.com/watch?v=iHhcHTlGtRs";
+  youtubeUrl;
 
-  constructor( private embedService: EmbedVideoService ) { 
+  constructor(private domSanitizer : DomSanitizer) { 
   
   }
 
   play(index){
-    this.title = this.titles[index] +" "+"is playing";
-    this.iframe_html = this.embedService.embed(this.videos[index]);
+    this.youtubeUrl = this.domSanitizer.bypassSecurityTrustResourceUrl(this.videos[index]);
   }
 
   ngOnInit() {
-    this.iframe_html = this.embedService.embed(this.youtubeUrl);
+    this.youtubeUrl = this.domSanitizer.bypassSecurityTrustResourceUrl('https://www.youtube.com/embed/iHhcHTlGtRs');
   }
 
 }
