@@ -12,13 +12,13 @@
         <div class="col-lg-3 col-md-3 col-sm-3" *ngFor="let image of allImages; let i=index">
           <div class="card image-container">
             <!-- <img class="card-img-top" src="../../../assets/images/image.png" alt="Card image cap"> -->
-            <div class="card-body">
+            <div class="card-body"><!--
               <a href="#" class="float-right crud-menu" (click)="deleteImage(image.id);">
                 <i class="crud-menu-delete fa fa-trash" aria-hidden="true"></i>
-              </a>
+	      </a>-->
               <h5 class="card-title" #ref>{{image.label}}</h5>
               <p class="image-desc-container card-text">It is a long established fact that a reader will be distracted by the end of it.</p>
-              <a (click)="getVideos(index);">&nbsp;&nbsp;&nbsp;Get started</a><br/>
+              <a (click)="getVideos(i);">&nbsp;&nbsp;&nbsp;Get started</a><br/>
               <!-- <a [routerLink]="/app/profile" data-target="#getKeyInfo" data-toggle="modal" class="text-uppercase getKeyInfo" (click)="change(image);"><i class="fa fa-unlock-alt" aria-hidden="true"></i>&nbsp;&nbsp;&nbsp;Get started</a><br/> -->
             </div> 
             <!-- <div class="row bg-light no-gutters image-stats-container">

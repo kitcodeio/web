@@ -24,8 +24,6 @@ export class HttpService {
   }
 
   postData(model: string, data:any): Observable<any> {
-    console.log('main aab custom http ko bhejunga');
-    console.log(this.baseUrl+'create/'+model);
     return this.http.post(this.baseUrl+'create/'+model,data)
       .pipe(catchError((error)=>{return of(error);}));
   }

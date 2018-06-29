@@ -17,7 +17,7 @@ const routes: Routes = [
         children: [
             { path: 'dashboard', component: DashboardComponent },
             { path: 'image', component: ImagesComponent},
-            { path: 'profile', component: ProfileComponent}
+	    { path: 'profile/:index', component: ProfileComponent}
         ]
     }
 ];
