@@ -5,7 +5,6 @@ import { HttpModule, Http } from '@angular/http';
 import { HttpClientModule } from '@angular/common/http';
 import { AppComponent } from './app.component';
 import { ImagesComponent } from './views/images/images.component';
-import { ContainersComponent } from './views/containers/containers.component';
 import { ProfileComponent } from './views/profile/profile.component';
 import { DashboardComponent } from './views/dashboard/dashboard.component';
 import { LoginComponent } from './login/login.component';
@@ -26,7 +25,6 @@ import { EmbedVideo } from 'ngx-embed-video';
   declarations: [
     AppComponent,
     ImagesComponent,
-    ContainersComponent,
     ProfileComponent,
     DashboardComponent,
     LoginComponent,
