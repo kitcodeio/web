@@ -1,6 +1,5 @@
 import { Component, OnInit, ElementRef, ViewChild, Input } from '@angular/core';
 import * as $ from 'jquery';
-import { UserService } from '../../services/users/user.service'
 import { RouterModule, Routes } from '@angular/router';
 import {Router} from '@angular/router';
 import { HttpService } from '../../services/http/http.service'
@@ -22,7 +21,7 @@ export class DashboardComponent implements OnInit {
   emptyMessage:string;
   flag:boolean = false;
 
-  constructor(private userService: UserService, private router: Router, private http :HttpService,private elementRef: ElementRef, private toastrService: ToastrService) {}
+  constructor(private router: Router, private http :HttpService,private elementRef: ElementRef, private toastrService: ToastrService) {}
   @ViewChild('ref') ref:ElementRef;
 
   change(image:any): void{

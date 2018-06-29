@@ -68,7 +68,7 @@ export class ImagesComponent implements OnInit, AfterViewInit {
   stringOfAllImages=[];
   label:string;
 
-  constructor(private router:Router, private http: HttpService, private eleRef: ElementRef, private toastrService: ToastrService) {}
+  constructor(private router:Router, private http: HttpService, private eleRef: ElementRef, public toastrService: ToastrService) {}
 
 
   ngOnInit() {
@@ -187,10 +187,10 @@ export class ImagesComponent implements OnInit, AfterViewInit {
 
       if(res.status==200)
       {
-        this.toastrService.success('Image creation started');
+        this.toastrService.success('Image creation started','Success',{positionClass:'toast-bottom-right'});
       }
       else{
-        this.toastrService.error('Error');
+        this.toastrService.error('Dockerfile is not correct','Error',{positionClass:'toast-bottom-right'});
       }
     })
   }

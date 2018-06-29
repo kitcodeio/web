@@ -69,10 +69,10 @@ login(): void {
     }
        });
     } else {
-      this.toastrService.error('Please enter valid email');
+      this.toastrService.error('Please enter valid email','Error',{positionClass:'toast-bottom-right'});
     }
   } else {
-    this.toastrService.error('Please enter all fields');
+    this.toastrService.error('Please enter all fields','Error', {positionClass:'toast-bottom-right'});
   }
 }
 
@@ -92,16 +92,17 @@ login(): void {
         
             } else {
               this.error = response.error;
+              this.toastrService.error(response.error,'Error',{positionClass:'toast-bottom-right'});
             }
          });
          
       }
       else{
-        this.toastrService.error('Please enter all feild');
+        this.toastrService.error('Please enter all feild','Error',{positionClass:'toast-bottom-right'});
       }
     }
     else{
-      this.toastrService.error('Password does not match');
+      this.toastrService.error('Password does not match','Error',{positionClass:'toast-bottom-right'});
     }
   }
 

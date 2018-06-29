@@ -14,7 +14,7 @@ export class AuthserviceService {
   constructor(private http: HttpClient) { }
 
   login(email: string, password: string): Observable<any> {
-    return this.http.post('http://localhost:8080/login', {
+    return this.http.post('http://kitcode.io/login', {
       email: email,
       password: password
     }).pipe(
@@ -26,7 +26,7 @@ export class AuthserviceService {
   }
 
   register(name: string, email: string, password: string): Observable<any> {
-    return this.http.post('http://localhost:8080/register', {
+    return this.http.post('http://kitcode.io/register', {
       name: name,
       email: email,
       password: password
