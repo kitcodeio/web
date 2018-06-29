@@ -1,9 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-<<<<<<< HEAD
 import {DomSanitizer} from "@angular/platform-browser";
-=======
-//import { EmbedVideoService } from 'ngx-embed-video';
->>>>>>> 03b73dc999fdf09a7240f11c18cb0653f80f02a2
 
 @Component({
   selector: 'app-profile',
@@ -29,7 +25,6 @@ export class ProfileComponent implements OnInit {
 
   youtubeUrl;
 
-<<<<<<< HEAD
   constructor(private domSanitizer : DomSanitizer) { 
   
   }
@@ -40,19 +35,6 @@ export class ProfileComponent implements OnInit {
 
   ngOnInit() {
     this.youtubeUrl = this.domSanitizer.bypassSecurityTrustResourceUrl('https://www.youtube.com/embed/iHhcHTlGtRs');
-=======
-	constructor( /*private embedService: EmbedVideoService*/ ) { 
-  
-  }
-
-	//play(index){
-	//    this.title = this.titles[index] +" "+"is playing";
-	//    this.iframe_html = this.embedService.embed(this.videos[index]);
-	//  }
-
-  ngOnInit() {
-	  //this.iframe_html = this.embedService.embed(this.youtubeUrl);
->>>>>>> 03b73dc999fdf09a7240f11c18cb0653f80f02a2
   }
 
 }
