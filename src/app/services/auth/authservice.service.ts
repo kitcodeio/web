@@ -51,7 +51,6 @@ export class AuthserviceService {
 
     const date = new Date(0); 
     date.setUTCSeconds(decoded.exp);
-    console.log(date);
     return date;
   }
 
@@ -62,6 +61,12 @@ export class AuthserviceService {
     const date = this.getTokenExpirationDate(token);
     if(date === undefined) return false;
     return !(date.valueOf() > new Date().valueOf());
+  }
+
+  getUserData(): any {
+    let token = this.getToken();
+    const decoded = jwt_decode(token);
+    return decoded;
   }
 
 }
