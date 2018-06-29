@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import {DomSanitizer} from "@angular/platform-browser";
+import { CourseService } from '../../course.service';
 
 @Component({
   selector: 'app-profile',
@@ -13,19 +14,17 @@ export class ProfileComponent implements OnInit {
   titles=[
     "NodeJS for beginners",
     "Angular 5",
-    "Test1",
-    "Test2"
+    "Test1"
   ]
   videos=[
     "https://www.youtube.com/embed/KMX1mFEmM3E",
     "https://www.youtube.com/embed/ZWJH7JQCjLM", 
-    "https://www.youtube.com/embed/RUKcrphvO8I",
-    "https://www.youtube.com/embed/iHhcHTlGtRs"
+    "https://www.youtube.com/embed/RUKcrphvO8I"
   ]
 
   youtubeUrl;
 
-  constructor(private domSanitizer : DomSanitizer) { 
+  constructor(private domSanitizer : DomSanitizer, private course:CourseService) { 
   
   }
 
@@ -34,7 +33,8 @@ export class ProfileComponent implements OnInit {
   }
 
   ngOnInit() {
-    this.youtubeUrl = this.domSanitizer.bypassSecurityTrustResourceUrl('https://www.youtube.com/embed/iHhcHTlGtRs');
+    console.log(this.course.getarray());
+    this.youtubeUrl = this.domSanitizer.bypassSecurityTrustResourceUrl('https://www.youtube.com/embed/RUKcrphvO8I');
   }
 
 }

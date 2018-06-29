@@ -9,7 +9,7 @@
       </div>
       <div class="mt-4"></div>
       <div class="row no-gutters">
-        <div class="col-lg-3 col-md-3 col-sm-3" *ngFor="let image of allImages">
+        <div class="col-lg-3 col-md-3 col-sm-3" *ngFor="let image of allImages; let i=index">
           <div class="card image-container">
             <!-- <img class="card-img-top" src="../../../assets/images/image.png" alt="Card image cap"> -->
             <div class="card-body">
@@ -18,7 +18,7 @@
               </a>
               <h5 class="card-title" #ref>{{image.label}}</h5>
               <p class="image-desc-container card-text">It is a long established fact that a reader will be distracted by the end of it.</p>
-              <a routerLink="/app/profile"><i class="fa fa-unlock-alt" aria-hidden="true"></i>&nbsp;&nbsp;&nbsp;Get started</a><br/>
+              <a (click)="getVideos(index);">&nbsp;&nbsp;&nbsp;Get started</a><br/>
               <!-- <a [routerLink]="/app/profile" data-target="#getKeyInfo" data-toggle="modal" class="text-uppercase getKeyInfo" (click)="change(image);"><i class="fa fa-unlock-alt" aria-hidden="true"></i>&nbsp;&nbsp;&nbsp;Get started</a><br/> -->
             </div> 
             <!-- <div class="row bg-light no-gutters image-stats-container">

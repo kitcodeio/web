@@ -6,6 +6,7 @@ import { HttpService } from '../../services/http/http.service'
 import { viewClassName } from '@angular/compiler';
 import '../../../../node_modules/bootstrap/dist/js/bootstrap.min.js'
 import { ToastContainerDirective, ToastrService } from 'ngx-toastr';
+import { CourseService } from '../../course.service';
 
 @Component({
   selector: 'app-dashboard',
@@ -20,8 +21,9 @@ export class DashboardComponent implements OnInit {
   imageId:any;
   emptyMessage:string;
   flag:boolean = false;
+  @Input() lable:string;
 
-  constructor(private router: Router, private http :HttpService,private elementRef: ElementRef, private toastrService: ToastrService) {}
+  constructor(private course:CourseService, private router: Router, private http :HttpService,private elementRef: ElementRef, private toastrService: ToastrService) {}
   @ViewChild('ref') ref:ElementRef;
 
   change(image:any): void{
@@ -68,12 +70,18 @@ export class DashboardComponent implements OnInit {
     this.router.navigate(['/app/image']);
   }
 
+  getVideos(index){ 
+    this.course.selected = index;
+    console.log(this.course.selected, this.course.getarray());
+    this.router.navigate(['/app/profile']);
+  }
+
   populateCourses(){
       this.http.getCourse('Course')
     .subscribe((res) => {
       this.allImages=res.entity;
-      console.log(res);
+      this.course.alldata = this.allImages;
+      console.log(this.course.alldata)
     })
-
   }
 }
