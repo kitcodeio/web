@@ -73,6 +73,10 @@ export class ImagesComponent implements OnInit, AfterViewInit {
 
   ngOnInit() {
 
+    console.log(this.docker.Angular.length);
+    console.log(this.docker.Python.length);
+    console.log(this.docker.Node.length);
+
     //Notifucations
     this.toastrService.overlayContainer = this.toastContainer;
 
@@ -245,13 +249,19 @@ export class ImagesComponent implements OnInit, AfterViewInit {
       if(flag){
 
         if(this.tool.nativeElement.value=='Node'){
-          this.docker.Node = this.docker.Node + this.En_version.nativeElement.value + '.0.0\nRUN curl --silent -o- https://raw.githubusercontent.com/creationix/nvm/v0.31.2/install.sh | bash\nRUN source $NVM_DIR/nvm.sh\&& nvm install $NODE_VERSION\&& nvm alias default $NODE_VERSION\&& nvm use default\nENV NODE_PATH $NVM_DIR/v$NODE_VERSION/lib/node_modules\nENV PATH $NVM_DIR/versions/node/v$NODE_VERSION/bin:$PATH';
-        } 
+          if(this.docker.Node.length<=46){
+            this.docker.Node = this.docker.Node + this.En_version.nativeElement.value + '.0.0\nRUN curl --silent -o- https://raw.githubusercontent.com/creationix/nvm/v0.31.2/install.sh | bash\nRUN source $NVM_DIR/nvm.sh\&& nvm install $NODE_VERSION\&& nvm alias default $NODE_VERSION\&& nvm use default\nENV NODE_PATH $NVM_DIR/v$NODE_VERSION/lib/node_modules\nENV PATH $NVM_DIR/versions/node/v$NODE_VERSION/bin:$PATH';
+          }
+       } 
         else if(this.tool.nativeElement.value=='Angular' && this.En_version.nativeElement.value!=""){
-          this.docker.Angular = this.docker.Angular + this.En_version.nativeElement.value + '.0.0\n'; 
+          if(this.docker.Angular.length<=33){
+            this.docker.Angular = this.docker.Angular + this.En_version.nativeElement.value + '.0.0\n'; 
+          }
         }
         else if(this.tool.nativeElement.value=='Python'){
-          this.docker.Python = this.docker.Python + this.En_version.nativeElement.value + '.0 python-dev python-pip python-virtualenv && \ \nrm -rf /var/lib/apt/lists/*\n'
+          if(this.docker.Python.length<=50){
+            this.docker.Python = this.docker.Python + this.En_version.nativeElement.value + '.0 python-dev python-pip python-virtualenv && \ \nrm -rf /var/lib/apt/lists/*\n'
+          }
         }
 
         this.allTools.push({sTool: this.tool.nativeElement.value, sVersion:this.En_version.nativeElement.value});

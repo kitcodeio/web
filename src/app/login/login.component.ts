@@ -59,11 +59,16 @@ login(): void {
     if(this.emailLogin.indexOf('@')!==-1 && this.emailLogin.indexOf('.')){
       this.authService.login(this.emailLogin, this.passwordLogin)
         .subscribe(response => { 
-          if(response) {	    
-            
+          if(response) {	
+
+          if(response.error){
+            this.toastrService.error('incorrect password','Error',{positionClass:'toast-bottom-right'});
+          }   
+          else{
         this.authService.setToken(response.token);
-          window.location.reload();
+        window.location.reload();
         //this.router.navigate(['/app/dashboard']);
+          }
         
     } else {
       this.error = response.error;
@@ -79,7 +84,7 @@ login(): void {
 
   register(): void {
     if(this.passwordCon==this.passwordReg){
-      if (this.emailReg && this.company && this.passwordReg) {
+      if (this.emailReg && this.company && this.passwordReg && this.passwordCon) {
         this.authService.register(
           this.company,
           this.emailReg,
@@ -95,8 +100,7 @@ login(): void {
               this.error = response.error;
               this.toastrService.error(response.error,'Error',{positionClass:'toast-bottom-right'});
             }
-         });
-         
+         });        
       }
       else{
         this.toastrService.error('Please enter all feild','Error',{positionClass:'toast-bottom-right'});

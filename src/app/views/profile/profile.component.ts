@@ -40,5 +40,4 @@ export class ProfileComponent implements OnInit {
     var url = 'http://'+regex.exec(this.user.email)[0]+'-kide.kitcode.io';
     this.ide = this.domSanitizer.bypassSecurityTrustResourceUrl(url);
   }
-
 }
