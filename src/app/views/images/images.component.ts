@@ -30,15 +30,15 @@ export class ImagesComponent implements OnInit, AfterViewInit {
   {  
   'stringOs':'FROM ubuntu:latest\nRUN rm /bin/sh && ln -s /bin/bash /bin/sh\nRUN apt-get update\&& apt-get install -y curl\&& apt-get -y autoclean\n',
 
-  'Node': '\nENV NVM_DIR /usr/local/nvm\nENV NODE_VERSION ',
+  'Node': '',
   
-  'Angular': '\nRUN npm install -g @angular/cli',
+  'Angular': '',
   
   'Jupyter': '\nRUN pip3 install --upgrade pip\nRUN pip3 install numpy pandas sklearn matplotlib seaborn jupyter pyyaml h5py\nRUN pip3 install keras --no-deps\nRUN ["mkdir", "notebooks"]\nCOPY jupyter_notebook_config.py /root/.jupyter/\nCOPY run_jupyter.sh /\nEXPOSE 8888 6006\nVOLUME /notebooks\nCMD ["/run_jupyter.sh"]\n',
 
   'Tensorflow':'RUN pip3 install tensorflow',
 
-  'Python':'RUN apt-get update && \ \napt-get install -y python',
+  'Python':'',
   }
   allVersion = {
     'Angular':[2,3,5,6],
@@ -72,10 +72,6 @@ export class ImagesComponent implements OnInit, AfterViewInit {
 
 
   ngOnInit() {
-
-    console.log(this.docker.Angular.length);
-    console.log(this.docker.Python.length);
-    console.log(this.docker.Node.length);
 
     //Notifucations
     this.toastrService.overlayContainer = this.toastContainer;
@@ -214,6 +210,7 @@ export class ImagesComponent implements OnInit, AfterViewInit {
 
    this.editor.value =  this.docker.stringOs + finalString;
 
+
   }
 
   //Popup model
@@ -249,19 +246,13 @@ export class ImagesComponent implements OnInit, AfterViewInit {
       if(flag){
 
         if(this.tool.nativeElement.value=='Node'){
-          if(this.docker.Node.length<=46){
-            this.docker.Node = this.docker.Node + this.En_version.nativeElement.value + '.0.0\nRUN curl --silent -o- https://raw.githubusercontent.com/creationix/nvm/v0.31.2/install.sh | bash\nRUN source $NVM_DIR/nvm.sh\&& nvm install $NODE_VERSION\&& nvm alias default $NODE_VERSION\&& nvm use default\nENV NODE_PATH $NVM_DIR/v$NODE_VERSION/lib/node_modules\nENV PATH $NVM_DIR/versions/node/v$NODE_VERSION/bin:$PATH';
-          }
-       } 
+          this.docker.Node = '\nENV NVM_DIR /usr/local/nvm\nENV NODE_VERSION ' + this.En_version.nativeElement.value + '.0.0\nRUN curl --silent -o- https://raw.githubusercontent.com/creationix/nvm/v0.31.2/install.sh | bash\nRUN source $NVM_DIR/nvm.sh\&& nvm install $NODE_VERSION\&& nvm alias default $NODE_VERSION\&& nvm use default\nENV NODE_PATH $NVM_DIR/v$NODE_VERSION/lib/node_modules\nENV PATH $NVM_DIR/versions/node/v$NODE_VERSION/bin:$PATH';
+        } 
         else if(this.tool.nativeElement.value=='Angular' && this.En_version.nativeElement.value!=""){
-          if(this.docker.Angular.length<=33){
-            this.docker.Angular = this.docker.Angular + this.En_version.nativeElement.value + '.0.0\n'; 
-          }
+          this.docker.Angular = '\nRUN npm install -g @angular/cli@' + this.En_version.nativeElement.value + '.0.0\n'; 
         }
         else if(this.tool.nativeElement.value=='Python'){
-          if(this.docker.Python.length<=50){
-            this.docker.Python = this.docker.Python + this.En_version.nativeElement.value + '.0 python-dev python-pip python-virtualenv && \ \nrm -rf /var/lib/apt/lists/*\n'
-          }
+          this.docker.Python = 'RUN apt-get update && \ \napt-get install -y python' + this.En_version.nativeElement.value + '.0 python-dev python-pip python-virtualenv && \ \nrm -rf /var/lib/apt/lists/*\n'
         }
 
         this.allTools.push({sTool: this.tool.nativeElement.value, sVersion:this.En_version.nativeElement.value});
@@ -287,6 +278,10 @@ export class ImagesComponent implements OnInit, AfterViewInit {
    });
 
    this.editor.value =  this.docker.stringOs + finalString;
+
+   this.docker.Node = '';
+   this.docker.Angular = '';
+   this.docker.Python = '';
 
   }
 
