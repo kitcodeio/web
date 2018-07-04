@@ -17,6 +17,7 @@ import { AceEditorModule } from 'ng2-ace-editor';
 import { SimpleNotificationsModule } from 'angular2-notifications';
 import { ToastrModule, ToastNoAnimation, ToastNoAnimationModule,} from 'ngx-toastr';
 import { platformBrowserDynamic } from '@angular/platform-browser-dynamic';
+import { CoursesComponent } from './views/courses/courses.component';
 
 
 @NgModule({
@@ -26,7 +27,8 @@ import { platformBrowserDynamic } from '@angular/platform-browser-dynamic';
     ProfileComponent,
     DashboardComponent,
     LoginComponent,
-    RootComponent
+    RootComponent,
+    CoursesComponent
   ],
   imports: [
     BrowserModule,

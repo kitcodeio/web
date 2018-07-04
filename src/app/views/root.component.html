@@ -1,4 +1,4 @@
-<body>
+<body *ngIf="!sizeFlag">
   <section>
     <div class="row no-gutters">
       <nav class="d-none col-md-2 d-md-block sidebar">
@@ -94,4 +94,6 @@
     </div>
   </section>
   </body>
-<router-outlet></router-outlet>
+<router-outlet *ngIf="!sizeFlag"></router-outlet>
+
+  <h1 style="margin-top: 100px; margin-left: 100px;" *ngIf="sizeFlag">Device not suppoted</h1>

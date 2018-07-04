@@ -9,10 +9,17 @@ import {Router} from '@angular/router';
 })
 export class RootComponent implements OnInit {
   userName:string;
+  sizeFlag: boolean;
   
-  constructor(private router: Router) { }
+  constructor(private router: Router) {
+  
+   }
 
   ngOnInit() {
+
+    if(window.innerWidth<=768){
+      this.sizeFlag =true;
+    }
 
   }
 

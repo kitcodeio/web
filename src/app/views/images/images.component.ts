@@ -230,15 +230,13 @@ export class ImagesComponent implements OnInit, AfterViewInit {
 
     this.version = this.En_version.nativeElement.value;
     if(this.tool.nativeElement.value==""){
-      console.log("Please select the tool fist");
+      this.toastrService.warning('Please select component','Warning',{positionClass:'toast-bottom-right'});     
     }
-
     else{
       this.allTools.forEach(tool=>{
 
         if(tool.sTool == this.tool.nativeElement.value){
-
-          console.log(this.tool.nativeElement.value + ' is already selected');
+          this.toastrService.warning(this.tool.nativeElement.value + ' is already selected','Warning',{positionClass:'toast-bottom-right'});
           flag = false;
         }
       })
@@ -251,7 +249,7 @@ export class ImagesComponent implements OnInit, AfterViewInit {
         else if(this.tool.nativeElement.value=='Angular' && this.En_version.nativeElement.value!=""){
           this.docker.Angular = '\nRUN npm install -g @angular/cli@' + this.En_version.nativeElement.value + '.0.0\n'; 
         }
-        else if(this.tool.nativeElement.value=='Python'){
+        else if(this.tool.nativeElement.valsue=='Python'){
           this.docker.Python = 'RUN apt-get update && \ \napt-get install -y python' + this.En_version.nativeElement.value + '.0 python-dev python-pip python-virtualenv && \ \nrm -rf /var/lib/apt/lists/*\n'
         }
 

@@ -1,4 +1,4 @@
-import { Component, OnInit, ElementRef, ViewChild, Input } from '@angular/core';
+import { Component, OnInit, ElementRef, ViewChild, Input, HostListener } from '@angular/core';
 import * as $ from 'jquery';
 import { RouterModule, Routes } from '@angular/router';
 import { Router } from '@angular/router';
@@ -21,8 +21,25 @@ export class DashboardComponent implements OnInit {
   emptyMessage:string;
   flag:boolean = false;
   @Input() lable:string;
+  sizeFlag: boolean;
+  @HostListener('window:resize', ['$event'])
+  newInnerHeight;
+  newInnerWidth
 
-  constructor(private router: Router, private http :HttpService,private elementRef: ElementRef, private toastrService: ToastrService) {}
+onResize(event) {
+  this.newInnerHeight = event.target.innerHeight;
+  this.newInnerWidth = event.target.innerWidth;
+
+  if(window.innerWidth<=768){
+    this.sizeFlag =true;
+  }
+
+}
+
+  constructor(private router: Router, private http :HttpService,private elementRef: ElementRef, private toastrService: ToastrService) {
+    console.log('height',window.innerHeight);
+    console.log('width',window.innerWidth);
+  }
   @ViewChild('ref') ref:ElementRef;
 
   change(image:any): void{
