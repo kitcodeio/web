@@ -1,8 +1,9 @@
-import { Component, OnInit, HostListener } from '@angular/core';
+import { Component, OnInit, HostListener, ViewChild, ElementRef } from '@angular/core';
 import {DomSanitizer} from "@angular/platform-browser";
 import { ActivatedRoute } from '@angular/router';
 import { HttpService } from '../../services/http/http.service'
 import { AuthserviceService } from '../../services/auth/authservice.service'; 
+import * as $ from 'jquery';
 
 @Component({
   selector: 'app-profile',
@@ -16,6 +17,7 @@ export class ProfileComponent implements OnInit {
   user:any;
   newInnerHeight;
   newInnerWidth;
+  @ViewChild('frame') frame :ElementRef;
 	videos/*=[{title: "NodeJS for beginners", link: "https://www.youtube.com/embed/KMX1mFEmM3E"},
 	  {title:"Angular 5",link:"https://www.youtube.com/embed/ZWJH7JQCjLM" },
 	  {title:"Test1", link: "https://www.youtube.com/embed/RUKcrphvO8I"}]*/;
@@ -44,10 +46,9 @@ min(){
   this.maxFlag = false;
 }
 
-  constructor(private domSanitizer : DomSanitizer,private route: ActivatedRoute, private http:HttpService, private authService: AuthserviceService) { 
-    const actualHeight = window.innerHeight;
-    const actualWidth = window.innerWidth;
-    console.log(actualHeight,actualWidth);
+  constructor(private eRef: ElementRef, private domSanitizer : DomSanitizer,private route: ActivatedRoute, private http:HttpService, private authService: AuthserviceService) { 
+    //const actualHeight = window.innerHeight;
+    //const actualWidth = window.innerWidth;
    }
 
   play(index){
@@ -55,6 +56,12 @@ min(){
   }
 
   ngOnInit() {
+
+    console.log(this.frame);
+
+    $(function () {
+      $('[data-toggle="popover"]').popover()
+    })
 
     this.route.params.subscribe(params=>{
       this.http.getCourse('Course').subscribe((res) => {

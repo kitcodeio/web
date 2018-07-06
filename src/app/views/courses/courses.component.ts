@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { all } from 'q';
 
 @Component({
   selector: 'app-courses',
@@ -18,6 +19,7 @@ export class CoursesComponent implements OnInit {
   allChapter=[];
   selectIndex;
   obj={};
+  chapter=[];
 
   constructor() { }
 
@@ -27,16 +29,20 @@ export class CoursesComponent implements OnInit {
   addSection(){
     this.flag=false;
       this.allSection.push({sectionName:this.sectionName, sectionDis:this.sectionDis});
-  }
+  } 
   addChapter(i){
 
     let sec = this.allSection[i].sectionName;
     this.obj[sec] = {chapterName:this.chapterName,chapterDis:this.chapterDis,chapterUrl:this.chapterUrl};
-    this.allChapter.push([i,this.obj]);
-
+    this.allChapter.push([this.obj]);
+    if(this.allChapter.length!=0)
+    {
+      this.allChapter.forEach(el=>{
+        
+      })
+    }
     console.log(this.allChapter);
-    console.log(i)
-    
+    console.log(this.allChapter[0]);
   }
 
   getIndex(i){

@@ -25,6 +25,6 @@ export class RootComponent implements OnInit {
 
   logout(): void {
     localStorage.removeItem('jwt_token');
-    this.router.navigate(['/login']);
+    this.router.navigate(['/']);
   }
 }

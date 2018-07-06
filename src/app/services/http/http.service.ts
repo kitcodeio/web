@@ -11,7 +11,8 @@ import { CustomHttpService } from '../custom-http/custom-http.service';
 
 export class HttpService {
 
-	baseUrl = 'http://kitcode.io/';
+  baseUrl = 'http://kitcode.io/';
+  url = 'http://13.232.45.52:8080/'
 
   getData(model: string): Observable<any> {
     return this.http.get(this.baseUrl+'read/'+model)
@@ -39,7 +40,12 @@ export class HttpService {
   }
 
   getCourse(model: string): Observable<any> {
-    return this.http.get(this.baseUrl+'read/'+model)
+    return this.http.get(this.url+'study/'+model)
+    .pipe(catchError((error)=>{return of(error);}));
+  }
+
+  getCourseCategory(model: string): Observable<any> {
+    return this.http.get(this.url+'study/'+model)
     .pipe(catchError((error)=>{return of(error);}));
   }
 

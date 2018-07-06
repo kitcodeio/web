@@ -37,8 +37,7 @@ onResize(event) {
 }
 
   constructor(private router: Router, private http :HttpService,private elementRef: ElementRef, private toastrService: ToastrService) {
-    console.log('height',window.innerHeight);
-    console.log('width',window.innerWidth);
+
   }
   @ViewChild('ref') ref:ElementRef;
 

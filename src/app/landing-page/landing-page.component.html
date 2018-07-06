@@ -1,0 +1,95 @@
+<body>
+
+    <!-- Navigation -->
+    <nav class="navbar navbar-light bg-white static-top">
+      <div class="container-fluid">
+        <a class="navbar-brand" href="#"><img style="width:26px;height:26px;" src="../../assets/images/logo.png"></a>
+        <button class="btn" style="background-color:transparent;color: #565176;" href="#" (click)="toLogin();">Sign In</button>
+      </div>
+    </nav>
+
+    <!-- Masthead -->
+    <header class="masthead text-white text-center">
+      <div class="overlay"></div>
+      <div class="container">
+        <div class="row">
+          <div class="col-xl-9 mx-auto">
+            <h2 class="mb-5" style="font-weight:500;">Find the best course and tutorials</h2>
+          </div>
+          <div class="col-md-10 col-lg-8 col-xl-7 mx-auto">
+            <form>
+              <div class="form-row">
+                <div class="col-12 col-md-12 mb-2 mb-md-0">
+                  <div class="input-group mb-3">
+                    <div class="input-group-prepend">
+                      <button class="btn" style="background-color:#ffffff;color:#ccc;" type="button"><i class="fa fa-search" aria-hidden="true"></i></button>
+                    </div>
+                    <input type="text" class="form-control" placeholder="search for languages you want to learn">
+                  </div>
+                </div>
+              </div>
+            </form>
+          </div>
+        </div>
+      </div>
+    </header>
+      
+    <!-- Testimonials -->
+    <section style="padding-top:0;padding-bottom:4rem;position:relative;top:-70px;" class="testimonials text-center">
+      <div class="container">
+        <div class="row mb-5">
+          <div class="col-lg-2" *ngFor="let cat of allCourseCategory">
+            <div class="testimonial-item mx-auto mb-2">
+              <img class="img-fluid" src="../../assets/images/Untitled-3.png" alt="">
+            </div>
+              <p>{{cat.label}}</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer" style="background-color: #292929;">
+      <div class="container">
+        <div class="row">
+          <div class="col-lg-3">
+            <p class="text-white">OfficeSuite</p>
+            <ul style="color:#ccc;" class="list-unstyled">
+              <li>Plans</li>
+              <li>Download</li>
+              <li>Support</li>
+            </ul>
+          </div>
+          <div class="col-lg-3">
+            <p class="text-white">Company</p>
+            <ul style="color:#ccc;" class="list-unstyled">
+              <li>About</li>
+              <li>Partners</li>
+              <li>Market</li>
+            </ul>
+          </div>
+          <div class="col-lg-3">
+            <p class="text-white">Contacts</p>
+            <ul style="color:#ccc;" class="list-unstyled">
+              <li>Plans</li>
+              <li>Plans</li>
+              <li>Plans</li>
+            </ul>
+          </div>
+          <div class="col-lg-3">
+            <p class="text-white">Social</p>
+            <ul style="color:#ccc;" class="list-unstyled">
+              <li>Plans</li>
+              <li>Plans</li>
+              <li>Plans</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </footer>
+
+    <!-- Bootstrap core JavaScript -->
+    <script src="../../assets/vendor/jquery/jquery.min.js"></script>
+    <script src="../../assets/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+
+  </body>

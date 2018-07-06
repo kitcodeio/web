@@ -18,6 +18,7 @@ import { SimpleNotificationsModule } from 'angular2-notifications';
 import { ToastrModule, ToastNoAnimation, ToastNoAnimationModule,} from 'ngx-toastr';
 import { platformBrowserDynamic } from '@angular/platform-browser-dynamic';
 import { CoursesComponent } from './views/courses/courses.component';
+import { LandingPageComponent } from './landing-page/landing-page.component';
 
 
 @NgModule({
@@ -28,7 +29,8 @@ import { CoursesComponent } from './views/courses/courses.component';
     DashboardComponent,
     LoginComponent,
     RootComponent,
-    CoursesComponent
+    CoursesComponent,
+    LandingPageComponent
   ],
   imports: [
     BrowserModule,
