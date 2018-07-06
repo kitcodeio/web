@@ -1,0 +1,52 @@
+<div class="container" style="margin-top: 100px; margin-right: 100px;">
+  <div class="row">
+    <div class="col-md-4">
+        <form *ngIf="flag">
+            <div class="form-group">
+              <input type="email" class="form-control" id="exampleFormControlInput1" placeholder="Course name" [(ngModel)]="courseNmae" name="a">
+            </div>
+            <div class="form-group">
+              <input type="email" class="form-control" id="exampleFormControlInput1" placeholder="Image Id" [(ngModel)]="imageId" name="b">
+            </div>
+        </form>
+        <div class="card" style="width: 18rem;" *ngFor="let s of allSection; let i=index;">
+           <p>{{s.sectionName}}</p>
+            <div class="card-body">
+              <div *ngFor="let v of allChapter"></div>
+              <!-- <p>{{v.sachin.chapterName}}</p> -->
+              <button *ngIf="!flag" (click)="addChapter(i);"><i class="fa fa-plus" aria-hidden="true"></i>Add chapter</button>
+              <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
+            </div>
+        </div>
+        <br>
+      <br><br>
+      <button (click)="addSection();"><i class="fa fa-plus" aria-hidden="true"></i>Add section</button>    
+    </div>
+    <div class="col-md-8">
+        <form>
+            <div class="form-group">
+              <label for="exampleFormControlInput1">Section name</label>
+              <input [(ngModel)]="sectionName" type="text" class="form-control" id="exampleFormControlInput1" placeholder="section name" name="c">
+            </div>
+            <div class="form-group">
+              <label for="exampleFormControlTextarea1">Discription</label>
+              <textarea [(ngModel)]="sectionDis"class="form-control" id="exampleFormControlTextarea1" rows="3" placeholder="Discription" name="d"></textarea>
+            </div>
+        </form>
+          <form *ngIf="!flag">
+              <div class="form-group">
+                <label for="exampleFormControlInput1">Chapter name</label>
+                <input [(ngModel)]="chapterName" type="email" class="form-control" id="exampleFormControlInput1" placeholder="section name" name="e">
+              </div>
+            <div class="form-group">
+              <label for="exampleFormControlTextarea1">Discription</label>
+              <textarea [(ngModel)]="chapterDis" class="form-control" id="exampleFormControlTextarea1" rows="3" placeholder="Discription" name="f"></textarea>
+          </div>
+          <div class="form-group">
+              <label for="exampleFormControlInput1">Chapter Url</label>
+            <input [(ngModel)]="chapterUrl" type="text" class="form-control" id="exampleFormControlInput1" placeholder="section name" name="t">
+          </div>
+        </form>
+    </div>
+  </div>
+</div>
