@@ -153,3 +153,5 @@
 	height: 150px;
 	width: 500px;
 }
+
+.fa { transform: scale(.7,.7); }

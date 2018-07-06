@@ -8,6 +8,7 @@ import { ProfileComponent } from './views/profile/profile.component';
 import { AppComponent } from './app.component';
 import { RootComponent } from './views/root.component';
 import { ModuleWithProviders } from "@angular/core";
+import { CoursesComponent } from './views/courses/courses.component';
 
 
 const routes: Routes = [
@@ -17,7 +18,8 @@ const routes: Routes = [
         children: [
             { path: 'dashboard', component: DashboardComponent },
             { path: 'image', component: ImagesComponent},
-	    { path: 'profile/:index', component: ProfileComponent}
+            { path: 'profile/:index', component: ProfileComponent},
+            { path: 'courses', component: CoursesComponent }
         ]
     }
 ];
