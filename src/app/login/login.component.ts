@@ -8,6 +8,8 @@ import { NavigationStart } from '@angular/router';
 import { stringify } from '@angular/core/src/util';
 import { ToastContainerDirective, ToastrService } from 'ngx-toastr';
 import '../../../node_modules/font-awesome/css/font-awesome.css'
+import * as jwt_decode from 'jwt-decode';
+import { UserInfoService } from '../services/userInfo/user-info.service';
 
 
 @Component({
@@ -26,7 +28,7 @@ export class LoginComponent implements OnInit {
   passwordReg: string;
   company: string;
   passwordCon:string;
-  constructor(private router: Router, private authService: AuthserviceService, private route: ActivatedRoute, private toastrService: ToastrService) {
+  constructor(private userInfo: UserInfoService, private router: Router, private authService: AuthserviceService, private route: ActivatedRoute, private toastrService: ToastrService) {
   
    }
 
@@ -66,8 +68,10 @@ login(): void {
           }   
           else{
         this.authService.setToken(response.token);
-        window.location.reload();
-        //this.router.navigate(['/app/dashboard']);
+       // window.location.reload();
+        this.router.navigate(['/']);
+        console.log(jwt_decode(response.token).name);
+        this.userInfo.userDetail = jwt_decode(response.token);
           }
         
     } else {

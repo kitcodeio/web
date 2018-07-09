@@ -1,3 +1,5 @@
+
+
 .btn:focus,.btn:active,.btn:hover{
     box-shadow: none;
   }
@@ -23,7 +25,7 @@
     background-color: #ffffff;
   }
 
-  header.masthead{
+  header.masthead[_ngcontent-c1]{
     background-color: #72d5a4;
   }
 
@@ -154,7 +156,7 @@
   
   .call-to-action .overlay {
     position: absolute;
-    background-color: #212529;
+    background-color: #72d5a4;
     height: 100%;
     width: 100%;
     top: 0;
@@ -167,10 +169,9 @@
     padding-bottom: 4rem;
   }
   
-  /* input::-webkit-input-placeholder{color:#ccc;font-weight:500; !important;}
-  input::-moz-placeholder{color:#ccc;font-weight:500; !important;}
-  input:-ms-input-placeholder{color:#ccc;font-weight:500; !important;}
-  input::-ms-input-placeholder{color-weight:500;:#ccc;font-weight:500; !important;}
-  input::placeholder{color:#ccc;font-weight:500; !important;} */
 
+  input::-moz-placeholder{color:#ccc;font-weight:500 !important;}
+  input:-ms-input-placeholder{color:#ccc;font-weight:500 !important;}
+  input::-ms-input-placeholder{color:#ccc;font-weight:500 !important;}
+  input::placeholder{color:#ccc;font-weight:500 !important;}
   
