@@ -57,8 +57,6 @@ min(){
 
   ngOnInit() {
 
-    console.log(this.frame);
-
     $(function () {
       $('[data-toggle="popover"]').popover()
     })

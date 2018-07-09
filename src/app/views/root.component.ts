@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import {Router} from '@angular/router';
 import '../../../node_modules/bootstrap/dist/js/bootstrap.min.js'
 import { UserInfoService } from '../services/userInfo/user-info.service';
+import * as $ from 'jquery';
 
 //npm install  @types/youtube
 @Component({
@@ -18,6 +19,9 @@ export class RootComponent implements OnInit {
    }
 
   ngOnInit() {
+    $(function () {
+      $('[data-toggle="popover"]').popover()
+    })
 
     if(window.innerWidth<=768){
       this.sizeFlag =true;
@@ -28,7 +32,6 @@ export class RootComponent implements OnInit {
   logout(): void {
     localStorage.removeItem('jwt_token');
     this.userInfo.token = localStorage.getItem('jwt_token');
-    console.log(this.userInfo.token);
     this.router.navigate(['/']);
   }
 }

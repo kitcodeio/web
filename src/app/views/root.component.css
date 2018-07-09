@@ -129,3 +129,40 @@
 .crud-menu{
 	color:#cccccc;
 }
+
+
+.dropbtn {
+    background-color: transparent;
+    color: white;
+    padding: 16px;
+    border: none;
+}
+
+.dropdown {
+    position: relative;
+    display: inline-block;
+}
+
+.dropdown-content {
+    display: none;
+    position: absolute;
+    min-width: 120px;
+	box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+	background-color: white;
+    z-index: 1;
+	margin-right: 5px;
+}
+
+.dropdown-content button {
+    color: black;
+	padding: 12px 16px;
+    text-decoration: none;
+	display: block;
+	font-family: 'Montserrat', sans-serif;
+}
+
+.dropdown-content a:hover {background-color: #ddd;}
+
+.dropdown:hover .dropdown-content {display: block;}
+
+.dropdown:hover .dropbtn {background-color: transparent}
