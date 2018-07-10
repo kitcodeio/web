@@ -15,12 +15,12 @@ import { LandingPageComponent } from './landing-page/landing-page.component';
 const routes: Routes = [
     { path: '',  component:LandingPageComponent },
     { path: 'login', component: LoginComponent },
+    { path: 'courses', component: CoursesComponent },
     { path: 'app', component: RootComponent, canActivate: [AuthGuard],
         children: [
             { path: 'dashboard', component: DashboardComponent },
             { path: 'image', component: ImagesComponent},
-            { path: 'profile/:index', component: ProfileComponent},
-            { path: 'courses', component: CoursesComponent }
+            { path: 'profile/:index', component: ProfileComponent}
         ]
     }
 ];

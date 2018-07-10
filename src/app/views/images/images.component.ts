@@ -78,7 +78,7 @@ export class ImagesComponent implements OnInit, AfterViewInit {
 
     $(function(){
 
-      $('[data-toggle="popover"]').popover();
+     // $('[data-toggle="popover"]').popover();
 
       var popoverImage = "<ul class='list-inline'> <li class='list-inline-item'><input type='radio' class='d-none' name='a' id='f' checked='checked'><label class='activatedImage image-template-select mb-0' for='f'><img style='width:30px;height:30px;' src='../../../../assets/images/1.gif'></label></li> <li class='list-inline-item'><input type='radio' class='d-none' name='a' id='a'><label class='image-template-select mb-0' for='a'><img style='width:30px;height:30px;' src='../../../../assets/images/2.gif'></label></li> <li class='list-inline-item'><input type='radio' class='d-none' name='a' id='b'><label class='image-template-select mb-0' for='b'><img style='width:30px;height:30px;' src='../../../../assets/images/3.gif'></label></li> <li class='list-inline-item'><input type='radio' class='d-none' name='a' id='c'><label class='image-template-select mb-0' for='c'><img style='width:30px;height:30px;' src='../../../../assets/images/4.gif'></label></li> <li class='list-inline-item'><input type='radio' class='d-none' name='a' id='d'><label class='image-template-select mb-0' for='d'><img style='width:30px;height:30px;' src='../../../../assets/images/5.gif'></label></li> <li class='list-inline-item'><input type='radio' class='d-none' name='a' id='e'><label class='image-template-select mb-0' for='e'><img style='width:30px;height:30px;' src='../../../../assets/images/1.gif'></label></li> </ul>";
   
@@ -87,44 +87,44 @@ export class ImagesComponent implements OnInit, AfterViewInit {
   
   
   
-      $('.popOverImage').popover({
-        container:'body',
-        content:popoverImage,
-        html:true
-      });
+      // $('.popOverImage').popover({
+      //   container:'body',
+      //   content:popoverImage,
+      //   html:true
+      // });
 
-      $(document).on('change','.preview-check-container',function(){
-        if($('#previewCheck')[0].checked){
-          $('.previewImageBlock').slideDown();
-        }
-        else{
-          $('.previewImageBlock').slideUp();
-        }
-      });
+      // $(document).on('change','.preview-check-container',function(){
+      //   if($('#previewCheck')[0].checked){
+      //     $('.previewImageBlock').slideDown();
+      //   }
+      //   else{
+      //     $('.previewImageBlock').slideUp();
+      //   }
+      // });
   
   
-      $(":file").change(function () {
-          if (this.files && this.files[0]) {
-              var reader = new FileReader();
-              reader.onload = imageIsLoaded;
-              reader.readAsDataURL(this.files[0]);
-          }
-      });
+      // $(":file").change(function () {
+      //     if (this.files && this.files[0]) {
+      //         var reader = new FileReader();
+      //         reader.onload = imageIsLoaded;
+      //         reader.readAsDataURL(this.files[0]);
+      //     }
+      // });
   
       function imageIsLoaded(e) {
           $('#myImg').attr('src', e.target.result);
           $('.previewLogo').attr('src',e.target.result);
       }
   
-      $(document).on('click','.image-template-select',function(){
-          $('.image-template-select').removeClass('activatedImage');
-          $(this).addClass('activatedImage');
+      // $(document).on('click','.image-template-select',function(){
+      //     $('.image-template-select').removeClass('activatedImage');
+      //     $(this).addClass('activatedImage');
   
-          if($(this).hasClass('activatedImage')){
-            $('.popOverImage').children()[0].src=$(this).children()[0].src;
-            $('.previewImage')[0].src=$(this).children()[0].src;
-          }
-      });
+      //     if($(this).hasClass('activatedImage')){
+      //       $('.popOverImage').children()[0].src=$(this).children()[0].src;
+      //       $('.previewImage')[0].src=$(this).children()[0].src;
+      //     }
+      // });
     });
   
     $(function(){
@@ -211,16 +211,6 @@ export class ImagesComponent implements OnInit, AfterViewInit {
    this.editor.value =  this.docker.stringOs + finalString;
 
 
-  }
-
-  //Popup model
-  openModel1(){     
-    $('#getKeyInfo').modal('show');
-  }
-
-  //Popup model
-  openModel2(){
-    $('#getKeyInfo').modal('show');
   }
 
   

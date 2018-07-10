@@ -19,9 +19,6 @@ export class RootComponent implements OnInit {
    }
 
   ngOnInit() {
-    $(function () {
-      $('[data-toggle="popover"]').popover()
-    })
 
     if(window.innerWidth<=768){
       this.sizeFlag =true;

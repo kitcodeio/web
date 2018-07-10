@@ -15,7 +15,7 @@ import { AuthserviceService } from '../services/auth/authservice.service';
 })
 export class LandingPageComponent implements OnInit {
 
-  allCourseCategory=[]
+  allCourseCategory=[];
   userName:string;
   flag:boolean=false;
 

@@ -1,5 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { all } from 'q';
+import * as $ from 'jquery';
+import { Router } from '@angular/router';
+import { HttpService } from '../../services/http/http.service';
+import { MalihuScrollbarService } from 'ngx-malihu-scrollbar';
 
 @Component({
   selector: 'app-courses',
@@ -8,45 +12,28 @@ import { all } from 'q';
 })
 export class CoursesComponent implements OnInit {
   flag:boolean= true;
-  courseName:string;
-  imageId:string;
-  sectionName:string;
-  sectionDis:string;
-  chapterName:string;
-  chapterDis:string;
-  chapterUrl:string;
-  allSection=[];
-  allChapter=[];
-  selectIndex;
-  obj={};
-  chapter=[];
+  allCourseCategory=[];
 
-  constructor() { }
+
+  constructor(private router: Router, private http: HttpService, private scrollbarService: MalihuScrollbarService) { }
 
   ngOnInit() {
+
+
+  //Categories
+  this.http.getCourseCategory('CourseCategory').subscribe(res=>{
+    this.allCourseCategory=res.entity;
+    console.log(this.allCourseCategory);
+  })
+
+  }
+  
+  toLogin(){
+    this.router.navigate(['/login']);
   }
 
-  addSection(){
-    this.flag=false;
-      this.allSection.push({sectionName:this.sectionName, sectionDis:this.sectionDis});
-  } 
-  addChapter(i){
-
-    let sec = this.allSection[i].sectionName;
-    this.obj[sec] = {chapterName:this.chapterName,chapterDis:this.chapterDis,chapterUrl:this.chapterUrl};
-    this.allChapter.push([this.obj]);
-    if(this.allChapter.length!=0)
-    {
-      this.allChapter.forEach(el=>{
-        
-      })
-    }
-    console.log(this.allChapter);
-    console.log(this.allChapter[0]);
-  }
-
-  getIndex(i){
-    this.selectIndex = i;
+  ngAfterViewInit() {
+    this.scrollbarService.initScrollbar('.scrollPane', { axis: 'y', theme: 'dark-2', scrollButtons: { enable: true } });
   }
 
 }

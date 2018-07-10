@@ -57,9 +57,9 @@ min(){
 
   ngOnInit() {
 
-    $(function () {
-      $('[data-toggle="popover"]').popover()
-    })
+    // $(function () {
+    //   $('[data-toggle="popover"]').popover()
+    // })
 
     this.route.params.subscribe(params=>{
       this.http.getCourse('Course').subscribe((res) => {

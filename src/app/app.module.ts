@@ -19,6 +19,8 @@ import { ToastrModule, ToastNoAnimation, ToastNoAnimationModule,} from 'ngx-toas
 import { platformBrowserDynamic } from '@angular/platform-browser-dynamic';
 import { CoursesComponent } from './views/courses/courses.component';
 import { LandingPageComponent } from './landing-page/landing-page.component';
+import { CourseDetailComponent } from './views/course-detail/course-detail.component';
+import { MalihuScrollbarModule } from 'ngx-malihu-scrollbar';
 
 
 @NgModule({
@@ -30,7 +32,8 @@ import { LandingPageComponent } from './landing-page/landing-page.component';
     LoginComponent,
     RootComponent,
     CoursesComponent,
-    LandingPageComponent
+    LandingPageComponent,
+    CourseDetailComponent
   ],
   imports: [
     BrowserModule,
@@ -44,7 +47,8 @@ import { LandingPageComponent } from './landing-page/landing-page.component';
     ToastNoAnimationModule,
     ToastrModule.forRoot({
       toastComponent: ToastNoAnimation,
-    })
+    }),
+    MalihuScrollbarModule.forRoot(),
 
   ],
   providers: [AuthserviceService],
