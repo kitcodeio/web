@@ -140,7 +140,8 @@ color:#74d886;
 border-radius:50px;
 border: 1px solid #74d886;
 padding-left: 25px;
-padding-right: 25px; 
+padding-right: 25px;
+font-size: 14px; 
 }
 
 .buttons-top:active,.buttons-top:hover,.buttons-top:focus{
@@ -175,4 +176,9 @@ background-color: #fbfefd;
 .search-input::placeholder{
 font-size:13px;
 color: #ced4da;
+}
+
+.btn:hover, btn:active, btn:focus{
+  border: none;
+  box-align: none;
 }

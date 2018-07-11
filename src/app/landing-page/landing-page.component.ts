@@ -37,4 +37,8 @@ export class LandingPageComponent implements OnInit {
     this.router.navigate(['/login']);
   }
 
+  toCoursePage(){
+    this.router.navigate(['/courses']);
+  }
+
 }

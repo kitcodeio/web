@@ -139,12 +139,11 @@
   
   .testimonials .testimonial-item img {
     max-width: 12rem;
-    box-shadow: 0px 5px 5px 0px #adb5bd;
   }
   
   .call-to-action {
     position: relative;
-    background-color: #343a40;
+    background-color: #72d5a4 !important;
     background: url("../../assets/images/bg-masthead.jpg") no-repeat center center;
     -webkit-background-size: cover;
     -moz-background-size: cover;
@@ -169,6 +168,9 @@
     padding-bottom: 4rem;
   }
 
+  .btn1:hover{
+    color: blue;
+  }
 
   input::-moz-placeholder{color:#ccc;font-weight:500 !important;}
   input:-ms-input-placeholder{color:#ccc;font-weight:500 !important;}

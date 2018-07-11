@@ -33,7 +33,7 @@ export class CoursesComponent implements OnInit {
   }
 
   ngAfterViewInit() {
-    this.scrollbarService.initScrollbar('.scrollPane', { axis: 'y', theme: 'dark-2', scrollButtons: { enable: true } });
+    this.scrollbarService.initScrollbar('.scrollPane', { axis: 'y', theme: 'dark', scrollButtons: { enable: true } });
   }
 
 }
