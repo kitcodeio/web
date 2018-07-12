@@ -21,6 +21,7 @@ import { CoursesComponent } from './views/courses/courses.component';
 import { LandingPageComponent } from './landing-page/landing-page.component';
 import { CourseDetailComponent } from './views/course-detail/course-detail.component';
 import { MalihuScrollbarModule } from 'ngx-malihu-scrollbar';
+import { CreateCourseComponent } from './views/create-course/create-course.component';
 
 
 @NgModule({
@@ -33,7 +34,8 @@ import { MalihuScrollbarModule } from 'ngx-malihu-scrollbar';
     RootComponent,
     CoursesComponent,
     LandingPageComponent,
-    CourseDetailComponent
+    CourseDetailComponent,
+    CreateCourseComponent
   ],
   imports: [
     BrowserModule,

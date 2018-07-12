@@ -47,25 +47,25 @@ onResize(event) {
 
   ngOnInit() {
     this.populateCourses();
-    //this.populateImage();
+    this.populateImage();
 
     $(function(){
     });
 
   }
 
-  // populateImage(){
+  populateImage(){
 
-  //   this.http.getData('Image')
-  //   .subscribe((res) => {
-  //     this.allImages=res.entity;
-  //     if(this.allImages.length==0){
-  //       this.emptyMessage='you do not have any image';
-  //       this.flag=true;
-  //     }
-  //   })
+    this.http.getData('Image')
+    .subscribe((res) => {
+      this.allImages=res.entity;
+      if(this.allImages.length==0){
+        this.emptyMessage='you do not have any image';
+        this.flag=true;
+      }
+    })
 
-  // }
+  }
 
     //Delete image
     deleteImage(imageId) {

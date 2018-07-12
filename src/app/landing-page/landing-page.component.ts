@@ -27,10 +27,6 @@ export class LandingPageComponent implements OnInit {
     this.userName = this.useInfo.getInfo();
 
     this.flag = !this.authService.isTokenExpired();
-
-    this.http.getCourseCategory('CourseCategory').subscribe(res=>{
-      this.allCourseCategory=res.entity;
-    })
   }
 
   toLogin(){

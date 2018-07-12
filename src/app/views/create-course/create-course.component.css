@@ -1,0 +1,30 @@
+.creatcourse_section{
+    margin-top: 6rem
+}
+.creatcourse_headding{
+    font-size: 24px;
+}
+.creatcourse_addnewcourse{
+    border: 2px solid groove;
+    background-color: groove;
+}
+.creatcourse_btn{
+    background-color: #fff;
+    color: #3399cc;
+    border: 5px solid;
+    width: 100%;
+}
+.wid{
+    border: 2px solid #3399cc;
+    font-size: 13px;
+    margin: 1rem 0rem;   
+}
+.wid1{
+    border: 2px solid #3399cc;
+    font-size: 13px;
+    margin: 1rem 0rem;
+    height: 82px;
+}
+.card-header {
+    text-align: center;
+}

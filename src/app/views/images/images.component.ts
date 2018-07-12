@@ -180,18 +180,19 @@ export class ImagesComponent implements OnInit, AfterViewInit {
 //Create image
   createImage() {
     if(this.label){
+      console.log(this.label);
       this.http.postData('Image',{
-        label:this.label,
-        file:this.editor.value
+        "label":this.label,
+        "file":this.editor.value
       }).subscribe((res) => {
   
-        if(res.status==200)
-        {
-          this.toastrService.success('Image creation started','Success',{positionClass:'toast-bottom-right'});
-        }
-        else{
-          this.toastrService.error('Dockerfile is not correct','Error',{positionClass:'toast-bottom-right'});
-        }
+        // if(res.status==200)
+        // {
+        //   this.toastrService.success('Image creation started','Success',{positionClass:'toast-bottom-right'});
+        // }
+        // else{
+        //   this.toastrService.error('Dockerfile is not correct','Error',{positionClass:'toast-bottom-right'});
+        // }
       })
     }
     else{

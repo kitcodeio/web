@@ -10,6 +10,7 @@ import { RootComponent } from './views/root.component';
 import { ModuleWithProviders } from "@angular/core";
 import { CoursesComponent } from './views/courses/courses.component';
 import { LandingPageComponent } from './landing-page/landing-page.component';
+import { CreateCourseComponent } from './views/create-course/create-course.component';
 
 
 const routes: Routes = [
@@ -20,7 +21,8 @@ const routes: Routes = [
         children: [
             { path: 'dashboard', component: DashboardComponent },
             { path: 'image', component: ImagesComponent},
-            { path: 'profile/:index', component: ProfileComponent}
+            { path: 'profile/:index', component: ProfileComponent},
+            { path: 'createCourse', component: CreateCourseComponent}
         ]
     }
 ];
