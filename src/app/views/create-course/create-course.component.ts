@@ -2,6 +2,8 @@ import { Component, OnInit, ViewChild, ElementRef } from '@angular/core';
 import { HttpService } from '../../services/http/http.service';
 import * as $ from 'jquery';
 import { Router } from '@angular/router';
+import { flatten } from '@angular/compiler';
+import { ToastContainerDirective, ToastrService } from 'ngx-toastr';
 
 @Component({
   selector: 'app-create-course',
@@ -21,7 +23,7 @@ export class CreateCourseComponent implements OnInit {
 
 active: number;
   sectionArray=[];
-  chapterArray=[];
+  allChapter=[];
   allCourses=[];
   allSection=[];
   courseImgID:any;
@@ -50,7 +52,7 @@ active: number;
  block:any;
  imageFlag:boolean;
 
-  constructor(private http: HttpService, private router: Router) { }
+  constructor(private http: HttpService, private router: Router, private toastrService: ToastrService) { }
 
   ngOnInit() {
     this.Flag=true;
@@ -80,7 +82,13 @@ active: number;
       'description':this.courseDis,
       'image_id':this.imageId
     }).subscribe(res =>{
-      //console.log(res);
+      console.log(res);
+      if(res.status==200){
+        this.toastrService.success('Course successfully created','success',{positionClass:'toast-bottom-right'});
+      }
+      else{
+        this.toastrService.error('Something wrong','Error',{positionClass:'toast-bottom-right'});
+      }
     })
   }
 
@@ -99,6 +107,10 @@ active: number;
       console.log(res);
       if(res.status == 200){
         this.getcatgory();
+        this.toastrService.success('Secton Successfully created','Success',{positionClass:'toast-bottom-right'});
+      }
+      else{
+        this.toastrService.error('Something is wrong','Error',{positionClass:'toast-bottom-right'});
       }
     })
     console.log(this.courseId);
@@ -118,6 +130,12 @@ active: number;
         "url": this.chapterUrl
     }).subscribe(res=>{
       console.log(res); 
+      if(res.status==200){
+        this.toastrService.success('Chapter successfully created','Success',{positionClass:'toast-bottom-right'});
+      }
+      else{
+        this.toastrService.error('Somrthing is wrong','Error',{positionClass:'toast-bottom-right'});
+      }
     })
   }
 
@@ -133,20 +151,23 @@ active: number;
 
 
     addCategory(){
+      if(this.categoryName){
       this.http.postcategory('CourseCategory',{
         "label":this.categoryName
       }).subscribe(res=>{
         console.log(res);
+        if(res.status==200){
+          this.toastrService.success('Category succusfully created','Successs',{positionClass:'toast-bottom-right'});
+        }
+        else{
+          this.toastrService.error('Something is wrong','Error',{positionClass:'toast-bottom-right'});
+        }
       })
-      console.log('Hi..');
       this.getcatgory();
-    }
-  
-  chapter(index){
-    this.Flag= false;
-    this.Flag= true;
-
-    this.chapterArray.push({'name':this.chapterName,'url':this.chapterUrl,'dec':this.chapterDes})
+      }
+      else{
+        this.toastrService.error('please enter category name','Error',{positionClass:'toast-bottom-right'});
+      }
   }
 
   changeActive(i){
@@ -210,6 +231,7 @@ active: number;
     })
 
     this.flag=true;
+    this.flag1 = false;
   }
 
   openModal(){
@@ -218,14 +240,16 @@ active: number;
 
  getSection(id){
   this.allSection=[];
+  this.allChapter=[];
     this.http.getDataWithId('CourseSection',id)
     .subscribe(res=>{
       if(id == id){
         let result = res.entity;
         result.forEach(el=>{
           this.allSection.push(el);
+          this.allChapter.push(el.CourseChapters);
       })
-      console.log(this.allSection);
+      console.log('section',this.allChapter);
       console.log(id)
     }
   })
@@ -240,5 +264,6 @@ active: number;
 
  toImagePage(){
   this.router.navigate(['app/image']);
+  console.log('hddsd');
  }
 }

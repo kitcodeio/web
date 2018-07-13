@@ -1,8 +1,7 @@
 <!-- <body style="margin-top: 100px; margin-left: 70px;"> -->
   <div class="container" style="margin-top: 100px; margin-left: 100px;">
     <div class="row">
-      <div class="cl-md-6">
-          <button class="btn btn-md btn-success" style="margin-left: 0px;" data-toggle="modal" data-target="#bootstrapModel">Add category</button>&nbsp;&nbsp;&nbsp;
+      <div class="cl-md-6">          <button class="btn btn-md btn-success" style="margin-left: 0px;" data-toggle="modal" data-target="#bootstrapModel">Add category</button>&nbsp;&nbsp;&nbsp;
           <button class="btn btn-md btn-success" style="margin-left: 0px;" *ngIf="flag" (click)="courseForm();">Add course</button>
             <div>
               <br>
@@ -43,7 +42,7 @@
       </div>
       <div class="cl-md-6">
           <div  style="width: 18rem;" *ngIf="!Flag || !Flag1" >
-              <div  class="card mb-4" *ngFor="let a of sectionArray; let i=index" m-4 >
+              <div *ngFor="let a of sectionArray; let i=index">
                 <div class="card-header">
                   <div *ngIf="sectionArray.length == 0">
                       <!-- <a href="">{{i + 1}}.New Section</a> -->
@@ -89,12 +88,13 @@
                     <option selected>Choose Image...</option>
                     <option *ngFor="let image of allImages">{{image.label}}</option>
                   </select>
+                  <button class="btn btn-info" (click)="toImagePage();">Create new image</button>
                 </div>
                 <div class="input-group"  *ngIf="imageFlag">
                     <select class="custom-select" id="inputGroupSelect04">
-                      <option selected>Choose Image...</option>
-                        <option *ngFor="let image of allImages"><button (click)="toImagePage();">Create image first</button></option>
+                      <option selected>Create image first..</option>
                     </select>
+                    <button class="btn btn-info" (click)="toImagePage();">Create new image</button>
                 </div>
                 <input class="form-control wid" [(ngModel)]="courseDis" name="couse_Img_dis" placeholder=" The Description">
                 <button class="pull-right" (click)="saveCourse();" >Save course</button>
