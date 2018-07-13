@@ -1,6 +1,7 @@
 import { Component, OnInit, ViewChild, ElementRef } from '@angular/core';
 import { HttpService } from '../../services/http/http.service';
 import * as $ from 'jquery';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-create-course',
@@ -30,7 +31,7 @@ active: number;
   chapterName:any;
   chapterUrl:any;
   categories:any=[];
-  categoryname:any;
+  categoryName:any;
   courseId:any;
  Flag:boolean;
  Flag1:boolean;
@@ -43,11 +44,13 @@ active: number;
  allImages=[];
  imageId;
  sectionId;
+ checkImage
 
  display:any;
  block:any;
+ imageFlag:boolean;
 
-  constructor(private http: HttpService) { }
+  constructor(private http: HttpService, private router: Router) { }
 
   ngOnInit() {
     this.Flag=true;
@@ -109,13 +112,10 @@ active: number;
         this.sectionId=el.id;
       }
     })
-
-    console.log(this.sectionId);
     this.http.postchapter('CourseChapter',{
         "section_id": this.sectionId,
         "label": this.chapterName,  
         "url": this.chapterUrl
-    
     }).subscribe(res=>{
       console.log(res); 
     })
@@ -132,15 +132,14 @@ active: number;
     }
 
 
-    selectcategory(){
-      //console.log('method is workin')
+    addCategory(){
       this.http.postcategory('CourseCategory',{
-        "label":this.categoryname
+        "label":this.categoryName
       }).subscribe(res=>{
-       // console.log(res);
+        console.log(res);
       })
-     //$('.addcategory').modal('hide');
-
+      console.log('Hi..');
+      this.getcatgory();
     }
   
   chapter(index){
@@ -180,8 +179,18 @@ active: number;
   populateImage(){
     this.http.getData('Image')
     .subscribe((res) => {
+
+      if(res.entity.length!=0){
+        this.imageFlag=false;
       this.allImages=res.entity;
-      //console.log(this.allImages);
+      console.log('full');
+      }
+      else{
+        console.log('emp');
+        this.imageFlag=true;
+        this.allImages[0]='Create Image';
+      }
+      console.log(this.allImages);
     })
 
   }
@@ -203,7 +212,7 @@ active: number;
     this.flag=true;
   }
 
-  openModal(i){
+  openModal(){
     this.display=this.block;
  }
 
@@ -220,7 +229,16 @@ active: number;
       console.log(id)
     }
   })
-
   this.flag1 = true;
+ }
+
+ courseForm(){
+   this.Flag=true;
+   this.Flag1=true;
+   this.flag=false;
+ }
+
+ toImagePage(){
+  this.router.navigate(['app/image']);
  }
 }

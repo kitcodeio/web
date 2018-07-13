@@ -95,4 +95,8 @@ onResize(event) {
         this.allImages=res.entity;
       });
   }
+
+  createCourse(){
+    this.router.navigate(['app/createCourse']);
+  }
 }
