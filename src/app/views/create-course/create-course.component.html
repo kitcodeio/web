@@ -3,7 +3,8 @@
     <div class="container">
         <b class="creatcourse_headding">New Course</b>
         <br>
-        <button class="btn btn-md btn-success" (click)="showaddcategorymodal();" style="margin-left: 0px;" >Add category</button>
+        <button class="btn btn-md btn-success" (click)="showaddcategorymodal();" style="margin-left: 0px;" >Add category</button>&nbsp;&nbsp;&nbsp;
+        <button class="btn btn-md btn-success" (click)="showaddcategorymodal();" style="margin-left: 0px;" >Add course</button>
         <section>
           <br>
           <div class="row" style="margin-left: 0px;">
@@ -72,11 +73,22 @@
       <button class="btn btn-md creatcourse_btn" style="width: 50%;" (click)="section();" ><span class="fa fa-plus"></span> New Section</button>
          </div>
             <div class="col-md-9 col-lg-6 creatcourse_addnewcourse" >
-                <div *ngIf="flag">
-                    <div class="input-group" *ngFor="let course of allCourses;">
-                      <button style="background-color: transparent; border: none;" (click)="getCourseID(course.id);" data-toggle="modal" data-target="#bootstrapModel">{{course.label}}</button>
-                    </div>
-                  </div> 
+                <div *ngIf="flag && !flag1">
+                    <div class="list-group">
+                        <a href="#" class="list-group-item list-group-item-action active">
+                          Course List
+                        </a>
+                        <a type="click" class="list-group-item list-group-item-action" *ngFor="let course of allCourses;" (click)="getSection(course.id);">{{course.label}}</a>
+                      </div>
+                  </div>
+                  <div *ngIf="flag && flag1">
+                      <div class="list-group">
+                        <a href="#" class="list-group-item list-group-item-action active">
+                            Section List
+                        </a>
+                        <a type="click" class="list-group-item list-group-item-action" *ngFor="let section of allSection;" (click)="getChapter(section.id);">{{section.label}}</a>
+                      </div>
+                  </div>
               <div *ngIf="Flag && Flag1 && !flag">
                 <div class="input-group">
                   <select class="custom-select" id="inputGroupSelect04" #catId>
@@ -93,25 +105,50 @@
                   </div>
                   <input class="form-control wid" [(ngModel)]="courseDis" name="couse_Img_dis" placeholder=" The Description">
                   <button class="pull-right" (click)="saveCourse();" >Save course</button>
-              </div>  
-            <div *ngIf="!Flag && !Flag1" >
+              </div> 
+              <br>
+              <div *ngIf="flag && !flag1">
+                  <p>Add Section</p>
+                  <div class="input-group">
+                    <select class="custom-select" id="inputGroupSelect04" #course>
+                      <option selected>Choose course...</option>
+                      <option *ngFor="let course of allCourses">{{course.label}}</option>
+                    </select>
+                  </div>
+                    <input class="form-control wid" [(ngModel)]="courseName"  name="Course_name" placeholder=" The Course Name">
+                    <input class="form-control wid" [(ngModel)]="courseDis" name="couse_Img_dis" placeholder=" The Description">
+                    <button class="pull-right" (click)="addSection();" >Save section</button>
+                </div> 
+
+                <div *ngIf="flag && flag1">
+                    <p>Add Chpater</p>
+                    <div class="input-group">
+                      <select class="custom-select" id="inputGroupSelect04" #section>
+                        <option selected>Choose section...</option>
+                        <option *ngFor="let section of allSection">{{section.label}}</option>
+                      </select>
+                    </div>
+                      <input class="form-control wid" [(ngModel)]="chapterName"  name="chapter_name" placeholder=" The Chpater Name">
+                      <input class="form-control wid" [(ngModel)]="chapterUrl" name="couse_url" placeholder="Chpater Url">
+                      <button class="pull-right" (click)="addChapter();">Save chapter</button>
+                  </div>
+
+            <!-- <div *ngIf="!Flag && !Flag1" >
               <input class="form-control wid" [(ngModel)]="sectionName" name="sectionName" placeholder=" The Section Name">
           <textarea class="form-control wid1" [(ngModel)]="SectionDesc" name="sectionDis" placeholder=" The Description"></textarea>
         <button class="pull-right" (click)="savesection" >Save</button>
-      </div>
-      <div *ngIf="Flag && !Flag1">
+      </div> -->
+      <!-- <div *ngIf="Flag && !Flag1">
           <input class="form-control wid" [(ngModel)]="chapterName" name="ChapterName" placeholder=" The Chapter Name">
           <input class="form-control wid" type="file" [(ngModel)]="Chapter_Url" name="Chapter_Url" placeholder=" The Chapter Url">
           <textarea class="form-control wid1" [(ngModel)]="chapterDis" name="ChapterDesc" placeholder=" The Description"></textarea>
           <button class="pull-right" (click)="savechapter" >Save</button>
-        </div>
-                </div>
-                
-              </div>
-              </section>
-      
-        </div>
-        </section>
+        </div> -->
+      </div>
+    </div>
+  </section>
+ </div>
+</section>
 
 
         <!-- <button type="button" class="btn btn-info btn-lg" data-toggle="modal" data-target="#bootstrapModel">click to open</button> -->

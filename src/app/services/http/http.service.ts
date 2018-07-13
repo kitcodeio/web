@@ -37,8 +37,9 @@ export class HttpService {
     return this.http.post(this.url+'create/course/'+model,data)
       .pipe(catchError((error)=>{return of(error);}));
   }
+
   postchapter(model:string, data:any): Observable<any>{
-    return this.http.post(this.url+'make/'+model,data)
+    return this.http.post(this.url+'create/course/'+model,data)
     .pipe(catchError((error)=>{return of(error);}))
   }
   postcategory(model:string, data:any): Observable<any>{
@@ -70,7 +71,7 @@ export class HttpService {
     .pipe(catchError((error)=>{return of(error);}));
   }
 
-  getCourseWithId(model:string,id:number):Observable<any>{
+  getDataWithId(model:string,id:number):Observable<any>{
     return this.http.get(this.url+'read/course/'+model+'/'+id)
     .pipe(catchError((error)=>{return of(error);}));
   }

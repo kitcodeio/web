@@ -12,6 +12,8 @@ export class CreateCourseComponent implements OnInit {
   @ViewChild('labelcat') catlabel: ElementRef;
   @ViewChild('catId') catName: ElementRef;
   @ViewChild('imageId') imageName: ElementRef;
+  @ViewChild('course') courseName: ElementRef;
+  @ViewChild('section') sectionName: ElementRef;
 
   //  catgorylabel = this.catlabel.nativeElement.value;
 
@@ -20,26 +22,27 @@ active: number;
   sectionArray=[];
   chapterArray=[];
   allCourses=[];
-  courseName:any;
+  allSection=[];
   courseImgID:any;
   courseDis:any;
   SectionDesc:any;
-  sectionName:any;
-  chapterDis:any;
+  chapterDes:any;
   chapterName:any;
-  Chapter_Url:any;
+  chapterUrl:any;
   categories:any=[];
   categoryname:any;
   courseId:any;
  Flag:boolean;
  Flag1:boolean;
  flag:boolean=false;
+ flag1:boolean = false;
  index:number;
  secIndex;
  obj={};
  catId:any;
  allImages=[];
  imageId;
+ sectionId;
 
  display:any;
  block:any;
@@ -50,7 +53,6 @@ active: number;
     this.Flag=true;
     this.Flag1=true;
     this.getcatgory();
-    this.getChapter();
     this.populateImage();
   }
   
@@ -81,6 +83,11 @@ active: number;
 
 
   addSection(){
+    this.allCourses.forEach(el=>{
+      if(el.label==this.courseName.nativeElement.value){
+        this.courseId = el.id;
+      }
+    })
     this.http.postsection('CourseSection',{
         "course_id":this.courseId,
         "label":this.sectionName,
@@ -91,19 +98,26 @@ active: number;
         this.getcatgory();
       }
     })
-    //console.log('yes ss')
+    console.log(this.courseId);
   }
 
 
 
-  savechapter(){
+  addChapter(){
+    this.allSection.forEach(el=>{
+      if(el.label==this.sectionName.nativeElement.value){
+        this.sectionId=el.id;
+      }
+    })
+
+    console.log(this.sectionId);
     this.http.postchapter('CourseChapter',{
-        "section_id": "3",
-        "label": this.chapterDis,
-        "url": this.Chapter_Url
+        "section_id": this.sectionId,
+        "label": this.chapterName,  
+        "url": this.chapterUrl
     
     }).subscribe(res=>{
-      //console.log(res);
+      console.log(res); 
     })
   }
 
@@ -133,7 +147,7 @@ active: number;
     this.Flag= false;
     this.Flag= true;
 
-    this.chapterArray.push({'name':this.chapterName,'url':this.Chapter_Url,'dec':this.chapterDis})
+    this.chapterArray.push({'name':this.chapterName,'url':this.chapterUrl,'dec':this.chapterDes})
   }
 
   changeActive(i){
@@ -155,9 +169,10 @@ active: number;
   }
 
 
-  getChapter(){
-    this.http.getChapter('Course',1).subscribe(res=>{
-      //console.log(res);
+  getChapter(id){
+    this.http.getChapter('CourseSection',id)
+    .subscribe(res=>{
+      console.log(res);
     })
   }
 
@@ -173,7 +188,7 @@ active: number;
 
   getCourse(id){
     this.allCourses=[];
-      this.http.getCourseWithId('Course',id)
+      this.http.getDataWithId('Course',id)
       .subscribe(res=>{
         if(id == id){
           let result = res.entity;
@@ -188,11 +203,24 @@ active: number;
     this.flag=true;
   }
 
-  getCourseID(i){
-    this.courseId = i;
-  }
-
   openModal(i){
     this.display=this.block;
+ }
+
+ getSection(id){
+  this.allSection=[];
+    this.http.getDataWithId('CourseSection',id)
+    .subscribe(res=>{
+      if(id == id){
+        let result = res.entity;
+        result.forEach(el=>{
+          this.allSection.push(el);
+      })
+      console.log(this.allSection);
+      console.log(id)
+    }
+  })
+
+  this.flag1 = true;
  }
 }
