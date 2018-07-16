@@ -11,8 +11,8 @@ import { CustomHttpService } from '../custom-http/custom-http.service';
 
 export class HttpService {
 
-  baseUrl = 'http://kitcode.io/';
-  url ='http://13.232.45.52:8080/'
+  baseUrl = 'http://beta.kitcode.io/';
+  url ='http://beta.kitcode.io/'
 
   getData(model: string): Observable<any> {
     return this.http.get(this.url+'read/api/'+model)

@@ -19,6 +19,15 @@ export class CoursesComponent implements OnInit {
 
   ngOnInit() {
 
+    this.populateCatgory();
+
+  }
+
+  populateCatgory(){
+    this.http.getcategory('CourseCategory').subscribe(res=>{
+      this.allCourseCategory = res.entity;
+      console.log(this.allCourseCategory);
+    })
   }
   
   toLogin(){
