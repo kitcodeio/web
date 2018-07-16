@@ -23,7 +23,7 @@ export class LandingPageComponent implements OnInit {
 
   ngOnInit() {
 
-   
+    this.populateCatgory();
     this.userName = this.useInfo.getInfo();
 
     this.flag = !this.authService.isTokenExpired();
@@ -35,6 +35,13 @@ export class LandingPageComponent implements OnInit {
 
   toCoursePage(){
     this.router.navigate(['/courses']);
+  }
+
+  populateCatgory(){
+    this.http.getcategory('CourseCategory').subscribe(res=>{
+      this.allCourseCategory = res.entity;
+      console.log(this.allCourseCategory);
+    })
   }
 
 }

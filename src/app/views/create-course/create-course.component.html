@@ -11,10 +11,10 @@
         <p><a type="click" style="color: royalblue" ><strong class="left-nav-headline" (click)="getSectionId(i);">{{i+1}}.{{sec.name}}</strong></a></p>
         <div *ngFor="let c of sec.chapters; let j=index;">
             <div *ngIf="chapterFlag2">
-                <p><a type="click" style="color: royalblue" ><strong class="left-nav-headline" (click)="getChapterId(i);">{{i+1}}.{{j+1}}.{{c.name}}</strong></a></p>
+                <p><a type="click" style="color: royalblue" ><strong class="left-nav-headline" (click)="getChapterId(j);">{{i+1}}.{{j+1}}.{{c.name}}</strong></a></p>
             </div>
         </div>
-      <button class="list-group-item add-section" (click)="chapterForm(i);"><i class="fa fa-plus"></i> Add Chapter</button>
+      <button class="list-group-item add-section" (click)="chapterForm(i);"><i class="fa fa-plus"></i> Add Chapter</button> 
     </div>
   </div>
   <br>
@@ -51,11 +51,7 @@
     <label for="form_lastname">Category </label>
         <select id="country" name="country" #cat>
         <option>--select--</option>
-        <option value="Business">Business</option>
-        <option value="Humanities">Humanities</option>
-        <option value="Math/Science">Math/Science</option>
-        <option value="Programming">Programming</option>
-        <option value="Other">Other</option>
+        <option value="Business" *ngFor="let cat of categories">{{cat.label}}</option>
       </select>
                 <div class="help-block with-errors"></div>
             </div>
@@ -65,7 +61,7 @@
         <label for="form_lastname">Workspace</label>
         <select id="country" name="country" #image>
         <option value="Published">--select--</option>
-        <option value="Unpublished">Unpublished</option>
+        <option value="Unpublished" *ngFor="let image of allImages">{{image.label}}</option>
         </select>
         <div class="help-block with-errors"></div>
       </div>
@@ -99,22 +95,6 @@
                   </div>
               </div>
           </div>
-          <div class="row">
-              <div class="col-md-12">
-                  <div class="form-group">
-          <label for="form_lastname">Choose Course </label>
-                      <select id="country" name="country" #selectCourse>
-              <option>--select--</option>
-              <option value="Business">Business</option>
-              <option value="Humanities">Humanities</option>
-              <option value="Math/Science">Math/Science</option>
-              <option value="Programming">Programming</option>
-              <option value="Other">Other</option>
-            </select>
-                <div class="help-block with-errors"></div>
-              </div>
-            </div>
-      </div>
         <div class="row">
             <div class="col-md-12">
                 <input type="submit" class="btn btn-success btn-send"  value="Add Section" (click)="addSection();">
@@ -151,25 +131,9 @@
                     </div>
                 </div>
             </div>
-            <div class="row">
-                <div class="col-md-12">
-                    <div class="form-group">
-            <label for="form_lastname">Choose Section </label>
-                        <select id="country" name="country" #selectSection>
-                <option>--select--</option>
-                <option value="Business">Business</option>
-                <option value="Humanities">Humanities</option>
-                <option value="Math/Science">Math/Science</option>
-                <option value="Programming">Programming</option>
-                <option value="Other">Other</option>
-              </select>
-                  <div class="help-block with-errors"></div>
-              </div>
-           </div>
-        </div>
           <div class="row">
             <div class="col-md-12">
-          <input type="submit" class="btn btn-success btn-send"  value="Add Chapter">
+          <input type="submit" class="btn btn-success btn-send"  value="Add Chapter" (click)="addChapter()">
         </div>
       </div>  
     </div>
