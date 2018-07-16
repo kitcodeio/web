@@ -1,30 +1,77 @@
-.creatcourse_section{
-    margin-top: 6rem
-}
-.creatcourse_headding{
-    font-size: 24px;
-}
-.creatcourse_addnewcourse{
-    border: 2px solid groove;
-    background-color: groove;
-}
-.creatcourse_btn{
-    background-color: #fff;
-    color: #3399cc;
-    border: 5px solid;
+input[type=text], select, textarea {
     width: 100%;
+    padding: 12px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    box-sizing: border-box;
+    margin-top: 6px;
+    margin-bottom: 16px;
+    resize: vertical;
 }
-.wid{
-    border: 2px solid #3399cc;
-    font-size: 13px;
-    margin: 1rem 0rem;   
+
+input[type=submit] {
+    background-color: #4CAF50;
+    color: white;
+    padding: 12px 20px;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
 }
-.wid1{
-    border: 2px solid #3399cc;
-    font-size: 13px;
-    margin: 1rem 0rem;
-    height: 82px;
+
+input[type=submit]:hover {
+    background-color: #45a049;
 }
-.card-header {
-    text-align: center;
+
+@media print /*--This is for Print--*/
+{
+    .btn
+    {
+        display: none;
+    }
+    .tble
+    {
+        background-color: #CD853F;
+        border:1px solid green;
+        -webkit-print-color-adjust: exact
+
+    }
+}
+@media screen /*--This is for Print Preview Screen--*/
+{
+    .btn
+    {
+        display: none;
+    }
+
+    .tble
+    {
+        background-color: #CD853F;
+        border:1px solid green;
+    }
+  }
+  
+  @media screen /*--This is for Screen--*/
+{
+    .btn
+    {
+        background-color: #AFAFAF;
+        display: block;
+    }
+    .tble
+    {
+        background-color: #E5E5E5;
+        border: 1px solid #CD853F;
+    }
+}
+
+.col-lg-4{
+	width:25%;
+	float:left;
+}
+.col-lg-8{
+	width:75%;
+	float:right;
+}
+.col-lg-12{
+	width:100%;
 }

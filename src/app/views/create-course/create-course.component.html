@@ -1,169 +1,181 @@
-<!-- <body style="margin-top: 100px; margin-left: 70px;"> -->
-  <div class="container" style="margin-top: 100px; margin-left: 100px;">
-    <div class="row">
-      <div class="cl-md-6">          <button class="btn btn-md btn-success" style="margin-left: 0px;" data-toggle="modal" data-target="#bootstrapModel">Add category</button>&nbsp;&nbsp;&nbsp;
-          <button class="btn btn-md btn-success" style="margin-left: 0px;" *ngIf="flag" (click)="courseForm();">Add course</button>
-            <div>
-              <br>
-                <div class="list-group">
-                    <div class="list-group">
-                        <a class="list-group-item list-group-item-action active">
-                          Category List
-                        </a>
-                      <a type="click" class="list-group-item list-group-item-action" *ngFor="let cat of categories;" (click)="getCourse(cat.id);">{{cat.label}}</a>
-                  </div>
-                  <!-- <div *ngFor="let cat of categories; let i=index;">
-                      <button type="button" class="list-group-item list-group-item-action" (click)="getCourse(cat.id);">{{cat.label}}</button>
-                  </div>          -->
-                </div>
-            <div class="modal addcategory" tabindex="-1" role="dialog">
-                <div class="modal-dialog" role="document">
-                  <div class="modal-content">
-                    <div class="modal-header">
-                      <h5 class="modal-title">New category</h5>
-                      <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                        <span aria-hidden="true">&times;</span>
-                      </button>
-                    </div>
-                    <div class="modal-body">
-                      <form>
-                          <input type="text" class="form-control" placeholder="category Name" [(ngModel)]="categoryname" name="categoryname">
-  
-                      </form>
-                                 </div>
-                    <div class="modal-footer">
-                      <button type="button" class="btn btn-primary" (click)="selectcategory();" >Save </button>
-                      <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </div>
-      </div>
-      <div class="cl-md-6">
-          <div  style="width: 18rem;" *ngIf="!Flag || !Flag1" >
-              <div *ngFor="let a of sectionArray; let i=index">
-                <div class="card-header">
-                  <div *ngIf="sectionArray.length == 0">
-                      <!-- <a href="">{{i + 1}}.New Section</a> -->
-                  </div>
-                  <!-- <a href="">{{i + 1}}.{{a.name}}</a> -->
-                </div>
-                <ul class="list-group list-group-flush">
-                  <li class="list-group-item"><button class="btn btn-md creatcourse_btn" (click)="chapter(j); selectedSec(i);"><span class="fa fa-plus"></span> New Chapter</button>
-                  </li>
-                </ul>                          
-              </div>
-              <br>
-            </div>
-       </div>
-          <div class="col-md-7 col-lg-7 creatcourse_addnewcourse" >
-              <div *ngIf="flag && !flag1">
-                  <div class="list-group">
-                      <a href="#" class="list-group-item list-group-item-action active">
-                        Course List
-                      </a>
-                      <a type="click" class="list-group-item list-group-item-action" *ngFor="let course of allCourses;" (click)="getSection(course.id);">{{course.label}}</a>
-                    </div>
-                </div>
-                <div *ngIf="flag && flag1">
-                    <div class="list-group">
-                      <a href="#" class="list-group-item list-group-item-action active">
-                          Section List
-                      </a>
-                      <a type="click" class="list-group-item list-group-item-action" *ngFor="let section of allSection;" (click)="getChapter(section.id);">{{section.label}}</a>
-                    </div>
-                </div>
-            <div *ngIf="Flag && Flag1 && !flag">
-              <p>Add New Course</p>
-              <div class="input-group">
-                <select class="custom-select" id="inputGroupSelect04" #catId>
-                  <option selected>Choose category...</option>
-                  <option *ngFor="let cat of categories">{{cat.label}}</option>
-                </select>
-              </div>
-                <input class="form-control wid" [(ngModel)]="courseName"  name="Course_name" placeholder=" The Course Name">
-                <div class="input-group" *ngIf="!imageFlag">
-                  <select class="custom-select" id="inputGroupSelect04" #imageId>
-                    <option selected>Choose Image...</option>
-                    <option *ngFor="let image of allImages">{{image.label}}</option>
-                  </select>
-                  <button class="btn btn-info" (click)="toImagePage();">Create new image</button>
-                </div>
-                <div class="input-group"  *ngIf="imageFlag">
-                    <select class="custom-select" id="inputGroupSelect04">
-                      <option selected>Create image first..</option>
-                    </select>
-                    <button class="btn btn-info" (click)="toImagePage();">Create new image</button>
-                </div>
-                <input class="form-control wid" [(ngModel)]="courseDis" name="couse_Img_dis" placeholder=" The Description">
-                <button class="pull-right" (click)="saveCourse();" >Save course</button>
-            </div> 
-            <br>
-            <div *ngIf="flag && !flag1">
-                <p>Add Section</p>
-                <div class="input-group">
-                  <select class="custom-select" id="inputGroupSelect04" #course>
-                    <option selected>Choose course...</option>
-                    <option *ngFor="let course of allCourses">{{course.label}}</option>
-                  </select>
-                </div>
-                  <input class="form-control wid" [(ngModel)]="courseName"  name="Course_name" placeholder=" The Course Name">
-                  <input class="form-control wid" [(ngModel)]="courseDis" name="couse_Img_dis" placeholder=" The Description">
-                  <button class="pull-right" (click)="addSection();" >Save section</button>
-              </div> 
+<body style="margin-top: 100px;">
 
-              <div *ngIf="flag && flag1">
-                  <p>Add Chpater</p>
-                  <div class="input-group">
-                    <select class="custom-select" id="inputGroupSelect04" #section>
-                      <option selected>Choose section...</option>
-                      <option *ngFor="let section of allSection">{{section.label}}</option>
-                    </select>
-                  </div>
-                    <input class="form-control wid" [(ngModel)]="chapterName"  name="chapter_name" placeholder=" The Chpater Name">
-                    <input class="form-control wid" [(ngModel)]="chapterUrl" name="couse_url" placeholder="Chpater Url">
-                    <button class="pull-right" (click)="addChapter();">Save chapter</button>
-                </div>
-
-      </div>
+    <div class="container">
+     <div class="col-lg-12">
+        <div class="row" style="margin-top:5%;">
+        <div class="col-lg-4">
+  <div class="course-left-nav">
+<p><a type="click" style="color: royalblue"><strong class="left-nav-headline" (click)="courseForm();">{{defaultCourseName}}</strong></a></p>
+<div class="panel panel-default"  *ngFor="let sec of allSection; let i=index;">
+    <div class="panel-heading" *ngIf="chapterFlag1">
+        <p><a type="click" style="color: royalblue" ><strong class="left-nav-headline" (click)="getSectionId(i);">{{i+1}}.{{sec.name}}</strong></a></p>
+        <div *ngFor="let c of allChapter; let j=index;">
+            <div *ngIf="chapterFlag2">
+                <p><a type="click" style="color: royalblue" ><strong class="left-nav-headline" (click)="getChapterId(i);">{{i+1}}.{{j+1}}.{{c.name}}</strong></a></p>
+            </div>
+        </div>
+      <button class="list-group-item add-section" (click)="chapterForm(i);"><i class="fa fa-plus"></i> Add Chapter</button>
     </div>
   </div>
-                <!-- <ul class="list-inline">
-                    <li class="version-select-item list-inline-item">
-                        <select class="select-os" id="exampleFormControlSelect1" #labelcat (click)="selectcategory"  >
-                          <option value="" selected="" disabled="" id="choose_loc">Dependency</option>
-                          <option></option>
-                        </select>
-                    </li>
-                    </ul> -->
-              
-            <!-- <div *ngIf="!Flag && !Flag1" >
-              <input class="form-control wid" [(ngModel)]="sectionName" name="sectionName" placeholder=" The Section Name">
-          <textarea class="form-control wid1" [(ngModel)]="SectionDesc" name="sectionDis" placeholder=" The Description"></textarea>
-        <button class="pull-right" (click)="savesection" >Save</button>
-      </div> -->
-      <!-- <div *ngIf="Flag && !Flag1">
-          <input class="form-control wid" [(ngModel)]="chapterName" name="ChapterName" placeholder=" The Chapter Name">
-          <input class="form-control wid" type="file" [(ngModel)]="Chapter_Url" name="Chapter_Url" placeholder=" The Chapter Url">
-          <textarea class="form-control wid1" [(ngModel)]="chapterDis" name="ChapterDesc" placeholder=" The Description"></textarea>
-          <button class="pull-right" (click)="savechapter" >Save</button>
-        </div> -->
+  <br>
+<div class="panel panel-default">
+    <div class="panel-heading"><button class="list-group-item add-section" (click)="sectionForm();"><i class="fa fa-plus"></i> Add Section</button></div>
+  </div>
+</div>
+</div>
+<div class="col-lg-8">                
+ <form id="contact-form" method="post" action="contact.php" role="form" *ngIf="!sectionFlag && !chapterFlag">
 
+<div class="messages"></div>
 
-        <div id="bootstrapModel" class="modal fade" role="dialog">
-           <div class="modal-dialog">
-            <div class="modal-content">
-              <div class="modal-header">
-                <h4 class="modal-title">Add Category</h4>
-                <button type="button" class="close" data-dismiss="modal">&times;</button>
+<div class="controls">
+    <div class="row">
+        <div class="col-md-12">
+            <div class="form-group">
+                <label for="form_name">Title </label>
+                <input id="form_name" type="text" name="name" class="form-control" placeholder="New Course" required="required" data-error="Firstname is required." [(ngModel)]="courseName">
+                <div class="help-block with-errors"></div>
+            </div>
+        </div>
+        <div class="col-md-12">
+            <div class="form-group">
+                <label for="form_message">Description</label>
+                <textarea id="form_message" name="message" class="form-control" placeholder="Description *" rows="4" required="required" data-error="Please,leave us a message." [(ngModel)]="courseDescription"></textarea>
+                <div class="help-block with-errors"></div>
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-md-12">
+            <div class="form-group">
+    <label for="form_lastname">Category </label>
+        <select id="country" name="country" #cat>
+        <option>--select--</option>
+        <option value="Business">Business</option>
+        <option value="Humanities">Humanities</option>
+        <option value="Math/Science">Math/Science</option>
+        <option value="Programming">Programming</option>
+        <option value="Other">Other</option>
+      </select>
+                <div class="help-block with-errors"></div>
+            </div>
+        </div>
+    <div class="col-md-12">
+      <div class="form-group">
+        <label for="form_lastname">Workspace</label>
+        <select id="country" name="country" #image>
+        <option value="Published">--select--</option>
+        <option value="Unpublished">Unpublished</option>
+        </select>
+        <div class="help-block with-errors"></div>
+      </div>
+    </div>
+</div>
+  <div class="row">
+      <div class="col-md-12">
+          <input type="submit" class="btn btn-success btn-send"  value="Add Course" (click)="addCourse();">
+      </div>
+    </div>  
+   </div>
+  </form>
+  <form id="contact-form" method="post" action="contact.php" role="form" *ngIf="sectionFlag && !chapterFlag">
+      <div class="messages"></div>
+      
+      <div class="controls">
+      
+          <div class="row">
+              <div class="col-md-12">
+                  <div class="form-group">
+                      <label for="form_name">Section Title</label>
+                      <input id="form_name" type="text" name="name" class="form-control" placeholder="New Section" required="required" data-error="Firstname is required." [(ngModel)]="sectionName">
+                      <div class="help-block with-errors"></div>
+                  </div>
               </div>
-        <!-- model body section -->
-               <input class="form-control wid" [(ngModel)]="categoryName" name="sectionName" placeholder=" Category Name" style="width: 400px; margin: 0 auto;">
-              <div class="modal-footer">
-                <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-                <button type="button" class="btn btn-default" data-dismiss="modal" (click)="addCategory();">Save</button>
+              <div class="col-md-12">
+                  <div class="form-group">
+                      <label for="form_message">Description</label>
+                      <textarea id="form_message" name="message" class="form-control" placeholder="Description *" rows="4" required="required" data-error="Please,leave us a message." [(ngModel)]="sectionDescription"></textarea>
+                      <div class="help-block with-errors"></div>
+                  </div>
+              </div>
+          </div>
+          <div class="row">
+              <div class="col-md-12">
+                  <div class="form-group">
+          <label for="form_lastname">Choose Course </label>
+                      <select id="country" name="country" #selectCourse>
+              <option>--select--</option>
+              <option value="Business">Business</option>
+              <option value="Humanities">Humanities</option>
+              <option value="Math/Science">Math/Science</option>
+              <option value="Programming">Programming</option>
+              <option value="Other">Other</option>
+            </select>
+                <div class="help-block with-errors"></div>
               </div>
             </div>
+      </div>
+        <div class="row">
+            <div class="col-md-12">
+                <input type="submit" class="btn btn-success btn-send"  value="Add Section" (click)="addSection();">
           </div>
+        </div>  
+      </div>
+    </form>
+    <form id="contact-form" method="post" action="contact.php" role="form" *ngIf="!sectionFlag && chapterFlag">
+
+        <div class="messages"></div>
+        
+        <div class="controls">
+        
+            <div class="row">
+                <div class="col-md-12">
+                    <div class="form-group">
+                        <label for="form_name">Chapter Title </label>
+                        <input id="form_name" type="text" name="name" class="form-control" placeholder="New Chapter" required="required" data-error="Firstname is required."  [(ngModel)]="chapterName">
+                        <div class="help-block with-errors"></div>
+                    </div>
+                </div>
+                <div class="col-md-12">
+                    <div class="form-group">
+                        <label for="form_message">Description</label>
+                        <textarea id="form_message" name="message" class="form-control" placeholder="Description *" rows="4" required="required" data-error="Please,leave us a message." [(ngModel)]="chapterDescription"></textarea>
+                        <div class="help-block with-errors"></div>
+                    </div>
+                </div>
+                <div class="col-md-12">
+                    <div class="form-group">
+                        <label for="form_name">Chapter Url </label>
+                        <input id="form_name" type="text" name="name" class="form-control" placeholder="New Chapter" required="required" data-error="Firstname is required." [(ngModel)]="chapterUrl">
+                        <div class="help-block with-errors"></div>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-12">
+                    <div class="form-group">
+            <label for="form_lastname">Choose Section </label>
+                        <select id="country" name="country" #selectSection>
+                <option>--select--</option>
+                <option value="Business">Business</option>
+                <option value="Humanities">Humanities</option>
+                <option value="Math/Science">Math/Science</option>
+                <option value="Programming">Programming</option>
+                <option value="Other">Other</option>
+              </select>
+                  <div class="help-block with-errors"></div>
+              </div>
+           </div>
         </div>
+          <div class="row">
+            <div class="col-md-12">
+          <input type="submit" class="btn btn-success btn-send"  value="Add Chapter">
+        </div>
+      </div>  
+    </div>
+  </form>
+ </div>
+</div>
+</div>
+</div>
+</body>

@@ -14,256 +14,84 @@ export class CreateCourseComponent implements OnInit {
 
   @ViewChild('labelcat') catlabel: ElementRef;
   @ViewChild('catId') catName: ElementRef;
-  @ViewChild('imageId') imageName: ElementRef;
-  @ViewChild('course') courseName: ElementRef;
-  @ViewChild('section') sectionName: ElementRef;
+  @ViewChild('image') imageName: ElementRef;
+  @ViewChild('selectCourse') selectCourse: ElementRef;
+  @ViewChild('selectSection') selectSection: ElementRef;
+  
+  sectionFlag:boolean=false;
+  chapterFlag:boolean=false;
+  chapterFlag1:boolean=false;
+  chapterFlag2:boolean=false;
 
-  //  catgorylabel = this.catlabel.nativeElement.value;
-
-
-active: number;
-  sectionArray=[];
-  allChapter=[];
-  allCourses=[];
   allSection=[];
-  courseImgID:any;
-  courseDis:any;
-  SectionDesc:any;
-  chapterDes:any;
-  chapterName:any;
-  chapterUrl:any;
-  categories:any=[];
-  categoryName:any;
-  courseId:any;
- Flag:boolean;
- Flag1:boolean;
- flag:boolean=false;
- flag1:boolean = false;
- index:number;
- secIndex;
- obj={};
- catId:any;
- allImages=[];
- imageId;
- sectionId;
- checkImage
-
- display:any;
- block:any;
- imageFlag:boolean;
-
+  allChapter=[];
+  defaultSectionName;
+  defaultChapterName;
+  sectionDescription;
+  defaultCourseName;
+  courseName;
+  sectionName;
+  sectionIndex:number;
+  chapterId;
+  chapterName;
+  chapterDescription;
+  chapterUrl;
+  index;
+  sectionWithChapter=[];
+  lastIndex:number=-1;
+  obj={};
   constructor(private http: HttpService, private router: Router, private toastrService: ToastrService) { }
 
   ngOnInit() {
-    this.Flag=true;
-    this.Flag1=true;
-    this.getcatgory();
-    this.populateImage();
-  }
-  
-  saveCourse(){
-
-    //Get Category Id
-    this.categories.forEach(el => {
-      if(el.label==this.catName.nativeElement.value){
-        this.catId = el.id;
-      }
-    });
-
-    this.allImages.forEach(el => {
-      if(el.label==this.imageName.nativeElement.value){
-        this.imageId = el.id;
-      }
-    });
-
-    this.http.postCourse('Course',{
-      'category_id':this.catId,
-      'label':this.courseName,
-      'description':this.courseDis,
-      'image_id':this.imageId
-    }).subscribe(res =>{
-      console.log(res);
-      if(res.status==200){
-        this.toastrService.success('Course successfully created','success',{positionClass:'toast-bottom-right'});
-      }
-      else{
-        this.toastrService.error('Something wrong','Error',{positionClass:'toast-bottom-right'});
-      }
-    })
+    this.defaultCourseName='New Course';
+    this.defaultSectionName = 'New Section';
+    this.defaultChapterName ='New Chapter';
   }
 
+  chapterForm(i){
+    let chapterArray=[];
+    this.chapterFlag=true;
+    this.sectionFlag=false;
+    this.chapterFlag2=true;
+    this.obj[i]={name:this.chapterName,description:this.chapterDescription, chapterUrl:this.chapterUrl,  section:this.selectSection}
+    this.sectionWithChapter.push(this.obj);
+  }
+
+  sectionForm(){
+    this.sectionFlag=true;
+    this.chapterFlag=false;
+    this.chapterFlag1= true;
+
+    this.allSection.push({name:this.defaultSectionName,description:this.sectionDescription,course:this.selectCourse});
+  }
+
+  courseForm(){
+    this.chapterFlag=false;
+    this.sectionFlag=false;
+  }
+
+  addCourse(){
+    this.defaultCourseName=this.courseName;
+  }
 
   addSection(){
-    this.allCourses.forEach(el=>{
-      if(el.label==this.courseName.nativeElement.value){
-        this.courseId = el.id;
-      }
-    })
-    this.http.postsection('CourseSection',{
-        "course_id":this.courseId,
-        "label":this.sectionName,
-        "description":this.SectionDesc 
-    }).subscribe(res=>{
-      console.log(res);
-      if(res.status == 200){
-        this.getcatgory();
-        this.toastrService.success('Secton Successfully created','Success',{positionClass:'toast-bottom-right'});
-      }
-      else{
-        this.toastrService.error('Something is wrong','Error',{positionClass:'toast-bottom-right'});
-      }
-    })
-    console.log(this.courseId);
-  }
-
-
-
-  addChapter(){
-    this.allSection.forEach(el=>{
-      if(el.label==this.sectionName.nativeElement.value){
-        this.sectionId=el.id;
-      }
-    })
-    this.http.postchapter('CourseChapter',{
-        "section_id": this.sectionId,
-        "label": this.chapterName,  
-        "url": this.chapterUrl
-    }).subscribe(res=>{
-      console.log(res); 
-      if(res.status==200){
-        this.toastrService.success('Chapter successfully created','Success',{positionClass:'toast-bottom-right'});
-      }
-      else{
-        this.toastrService.error('Somrthing is wrong','Error',{positionClass:'toast-bottom-right'});
-      }
-    })
-  }
-
-
-
-    getcatgory(){
-      this.http.getcategory('CourseCategory').subscribe(res=>{
-        this.categories = res.entity;
-        //console.log('getres',res.entity);
-        //console.log('in',this.catId);
-      })
+    let obj;
+    if(!this.sectionIndex){
+      obj={name:this.sectionName,description:this.sectionDescription,course:this.selectCourse}
+      this.allSection[this.allSection.length-1]=obj;
     }
-
-
-    addCategory(){
-      if(this.categoryName){
-      this.http.postcategory('CourseCategory',{
-        "label":this.categoryName
-      }).subscribe(res=>{
-        console.log(res);
-        if(res.status==200){
-          this.toastrService.success('Category succusfully created','Successs',{positionClass:'toast-bottom-right'});
-        }
-        else{
-          this.toastrService.error('Something is wrong','Error',{positionClass:'toast-bottom-right'});
-        }
-      })
-      this.getcatgory();
-      }
-      else{
-        this.toastrService.error('please enter category name','Error',{positionClass:'toast-bottom-right'});
-      }
-  }
-
-  changeActive(i){
-    this.active = i;
-  }
-
-
-  section(i){
-    //this.sectionArray.push({'name':this.sectionName,'img':this.SectionDesc});
-    this.Flag=false;
-    this.Flag1=false;
-    //console.log(this.sectionArray);
-    //console.log(i);
-  }
-
-  showaddcategorymodal(){
-   // console.log('yes');
-    //$('.addcategory').modal('show');
-  }
-
-
-  getChapter(id){
-    this.http.getChapter('CourseSection',id)
-    .subscribe(res=>{
-      console.log(res);
-    })
-  }
-
-
-  populateImage(){
-    this.http.getData('Image')
-    .subscribe((res) => {
-
-      if(res.entity.length!=0){
-        this.imageFlag=false;
-      this.allImages=res.entity;
-      console.log('full');
-      }
-      else{
-        console.log('emp');
-        this.imageFlag=true;
-        this.allImages[0]='Create Image';
-      }
-      console.log(this.allImages);
-    })
-
-  }
-
-  getCourse(id){
-    this.allCourses=[];
-      this.http.getDataWithId('Course',id)
-      .subscribe(res=>{
-        if(id == id){
-          let result = res.entity;
-          result.forEach(el=>{
-            this.allCourses.push(el);
-          })
-          console.log(this.allCourses);
-          console.log(id)
-        }
-    })
-
-    this.flag=true;
-    this.flag1 = false;
-  }
-
-  openModal(){
-    this.display=this.block;
- }
-
- getSection(id){
-  this.allSection=[];
-  this.allChapter=[];
-    this.http.getDataWithId('CourseSection',id)
-    .subscribe(res=>{
-      if(id == id){
-        let result = res.entity;
-        result.forEach(el=>{
-          this.allSection.push(el);
-          this.allChapter.push(el.CourseChapters);
-      })
-      console.log('section',this.allChapter);
-      console.log(id)
+    else if(this.sectionIndex)
+    {
+      obj={name:this.sectionName,description:this.sectionDescription,course:this.selectCourse}
+      console.log(obj);
+      this.allSection[this.sectionIndex]=obj;
     }
-  })
-  this.flag1 = true;
- }
+  }
 
- courseForm(){
-   this.Flag=true;
-   this.Flag1=true;
-   this.flag=false;
- }
-
- toImagePage(){
-  this.router.navigate(['app/image']);
-  console.log('hddsd');
- }
+  getSectionId(i){
+    this.sectionFlag=true;
+    this.chapterFlag=false;
+    this.sectionIndex=i;
+    console.log(i);
+  }
 }
