@@ -54,7 +54,8 @@ export class CreateCourseComponent implements OnInit {
     this.sectionFlag=false;
     this.chapterFlag2=true;
     this.obj[i]={name:this.chapterName,description:this.chapterDescription, chapterUrl:this.chapterUrl,  section:this.selectSection}
-    this.sectionWithChapter.push(this.obj);
+	  this.sectionWithChapter.push(this.obj);
+    this.allSection[i].chapters.push({name:this.chapterName,description:this.chapterDescription, chapterUrl:this.chapterUrl,  section:this.selectSection});
   }
 
   sectionForm(){
@@ -62,7 +63,7 @@ export class CreateCourseComponent implements OnInit {
     this.chapterFlag=false;
     this.chapterFlag1= true;
 
-    this.allSection.push({name:this.defaultSectionName,description:this.sectionDescription,course:this.selectCourse});
+    this.allSection.push({name:this.defaultSectionName,description:this.sectionDescription,course:this.selectCourse, chapters: []});
   }
 
   courseForm(){
