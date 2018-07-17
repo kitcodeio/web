@@ -192,7 +192,8 @@ export class ImagesComponent implements OnInit, AfterViewInit {
           this.router.navigate(['app/dashboard']);
         }
         else{
-          this.toastrService.error('Dockerfile is not correct','Error',{positionClass:'toast-bottom-right'});
+          this.toastrService.success('Image creation started','Success',{positionClass:'toast-bottom-right'});
+          this.router.navigate(['app/dashboard']);
         }
       })
     }

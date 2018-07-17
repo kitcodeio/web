@@ -24,16 +24,17 @@ export class LandingPageComponent implements OnInit {
   constructor(private userInfo: UserInfoService, private router:Router, private http: HttpService, private useInfo: UserInfoService, private authService: AuthserviceService) { }
 
   ngOnInit() {
-    this.userRole = this.useInfo.getInfo();
-    if(this.userRole==1){
-      this.userHige = false;
-    }
-    else if(this.userRole==0){
-      this.userRole=true;
-    }
+    // this.userRole = this.useInfo.getInfo();
+    // if(this.userRole==1){
+    //   this.userHige = false;
+    // }
+    // else if(this.userRole==0){
+    //   this.userRole=true;
+    // }
     this.populateCatgory();
 
     this.flag = !this.authService.isTokenExpired();
+ 
   }
 
   toLogin(){
@@ -49,6 +50,12 @@ export class LandingPageComponent implements OnInit {
       this.allCourseCategory = res.entity;
       console.log(this.allCourseCategory);
     })
+  }
+
+  logout(): void {
+    localStorage.removeItem('jwt_token');
+    this.userInfo.token = localStorage.getItem('jwt_token');
+    this.router.navigate(['/login']);
   }
 
 }

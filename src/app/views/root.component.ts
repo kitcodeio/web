@@ -23,15 +23,15 @@ export class RootComponent implements OnInit {
   ngOnInit() {
     this.userRole = this.userInfo.getInfo();
 
-    if(this.userRole==1){
-      this.userHide = false;
-    }
-    else if(this.userRole==0){
-      this.userHide = true;
-    }
-    if(window.innerWidth<=768){
-      this.sizeFlag =true;
-    }
+    // if(this.userRole==1){
+    //   this.userHide = false;
+    // }
+    // else if(this.userRole==0){
+    //   this.userHide = true;
+    // }
+    // if(window.innerWidth<=768){
+    //   this.sizeFlag =true;
+    // }
 
   }
 
