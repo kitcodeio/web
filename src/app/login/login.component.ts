@@ -28,11 +28,14 @@ export class LoginComponent implements OnInit {
   passwordReg: string;
   company: string;
   passwordCon:string;
+  checkBox:boolean;
   constructor(private userInfo: UserInfoService, private router: Router, private authService: AuthserviceService, private route: ActivatedRoute, private toastrService: ToastrService) {
   
    }
 
   ngOnInit() {
+
+    console.log('box',this.checkBox);
 
     $(function(){
       $(document).on('click','.login-register-button',function(e){

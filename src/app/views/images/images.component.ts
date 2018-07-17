@@ -11,8 +11,8 @@ import '../../../../node_modules/jquery/dist/jquery.min.js'
 import { version } from 'codemirror';
 import { shouldCallLifecycleInitHook } from '@angular/core/src/view';
 import { ToastContainerDirective, ToastrService } from 'ngx-toastr';
-import { RouterModule, Routes } from '@angular/router';
-import {Router} from '@angular/router';
+import { RouterModule, Routes, } from '@angular/router';
+import { Router } from '@angular/router';
 
 declare var CodeMirror: any;
 declare var popover: any;
@@ -186,13 +186,14 @@ export class ImagesComponent implements OnInit, AfterViewInit {
         "file":this.editor.value
       }).subscribe((res) => {
   
-        // if(res.status==200)
-        // {
-        //   this.toastrService.success('Image creation started','Success',{positionClass:'toast-bottom-right'});
-        // }
-        // else{
-        //   this.toastrService.error('Dockerfile is not correct','Error',{positionClass:'toast-bottom-right'});
-        // }
+        if(res.status==200)
+        {
+          this.toastrService.success('Image creation started','Success',{positionClass:'toast-bottom-right'});
+          this.router.navigate(['app/dashboard']);
+        }
+        else{
+          this.toastrService.error('Dockerfile is not correct','Error',{positionClass:'toast-bottom-right'});
+        }
       })
     }
     else{

@@ -13,13 +13,22 @@ import * as $ from 'jquery';
 export class RootComponent implements OnInit {
   userName:string;
   sizeFlag: boolean;
+  userRole;
+  userHide:boolean;
   
   constructor(private router: Router, private userInfo: UserInfoService) {
   
    }
 
   ngOnInit() {
+    this.userRole = this.userInfo.getInfo();
 
+    if(this.userRole==1){
+      this.userHide = false;
+    }
+    else if(this.userRole==0){
+      this.userHide = true;
+    }
     if(window.innerWidth<=768){
       this.sizeFlag =true;
     }

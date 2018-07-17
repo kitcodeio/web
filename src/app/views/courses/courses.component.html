@@ -47,7 +47,7 @@
                             <!-- Start Bootstrap -->
                         </a>
                     </li>
-                    <li class="text-center" *ngFor="let c of allCourseCategory">
+                    <li class="text-center" *ngFor="let cat of allCourseCategory">
                         <!-- <a href="#">Dashboard</a> -->
                         <button style="background-color:#ffffff;border-radius:10px;margin-bottom:10px;padding:10px;box-shadow:0px 2px 5px 0px #0000002e;border:none;"><img width="40" src="../../../assets/images/angular.png"></button>
                     </li>
@@ -65,7 +65,7 @@
                             <li class="mb-4">
                                 <div class="card" style="border:none;">
                                   <div class="card-header" style="background:transparent;border: none;">
-                                    <span style="font-size:25px;">Angular JS Course</span>
+                                      <a [routerLink]="['/courseDetail']"><span class="glyphicon glyphicon-log-in"></span><span style="font-size:25px;">Angular JS Course</span></a>
                                     <p class="mb-0 float-right" style="color:#ccc; font-size:14px;">Updated on July 04,2018</p>
                                     <p class="mb-0" style="color:#ccc; font-size: 14px;">Created by <span style="color:#000; font-size: 14px;">Supernav Majumdar</span></p>
                                   </div>

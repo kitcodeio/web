@@ -6,6 +6,7 @@ import { HttpService } from '../../services/http/http.service'
 import { viewClassName } from '@angular/compiler';
 import '../../../../node_modules/bootstrap/dist/js/bootstrap.min.js'
 import { ToastContainerDirective, ToastrService } from 'ngx-toastr';
+import { UserInfoService } from '../../services/userInfo/user-info.service'
 
 @Component({
   selector: 'app-dashboard',
@@ -25,6 +26,8 @@ export class DashboardComponent implements OnInit {
   @HostListener('window:resize', ['$event'])
   newInnerHeight;
   newInnerWidth
+  categoryName;
+  categories=[];
 
 onResize(event) {
   this.newInnerHeight = event.target.innerHeight;
@@ -36,7 +39,7 @@ onResize(event) {
 
 }
 
-  constructor(private router: Router, private http :HttpService,private elementRef: ElementRef, private toastrService: ToastrService) {
+  constructor(private userInfo:UserInfoService, private router: Router, private http :HttpService,private elementRef: ElementRef, private toastrService: ToastrService) {
 
   }
   @ViewChild('ref') ref:ElementRef;
@@ -46,6 +49,9 @@ onResize(event) {
   }
 
   ngOnInit() {
+
+    console.log('user',this.userInfo.getInfo());
+
     this.populateCourses();
     this.populateImage();
 
@@ -99,4 +105,33 @@ onResize(event) {
   createCourse(){
     this.router.navigate(['app/createCourse']);
   }
+
+  addCategory(){
+    if(this.categoryName){
+      this.http.postcategory('CourseCategory',{
+        "label":this.categoryName
+      }).subscribe(res=>{
+        console.log(res);
+        if(res.status==200){
+          this.toastrService.success('Category succusfully created','Successs',{positionClass:'toast-bottom-right'});
+        }
+        else{
+          this.toastrService.error('Something is wrong','Error',{positionClass:'toast-bottom-right'});
+        }
+      })
+      this.getcatgory();
+      }
+      else{
+        this.toastrService.error('please enter category name','Error',{positionClass:'toast-bottom-right'});
+    }
+  }
+
+  getcatgory(){
+    this.http.getcategory('CourseCategory').subscribe(res=>{
+      this.categories = res.entity;
+      //console.log('getres',res.entity);
+      //console.log('in',this.catId);
+    })
+  }
+
 }

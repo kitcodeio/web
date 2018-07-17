@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { HttpService } from '../../services/http/http.service';
 
 @Component({
   selector: 'app-course-detail',
@@ -7,9 +8,19 @@ import { Component, OnInit } from '@angular/core';
 })
 export class CourseDetailComponent implements OnInit {
 
-  constructor() { }
+  allCourseCategory=[]
+
+  constructor(private http: HttpService) { }
 
   ngOnInit() {
+    this.populateCatgory();
+  }
+
+  populateCatgory(){
+    this.http.getcategory('CourseCategory').subscribe(res=>{
+      this.allCourseCategory = res.entity;
+      console.log(this.allCourseCategory);
+    })
   }
 
 }

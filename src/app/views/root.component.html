@@ -17,18 +17,18 @@
                   </a>
                 </li>
                 <li class="nav-item">
+                  <a class="sidebar-icons nav-link" [routerLink]="['/']">
+                    <span data-feather="file"></span>
+                    <img src="../../assets/images/favicon.ico" style="height: 30px; width: 30px;">
+                  </a>
+                </li>
+                <li class="nav-item" *ngIf="userHide">
                   <a class="sidebar-icons nav-link active" [routerLink]="['/app/dashboard']">
                     <span data-feather="home"></span>
                     <i class="fa fa-camera" aria-hidden="true"></i>
                   </a>
                 </li>
                 <!-- <li class="nav-item">
-                  <a class="sidebar-icons nav-link" href="#">
-                    <span data-feather="file"></span>
-                    <i class="fa fa-database" aria-hidden="true"></i>
-                  </a>
-                </li>
-                <li class="nav-item">
                   <a class="sidebar-icons nav-link" href="#">
                     <span data-feather="shopping-cart"></span>
                     <i class="fa fa-cog" aria-hidden="true"></i>
@@ -78,14 +78,14 @@
               <a class="nav-link" href="#"><p style="font-size:20px">{{userName}}</p></a>
             </li>
           </ul>
-        <ul class="navbar-nav px-3">
+        <ul class="navbar-nav px-3" style="margin-right: 5px;">
           <li class="nav-item text-nowrap">
               <!-- <button (click)="logout();" style="border: none; background-color: transparent;"><i class="fa fa-sign-out" aria-hidden="true"></i> Log Out</button> -->
                   <div class="dropdown">
                       <button class="dropbtn"><img src="../../../assets/images/kcprofile.jpg" class="profile-image-container"></button>
-                      <div class="dropdown-content" style="margin-left: 10%;">
+                      <div class="dropdown-content">
                         <button (click)="logout();" style="border: none; background-color: transparent"><i class="fa fa-sign-out" aria-hidden="true"></i>logout</button>
-                        <button style="border: none; background-color: transparent"><i class="fa fa-user-circle" aria-hidden="true"></i>My Profile</button>
+                        <!-- <button style="border: none; background-color: transparent"><i class="fa fa-user-circle" aria-hidden="true"></i>My Profile</button> -->
                     </div>
                 </div>
               <!-- <div class="dropdown">

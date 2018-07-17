@@ -18,13 +18,20 @@ export class LandingPageComponent implements OnInit {
   allCourseCategory=[];
   userName:string;
   flag:boolean=false;
+  userRole;
+  userHige:boolean;
 
-  constructor(private router:Router, private http: HttpService, private useInfo: UserInfoService, private authService: AuthserviceService) { }
+  constructor(private userInfo: UserInfoService, private router:Router, private http: HttpService, private useInfo: UserInfoService, private authService: AuthserviceService) { }
 
   ngOnInit() {
-
+    this.userRole = this.useInfo.getInfo();
+    if(this.userRole==1){
+      this.userHige = false;
+    }
+    else if(this.userRole==0){
+      this.userRole=true;
+    }
     this.populateCatgory();
-    this.userName = this.useInfo.getInfo();
 
     this.flag = !this.authService.isTokenExpired();
   }

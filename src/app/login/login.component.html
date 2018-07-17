@@ -66,7 +66,7 @@
 		                <label>Confirm password</label>
 		              </div>
 					  <div class="pure-checkbox form-group form-check mb-4 pl-0">
-					    <input type="checkbox" class="form-check-input" id="exampleCheck2">
+					    <input type="checkbox" class="form-check-input" id="exampleCheck2" [ngModel]="checkBox == 1 ? true : checkBox == 0 ? false : null" (ngModelChange)="checkBox = $event ? 1 : 0" name="box">
 					    <label class="form-check-label login-tc-container" for="exampleCheck2">&nbsp;&nbsp;&nbsp;I agree all statement in <a href="#">Terms & Conditions</a></label>
 					  </div>
 					  <button type="submit" class="btn login-btn-container pr-4 pl-4" (click)="register();">Sign Up</button>

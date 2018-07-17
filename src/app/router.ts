@@ -11,12 +11,14 @@ import { ModuleWithProviders } from "@angular/core";
 import { CoursesComponent } from './views/courses/courses.component';
 import { LandingPageComponent } from './landing-page/landing-page.component';
 import { CreateCourseComponent } from './views/create-course/create-course.component';
+import { CourseDetailComponent } from './views/course-detail/course-detail.component';
 
 
 const routes: Routes = [
     { path: '',  component:LandingPageComponent },
     { path: 'login', component: LoginComponent },
     { path: 'courses', component: CoursesComponent },
+    { path: 'courseDetail', component: CourseDetailComponent},
     { path: 'app', component: RootComponent, canActivate: [AuthGuard],
         children: [
             { path: 'dashboard', component: DashboardComponent },

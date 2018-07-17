@@ -4,7 +4,7 @@
     <nav class="navbar navbar-light bg-white static-top">
       <div class="container-fluid">
         <a class="navbar-brand" href="#"><img style="width:137px;height:26px;" src="../../assets/images/logo.png"></a>
-        <button *ngIf="flag" class="btn" style="background-color:transparent;color: #565176;" href="#" (click)="toLogin();">Dashboard</button>
+        <button *ngIf="flag && userHige" class="btn" style="background-color:transparent;color: #565176;" href="#" (click)="toLogin();">Dashboard</button>
         <button *ngIf="!flag" class="btn" style="background-color:transparent;color: #565176;" href="#" (click)="toLogin();">Sign In</button>
       </div>
     </nav>
@@ -40,10 +40,12 @@
       <div class="container">
         <div class="row mb-5">
           <div class="col-lg-2" *ngFor="let cat of allCourseCategory">
-            <div class="testimonial-item mx-auto mb-2">
-              <img class="img-fluid" src="../../assets/images/Untitled-3.png" alt="">
-            </div>
-              <button class="btn1" style="border: none; background-color: transparent" (click)="toCoursePage();">{{cat.label}}</button>
+            <a [routerLink]="['/courses']"><span class="glyphicon glyphicon-log-in"></span>
+              <div class="testimonial-item mx-auto mb-2">
+                <img class="img-fluid" src="../../assets/images/Untitled-3.png" alt="">
+              </div>
+              {{cat.label}}
+            </a>
           </div>
         </div>
       </div>
