@@ -28,14 +28,14 @@ export class LoginComponent implements OnInit {
   passwordReg: string;
   company: string;
   passwordCon:string;
-  checkBox:boolean;
+  checked:boolean;
+  counter:number=0;
+
   constructor(private userInfo: UserInfoService, private router: Router, private authService: AuthserviceService, private route: ActivatedRoute, private toastrService: ToastrService) {
   
    }
 
   ngOnInit() {
-
-    console.log('box',this.checkBox);
 
     $(function(){
       $(document).on('click','.login-register-button',function(e){
@@ -92,22 +92,28 @@ login(): void {
   register(): void {
     if(this.passwordCon==this.passwordReg){
       if (this.emailReg && this.company && this.passwordReg && this.passwordCon) {
-        this.authService.register(
-          this.company,
-          this.emailReg,
-          this.passwordReg
-        )
-          .subscribe(response => {
-            if(!response.error) {	    
-              this.authService.setToken(response.token);
-              window.location.reload();
-              //this.router.navigate(['/app/dashboard']);
-        
-            } else {
-              this.error = response.error;
-              this.toastrService.error(response.error,'Error',{positionClass:'toast-bottom-right'});
-            }
-         });        
+        if(this.checked){
+
+          this.authService.register(
+            this.company,
+            this.emailReg,
+            this.passwordReg
+          )
+            .subscribe(response => {
+              if(!response.error) {	    
+                this.authService.setToken(response.token);
+                window.location.reload();
+                //this.router.navigate(['/app/dashboard']);
+          
+              } else {
+                this.error = response.error;
+                this.toastrService.error(response.error,'Error',{positionClass:'toast-bottom-right'});
+              }
+           });  
+        }     
+        else{
+          this.toastrService.info('You did not agree to the terms and conditions','Error',{positionClass:'toast-bottom-right'});
+        } 
       }
       else{
         this.toastrService.error('Please enter all feild','Error',{positionClass:'toast-bottom-right'});
@@ -118,4 +124,14 @@ login(): void {
     }
   }
 
+  checkBox(enent){
+    this.counter++;
+    console.log(this.counter)
+    if(this.counter%2==1){
+      this.checked= true;
+    }
+    else{
+      this.checked=false;
+    }
+  }
 }
