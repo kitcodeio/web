@@ -36,7 +36,7 @@
 				<div class="login-form-container ml-5 mr-5 pt-5">
 					<form>
 		              <div class="md-input register-input">
-		                <input class="md-form-control" required="" type="text" [(ngModel)]="company" name="company">
+		                <input class="md-form-control" required="" type="text" [(ngModel)]="company" name="company" pattern="[A-Za-z]">
 		                <span class="highlight"></span>
 		                <span class="bar"></span>
 		                <label>Full name</label>
@@ -54,13 +54,13 @@
 		                <label>Email ID</label>
 		              </div>
 		              <div class="md-input register-input">
-		                <input class="md-form-control" required="" type="password" [(ngModel)]="passwordReg" name="password">
+		                <input class="md-form-control" required="" type="password" [(ngModel)]="passwordReg" name="password" pattern=".{6,}">
 		                <span class="highlight"></span>
 		                <span class="bar"></span>
 		                <label>Password</label>
 		              </div>
 		              <div class="md-input">
-		                <input class="md-form-control" required="" type="password" [(ngModel)]="passwordCon" name="password">
+		                <input class="md-form-control" required="" type="password" [(ngModel)]="passwordCon" name="password" pattern=".{6,}">
 		                <span class="highlight"></span>
 		                <span class="bar"></span>
 		                <label>Confirm password</label>

@@ -28,6 +28,7 @@ export class DashboardComponent implements OnInit {
   newInnerWidth
   categoryName;
   categories=[];
+  catImageUrl:string;
 
 onResize(event) {
   this.newInnerHeight = event.target.innerHeight;
@@ -109,7 +110,8 @@ onResize(event) {
   addCategory(){
     if(this.categoryName){
       this.http.postcategory('CourseCategory',{
-        "label":this.categoryName
+        "label":this.categoryName,
+        "logo": this.catImageUrl
       }).subscribe(res=>{
         console.log(res);
         if(res.status==200){
