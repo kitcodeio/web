@@ -58,63 +58,30 @@
                     <div class="course_detail">
                       <div class="card" style="border:none;">
                         <div class="card-header" style="background:transparent;border: none;">
-                          <span style="font-size:25px;">Angular JS Course</span>
+                          <span style="font-size:25px;"></span>
                           <p class="mb-0 float-right" style="color:#ccc;">Updated on July 04,2018</p>
-                          <p class="mb-0" style="color:#ccc;">Created by <span style="color:#000;">Natasha Malkova</span></p>
+                          <p class="mb-0" style="color:#ccc;">Created by <span style="color:#000;"></span></p>
                         </div>
                         <div class="card-body">
-                          <p class="card-text" style="color:#827c7c;">With supporting text below as a natural lead-in to additional content.With supporting text below as a natural lead-in to additional content.With supporting text below as a natural lead-in to additional content.With supporting text below as a natural lead-in to additional content.</p>
+                          <p class="card-text" style="color:#827c7c;"></p>
                         </div>
                         <div class="card-footer text-muted" style="background-color:transparent;">
-                          <a href="#" style="color:#ccc;" class=""><i class="fas fa-eye"></i> 5 Views</a>&nbsp;&nbsp;&nbsp;
-                          <a href="#" style="color:#ccc;" class=""><i class="far fa-comment"></i> 2 Comments</a>
+                          <a href="#" style="color:#ccc;" class=""><i class="fa fa-eye" aria-hidden="true"></i> 5 Views</a>&nbsp;&nbsp;&nbsp;
+                          <a href="#" style="color:#ccc;" class=""><i class="fa fa-comment-o" aria-hidden="true"></i> 2 Comments</a>
                         </div>
                       </div><br/>
                       <div class="sections">
                         <div id="accordion">
-                          <div class="card mb-5">
+                          <div class="card mb-5"  *ngFor="let s of allSections; let i=index;">
                             <div class="card-header bg-white" id="headingOne" data-toggle="collapse" data-target="#collapseOne">
                               <h5 class="mb-0">
-                                  Introduction
+                                  {{s.label}}
                               </h5>
                             </div>
     
                             <div id="collapseOne" class="collapse show" aria-labelledby="headingOne" data-parent="#accordion">  
                                 <div class="list-group" id="list-tab" role="tablist">
-                                  <a class="list-group-item chapter-item list-group-item-action active" id="list-home-list" data-toggle="list" href="#list-home" role="tab" aria-controls="home"><i class="fa fa-play-circle" aria-hidden="true"></i>&nbsp;&nbsp;&nbsp;Introduction<span class="float-right">0:53</span></a>
-                                  <a class="list-group-item chapter-item list-group-item-action" id="list-profile-list" data-toggle="list" href="#list-profile" role="tab" aria-controls="profile"><i class="fa fa-play-circle" aria-hidden="true"></i>&nbsp;&nbsp;&nbsp;What is Angular<span class="float-right">1:20</span></a>
-                                  <a class="list-group-item chapter-item list-group-item-action" id="list-messages-list" data-toggle="list" href="#list-messages" role="tab" aria-controls="messages"><i class="fa fa-play-circle" aria-hidden="true"></i>&nbsp;&nbsp;&nbsp;Architecture<span class="float-right">2:50</span></a>
-                                  <a class="list-group-item chapter-item list-group-item-action" id="list-settings-list" data-toggle="list" href="#list-settings" role="tab" aria-controls="settings"><i class="fa fa-play-circle" aria-hidden="true"></i>&nbsp;&nbsp;&nbsp;Setting up development environment<span class="float-right">4:03</span></a>
-                              </div>
-                            </div>
-                          </div>
-                          <div class="card mb-5">
-                            <div class="card-header collapsed bg-white" id="headingTwo" data-toggle="collapse" data-target="#collapseTwo">
-                              <h5 class="mb-0">
-                                 TypeScript Fundamentals
-                              </h5>
-                            </div>
-                            <div id="collapseTwo" class="collapse" aria-labelledby="headingTwo" data-parent="#accordion">  
-                                <div class="list-group" id="list-tab" role="tablist">
-                                  <a class="list-group-item chapter-item list-group-item-action active" id="list-home-list" data-toggle="list" href="#list-home" role="tab" aria-controls="home"><i class="fa fa-play-circle" aria-hidden="true"></i>&nbsp;&nbsp;&nbsp;Introduction<span class="float-right">0:53</span></a>
-                                  <a class="list-group-item chapter-item list-group-item-action" id="list-profile-list" data-toggle="list" href="#list-profile" role="tab" aria-controls="profile"><i class="fa fa-play-circle" aria-hidden="true"></i>&nbsp;&nbsp;&nbsp;What is Angular<span class="float-right">1:20</span></a>
-                                  <a class="list-group-item chapter-item list-group-item-action" id="list-messages-list" data-toggle="list" href="#list-messages" role="tab" aria-controls="messages"><i class="fa fa-play-circle" aria-hidden="true"></i>&nbsp;&nbsp;&nbsp;Architecture<span class="float-right">2:50</span></a>
-                                  <a class="list-group-item chapter-item list-group-item-action" id="list-settings-list" data-toggle="list" href="#list-settings" role="tab" aria-controls="settings"><i class="fa fa-play-circle" aria-hidden="true"></i>&nbsp;&nbsp;&nbsp;Setting up development environment<span class="float-right">4:03</span></a>
-                              </div>
-                            </div>
-                          </div>
-                          <div class="card mb-5">
-                            <div class="card-header collapsed bg-white" data-toggle="collapse" data-target="#collapseThree" id="headingThree">
-                              <h5 class="mb-0">
-                                  Angular Fundamentals
-                              </h5>
-                            </div>
-                            <div id="collapseThree" class="collapse" aria-labelledby="headingThree" data-parent="#accordion">      
-                                <div class="list-group" id="list-tab" role="tablist">
-                                  <a class="list-group-item chapter-item list-group-item-action active" id="list-home-list" data-toggle="list" href="#list-home" role="tab" aria-controls="home"><i class="fa fa-play-circle" aria-hidden="true"></i>&nbsp;&nbsp;&nbsp;Introduction<span class="float-right">0:53</span></a>
-                                  <a class="list-group-item chapter-item list-group-item-action" id="list-profile-list" data-toggle="list" href="#list-profile" role="tab" aria-controls="profile"><i class="fa fa-play-circle" aria-hidden="true"></i>&nbsp;&nbsp;&nbsp;What is Angular<span class="float-right">1:20</span></a>
-                                  <a class="list-group-item chapter-item list-group-item-action" id="list-messages-list" data-toggle="list" href="#list-messages" role="tab" aria-controls="messages"><i class="fa fa-play-circle" aria-hidden="true"></i>&nbsp;&nbsp;&nbsp;Architecture<span class="float-right">2:50</span></a>
-                                  <a class="list-group-item chapter-item list-group-item-action" id="list-settings-list" data-toggle="list" href="#list-settings" role="tab" aria-controls="settings"><i class="fa fa-play-circle" aria-hidden="true"></i>&nbsp;&nbsp;&nbsp;Setting up development environment<span class="float-right">4:03</span></a>
+                                  <a class="list-group-item chapter-item list-group-item-action active" id="list-home-list" data-toggle="list" href="#list-home" role="tab" aria-controls="home"  *ngFor="let c of s.CourseChapters; let i=index;"><i class="fa fa-play-circle" aria-hidden="true"></i>&nbsp;&nbsp;&nbsp;{{c.label}}<span class="float-right">0:53</span></a>
                               </div>
                             </div>
                           </div>

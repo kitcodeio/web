@@ -18,7 +18,7 @@ const routes: Routes = [
     { path: '',  component:LandingPageComponent },
     { path: 'login', component: LoginComponent },
     { path: 'courses/:id', component: CoursesComponent },
-    { path: 'courseDetail', component: CourseDetailComponent},
+    { path: 'courseDetail/:id', component: CourseDetailComponent},
     { path: 'app', component: RootComponent, canActivate: [AuthGuard],
         children: [
             { path: 'dashboard', component: DashboardComponent },

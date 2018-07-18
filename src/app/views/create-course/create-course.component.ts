@@ -25,8 +25,6 @@ export class CreateCourseComponent implements OnInit {
   chapterFlag1:boolean=false;
   chapterFlag2:boolean=false;
 
-  selectedCat;
-  selectedImage;
   allSection=[];
   allChapter=[];
   defaultSectionName;
@@ -95,12 +93,15 @@ export class CreateCourseComponent implements OnInit {
 
   addCourse(){
     this.defaultCourseName=this.courseName;
+      
     //Get Category Id
       this.categories.forEach(el => {
         if(el.label==this.catName.nativeElement.value){
           this.catId = el.id;
         }
       });
+      console.log(this.catName.nativeElement.value);
+      console.log(this.imageName.nativeElement.value);
       
       //Get image id
       this.allImages.forEach(el => {
@@ -109,9 +110,7 @@ export class CreateCourseComponent implements OnInit {
         }
       });
 
-    console.log(this.selectedCat,this.selectedImage);
-
-      if(this.courseName){
+      if(this.courseName && this.imageName.nativeElement.value && this.catName.nativeElement.value){
 
       this.http.postCourse('Course',{
         'category_id':this.catId,

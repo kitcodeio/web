@@ -16,6 +16,7 @@ export class CoursesComponent implements OnInit {
   flag:boolean= true;
   allCourseCategory=[];
   allCourses=[]
+  false:boolean=true;
 
 
   constructor(private route: ActivatedRoute,private router: Router, private http: HttpService, private scrollbarService: MalihuScrollbarService) { }
@@ -25,11 +26,13 @@ export class CoursesComponent implements OnInit {
     this.populateCatgory();
 
     this.route.params.subscribe(params=>{
-      this.http.getDataWithId('Course',params.index)
+      this.http.getDataWithId('Course',params.id)
       .subscribe(res=>{
         this.allCourses = res.entity; 
-        console.log(this.allCourses);
-      })    
+        console.log('course',this.allCourses);
+
+        console.log('i',params.id);
+      });    
     });
   }
 
@@ -48,4 +51,13 @@ export class CoursesComponent implements OnInit {
     this.scrollbarService.initScrollbar('.scrollPane', { axis: 'y', theme: 'dark', scrollButtons: { enable: true } });
   }
 
+  courseDetail(id){
+    this.http.getDataWithId('Course',id)
+    .subscribe(res=>{
+      this.allCourses = res.entity; 
+      console.log('course',this.allCourses);
+      console.log('i',id);
+    }); 
+    this.flag=true;
+  }
 }

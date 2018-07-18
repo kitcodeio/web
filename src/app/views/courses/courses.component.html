@@ -47,9 +47,9 @@
                             <!-- Start Bootstrap -->
                         </a>
                     </li>
-                    <li class="text-center" *ngFor="let cat of allCourseCategory">
+                    <li class="text-center" *ngFor="let cat of allCourseCategory; let i=index">
                         <!-- <a href="#">Dashboard</a> -->
-                        <button style="background-color:#ffffff;border-radius:10px;margin-bottom:10px;padding:10px;box-shadow:0px 2px 5px 0px #0000002e;border:none;"><img width="40" src="{{cat.logo}}"></button>
+                        <button style="background-color:#ffffff;border-radius:10px;margin-bottom:10px;padding:10px;box-shadow:0px 2px 5px 0px #0000002e;border:none;" (click)="courseDetail(cat.id);"><img width="40" src="{{cat.logo}}"></button>
                     </li>
                 </ul>
             </div>
@@ -61,16 +61,17 @@
                     <a href="#menu-toggle" class="btn btn-secondary d-sm-none d-lg-none d-md-none" id="menu-toggle">Toggle Menu</a>
                     <button class="buttons-top">Hot</button>&nbsp;&nbsp;&nbsp;<button class="buttons-top">Trending</button>
                     <div class="course_list">
-                        <ul class="mt-4" style="list-style-type:none;padding-left:0;">
-                            <li class="mb-4" >
+                        <ul class="mt-4" style="list-style-type:none;padding-left:0;" *ngIf="flag">
+                            <li class="mb-4" *ngFor="let c of allCourses; let i=index;">
                                 <div class="card" style="border:none;">
                                   <div class="card-header" style="background:transparent;border: none;">
-                                      <a [routerLink]="['/courseDetail']"><span class="glyphicon glyphicon-log-in"></span><span style="font-size:25px;">Angular JS Course</span></a>
+                                      <a routerLink="/courseDetail/{{c.id}}"><span class="glyphicon glyphicon-log-in"></span><span style="font-size:25px;">{{c.label}}</span></a>
                                     <p class="mb-0 float-right" style="color:#ccc; font-size:14px;">Updated on July 04,2018</p>
                                     <p class="mb-0" style="color:#ccc; font-size: 14px;">Created by <span style="color:#000; font-size: 14px;">Supernav Majumdar</span></p>
                                   </div>
                                   <div class="card-body">
-                                    <p class="card-text" style="color:#827c7c; font-size: 14px;">With supporting text below as a natural lead-in to additional content.With supporting text below as a natural lead-in to additional content.With supporting text below as a natural lead-in to additional content.With supporting text below as a natural lead-in to additional content.</p>
+                                    <p class="card-text" style="color:#827c7c; font-size: 14px;">
+                                        {{c.description}}</p>
                                   </div>
                                   <div class="card-footer text-muted" style="background-color:transparent;">
                                     <a href="#" style="color:#ccc; font-size: 14px;" class=""><i class="fa fa-eye" aria-hidden="true"></i> 5 Views</a>&nbsp;&nbsp;&nbsp;
@@ -79,6 +80,25 @@
                                 </div>
                             </li>
                         </ul>
+                        <ul class="mt-4" style="list-style-type:none;padding-left:0;" *ngIf="flag">
+                                <li class="mb-4" *ngFor="let c of allCourses; let i=index;">
+                                    <div class="card" style="border:none;">
+                                      <div class="card-header" style="background:transparent;border: none;">
+                                          <a [routerLink]="['/courseDetail']"><span class="glyphicon glyphicon-log-in"></span><span style="font-size:25px;">{{c.label}}</span></a>
+                                        <p class="mb-0 float-right" style="color:#ccc; font-size:14px;">Updated on July 04,2018</p>
+                                        <p class="mb-0" style="color:#ccc; font-size: 14px;">Created by <span style="color:#000; font-size: 14px;">Supernav Majumdar</span></p>
+                                      </div>
+                                      <div class="card-body">
+                                        <p class="card-text" style="color:#827c7c; font-size: 14px;">
+                                            {{c.description}}</p>
+                                      </div>
+                                      <div class="card-footer text-muted" style="background-color:transparent;">
+                                        <a href="#" style="color:#ccc; font-size: 14px;" class=""><i class="fa fa-eye" aria-hidden="true"></i> 5 Views</a>&nbsp;&nbsp;&nbsp;
+                                        <a href="#" style="color:#ccc; font-size: 14px;" class=""><i class="fa fa-comment-o" aria-hidden="true"></i> 2 Comments</a>
+                                      </div>
+                                    </div>
+                                </li>
+                            </ul>
                     </div>
                 </div>
             </div>
