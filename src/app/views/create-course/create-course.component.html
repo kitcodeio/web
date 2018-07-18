@@ -1,145 +1,160 @@
 <body style="margin-top: 100px;">
 
     <div class="container">
-     <div class="col-lg-12">
-        <div class="row" style="margin-top:5%;">
-        <div class="col-lg-4">
-  <div class="course-left-nav">
-<p><a type="click" style="color: rgb(3, 47, 177)"><strong class="left-nav-headline" (click)="courseForm();">{{defaultCourseName}}</strong></a></p>
-<div class="panel panel-default"  *ngFor="let sec of allSection; let i=index;">
-    <div class="panel-heading" *ngIf="chapterFlag1">
-        <p><a type="click" style="color: rgb(45, 81, 189)" ><strong class="left-nav-headline" (click)="getSectionId(i);">{{i+1}}.{{sec.name}}</strong></a></p>
-        <div *ngFor="let c of sec.chapters; let j=index;">
-            <div *ngIf="chapterFlag2">
-                <p><a type="click" style="color: rgb(88, 112, 184)" ><strong class="left-nav-headline" (click)="getChapterId(i,j);">{{i+1}}.{{j+1}}.{{c.name}}</strong></a></p>
-            </div>
-        </div>
-      <button class="list-group-item add-section" (click)="chapterForm(i);"><i class="fa fa-plus"></i> Add Chapter</button> 
-    </div>
-  </div>
-  <br>
-<div class="panel panel-default">
-    <div class="panel-heading"><button class="list-group-item add-section" (click)="sectionForm();"><i class="fa fa-plus"></i> Add Section</button></div>
-  </div>
-</div>
-</div>
-<div class="col-lg-8">                
- <form id="contact-form" method="post" action="contact.php" role="form" *ngIf="!sectionFlag && !chapterFlag">
+        <div class="col-lg-12">
+            <div class="row" style="margin-top:5%;">
+                <div class="col-lg-4">
+                    <div class="course-left-nav">
+                        <p><a type="click" style="color: rgb(3, 47, 177)"><strong class="left-nav-headline" (click)="courseForm();">{{defaultCourseName}}</strong></a></p>
+                        <div class="panel panel-default" *ngFor="let sec of allSection; let i=index;">
+                            <div class="panel-heading" *ngIf="chapterFlag1">
+                                <p><a type="click" style="color: rgb(45, 81, 189)"><strong class="left-nav-headline" (click)="getSectionId(i);">{{i+1}}.{{sec.name}}</strong></a></p>
+                                <div *ngFor="let c of sec.chapters; let j=index;">
+                                    <div *ngIf="chapterFlag2">
+                                        <p><a type="click" style="color: rgb(88, 112, 184)"><strong class="left-nav-headline" (click)="getChapterId(i,j);">{{i+1}}.{{j+1}}.{{c.name}}</strong></a></p>
+                                    </div>
+                                </div>
+                                <button class="list-group-item add-section" (click)="chapterForm(i);"><i class="fa fa-plus"></i> Add Chapter</button>
+                            </div>
+                        </div>
+                        <br>
+                        <div class="panel panel-default">
+                            <div class="panel-heading"><button class="list-group-item add-section" (click)="sectionForm();"><i class="fa fa-plus"></i> Add Section</button></div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-8">
+                    <form id="contact-form" method="post" action="contact.php" role="form" *ngIf="!sectionFlag && !chapterFlag">
 
-<div class="messages"></div>
+                        <div class="messages"></div>
 
-<div class="controls">
-    <div class="row">
-        <div class="col-md-12">
-            <div class="form-group">
-                <label for="form_name">Title </label>
-                <input id="form_name" type="text" name="name" class="form-control" placeholder="New Course" required="required" data-error="Firstname is required." [(ngModel)]="courseName">
-                <div class="help-block with-errors"></div>
-            </div>
-        </div>
-        <div class="col-md-12">
-            <div class="form-group">
-                <label for="form_message">Description</label>
-                <textarea id="form_message" name="message" class="form-control" placeholder="Description *" rows="4" required="required" data-error="Please,leave us a message." [(ngModel)]="courseDescription"></textarea>
-                <div class="help-block with-errors"></div>
-            </div>
-        </div>
-    </div>
-    <div class="row">
-        <div class="col-md-12">
-            <div class="form-group">
-    <label for="form_lastname">Category </label>
-        <select id="country" name="country" #cat>
+                        <div class="controls">
+                            <div class="row">
+                                <div class="col-md-12">
+                                    <div class="form-group">
+                                        <label for="form_name">Title </label>
+                                        <input id="form_name" type="text" name="name" class="form-control" placeholder="New Course"
+                                            required="required" data-error="Firstname is required."
+                                            [(ngModel)]="courseName">
+                                        <div class="help-block with-errors"></div>
+                                    </div>
+                                </div>
+                                <div class="col-md-12">
+                                    <div class="form-group">
+                                        <label for="form_message">Description</label>
+                                        <textarea id="form_message" name="message" class="form-control" placeholder="Description *"
+                                            rows="4" required="required" data-error="Please,leave us a message."
+                                            [(ngModel)]="courseDescription"></textarea>
+                                        <div class="help-block with-errors"></div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-md-12">
+                                    <div class="form-group">
+                                        <label for="form_lastname">Category </label>
+                                        <select id="country" name="country" [ngModel]="selectedCat">
         <option>--select--</option>
-        <option value="Business" *ngFor="let cat of categories">{{cat.label}}</option>
+        <option *ngFor="let cat of categories" [ngValue]="cat">{{cat.label}}</option>
       </select>
-                <div class="help-block with-errors"></div>
-            </div>
-        </div>
-    <div class="col-md-12">
-      <div class="form-group">
-        <label for="form_lastname">Workspace</label>
-        <select id="country" name="country" #image>
-        <option value="Published">--select--</option>
-        <option value="Unpublished" *ngFor="let image of allImages">{{image.label}}</option>
-        </select> 
-        <div class="help-block with-errors"></div>
-      </div>
-    </div>
-</div>
-  <div class="row">
-      <div class="col-md-12">
-          <input type="submit" class="btn btn-success btn-send"  value="Add Course" (click)="addCourse();">
-      </div>
-    </div>  
-   </div>
-  </form>
-  <form #secForm id="contact-form" method="post" action="contact.php" role="form" *ngIf="sectionFlag && !chapterFlag">
-      <div class="messages"></div>
-      
-      <div class="controls">
-      
-          <div class="row">
-              <div class="col-md-12">
-                  <div class="form-group">
-                      <label for="form_name">Section Title</label>
-                      <input id="form_name" type="text" name="name" class="form-control" placeholder="New Section" required="required" data-error="Firstname is required." [(ngModel)]="sectionName">
-                      <div class="help-block with-errors"></div>
-                  </div>
-              </div>
-              <div class="col-md-12">
-                  <div class="form-group">
-                      <label for="form_message">Description</label>
-                      <textarea id="form_message" name="message" class="form-control" placeholder="Description *" rows="4" required="required" data-error="Please,leave us a message." [(ngModel)]="sectionDescription"></textarea>
-                      <div class="help-block with-errors"></div>
-                  </div>
-              </div>
-          </div>
-        <div class="row">
-            <div class="col-md-12">
-                <input type="submit" class="btn btn-success btn-send"  value="Add Section" (click)="addSection();">
-          </div>
-        </div>  
-      </div>
-    </form>
-    <form id="contact-form" method="post" action="contact.php" role="form" *ngIf="!sectionFlag && chapterFlag">
+                                        <div class="help-block with-errors"></div>
+                                    </div>
+                                </div>
+                                <div class="col-md-12">
+                                    <div class="form-group">
+                                        <label for="form_lastname">Workspace</label>
+                                        <select id="country" name="country" [ngModel]="selectedImage">
+        <option>--select--</option>
+        <option  *ngFor="let image of allImages" [ngValue]="image">{{image.label}}</option>
+        </select>
+                                        <div class="help-block with-errors"></div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-md-12">
+                                    <input type="submit" class="btn btn-success btn-send" value="Add Course" (click)="addCourse();">
+                                </div>
+                            </div>
+                        </div>
+                    </form>
+                    <form #secForm id="contact-form" method="post" action="contact.php" role="form"
+                        *ngIf="sectionFlag && !chapterFlag">
+                        <div class="messages"></div>
 
-        <div class="messages"></div>
-        
-        <div class="controls">
-        
-            <div class="row">
-                <div class="col-md-12">
-                    <div class="form-group">
-                        <label for="form_name">Chapter Title </label>
-                        <input id="form_name" type="text" name="name" class="form-control" placeholder="New Chapter" required="required" data-error="Firstname is required."  [(ngModel)]="chapterName">
-                        <div class="help-block with-errors"></div>
-                    </div>
-                </div>
-                <div class="col-md-12">
-                    <div class="form-group">
-                        <label for="form_message">Description</label>
-                        <textarea id="form_message" name="message" class="form-control" placeholder="Description *" rows="4" required="required" data-error="Please,leave us a message." [(ngModel)]="chapterDescription"></textarea>
-                        <div class="help-block with-errors"></div>
-                    </div>
-                </div>
-                <div class="col-md-12">
-                    <div class="form-group">
-                        <label for="form_name">Chapter Url </label>
-                        <input id="form_name" type="text" name="name" class="form-control" placeholder="New Chapter" required="required" data-error="Firstname is required." [(ngModel)]="chapterUrl">
-                        <div class="help-block with-errors"></div>
-                    </div>
+                        <div class="controls">
+
+                            <div class="row">
+                                <div class="col-md-12">
+                                    <div class="form-group">
+                                        <label for="form_name">Section Title</label>
+                                        <input id="form_name" type="text" name="name" class="form-control" placeholder="New Section"
+                                            required="required" data-error="Firstname is required."
+                                            [(ngModel)]="sectionName">
+                                        <div class="help-block with-errors"></div>
+                                    </div>
+                                </div>
+                                <div class="col-md-12">
+                                    <div class="form-group">
+                                        <label for="form_message">Description</label>
+                                        <textarea id="form_message" name="message" class="form-control" placeholder="Description *"
+                                            rows="4" required="required" data-error="Please,leave us a message."
+                                            [(ngModel)]="sectionDescription"></textarea>
+                                        <div class="help-block with-errors"></div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-md-12">
+                                    <input type="submit" class="btn btn-success btn-send" value="Add Section" (click)="addSection();">
+                                </div>
+                            </div>
+                        </div>
+                    </form>
+                    <form id="contact-form" method="post" action="contact.php" role="form" *ngIf="!sectionFlag && chapterFlag">
+
+                        <div class="messages"></div>
+
+                        <div class="controls">
+
+                            <div class="row">
+                                <div class="col-md-12">
+                                    <div class="form-group">
+                                        <label for="form_name">Chapter Title </label>
+                                        <input id="form_name" type="text" name="name" class="form-control" placeholder="New Chapter"
+                                            required="required" data-error="Firstname is required."
+                                            [(ngModel)]="chapterName">
+                                        <div class="help-block with-errors"></div>
+                                    </div>
+                                </div>
+                                <div class="col-md-12">
+                                    <div class="form-group">
+                                        <label for="form_message">Description</label>
+                                        <textarea id="form_message" name="message" class="form-control" placeholder="Description *"
+                                            rows="4" required="required" data-error="Please,leave us a message."
+                                            [(ngModel)]="chapterDescription"></textarea>
+                                        <div class="help-block with-errors"></div>
+                                    </div>
+                                </div>
+                                <div class="col-md-12">
+                                    <div class="form-group">
+                                        <label for="form_name">Chapter Url </label>
+                                        <input id="form_name" type="text" name="name" class="form-control" placeholder="New Chapter"
+                                            required="required" data-error="Firstname is required."
+                                            [(ngModel)]="chapterUrl">
+                                        <div class="help-block with-errors"></div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-md-12">
+                                    <input type="submit" class="btn btn-success btn-send" value="Add Chapter" (click)="addChapter()">
+                                </div>
+                            </div>
+                        </div>
+                    </form>
                 </div>
             </div>
-          <div class="row">
-            <div class="col-md-12">
-          <input type="submit" class="btn btn-success btn-send"  value="Add Chapter" (click)="addChapter()">
         </div>
-      </div>  
     </div>
-  </form>
- </div>
-</div>
-</div>
-</div>
 </body>

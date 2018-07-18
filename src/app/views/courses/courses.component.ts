@@ -4,6 +4,8 @@ import * as $ from 'jquery';
 import { Router } from '@angular/router';
 import { HttpService } from '../../services/http/http.service';
 import { MalihuScrollbarService } from 'ngx-malihu-scrollbar';
+import { RouterModule, Routes } from '@angular/router';
+import { ActivatedRoute } from '@angular/router';
 
 @Component({
   selector: 'app-courses',
@@ -13,14 +15,22 @@ import { MalihuScrollbarService } from 'ngx-malihu-scrollbar';
 export class CoursesComponent implements OnInit {
   flag:boolean= true;
   allCourseCategory=[];
+  allCourses=[]
 
 
-  constructor(private router: Router, private http: HttpService, private scrollbarService: MalihuScrollbarService) { }
+  constructor(private route: ActivatedRoute,private router: Router, private http: HttpService, private scrollbarService: MalihuScrollbarService) { }
 
   ngOnInit() {
 
     this.populateCatgory();
 
+    this.route.params.subscribe(params=>{
+      this.http.getDataWithId('Course',params.index)
+      .subscribe(res=>{
+        this.allCourses = res.entity; 
+        console.log(this.allCourses);
+      })    
+    });
   }
 
   populateCatgory(){
