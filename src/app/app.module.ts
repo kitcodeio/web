@@ -22,6 +22,7 @@ import { LandingPageComponent } from './landing-page/landing-page.component';
 import { CourseDetailComponent } from './views/course-detail/course-detail.component';
 import { MalihuScrollbarModule } from 'ngx-malihu-scrollbar';
 import { CreateCourseComponent } from './views/create-course/create-course.component';
+import { ReactiveFormsModule, FormGroup, FormControl, Validators, FormBuilder } from '@angular/forms';
 
 
 @NgModule({

@@ -1,9 +1,10 @@
-import { Component, OnInit, ViewChild, ElementRef } from '@angular/core';
+import { Component, OnInit, ViewChild, ElementRef, NgModule } from '@angular/core';
 import { HttpService } from '../../services/http/http.service';
 import * as $ from 'jquery';
 import { Router } from '@angular/router';
 import { flatten } from '@angular/compiler';
 import { ToastContainerDirective, ToastrService } from 'ngx-toastr';
+import { NgForm } from '@angular/forms'
 
 @Component({
   selector: 'app-create-course',
@@ -17,6 +18,7 @@ export class CreateCourseComponent implements OnInit {
   @ViewChild('image') imageName: ElementRef;
   @ViewChild('selectCourse') selectCourse: ElementRef;
   @ViewChild('selectSection') selectSection: ElementRef;
+  @ViewChild('secForm') secForm: NgForm;
   
   sectionFlag:boolean=false;
   chapterFlag:boolean=false;
@@ -31,25 +33,24 @@ export class CreateCourseComponent implements OnInit {
   defaultCourseName;
   courseName;
   sectionName;
-  sectionIndex:number=-1;
+  sectionIndex:number;
   chapterId;
   chapterName;
   chapterDescription;
   courseDescription;
   chapterUrl;
   index;
-  sectionWithChapter=[];
-  lastIndex:number=-1;
   categories=[];
   allImages=[];
   obj={};
   catId;
   imageId;
   imageFlag:boolean;
-  courseId;
+  courseId:number=null;
   sectionId;
   indexOfChapter;
   indexOfSection;
+  flag:boolean=false;
   constructor(private http: HttpService, private router: Router, private toastrService: ToastrService) { }
 
   ngOnInit() {
@@ -65,16 +66,22 @@ export class CreateCourseComponent implements OnInit {
     this.chapterFlag=true;
     this.sectionFlag=false;
     this.chapterFlag2=true;
-	  this.sectionWithChapter.push(this.obj);
     this.allSection[i].chapters.push({name:this.defaultChapterName,description:this.chapterDescription, chapterUrl:this.chapterUrl,  section:this.selectSection});
     this.index=i;
+    
+    this.chapterName = 'New Chapter';
   }
 
   sectionForm(){
     this.sectionFlag=true;
     this.chapterFlag=false;
     this.chapterFlag1= true;
+    if(this.allSection.length==0){
     this.allSection.push({name:this.defaultSectionName,description:this.sectionDescription,course:this.selectCourse, chapters: []});
+    }
+    else if(this.allSection.length>0 && this.sectionName){
+      this.allSection.push({name:this.defaultSectionName,description:this.sectionDescription,course:this.selectCourse, chapters: []});
+    }
   }
 
 
@@ -112,11 +119,11 @@ export class CreateCourseComponent implements OnInit {
         console.log(res);
         this.defaultCourseName=res.entity.label;
         this.courseId=res.entity.id;
-        if(res.status==200){
+        if(res.status==201){
           this.toastrService.success('Course successfully created','success',{positionClass:'toast-bottom-right'});
         }
         else{
-          this.toastrService.error('Something wrong','Error',{positionClass:'toast-bottom-right'});
+          this.toastrService.error(res.error,'Error',{positionClass:'toast-bottom-right'});
         }
       })
       }
@@ -129,13 +136,13 @@ export class CreateCourseComponent implements OnInit {
     let obj;
     if(!this.sectionIndex && this.sectionIndex<0){
       obj={name:this.sectionName,description:this.sectionDescription,course:this.selectCourse}
-      this.allSection[this.allSection.length-1]=obj;
+      this.allSection[this.allSection.length-1].name=obj.name;
     }
     else if(this.sectionIndex || this.sectionIndex>=0)
     {
       obj={name:this.sectionName,description:this.sectionDescription,course:this.selectCourse}
       console.log(obj);
-      this.allSection[this.sectionIndex]=obj;
+      this.allSection[this.sectionIndex].name=obj.name;
     }
 
     this.http.postsection('CourseSection',{
@@ -144,17 +151,18 @@ export class CreateCourseComponent implements OnInit {
         "description":this.sectionDescription 
     }).subscribe(res=>{
       console.log(res);
-      this.defaultSectionName= res.entity.label;
+      this.sectionName= res.entity.label;
       this.sectionId=res.entity.id;
-      if(res.status == 200){
+      if(res.status == 201){
         this.populateCatgory();
-        this.toastrService.success('Secton Successfully created','Success',{positionClass:'toast-bottom-right'});
+        this.toastrService.success('Section successfully created','Success',{positionClass:'toast-bottom-right'});
       }
       else{
-        this.toastrService.error('Something is wrong','Error',{positionClass:'toast-bottom-right'});
+        this.toastrService.error(res.error,'Error',{positionClass:'toast-bottom-right'});
       }
     })
     console.log(this.sectionIndex);
+    this.sectionName=null;
   }
   
   addChapter(){
@@ -175,11 +183,11 @@ export class CreateCourseComponent implements OnInit {
       console.log(res); 
       this.defaultChapterName=res.entity.label;
       this.chapterId=res.entity.id;
-      if(res.status==200){
+      if(res.status==201){
         this.toastrService.success('Chapter successfully created','Success',{positionClass:'toast-bottom-right'});
       }
       else{
-        this.toastrService.error('Somrthing is wrong','Error',{positionClass:'toast-bottom-right'});
+        this.toastrService.error(res.error,'Error',{positionClass:'toast-bottom-right'});
       }
     })
   }
@@ -196,13 +204,13 @@ export class CreateCourseComponent implements OnInit {
     this.sectionFlag=false;
     this.indexOfChapter=j;
     this.indexOfSection=i;
-    console.log(i);
+    //console.log(i);
   }
 
   populateCatgory(){
     this.http.getcategory('CourseCategory').subscribe(res=>{
       this.categories = res.entity;
-      console.log(this.categories);
+      //console.log(this.categories);
     })
   }
 
@@ -213,14 +221,12 @@ export class CreateCourseComponent implements OnInit {
       if(res.entity.length!=0){
         this.imageFlag=false;
       this.allImages=res.entity;
-      console.log('full');
       }
       else{
-        console.log('emp');
         this.imageFlag=true;
         this.allImages[0]='Create Image';
       }
-      console.log(this.allImages);
+      //console.log(this.allImages);
     })
 
   }
@@ -228,7 +234,7 @@ export class CreateCourseComponent implements OnInit {
   getChapter(){
     this.http.getChapter('CourseSection',this.courseId)
     .subscribe(res=>{
-      console.log(res);
+      //console.log(res);
     })
   }
 }

@@ -87,10 +87,11 @@
         <div class="modal-header">
           <button type="button" class="close" data-dismiss="modal">&times;</button>
         </div>
-        <h4 class="modal-title">Add Category</h4>
+        <h4 class="modal-title" style="margin-left: 16px;">Add Category</h4>
   <!-- model body section -->
         <div class="modal-body">
           <input id="form_name" type="text" name="name" class="form-control" placeholder="Course Category" required="required" data-error="Firstname is required." [(ngModel)]="categoryName">
+          <br>
           <input id="form_name" type="text" name="url" class="form-control" placeholder="Category image url" required="required" data-error="Firstname is required." [(ngModel)]="catImageUrl">
         </div>
         <div class="modal-footer">
