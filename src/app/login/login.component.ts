@@ -92,40 +92,45 @@ login(): void {
 
 
   register(): void {
-    if(this.passwordCon==this.passwordReg){
-      if (this.emailReg && this.company && this.passwordReg && this.passwordCon) {
-        if(this.emailReg.indexOf('@')!==-1 && this.emailReg.indexOf('.')){
-
-          if(this.checked){
-
-            this.authService.register(
-              this.company,
-              this.emailReg,
-              this.passwordReg
-            )
-              .subscribe(response => {
-                if(!response.error) {	    
-                  this.authService.setToken(response.token);
-                  window.location.reload();
-                  //this.router.navigate(['/app/dashboard']);
-            
-                } else {
-                  this.error = response.error;
-                  this.toastrService.error(response.error,'Error',{positionClass:'toast-bottom-right'});
-                }
-             });  
-          } 
-          else{
-            this.toastrService.info('You did not agree to the terms and conditions','Error',{positionClass:'toast-bottom-right'});
-          }  
-        }   
+    if(this.passwordReg.length>=6){
+      if(this.passwordCon==this.passwordReg){
+        if (this.emailReg && this.company && this.passwordReg && this.passwordCon) {
+          if(this.emailReg.indexOf('@')!==-1 && this.emailReg.indexOf('.')){
+  
+            if(this.checked){
+  
+              this.authService.register(
+                this.company,
+                this.emailReg,
+                this.passwordReg
+              )
+                .subscribe(response => {
+                  if(!response.error) {	    
+                    this.authService.setToken(response.token);
+                    window.location.reload();
+                    //this.router.navigate(['/app/dashboard']);
+              
+                  } else {
+                    this.error = response.error;
+                    this.toastrService.error(response.error,'Error',{positionClass:'toast-bottom-right'});
+                  }
+               });  
+            } 
+            else{
+              this.toastrService.info('You did not agree to the terms and conditions','Error',{positionClass:'toast-bottom-right'});
+            }  
+          }   
+        }
+        else{
+          this.toastrService.error('Please enter all feild','Error',{positionClass:'toast-bottom-right'});
+        }
       }
       else{
-        this.toastrService.error('Please enter all feild','Error',{positionClass:'toast-bottom-right'});
+        this.toastrService.error('Password does not match','Error',{positionClass:'toast-bottom-right'});
       }
     }
     else{
-      this.toastrService.error('Password does not match','Error',{positionClass:'toast-bottom-right'});
+      this.toastrService.error('Password is too Short','Error',{positionClass:'toast-bottom-right'});
     }
   }
 
