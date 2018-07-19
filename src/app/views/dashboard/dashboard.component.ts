@@ -23,22 +23,9 @@ export class DashboardComponent implements OnInit {
   flag:boolean = false;
   @Input() lable:string;
   sizeFlag: boolean;
-  @HostListener('window:resize', ['$event'])
-  newInnerHeight;
-  newInnerWidth
   categoryName;
   categories=[];
   catImageUrl:string;
-
-onResize(event) {
-  this.newInnerHeight = event.target.innerHeight;
-  this.newInnerWidth = event.target.innerWidth;
-
-  if(window.innerWidth<=768){
-    this.sizeFlag =true;
-  }
-
-}
 
   constructor(private userInfo:UserInfoService, private router: Router, private http :HttpService,private elementRef: ElementRef, private toastrService: ToastrService) {
 
@@ -70,6 +57,7 @@ onResize(event) {
         this.emptyMessage='you do not have any image';
         this.flag=true;
       }
+      console.log(this.allImages);
     })
 
   }

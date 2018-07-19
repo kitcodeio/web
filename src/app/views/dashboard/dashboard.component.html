@@ -1,4 +1,4 @@
-<body *ngIf="!sizeFlag" (window:resize)="onResize($event);">
+<body>
   <section class="content-section">
       <div class="row no-gutters">
         
@@ -20,9 +20,9 @@
                 <i class="crud-menu-delete fa fa-trash" aria-hidden="true"></i>
 	      </a>-->
               <h5 class="card-title" #ref>{{image.label}}</h5>
-              <p class="image-desc-container card-text">It is a long established fact that a reader will be distracted by the end of it.</p>
+              <p class="image-desc-container card-text">{{image.description}}</p>
               <!-- <a (click)="getVideos(i);">&nbsp;&nbsp;&nbsp;Get started</a><br> -->
-              <a data-target="#getKeyInfo" data-toggle="modal" class="text-uppercase getKeyInfo" (click)="change(image);"><i class="fa fa-unlock-alt" aria-hidden="true"></i>&nbsp;&nbsp;&nbsp;Get started</a>
+              <i class="fa fa-unlock-alt" aria-hidden="true"></i><a href="#." data-target="#getKeyInfo" data-toggle="modal" class="text-uppercase getKeyInfo" (click)="change(image);">&nbsp;Key Info</a>
             </div> 
             <!-- <div class="row bg-light no-gutters image-stats-container">
               <div class="col-lg-4 col-md-4 col-lg-4">

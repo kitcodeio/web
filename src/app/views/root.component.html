@@ -19,7 +19,7 @@
                 <li class="nav-item">
                   <a class="sidebar-icons nav-link" [routerLink]="['/']">
                     <span data-feather="file"></span>
-                    <img src="../../assets/images/favicon.ico" style="height: 30px; width: 30px;">
+                    <img src="../../assets/images/favicon.png" style="height: 50px; width: 50px;">
                   </a>
                 </li>
                 <li class="nav-item" *ngIf="userHide">
@@ -101,6 +101,5 @@
     </div>
   </section>
   </body>
-<router-outlet *ngIf="!sizeFlag"></router-outlet>
+<router-outlet></router-outlet>
 
-  <h1 style="margin-top: 100px; margin-left: 100px;" *ngIf="sizeFlag">Device not suppoted</h1>

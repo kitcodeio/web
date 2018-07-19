@@ -30,13 +30,14 @@ export class LoginComponent implements OnInit {
   passwordCon:string;
   checked:boolean;
   counter:number=0;
+  regex = new RegExp('^([^0-9!$@#$%^&*\(\)-_+=\[\]~`\<\>,.?\/\'";\{\}|\\]*)$');
 
   constructor(private userInfo: UserInfoService, private router: Router, private authService: AuthserviceService, private route: ActivatedRoute, private toastrService: ToastrService) {
   
    }
 
   ngOnInit() {
-
+  
     $(function(){
       $(document).on('click','.login-register-button',function(e){
         e.preventDefault();
@@ -89,31 +90,35 @@ login(): void {
   }
 }
 
+
   register(): void {
     if(this.passwordCon==this.passwordReg){
       if (this.emailReg && this.company && this.passwordReg && this.passwordCon) {
-        if(this.checked){
+        if(this.emailReg.indexOf('@')!==-1 && this.emailReg.indexOf('.')){
 
-          this.authService.register(
-            this.company,
-            this.emailReg,
-            this.passwordReg
-          )
-            .subscribe(response => {
-              if(!response.error) {	    
-                this.authService.setToken(response.token);
-                window.location.reload();
-                //this.router.navigate(['/app/dashboard']);
-          
-              } else {
-                this.error = response.error;
-                this.toastrService.error(response.error,'Error',{positionClass:'toast-bottom-right'});
-              }
-           });  
-        }     
-        else{
-          this.toastrService.info('You did not agree to the terms and conditions','Error',{positionClass:'toast-bottom-right'});
-        } 
+          if(this.checked){
+
+            this.authService.register(
+              this.company,
+              this.emailReg,
+              this.passwordReg
+            )
+              .subscribe(response => {
+                if(!response.error) {	    
+                  this.authService.setToken(response.token);
+                  window.location.reload();
+                  //this.router.navigate(['/app/dashboard']);
+            
+                } else {
+                  this.error = response.error;
+                  this.toastrService.error(response.error,'Error',{positionClass:'toast-bottom-right'});
+                }
+             });  
+          } 
+          else{
+            this.toastrService.info('You did not agree to the terms and conditions','Error',{positionClass:'toast-bottom-right'});
+          }  
+        }   
       }
       else{
         this.toastrService.error('Please enter all feild','Error',{positionClass:'toast-bottom-right'});

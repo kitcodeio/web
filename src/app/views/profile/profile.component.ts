@@ -15,8 +15,6 @@ export class ProfileComponent implements OnInit {
   iframe_html: any;
   title:string;
   user:any;
-  newInnerHeight;
-  newInnerWidth;
   @ViewChild('frame') frame :ElementRef;
 	videos/*=[{title: "NodeJS for beginners", link: "https://www.youtube.com/embed/KMX1mFEmM3E"},
 	  {title:"Angular 5",link:"https://www.youtube.com/embed/ZWJH7JQCjLM" },
@@ -25,18 +23,6 @@ export class ProfileComponent implements OnInit {
   ide;
   sizeFlag: boolean;
   maxFlag:boolean = false;
-  @HostListener('window:resize', ['$event'])
-
-
-onResize(event) {
-  this.newInnerHeight = event.target.innerHeight;
-  this.newInnerWidth = event.target.innerWidth;
-
-  if(window.innerWidth<=768){
-    this.sizeFlag =true;
-  }
-
-}
 
 max(){
   this.maxFlag = true;
