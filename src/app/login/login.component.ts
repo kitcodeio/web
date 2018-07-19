@@ -37,8 +37,23 @@ export class LoginComponent implements OnInit {
    }
 
   ngOnInit() {
-  
+
+    
     $(function(){
+      		
+$(document).on('focusout','.md-form-control',function(){	
+  $(this).each(function(){
+    // console.log($(this)[0].value.length);
+    ($(this)[0].value.length)?$(this).parent('.md-input').find('label').animate({top:'-15px'},300):$(this).parent('.md-input').find('label').animate({top:'10px'},300);
+  });
+});
+
+
+$(document).on('focus','.md-form-control',function(){	
+  $(this).each(function(){
+    $(this).parent('.md-input').find('label').animate({top:'-15px'},300);
+  });
+});
       $(document).on('click','.login-register-button',function(e){
         e.preventDefault();
         $('.login-container').fadeOut(200,function(){
