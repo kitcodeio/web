@@ -43,8 +43,8 @@ export class LoginComponent implements OnInit {
       		
 $(document).on('focusout','.md-form-control',function(){	
   $(this).each(function(){
-    // console.log($(this)[0].value.length);
-    ($(this)[0].value.length)?$(this).parent('.md-input').find('label').animate({top:'-15px'},300):$(this).parent('.md-input').find('label').animate({top:'10px'},300);
+    console.log($(this).val());
+    ($(this).val()!="")?$(this).parent('.md-input').find('label').animate({top:'-15px'},300):$(this).parent('.md-input').find('label').animate({top:'10px'},300);
   });
 });
 
