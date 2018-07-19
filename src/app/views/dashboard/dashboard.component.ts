@@ -102,7 +102,7 @@ export class DashboardComponent implements OnInit {
         "logo": this.catImageUrl
       }).subscribe(res=>{
         console.log(res);
-        if(res.status==200){
+        if(res.status==201){
           this.toastrService.success('Category succusfully created','Successs',{positionClass:'toast-bottom-right'});
         }
         else{
