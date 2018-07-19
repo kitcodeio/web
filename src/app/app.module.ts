@@ -49,7 +49,7 @@ import { ReactiveFormsModule, FormGroup, FormControl, Validators, FormBuilder } 
     SimpleNotificationsModule.forRoot(),
     ToastNoAnimationModule,
     ToastrModule.forRoot({
-      toastComponent: ToastNoAnimation,
+      toastComponent: ToastNoAnimation,preventDuplicates: true,
     }),
     MalihuScrollbarModule.forRoot(),
 
