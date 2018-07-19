@@ -17,6 +17,7 @@ export class CoursesComponent implements OnInit {
   allCourseCategory=[];
   allCourses=[]
   false:boolean=true;
+  emptyCourse:string;
 
 
   constructor(private route: ActivatedRoute,private router: Router, private http: HttpService, private scrollbarService: MalihuScrollbarService) { }
@@ -30,7 +31,6 @@ export class CoursesComponent implements OnInit {
       .subscribe(res=>{
         this.allCourses = res.entity; 
         console.log('course',this.allCourses);
-
         console.log('i',params.id);
       });    
     });
@@ -40,6 +40,7 @@ export class CoursesComponent implements OnInit {
     this.http.getcategory('CourseCategory').subscribe(res=>{
       this.allCourseCategory = res.entity;
       console.log(this.allCourseCategory);
+    
     })
   }
   

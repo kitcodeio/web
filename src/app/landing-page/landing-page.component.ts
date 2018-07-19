@@ -20,6 +20,7 @@ export class LandingPageComponent implements OnInit {
   flag:boolean=false;
   userRole;
   userHige:boolean;
+  loadingFlag:boolean=false;
 
   constructor(private userInfo: UserInfoService, private router:Router, private http: HttpService, private useInfo: UserInfoService, private authService: AuthserviceService) { }
 

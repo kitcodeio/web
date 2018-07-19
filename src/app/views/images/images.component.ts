@@ -67,6 +67,7 @@ export class ImagesComponent implements OnInit, AfterViewInit {
   allTools=[];
   stringOfAllImages=[];
   label:string;
+  public e: any;
 
   constructor(private router:Router, private http: HttpService, private eleRef: ElementRef, public toastrService: ToastrService) {}
 
@@ -292,5 +293,12 @@ export class ImagesComponent implements OnInit, AfterViewInit {
       this.versionArray=[];
     }
   }
+
+  omit_special_char(val)
+{
+   var k;
+    document.all ? k = this.e.keyCode : k = this.e.which;
+    return ((k > 64 && k < 91) || (k > 96 && k < 123) || k == 8 || k == 32 || (k >= 48 && k <= 57));
+}
 
 }
