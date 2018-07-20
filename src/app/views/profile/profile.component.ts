@@ -24,6 +24,7 @@ export class ProfileComponent implements OnInit {
   ide;
   sizeFlag: boolean;
   maxFlag:boolean = false;
+  
 
 max(){
   this.maxFlag = true;

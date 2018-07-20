@@ -56,13 +56,13 @@ export class CreateCourseComponent implements OnInit {
   ngOnInit() {
     this.defaultCourseName='New Course';
     this.defaultSectionName = 'New Section';
-    this.defaultChapterName ='New Chapter';
 
     this.populateImage();
     this.populateCatgory();
   }
 
   chapterForm(i){
+    this.defaultChapterName ='New Chapter';
     this.chapterFlag=true;
     this.sectionFlag=false;
     this.chapterFlag2=true;
@@ -76,12 +76,7 @@ export class CreateCourseComponent implements OnInit {
     this.sectionFlag=true;
     this.chapterFlag=false;
     this.chapterFlag1= true;
-    if(this.allSection.length==0){
     this.allSection.push({name:this.defaultSectionName,description:this.sectionDescription,course:this.selectCourse, chapters: []});
-    }
-    else if(this.allSection.length>0 && this.sectionName){
-      this.allSection.push({name:this.defaultSectionName,description:this.sectionDescription,course:this.selectCourse, chapters: []});
-    }
   }
 
 
@@ -119,7 +114,7 @@ export class CreateCourseComponent implements OnInit {
         'image_id':this.imageId
       }).subscribe(res =>{
         console.log(res);
-        this.defaultCourseName=res.entity.label;
+        this.courseName=res.entity.label;
         this.courseId=res.entity.id;
         if(res.status==201){
           this.toastrService.success('Course successfully created','success',{positionClass:'toast-bottom-right'});
@@ -135,19 +130,9 @@ export class CreateCourseComponent implements OnInit {
     }
 
   addSection(){
-    let obj;
-    if(!this.sectionIndex && this.sectionIndex<0){
-      obj={name:this.sectionName,description:this.sectionDescription,course:this.selectCourse}
-      this.allSection[this.allSection.length-1].name=obj.name;
-    }
-    else if(this.sectionIndex || this.sectionIndex>=0)
-    {
-      obj={name:this.sectionName,description:this.sectionDescription,course:this.selectCourse}
-      console.log(obj);
-      this.allSection[this.sectionIndex].name=obj.name;
-    }
 
-    this.http.postsection('CourseSection',{
+    if(this.courseId){
+      this.http.postsection('CourseSection',{
         "course_id":this.courseId,
         "label":this.sectionName,
         "description":this.sectionDescription 
@@ -155,6 +140,17 @@ export class CreateCourseComponent implements OnInit {
       console.log(res);
       this.sectionName= res.entity.label;
       this.sectionId=res.entity.id;
+      let obj; // change the name in dom
+      if(!this.sectionIndex){
+        obj={name:this.sectionName,description:this.sectionDescription,course:this.selectCourse}
+        this.allSection[this.allSection.length-1].name=obj.name;
+      }
+      else if(this.sectionIndex || this.sectionIndex>=0)
+      {
+        obj={name:this.sectionName,description:this.sectionDescription,course:this.selectCourse}
+        console.log(obj);
+        this.allSection[this.sectionIndex].name=obj.name;
+      }
       if(res.status == 201){
         this.populateCatgory();
         this.toastrService.success('Section successfully created','Success',{positionClass:'toast-bottom-right'});
@@ -164,27 +160,29 @@ export class CreateCourseComponent implements OnInit {
         this.toastrService.error(res.error,'Error',{positionClass:'toast-bottom-right'});
       }
     })
-    console.log(this.sectionIndex);
-    
+    }
+    else{
+      this.toastrService.info('Create a course first','Error',{positionClass:'toast-bottom-right'});
+    }
+    console.log(this.sectionIndex);   
   }
   
   addChapter(){
     let obj;
-    if(!this.indexOfChapter && this.indexOfChapter<0){
+    if(!this.indexOfChapter){
       this.allSection[this.indexOfSection].chapters[this.allSection[this.index].chapters.length-1]={name:this.chapterName,description:this.chapterDescription, chapterUrl:this.chapterUrl,  section:this.selectSection};
     }
     else if(this.indexOfChapter || this.indexOfChapter>=0)
     {
       this.allSection[this.indexOfSection].chapters[this.indexOfChapter]={name:this.chapterName,description:this.chapterDescription, chapterUrl:this.chapterUrl,  section:this.selectSection};
     }
-    
-    this.http.postchapter('CourseChapter',{
+    if(this.sectionId){
+      this.http.postchapter('CourseChapter',{
         "section_id": this.sectionId,
         "label": this.chapterName,  
         "url": this.chapterUrl
-    }).subscribe(res=>{
-      console.log(res); 
-      this.defaultChapterName=res.entity.label;
+    }).subscribe(res=>{ 
+      this.chapterName=res.entity.label;
       this.chapterId=res.entity.id;
       if(res.status==201){
         this.toastrService.success('Chapter successfully created','Success',{positionClass:'toast-bottom-right'});
@@ -192,7 +190,12 @@ export class CreateCourseComponent implements OnInit {
       else{
         this.toastrService.error(res.error,'Error',{positionClass:'toast-bottom-right'});
       }
+      this.chapterName = '';
     })
+    }
+    else{
+      this.toastrService.info('Create the section first','Error',{positionClass:'toast-bottom-right'});
+    }
   }
 
   getSectionId(i){

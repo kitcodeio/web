@@ -26,6 +26,7 @@ export class DashboardComponent implements OnInit {
   categoryName;
   categories=[];
   catImageUrl:string;
+  regex1 = new RegExp('(?:(?:https?|ftp|file):\/\/|www\.|ftp\.)(?:\([-A-Z0-9+&@#\/%=~_|$?!:,.]*\)|[-A-Z0-9+&@#\/%=~_|$?!:,.])*(?:\([-A-Z0-9+&@#\/%=~_|$?!:,.]*\)|[A-Z0-9+&@#\/%=~_|$])');
 
   constructor(private userInfo:UserInfoService, private router: Router, private http :HttpService,private elementRef: ElementRef, private toastrService: ToastrService) {
 
@@ -37,8 +38,6 @@ export class DashboardComponent implements OnInit {
   }
 
   ngOnInit() {
-
-    console.log('user',this.userInfo.getInfo());
 
     this.populateCourses();
     this.populateImage();
@@ -96,7 +95,8 @@ export class DashboardComponent implements OnInit {
   }
 
   addCategory(){
-    if(this.categoryName){
+    if(this.regex1.test(this.catImageUrl)){  
+    if(this.categoryName &&  this.catImageUrl){
       this.http.postcategory('CourseCategory',{
         "label":this.categoryName,
         "logo": this.catImageUrl
@@ -113,6 +113,10 @@ export class DashboardComponent implements OnInit {
       }
       else{
         this.toastrService.error('please enter category name','Error',{positionClass:'toast-bottom-right'});
+      }
+    }
+    else{
+      this.toastrService.error('Enter valid url','Error',{positionClass:'toast-bottom-right'});
     }
   }
 
