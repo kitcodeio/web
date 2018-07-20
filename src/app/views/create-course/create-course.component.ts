@@ -172,7 +172,7 @@ export class CreateCourseComponent implements OnInit {
     if(!this.indexOfChapter){
       this.allSection[this.indexOfSection].chapters[this.allSection[this.index].chapters.length-1]={name:this.chapterName,description:this.chapterDescription, chapterUrl:this.chapterUrl,  section:this.selectSection};
     }
-    else if(this.indexOfChapter || this.indexOfChapter>=0)
+    else if(this.indexOfChapter)
     {
       this.allSection[this.indexOfSection].chapters[this.indexOfChapter]={name:this.chapterName,description:this.chapterDescription, chapterUrl:this.chapterUrl,  section:this.selectSection};
     }
