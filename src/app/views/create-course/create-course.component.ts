@@ -141,11 +141,11 @@ export class CreateCourseComponent implements OnInit {
       this.sectionName= res.entity.label;
       this.sectionId=res.entity.id;
       let obj; // change the name in dom
-      if(!this.sectionIndex){
+      if(!this.sectionIndex && this.sectionIndex!=0){
         obj={name:this.sectionName,description:this.sectionDescription,course:this.selectCourse}
         this.allSection[this.allSection.length-1].name=obj.name;
       }
-      else if(this.sectionIndex || this.sectionIndex>=0)
+      else if(this.sectionIndex || this.sectionIndex==0)
       {
         obj={name:this.sectionName,description:this.sectionDescription,course:this.selectCourse}
         console.log(obj);
@@ -168,13 +168,16 @@ export class CreateCourseComponent implements OnInit {
   }
   
   addChapter(){
+    console.log(this.indexOfSection,this.indexOfChapter);
     let obj;
-    if(!this.indexOfChapter){
-      this.allSection[this.indexOfSection].chapters[this.allSection[this.index].chapters.length-1]={name:this.chapterName,description:this.chapterDescription, chapterUrl:this.chapterUrl,  section:this.selectSection};
+    if(!this.indexOfChapter && this.indexOfChapter!=0){
+      obj = {name:this.chapterName,description:this.chapterDescription, chapterUrl:this.chapterUrl,  section:this.selectSection}
+      this.allSection[this.indexOfSection].chapters[this.allSection[this.indexOfSection].chapters.length-1].name=obj.name;
     }
-    else if(this.indexOfChapter)
+    else if(this.indexOfChapter || this.indexOfChapter==0)
     {
-      this.allSection[this.indexOfSection].chapters[this.indexOfChapter]={name:this.chapterName,description:this.chapterDescription, chapterUrl:this.chapterUrl,  section:this.selectSection};
+      obj = {name:this.chapterName,description:this.chapterDescription, chapterUrl:this.chapterUrl,  section:this.selectSection}
+      this.allSection[this.indexOfSection].chapters[this.indexOfChapter].name=obj.name;
     }
     if(this.sectionId){
       this.http.postchapter('CourseChapter',{

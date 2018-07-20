@@ -50,6 +50,7 @@ export class ImagesComponent implements OnInit, AfterViewInit {
   version:any;
   selectedVersion=[];
   imageId: number;
+  flag:boolean=false;
   @ViewChild('linux') linux: ElementRef;
   @ViewChild('select') tool: ElementRef;
   @ViewChild('lools') tools: ElementRef;
@@ -176,10 +177,9 @@ export class ImagesComponent implements OnInit, AfterViewInit {
     });
 }
 
-
 //Create image
   createImage() {
-    if(this.label && this.tool.nativeElement.value){
+    if(this.label && this.tool.nativeElement.value && this.flag){
       console.log(this.label);
       this.http.postData('Image',{
         "label":this.label,
@@ -218,6 +218,7 @@ export class ImagesComponent implements OnInit, AfterViewInit {
   addTools(){
 
     let flag:boolean=true;
+    this.flag=true;
 
     this.version = this.En_version.nativeElement.value;
     if(this.tool.nativeElement.value==""){
