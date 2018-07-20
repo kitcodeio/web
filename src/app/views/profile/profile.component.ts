@@ -11,6 +11,7 @@ import * as $ from 'jquery';
   styleUrls: ['./profile.component.css']
 })
 export class ProfileComponent implements OnInit {
+  
   courseDetail: any;
   iframe_html: any;
   title:string;

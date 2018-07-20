@@ -24,7 +24,7 @@ export class CourseDetailComponent implements OnInit {
       this.http.getDataWithId('CourseSection',params.id)
       .subscribe(res=>{
         this.allSections = res.entity;
-        //console.log('section',this.allSections);
+        console.log('section',this.allSections);
         //console.log(params.id);
       })    
     });
@@ -45,5 +45,4 @@ export class CourseDetailComponent implements OnInit {
     this.router.navigate(['/app/profile/'+id]);
     console.log('jncskjd');
   }
-  
 }
