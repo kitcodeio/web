@@ -23,7 +23,7 @@ const routes: Routes = [
         children: [
             { path: 'dashboard', component: DashboardComponent },
             { path: 'image', component: ImagesComponent},
-            { path: 'profile/:index', component: ProfileComponent},
+            { path: 'profile/:course/:chapter', component: ProfileComponent},
             { path: 'createCourse', component: CreateCourseComponent}
         ]
     }

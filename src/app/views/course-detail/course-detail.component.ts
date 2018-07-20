@@ -14,18 +14,18 @@ export class CourseDetailComponent implements OnInit {
   allCourseCategory=[]
   allSections=[];
   allChapters=[];
-
+  course_id;
   constructor(private route:ActivatedRoute, private http: HttpService, private scrollbarService: MalihuScrollbarService, private router: Router) { }
 
   ngOnInit() {
     this.populateCatgory();
 
     this.route.params.subscribe(params=>{
+      this.course_id = params.id;
       this.http.getDataWithId('CourseSection',params.id)
       .subscribe(res=>{
         this.allSections = res.entity;
         console.log('section',this.allSections);
-        //console.log(params.id);
       })    
     });
   }
@@ -37,12 +37,13 @@ export class CourseDetailComponent implements OnInit {
   populateCatgory(){
     this.http.getcategory('CourseCategory').subscribe(res=>{
       this.allCourseCategory = res.entity;
+
       //console.log(this.allCourseCategory);
     })
   }
 
   toProfile(id){
-    this.router.navigate(['/app/profile/'+id]);
+    this.router.navigate(['/app/profile/'+this.course_id+'/'+id]);
     console.log('jncskjd');
   }
 }
