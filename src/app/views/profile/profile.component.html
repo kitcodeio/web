@@ -1,7 +1,43 @@
+<nav class="navbar sticky-top navbar-expand-lg navbar-light bg-white" style="border-bottom:1px solid #f7f7f7;">
+    <a class="navbar-brand d-lg-none d-md-none d-sm-none" href="#"><img src="../../../assets/images/kitcode logo.png" width="137"></a>
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarTogglerDemo01"
+        aria-controls="navbarTogglerDemo01" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+    <div class="collapse navbar-collapse" id="navbarTogglerDemo01">
+        <a class="navbar-brand d-lg-block d-md-block d-sm-block d-none" href="#"><img src="../../../assets/images/kitcode logo.png" width="137"></a>
+        <form class="form-inline my-2 w-100">
+            <!-- <input class="form-control mr-sm-2" type="search" placeholder="Search for languages" aria-label="Search"> -->
+            <div class="input-group ml-auto mr-5" style="width:50%;">
+                <div class="input-group-prepend float-right">
+                    <button class="btn search-button" type="button"><i class="fa fa-search" aria-hidden="true"></i></button>
+                </div>
+                <input type="search" class="form-control search-input" placeholder="Search for languages ..."
+                    aria-label="" aria-describedby="basic-addon1">
+            </div>
+        </form>
+        <!--     <ul class="navbar-nav ml-auto mt-2 mt-lg-0">
+          <li class="nav-item active">
+            <a class="nav-link" href="#">Home <span class="sr-only">(current)</span></a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="#">Link</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link disabled" href="#">Disabled</a>
+          </li>
+        </ul> -->
+        <ul class="nav navbar-nav ml-auto">
+		<li><a [routerLink]="['/']">{{user.name}}</a></li>
+        </ul>
+
+    </div>
+</nav>
+
 <!-- <div class="container">
     <div class="row" style="margin-top: 20px;">
              <section class="content-section"> -->
-                  <!-- <div class="col-lg-6 col-md-6 col-sm-6">
+<!-- <div class="col-lg-6 col-md-6 col-sm-6">
                     <div class="create-image-container" id="stage">
                         <iframe height = "400" style="width:100%;height:400px;" [src]="youtubeUrl" frameborder="0" allowfullscreen></iframe>
                          <ul class="playlist-container">
@@ -16,46 +52,38 @@
                   </div>
                   <div class="col-lg-6 col-md-6 col-sm-6">
                       <iframe height = "600" style="width:100%;height:600px;" [src]="ide" frameborder="0"></iframe>
-                    </div> --> 
+                    </div> -->
 
-        <!-- <div class="column">
+<!-- <div class="column">
             <div style="height:100%;right:0;width:55%;top:63px;">
               <iframe height = "600" width = "630" [src]="ide" frameborder="0"></iframe>
             </div>
         </div> -->
-    <!-- </div>
+<!-- </div>
 </div> -->
-    <section class="content-section" *ngIf="videos">
-      <div class="container-fluid">
+<section class="content-section" *ngIf="videos">
+    <div class="container-fluid">
         <div class="row">
-          <div class="col-lg-5 col-md-5 col-sm-5"  *ngIf="!maxFlag" #frame>
-              <iframe height = "400" style="width:100%;height:400px;" [src]="youtubeUrl" frameborder="0" allowfullscreen></iframe>
-              <ul class="playlist-container">
-                       <li class="playlist-item" *ngFor="let video of videos; let i = index" style=" font-size: 12px;">
-                           <a (click)="play(i);">
+            <div class="col-lg-5 col-md-5 col-sm-5" *ngIf="!maxFlag" #frame>
+                <iframe height="400" style="width:100%;height:400px;" [src]="youtubeUrl" frameborder="0"
+                    allowfullscreen></iframe>
+                <ul class="playlist-container">
+                    <li class="playlist-item" *ngFor="let video of videos; let i = index" style=" font-size: 12px;">
+                        <a (click)="play(i);">
                        <i style="color:#0606a4;" class="fa fa-play-circle" aria-hidden="true"></i>
-                      &nbsp;&nbsp;&nbsp;<span>{{video.title}}</span>
+                      &nbsp;&nbsp;&nbsp;<span>{{video.label}}</span>
                    </a>
-                </li>
-              </ul>
-          </div>
-          <div class="col-lg-7 col-md-7 col-sm-7" *ngIf="!maxFlag" style="background-color:#21252b;">
-                <button type="button" data-container="body" data-toggle="popover" data-placement="bottom" data-content="" style="border: none; background-color: transparent; margin-left: 620px;">
-                <i class="fa fa-eye" aria-hidden="true" style="color: white;"></i>
-                </button>
-              <!-- <button style="border: none; background-color: transparent; margin-left: 620px;" (click)="min();"><i class="fa fa-eye" aria-hidden="true" style="color: white;"></i></button> -->
-              <button style="border: none; background-color: transparent;" (click)="min();"><i class="fa fa-window-minimize" aria-hidden="true" style="color: white;"></i></button>
-              <button style="border: none; background-color: transparent;" (click)="max();"><i class="fa fa-window-maximize" aria-hidden="true" style="color: white"></i></button>
-              <iframe style="width:100%;height:550px;" [src]="ide" frameborder="0"></iframe>
-          </div>
-          <div class="col-lg-12 col-md-12 col-sm-12" *ngIf ="maxFlag" style="background-color:#21252b;">
-              <button style="border: none; background-color: transparent; margin-left: 1150px;" (click)="min();"><i class="fa fa-eye" aria-hidden="true" style="color: white;"></i></button>
-              <button style="border: none; background-color: transparent;" (click)="min();"><i class="fa fa-window-minimize" aria-hidden="true" style="color: white"></i></button>
-              <button style="border: none; background-color: transparent;" (click)="max();"><i class="fa fa-window-maximize" aria-hidden="true" style="color: white; height: 1px;"></i></button>
-              <iframe style="width:100%;height:600px; margin-top: 0;" [src]="ide" frameborder="0"></iframe>
-          </div>
+                    </li>
+                </ul>
+            </div>
+            <div id="kide" style="width:58.3%;height:600px; margin-top: 0; margin-left:0"><iframe id="kide-iframe" style="width:100%;height:100%; margin-top: 0; margin-left:0"
+                    [src]="ide" frameborder="0"></iframe></div>
         </div>
-      </div>
-    </section>
+    </div>
+</section>
 
-    <!-- <app-loadiing *ngIf="!videos"></app-loadiing> -->
+<!-- <app-loadiing *ngIf="!videos"></app-loadiing> -->
+<script>
+
+ console.log(window.location.href);
+</script>

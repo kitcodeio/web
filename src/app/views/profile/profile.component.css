@@ -28,8 +28,6 @@
 }
 
 .content-section{
-	margin-left: 80px;
-    margin-top: 90px;
 }
 
 .create-image-button{
@@ -99,37 +97,31 @@
     background-color:#3399cc;
     color:#ffffff;
 }
+.search-button{
+  background-color:#fbfefd;
+  border:none;
+  /*border-right:none;*/
+  color: #ced4da;
+}
 
-.search-container{
-	width:40%;
-	margin-right: auto;
+.search-button:active,.search-button:hover,.search-button:focus{
+  box-shadow: none;
 }
 
 .search-input{
-	border-bottom-right-radius:20px;
-	border-top-right-radius:20px;
-	border-left:0;
+  border:none;
+  background-color: #fbfefd;
 }
 
-.search-input::placeholder { /* Chrome, Firefox, Opera, Safari 10.1+ */
-    color: #cccccc;
-    opacity: 1; /* Firefox */
+.search-input:active,.search-input:hover,.search-input:focus{
+  box-shadow: none;
+  /*border-color:;*/
+  background-color: #fbfefd;
 }
 
-.search-input:-ms-input-placeholder { /* Internet Explorer 10-11 */
-    color:#cccccc;
-}
-
-.search-input::-ms-input-placeholder { /* Microsoft Edge */
-    color:#cccccc;
-}
-
-.search-icon-container{
-	border-bottom-left-radius:20px;
-	border-top-left-radius:20px;
-	border-right:0;
-	background-color:#ffffff;
-	color:#cccccc;
+.search-input::placeholder{
+  font-size:13px;
+  color: #ced4da;
 }
 
 .crud-menu{
@@ -150,8 +142,8 @@
     list-style-type:none;
 	padding-left:0;
 	overflow-y: auto;
-	height: 150px;
-	width: 500px;
+	height: 28%;
+	width: 100%;
 }
 
 .fa { transform: scale(.7,.7); }

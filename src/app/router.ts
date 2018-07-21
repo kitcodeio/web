@@ -22,11 +22,11 @@ const routes: Routes = [
     { path: 'app', component: RootComponent, canActivate: [AuthGuard],
         children: [
             { path: 'dashboard', component: DashboardComponent },
-            { path: 'image', component: ImagesComponent},
-            { path: 'profile/:course/:chapter', component: ProfileComponent},
+            { path: 'image', component: ImagesComponent}, 
             { path: 'createCourse', component: CreateCourseComponent}
         ]
-    }
+    },
+    { path: 'profile/:course/:section/:chapter', component: ProfileComponent, canActivate: [AuthGuard]}
 ];
 
 

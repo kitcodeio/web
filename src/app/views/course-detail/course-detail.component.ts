@@ -37,13 +37,11 @@ export class CourseDetailComponent implements OnInit {
   populateCatgory(){
     this.http.getcategory('CourseCategory').subscribe(res=>{
       this.allCourseCategory = res.entity;
-
-      //console.log(this.allCourseCategory);
     })
   }
 
-  toProfile(id){
-    this.router.navigate(['/app/profile/'+this.course_id+'/'+id]);
+  toProfile(s_id, c_index){
+	  this.router.navigate(['/profile/'+this.course_id+'/'+s_id+'/'+c_index]);
     console.log('jncskjd');
   }
 }

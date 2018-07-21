@@ -53,12 +53,15 @@ export class HttpService {
   }
   
   getDataFromOne(model:string, id:number) {
-    return this.http.get(this.baseUrl+'read/'+model+'/'+id)
+    return this.http.get(this.baseUrl+'read/course'+model+'/'+id)
       .pipe(catchError((error)=>{return of(error);}));
   }
-
   getCourse(model: string): Observable<any> {
     return this.http.get(this.url+'read/'+model)
+    .pipe(catchError((error)=>{return of(error);}));
+  }
+  getCourseSection(model: string, id:number): Observable<any> {
+    return this.http.get(this.url+'read/course/'+model+'/'+id)
     .pipe(catchError((error)=>{return of(error);}));
   }
   getcategory(model:string):Observable<any>{
@@ -75,7 +78,14 @@ export class HttpService {
     return this.http.get(this.url+'read/course/'+model+'/'+id)
     .pipe(catchError((error)=>{return of(error);}));
   }
+
+ //=======================Container Creation API=======================//
   
+  getContainer(id: number):Observable<any>{
+	  console.log(id, 'id mil gaya aab hum req karega');
+	  return this.http.post(this.url+'create/api/Container', {course_id: id})
+	  .pipe(catchError((error)=>{return of(error);}));
+  }
 
   constructor(private http:CustomHttpService) { }
 }

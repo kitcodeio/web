@@ -1,65 +1,84 @@
-import { Component, OnInit, HostListener, ViewChild, ElementRef } from '@angular/core';
-import {DomSanitizer} from "@angular/platform-browser";
+import { Component, OnInit, HostListener, ViewChild, ElementRef, Renderer2 } from '@angular/core';
+import { DomSanitizer } from "@angular/platform-browser";
 import { ActivatedRoute } from '@angular/router';
 import { HttpService } from '../../services/http/http.service'
-import { AuthserviceService } from '../../services/auth/authservice.service'; 
+import { AuthserviceService } from '../../services/auth/authservice.service';
 import * as $ from 'jquery';
+
 
 @Component({
   selector: 'app-profile',
   templateUrl: './profile.component.html',
   styleUrls: ['./profile.component.css']
 })
+
 export class ProfileComponent implements OnInit {
-  
-  courseDetail: any;
+  data: any  = {
+    kide: '',
+    terminal: '',
+    preview: ''
+  };
+  stopListening: Function;
+  course_id: number;
+  chapters: any;
   iframe_html: any;
-  title:string;
-  user:any;
-  @ViewChild('frame') frame :ElementRef;
-	videos/*=[{title: "NodeJS for beginners", link: "https://www.youtube.com/embed/KMX1mFEmM3E"},
-	  {title:"Angular 5",link:"https://www.youtube.com/embed/ZWJH7JQCjLM" },
-	  {title:"Test1", link: "https://www.youtube.com/embed/RUKcrphvO8I"}]*/;
+  title: string;
+  user: any;@ViewChild('frame') frame: ElementRef;
+  videos;
   youtubeUrl;
   ide;
   sizeFlag: boolean;
-  maxFlag:boolean = false;
-  
-
-max(){
-  this.maxFlag = true;
-}
-
-min(){
-  this.maxFlag = false;
-}
-
-  constructor(private eRef: ElementRef, private domSanitizer : DomSanitizer,private route: ActivatedRoute, private http:HttpService, private authService: AuthserviceService) { 
-    //const actualHeight = window.innerHeight;
-    //const actualWidth = window.innerWidth;
-   }
-
-  play(index){
-    this.youtubeUrl = this.domSanitizer.bypassSecurityTrustResourceUrl(this.videos[index].link);
+  maxFlag: boolean = false;
+  max() {
+    this.maxFlag = true;
+  }
+  min() {
+    this.maxFlag = false;
+  }
+  constructor(
+  	private renderer: Renderer2,
+  	private eRef: ElementRef,
+  	private domSanitizer: DomSanitizer,
+	private route: ActivatedRoute,
+	private http: HttpService,
+        private authService: AuthserviceService
+  ) {
+    this.stopListening = renderer.listen('window', 'message', this.handleMessage.bind(this));
+  }
+	
+  play(index) {
+    this.youtubeUrl = this.domSanitizer.bypassSecurityTrustResourceUrl(this.videos[index].url);
+  }
+	
+  ngOnInit() {
+    this.route.params.subscribe(params => {
+      this.course_id = params.course;
+      this.http.getCourseSection('CourseChapter', params.section).subscribe((res) => {
+        this.chapters = res.entity;
+        this.videos = this.chapters;
+        this.youtubeUrl = this.domSanitizer.bypassSecurityTrustResourceUrl(this.chapters[params.chapter].url);
+      });
+    });
+    
+    this.user = this.authService.getUserData();
   }
 
-  ngOnInit() {
-
-    // $(function () {
-    //   $('[data-toggle="popover"]').popover()
-    // })
-
-    this.route.params.subscribe(params=>{
-      this.http.getCourse('Course').subscribe((res) => {
-        this.courseDetail=res.entity[params.index]; 
-	this.courseDetail.CourseLinks = this.courseDetail.CourseLinks.sort(function(a,b) {return (a.index > b.index) ? 1 : ((b.index > a.index) ? -1 : 0);} );
-	this.videos = this.courseDetail.CourseLinks;
-	this.youtubeUrl = this.domSanitizer.bypassSecurityTrustResourceUrl(this.courseDetail.CourseLinks[0].link);
-      });     
+  ngAfterViewInit(){
+    this.http.getContainer(this.course_id).subscribe(res => {
+      this.data.kide = 'http://' + res.entity.kide;
+      this.data.terminal = 'http://' + res.entity.terminal;
+      this.data.preview = 'http://' + res.entity.app;
+      this.ide = this.domSanitizer.bypassSecurityTrustResourceUrl('http://' + res.entity.kide);
     });
-    this.user = this.authService.getUserData();
-    var regex = new RegExp('[^@]+');
-    var url = 'http://'+regex.exec(this.user.email)[0]+'-kide.kitcode.io';
-    this.ide = this.domSanitizer.bypassSecurityTrustResourceUrl(url);
+  }
+
+  handleMessage(event: Event) {
+    const message = event as MessageEvent;
+    console.log(message.data);
+    if (message.data == 'loaded') document.getElementById('kide-iframe').contentWindow.postMessage(JSON.stringify(this.data), '*');
+    else if (message.data == 'minimize') this.min();
+    else if(message.data == 'maximize') this.max();
+    else if(message.data == 'close') console.log('time to close');
+    else console.log(message.data);
   }
 }
