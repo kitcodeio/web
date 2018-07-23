@@ -102,7 +102,7 @@ export class CreateCourseComponent implements OnInit {
         }
       });
 
-      if(this.courseName && this.imageName.nativeElement.value && this.catName.nativeElement.value){
+      if(this.courseName && this.imageName.nativeElement.value && this.catName.nativeElement.value && this.courseDescription){
 
       this.http.postCourse('Course',{
         'category_id':this.catId,

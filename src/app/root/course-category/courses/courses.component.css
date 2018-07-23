@@ -112,9 +112,7 @@ background-color: #74d886 !important;
 }
 
 @media(min-width:768px) {
-#wrapper {
-  padding-left: 100px;
-}
+
 #wrapper.toggled {
   padding-left: 250px;
 }
