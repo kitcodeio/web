@@ -41,7 +41,6 @@ export class CourseDetailComponent implements OnInit {
   }
 
   toProfile(s_id, c_index){
-	  this.router.navigate(['/app/'+this.course_id+'/'+s_id+'/'+c_index]);
-    console.log('jncskjd');
+    this.router.navigate(['/root/kide/'+this.course_id+'/'+s_id+'/'+c_index]);
   }
 }
