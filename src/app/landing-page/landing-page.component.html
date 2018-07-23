@@ -1,21 +1,4 @@
-<body *ngIf="allCourseCategory">
-
-    <!-- Navigation -->
-    <nav class="navbar navbar-light bg-white static-top">
-      <div class="container-fluid">
-        <a class="navbar-brand" href="/"><img style="width:137px;height:26px; margin-left: -21%" src="../../assets/images/kitcode logo.png"></a>
-        <button *ngIf="flag" class="btn" style="background-color:transparent;color: #565176;" href="#" (click)="toLogin();">Dashboard</button>
-        <button *ngIf="!flag" class="btn" style="background-color:transparent;color: #565176;" href="#" (click)="toLogin();">Sign In</button>
-        <!-- <div class="dropdown" *ngIf="flag && !userHige"> -->
-            <!-- <button class="dropbtn"><img src="../../../assets/images/kcprofile.jpg" class="profile-image-container" style="height: 20px; width: 20px;"></button> -->
-            <!-- <div class="dropdown-content">
-              <button (click)="logout();" style="border: none; background-color: transparent"><i class="fa fa-sign-out" aria-hidden="true"></i>logout</button> -->
-              <!-- <button style="border: none; background-color: transparent"><i class="fa fa-user-circle" aria-hidden="true"></i>My Profile</button> -->
-          <!-- </div>
-      </div> -->
-      </div>
-    </nav>
-
+<body>
     <!-- Masthead -->
     <header class="masthead text-white text-center">
       <div class="overlay"></div>
@@ -43,11 +26,11 @@
     </header>
       
     <!-- Testimonials -->
-    <section style="padding-top:0;padding-bottom:4rem;position:relative;top:-70px;" class="testimonials text-center">
+    <section *ngIf="allCourseCategory" style="padding-top:0;padding-bottom:4rem;position:relative;top:-70px;" class="testimonials text-center">
       <div class="container">
         <div class="row mb-5 mx-auto" style="width:80%;">
           <div class="col-lg-2" *ngFor="let cat of allCourseCategory">
-            <a routerLink="/courses/{{cat.id}}" ><span class="glyphicon glyphicon-log-in"></span>
+            <a routerLink="/user/courses/{{cat.id}}" ><span class="glyphicon glyphicon-log-in"></span>
               <div class="testimonial-item mx-auto mb-2">
                 <img class="img-fluid" src="{{cat.logo}}" alt="">
               </div>
@@ -57,6 +40,7 @@
         </div>
       </div>
     </section>
+    <app-loadiing *ngIf="!allCourseCategory"></app-loadiing>
 
     <!-- Footer -->
     <footer class="footer" style="background-color: #292929;">
@@ -100,6 +84,5 @@
       </div>
     </footer>
   </body>
-  <app-loadiing *ngIf="!allCourseCategory"></app-loadiing>
 
   

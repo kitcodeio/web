@@ -1,43 +1,5 @@
-<body style="background:#f5f5f5;" *ngIf="allCourses">
-    <nav class="navbar fixed-top navbar-expand-lg navbar-light bg-white" style="border-bottom:1px solid #f7f7f7;">
-        <a class="navbar-brand d-lg-none d-md-none d-sm-none" href="#"><img src="../../../assets/images/kitcode logo.png" width="137"></a>
-      <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarTogglerDemo01" aria-controls="navbarTogglerDemo01" aria-expanded="false" aria-label="Toggle navigation">
-        <span class="navbar-toggler-icon"></span>
-      </button>
-      <div class="collapse navbar-collapse" id="navbarTogglerDemo01">
-        <a class="navbar-brand d-lg-block d-md-block d-sm-block d-none" href="#"><img src="../../../assets/images/kitcode logo.png" width="137"></a>
-        <form class="form-inline my-2 w-100">
-          <!-- <input class="form-control mr-sm-2" type="search" placeholder="Search for languages" aria-label="Search"> -->
-          <div class="input-group ml-auto mr-5" style="width:50%;">
-              <div class="input-group-prepend float-right">
-                <button class="btn search-button" type="button"><i class="fa fa-search" aria-hidden="true"></i></button>
-              </div>
-              <input type="search" class="form-control search-input" placeholder="Search for languages ..." aria-label="" aria-describedby="basic-addon1">
-            </div>
-        </form>
-    <!--     <ul class="navbar-nav ml-auto mt-2 mt-lg-0">
-          <li class="nav-item active">
-            <a class="nav-link" href="#">Home <span class="sr-only">(current)</span></a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link" href="#">Link</a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link disabled" href="#">Disabled</a>
-          </li>
-        </ul> -->
-        <ul class="nav navbar-nav ml-auto">
-          <!-- <li><a type="click" (click)="toLogin();" style="color: rgb(30, 30, 163)"><span class="glyphicon glyphicon-log-in"></span>LogIn</a></li> -->
-          <li>
-              <div class="container-fluid">
-                <button class="btn" style="background-color:transparent; border: none; color: blue;" href="#" (click)="toLogin();">Login</button>
-              </div>
-          </li>
-        </ul>
-    
-      </div>
-    </nav>
-        <div id="wrapper" style="margin-top: 67px;">
+<body style="background:#f5f5f5;">
+        <div id="wrapper">
     
             <!-- Sidebar -->
             <div id="sidebar-wrapper" class="scrollPane">
@@ -60,12 +22,16 @@
                 <div class="container-fluid">
                     <a href="#menu-toggle" class="btn btn-secondary d-sm-none d-lg-none d-md-none" id="menu-toggle">Toggle Menu</a>
                     <button class="buttons-top">Hot</button>&nbsp;&nbsp;&nbsp;<button class="buttons-top">Trending</button>
+                    
+                    <app-loadiing *ngIf="!allCourses && !flag"></app-loadiing>
+                    
                     <div class="course_list">
-                        <ul class="mt-4" style="list-style-type:none;padding-left:0;" *ngIf="flag || allCourses">
+                        <h2 *ngIf="flag && !allCourses">The Category is empty</h2>
+                        <ul class="mt-4" style="list-style-type:none;padding-left:0;" *ngIf="allCourses && flag">
                             <li class="mb-4" *ngFor="let c of allCourses; let i=index;">
                                 <div class="card" style="border:none;">
                                   <div class="card-header" style="background:transparent;border: none;">
-                                      <a routerLink="/courseDetail/{{c.id}}"><span class="glyphicon glyphicon-log-in"></span><span style="font-size:25px;">{{c.label}}</span></a>
+                                      <a routerLink="/user/courseDetail/{{c.id}}"><span class="glyphicon glyphicon-log-in"></span><span style="font-size:25px;">{{c.label}}</span></a>
                                     <p class="mb-0 float-right" style="color:#ccc; font-size:14px;">Updated on July 04,2018</p>
                                     <p class="mb-0" style="color:#ccc; font-size: 14px;">Created by <span style="color:#000; font-size: 14px;">Supernav Majumdar</span></p>
                                   </div>
@@ -95,4 +61,3 @@
     
     </body>
 
-    <app-loadiing *ngIf="!allCourses"></app-loadiing>

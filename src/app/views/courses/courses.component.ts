@@ -16,7 +16,7 @@ export class CoursesComponent implements OnInit {
   flag:boolean= true;
   allCourseCategory=[];
   allCourses=[]
-  false:boolean=true;
+  false:boolean;
   emptyCourse:string;
 
 
@@ -32,6 +32,12 @@ export class CoursesComponent implements OnInit {
         this.allCourses = res.entity; 
         console.log('course',this.allCourses);
         console.log('i',params.id);
+        if(this.allCourses.length>0){
+          this.flag=true;
+        }
+        else{
+          this.flag = false;
+        }
       });    
     });
   }
@@ -58,7 +64,12 @@ export class CoursesComponent implements OnInit {
       this.allCourses = res.entity; 
       console.log('course',this.allCourses);
       console.log('i',id);
+      if(this.allCourses.length>0){
+        this.flag=true;
+      }
+      else{
+        this.flag=false;
+      }
     }); 
-    this.flag=true;
   }
 }

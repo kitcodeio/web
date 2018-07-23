@@ -12,13 +12,18 @@ import { CoursesComponent } from './views/courses/courses.component';
 import { LandingPageComponent } from './landing-page/landing-page.component';
 import { CreateCourseComponent } from './views/create-course/create-course.component';
 import { CourseDetailComponent } from './views/course-detail/course-detail.component';
-
+import { UserComponent } from './user/user.component';
 
 const routes: Routes = [
-    { path: '',  component:LandingPageComponent },
+    { path: '',  redirectTo:'/user/landing', pathMatch: 'full', canActivate: [AuthGuard]},
     { path: 'login', component: LoginComponent },
-    { path: 'courses/:id', component: CoursesComponent },
-    { path: 'courseDetail/:id', component: CourseDetailComponent},
+    { path : 'user', component :UserComponent, canActivate: [AuthGuard],
+    children: [
+            { path: 'landing' , component: LandingPageComponent},
+            { path: 'courses/:id', component: CoursesComponent },
+            { path: 'courseDetail/:id', component: CourseDetailComponent}
+        ]
+    },
     { path: 'app', component: RootComponent, canActivate: [AuthGuard],
         children: [
             { path: 'dashboard', component: DashboardComponent },

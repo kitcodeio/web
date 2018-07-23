@@ -13,7 +13,7 @@
     background-color:#ffffff;
     border-radius:50px;
   }
-  .testimonials .testimonial-item img {
+  .testimonials[_ngcontent-c1] .testimonial-item[_ngcontent-c1] img[_ngcontent-c1] {
     max-width: 100%;
     box-shadow:none;
   }
@@ -168,11 +168,6 @@
 
   .btn1:hover{
     color: blue;
-  }
-
-  .img-fluid{
-    height: 60px;
-    width: 60px; 
   }
 
   input::-moz-placeholder{color:#ccc;font-weight:500 !important;}
