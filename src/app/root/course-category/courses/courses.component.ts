@@ -20,7 +20,6 @@ export class CoursesComponent implements OnInit {
     this.route.params.subscribe(params=>{
       this.http.getDataWithId('Course',params.id)
       .subscribe(res=>{
-        console.log(res);
         if(res.status == 200){
           this.loading = false;
           this.allCourses = res.entity;
