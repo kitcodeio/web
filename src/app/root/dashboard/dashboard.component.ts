@@ -76,11 +76,7 @@ export class DashboardComponent implements OnInit {
     }
 
   createImage(){
-    this.router.navigate(['/app/image']);
-  }
-
-  getVideos(index){ 
-	  this.router.navigate(['/app/profile/'+index]);
+    this.router.navigate(['/root/image']);
   }
 
   populateCourses(){
@@ -91,7 +87,7 @@ export class DashboardComponent implements OnInit {
   }
 
   createCourse(){
-    this.router.navigate(['app/createCourse']);
+    this.router.navigate(['/root/createCourse']);
   }
 
   addCategory(){

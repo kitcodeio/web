@@ -188,7 +188,7 @@ export class ImagesComponent implements OnInit, AfterViewInit {
         if(res.status==201)
         {
           this.toastrService.success('Image creation started','Success',{positionClass:'toast-bottom-right'});
-          this.router.navigate(['app/dashboard']);
+          this.router.navigate(['root/dashboard']);
         }
         else{
           this.toastrService.error(res.erroe,'Error',{positionClass:'toast-bottom-right'});
