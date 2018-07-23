@@ -1,0 +1,45 @@
+<body style="background:#f5f5f5;">
+    <div id="wrapper">
+
+        <!-- Sidebar -->
+        <div id="sidebar-wrapper" class="scrollPane">
+            <ul class="sidebar-nav">
+                <li class="sidebar-brand">
+                    <a href="#">
+                        <!-- Start Bootstrap -->
+                    </a>
+                </li>
+                <li class="text-center" *ngFor="let cat of allCourseCategory">
+                    <!-- <a href="#">Dashboard</a> -->
+                    <button style="background-color:#ffffff;border-radius:10px;margin-bottom:10px;padding:10px;box-shadow:0px 2px 5px 0px #0000002e;border:none;"><img width="40" src="{{cat.logo}}"></button>
+                </li>
+            </ul>
+        </div>
+        <!-- /#sidebar-wrapper -->
+
+        <router-outlet></router-outlet>
+    </div>
+    <!-- /#wrapper -->
+
+    <!-- Bootstrap core JavaScript -->
+    <script src="vendor/jquery/jquery.min.js"></script>
+    <script src="vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+    <script src="http://manos.malihu.gr/repository/custom-scrollbar/demo/jquery.mCustomScrollbar.concat.min.js"></script>
+
+    <!-- Menu Toggle Script -->
+    <script>
+    $("#menu-toggle").click(function(e) {
+        e.preventDefault();
+        $("#wrapper").toggleClass("toggled");
+    });
+    $(function(){
+        $('.scrollPane').mCustomScrollbar(
+            {
+                axis:'y',
+                theme:'dark'
+            });
+    });
+    </script> 
+
+</body>
+

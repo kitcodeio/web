@@ -12,14 +12,13 @@ import { CoursesComponent } from './views/courses/courses.component';
 import { LandingPageComponent } from './landing-page/landing-page.component';
 import { CreateCourseComponent } from './views/create-course/create-course.component';
 import { CourseDetailComponent } from './views/course-detail/course-detail.component';
-import { UserComponent } from './user/user.component';
+import { CourseCategoryComponent } from './course-category/course-category.component';
 
 const routes: Routes = [
-    { path: '',  redirectTo:'/user/landing', pathMatch: 'full', canActivate: [AuthGuard]},
+    { path: '',  component: LandingPageComponent},
     { path: 'login', component: LoginComponent },
-    { path : 'user', component :UserComponent, canActivate: [AuthGuard],
+    { path : 'course', component : CourseCategoryComponent, canActivate: [AuthGuard],
     children: [
-            { path: 'landing' , component: LandingPageComponent},
             { path: 'courses/:id', component: CoursesComponent },
             { path: 'courseDetail/:id', component: CourseDetailComponent}
         ]
@@ -28,10 +27,10 @@ const routes: Routes = [
         children: [
             { path: 'dashboard', component: DashboardComponent },
             { path: 'image', component: ImagesComponent}, 
-            { path: 'createCourse', component: CreateCourseComponent}
+            { path: 'createCourse', component: CreateCourseComponent},
+            { path: ':course/:section/:chapter', component: ProfileComponent }
         ]
-    },
-    { path: 'profile/:course/:section/:chapter', component: ProfileComponent, canActivate: [AuthGuard]}
+    }
 ];
 
 
