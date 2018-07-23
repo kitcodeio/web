@@ -12,7 +12,7 @@ import { ActivatedRoute } from '@angular/router';
 export class CoursesComponent implements OnInit {
   loading:boolean= true;
   allCourseCategory=[];
-  allCourses;
+  allCourses = [];
 
   constructor(private route: ActivatedRoute,private router: Router, private http: HttpService, private scrollbarService: MalihuScrollbarService) { }
 
