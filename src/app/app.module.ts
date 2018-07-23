@@ -24,6 +24,7 @@ import { MalihuScrollbarModule } from 'ngx-malihu-scrollbar';
 import { CreateCourseComponent } from './views/create-course/create-course.component';
 import { ReactiveFormsModule, FormGroup, FormControl, Validators, FormBuilder } from '@angular/forms';
 import { LoadiingComponent } from './loadiing/loadiing.component';
+import { UserComponent } from './user/user.component';
 
 
 @NgModule({
@@ -38,7 +39,8 @@ import { LoadiingComponent } from './loadiing/loadiing.component';
     LandingPageComponent,
     CourseDetailComponent,
     CreateCourseComponent,
-    LoadiingComponent
+    LoadiingComponent,
+    UserComponent
   ],
   imports: [
     BrowserModule,

@@ -227,15 +227,15 @@ export class CreateCourseComponent implements OnInit {
     this.http.getData('Image')
     .subscribe((res) => {
 
-      if(res.entity.length!=0){
-        this.imageFlag=false;
+      // if(res.entity.length!=0){
+      //   this.imageFlag=false;
       this.allImages=res.entity;
-      }
-      else{
-        this.imageFlag=true;
-        this.allImages[0]='Create Image';
-      }
-      //console.log(this.allImages);
+      // }
+      // else{
+      //   this.imageFlag=true;
+      //   this.allImages[0]='Create Image';
+      // }
+      // //console.log(this.allImages);
     })
 
   }
