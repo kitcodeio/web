@@ -1,109 +1,26 @@
-<!-- <body *ngIf="!sizeFlag">
-  <section>
-    <div class="row no-gutters">
-      <nav class="d-none col-md-2 d-md-block sidebar">
-            <div class="sidebar-sticky">
-              <ul class="nav flex-column">
-                <li class="nav-item">
-                  <a class="nav-link active invisible" href="#">
-                    <span data-feather="home"></span>
-                    Das <span class="sr-only">(current)</span>
-                  </a>
-                </li>
-                <li class="nav-item">
-                  <a class="nav-link active invisible" href="#">
-                    <span data-feather="home"></span>
-                    Das <span class="sr-only">(current)</span>
-                  </a>
-                </li>
-                <li class="nav-item">
-                  <a class="sidebar-icons nav-link" [routerLink]="['/']">
-                    <span data-feather="file"></span>
-                    <img src="../../assets/images/favicon.png" style="height: 50px; width: 50px;">
-                  </a>
-                </li>
-                <li class="nav-item" *ngIf="userHide">
-                  <a class="sidebar-icons nav-link active" [routerLink]="['/app/dashboard']">
-                    <span data-feather="home"></span>
-                    <i class="fa fa-camera" aria-hidden="true"></i>
-                  </a>
-                </li>
-                <!-- <li class="nav-item">
-                  <a class="sidebar-icons nav-link" href="#">
-                    <span data-feather="shopping-cart"></span>
-                    <i class="fa fa-cog" aria-hidden="true"></i>
-                  </a>
-                </li> -->
-              <!-- </ul>
-              <ul class="nav flex-column">
-                <li class="nav-item">
-                  <a class="nav-link invisible" href="#">
-                    <span data-feather="file"></span>
-                    o
-                  </a>
-                </li>
-                <li class="nav-item">
-                  <a class="nav-link invisible" href="#">
-                    <span data-feather="shopping-cart"></span>
-                    Pro
-                  </a>
-                </li>
-                <li class="nav-item">
-                  <a class="nav-link invisible" href="#">
-                    <span data-feather="shopping-cart"></span>
-                    Pro
-                  </a>
-                </li>
-              </ul>
-            </div>
-          </nav>
-      <nav class="navbar col-md-12 fixed-top bg-white flex-md-nowrap shadow">
-        <a class="navbar-brand" style="width:80px;" href="#"></a>
-        <div class="search-container input-group">
-          <div class="input-group-prepend">
-            <span class="input-group-text search-icon-container" id="basic-addon1"><i class="fa fa-search" aria-hidden="true"></i></span>
+<nav class="navbar fixed-top navbar-expand-lg navbar-light bg-white" style="border-bottom:1px solid #f7f7f7;">
+    <a class="navbar-brand d-lg-none d-md-none d-sm-none" href="#"><img src="../../../assets/images/kitcode logo.png" width="137"></a>
+  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarTogglerDemo01" aria-controls="navbarTogglerDemo01" aria-expanded="false" aria-label="Toggle navigation">
+    <span class="navbar-toggler-icon"></span>
+  </button>
+  <div class="collapse navbar-collapse" id="navbarTogglerDemo01">
+    <a class="navbar-brand d-lg-block d-md-block d-sm-block d-none" href="#"><img src="../../../assets/images/kitcode logo.png" width="137"></a>
+    <form class="form-inline my-2 w-100">
+                  <div class="input-group ml-auto mr-5" style="width:50%;">
+          <div class="input-group-prepend float-right">
+            <button class="btn search-button" type="button"><i class="fa fa-search" aria-hidden="true"></i></button>
           </div>
-          <input type="text" class="search-input form-control" placeholder="Search">
-        </div> -->
-        <!-- <ul class="navbar-nav px-3">
-          <li class="nav-item text-nowrap">
-            <a class="nav-link" href="#">
-              <i class="fa fa-bell" aria-hidden="true"></i>
-               <span class="label label-success badge">4</span>
-            </a>
-          </li>
-        </ul> -->
-        <!-- <ul class="navbar-nav px-3">
-            <li class="nav-item text-nowrap">
-              <a class="nav-link" href="#"><p style="font-size:20px">{{userName}}</p></a>
-            </li>
-          </ul>
-        <ul class="navbar-nav px-3" style="margin-right: 5px;">
-          <li class="nav-item text-nowrap">
-              <button (click)="logout();" style="border: none; background-color: transparent;"><i class="fa fa-sign-out" aria-hidden="true"></i> Log Out</button> -->
-                  <!-- <div class="dropdown">
-                      <button class="dropbtn"><img src="../../../assets/images/kcprofile.jpg" class="profile-image-container"></button>
-                      <div class="dropdown-content">
-                        <button (click)="logout();" style="border: none; background-color: transparent"><i class="fa fa-sign-out" aria-hidden="true"></i>logout</button>
-                         <button style="border: none; background-color: transparent"><i class="fa fa-user-circle" aria-hidden="true"></i>My Profile</button> -->
-                    <!-- </div>
-                </div> -->
-              <!-- <div class="dropdown">
-                <a class="nav-link" href="#" id="dropdownMenuLink" data-toggle="dropdown"><img src="../../../assets/images/kcprofile.jpg" class="profile-image-container"></a>
-                  <div class="profile-menu dropdown-menu dropdown-menu-right" aria-labelledby="dropdownMenuLink">
-                    <a class="dropdown-item" href="#"><i class="fa fa-user-circle" aria-hidden="true"></i> My Profile</a>
-                  <a class="dropdown-item" href="#" (click)="logout();"><i class="fa fa-sign-out" aria-hidden="true"></i> Log Out</a>
-              </div>
-            </div> -->
-          <!-- </li>
-        </ul>
-      </nav>
-    </div>
-  </section>
-  </body> -->
+          <input type="search" class="form-control search-input" placeholder="Search for languages ..." aria-label="" aria-describedby="basic-addon1">
+        </div>
+    </form>
+    <ul class="nav navbar-nav ml-auto">
+      <li>
+          <div class="container-fluid">
+            <button class="btn" style="background-color:transparent; border: none; color: blue;" href="#">Login</button>
+          </div>
+      </li>
+    </ul>
 
-
-<!-- New nav bar -->
-
+  </div>
+</nav>
 <router-outlet></router-outlet>
-

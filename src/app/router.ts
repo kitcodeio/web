@@ -15,23 +15,19 @@ import { CourseDetailComponent } from './root/course-detail/course-detail.compon
 import { CourseCategoryComponent } from './root/course-category/course-category.component';
 
 const routes: Routes = [
-    { path: '',  component: LandingPageComponent},
+    { path: '', redirectTo: 'root/category', pathMatch: 'full'},
     { path: 'login', component: LoginComponent },
-    { path : 'course', component : CourseCategoryComponent, canActivate: [AuthGuard],
-    children: [
-            { path: 'courses/:id', component: CoursesComponent },
-            { path: 'courseDetail/:id', component: CourseDetailComponent}
-        ]
-    },
-    { path: 'app', component: RootComponent, canActivate: [AuthGuard],
-        children: [
-            { path: 'dashboard', component: DashboardComponent },
-            { path: 'image', component: ImagesComponent}, 
-            { path: 'createCourse', component: CreateCourseComponent},
-            { path: ':course/:section/:chapter', component: ProfileComponent }
-        ]
-    }
-];
+    { path: 'root', component: RootComponent, children: [
+        { path: 'category', component: LandingPageComponent },
+        { path: 'course', component: CourseCategoryComponent, children: [
+            { path: 'detail/:id', component:  CoursesComponent },
+            { path: 'chapter/:id', component: CourseDetailComponent}
+        ]},
+        { path: 'kide/:course/:section/:chapter', component: ProfileComponent, canActivate: [AuthGuard] },
+        { path: 'dashboard', component: DashboardComponent, canActivate: [AuthGuard] },
+        { path: 'image', component: ImagesComponent, canActivate: [AuthGuard] },
+        { path: 'createCourse', component: CreateCourseComponent, canActivate: [AuthGuard] },
+    ]}];
 
 
 @NgModule({
