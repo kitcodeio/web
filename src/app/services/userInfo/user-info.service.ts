@@ -14,6 +14,6 @@ export class UserInfoService {
    }
 
   getInfo(){
-    return jwt_decode(this.authService.getToken()).role_type;
+    return jwt_decode(this.authService.getToken());
   }
 }

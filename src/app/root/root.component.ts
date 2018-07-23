@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import {Router} from '@angular/router';
 import '../../../node_modules/bootstrap/dist/js/bootstrap.min.js'
 import { UserInfoService } from '../services/userInfo/user-info.service';
+import { AuthserviceService } from '../services/auth/authservice.service';
 import * as $ from 'jquery';
 
 //npm install  @types/youtube
@@ -13,25 +14,20 @@ import * as $ from 'jquery';
 export class RootComponent implements OnInit {
   userName:string;
   sizeFlag: boolean;
-  userRole;
+  user: any;
   userHide:boolean;
-  constructor(private router: Router, private userInfo: UserInfoService) {
+  label: string = 'Login';
+
+  constructor(private router: Router, private userInfo: UserInfoService, private authService: AuthserviceService) {
   
    }
 
   ngOnInit() {
-    this.userRole = this.userInfo.getInfo();
-
-    // if(this.userRole==1){
-    //   this.userHide = false;
-    // }
-    // else if(this.userRole==0){
-    //   this.userHide = true;
-    // }
-    // if(window.innerWidth<=768){
-    //   this.sizeFlag =true;
-    // }
-
+    if(this.authService.isTokenExpired()) this.label = 'Login/Sign Up';
+    else {
+      this.user = this.userInfo.getInfo();
+      this.label = this.user.name;
+    }
   }
 
   logout(): void {

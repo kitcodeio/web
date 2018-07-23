@@ -16,8 +16,9 @@
     <ul class="nav navbar-nav ml-auto">
       <li>
           <div class="container-fluid">
-            <button class="btn" style="background-color:transparent; border: none; color: blue;" href="#">Login</button>
-          </div>
+              <button class="btn" *ngIf="!this.user" style="background-color:transparent; border: none; color: blue;" routerLink="/login">{{label}}</button>
+              <button class="btn" *ngIf="this.user" style="background-color:transparent; border: none; color: blue;" routerLink="/root/dashboard">{{label}}</button>
+            </div>
       </li>
     </ul>
 
