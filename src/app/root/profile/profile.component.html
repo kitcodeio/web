@@ -1,0 +1,48 @@
+
+<!-- <div class="container">
+    <div class="row" style="margin-top: 20px;">
+             <section class="content-section"> -->
+<!-- <div class="col-lg-6 col-md-6 col-sm-6">
+                    <div class="create-image-container" id="stage">
+                        <iframe height = "400" style="width:100%;height:400px;" [src]="youtubeUrl" frameborder="0" allowfullscreen></iframe>
+                         <ul class="playlist-container">
+                                  <li class="playlist-item" *ngFor="let video of videos; let i = index" style=" font-size: 12px;">
+                                      <a (click)="play(i);">
+                                  <i style="color:#0606a4;" class="fa fa-play-circle" aria-hidden="true"></i>
+                                 &nbsp;&nbsp;&nbsp;<span>{{video.title}}</span>
+                              </a>
+                           </li>
+                         </ul>
+                    </div>
+                  </div>
+                  <div class="col-lg-6 col-md-6 col-sm-6">
+                      <iframe height = "600" style="width:100%;height:600px;" [src]="ide" frameborder="0"></iframe>
+                    </div> -->
+
+<!-- <div class="column">
+            <div style="height:100%;right:0;width:55%;top:63px;">
+              <iframe height = "600" width = "630" [src]="ide" frameborder="0"></iframe>
+            </div>
+        </div> -->
+<!-- </div>
+</div> -->
+<section class="content-section" *ngIf="videos">
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-lg-5 col-md-5 col-sm-5" *ngIf="!maxFlag" #frame>
+                <iframe height="400" style="width:100%;height:400px;" [src]="youtubeUrl" frameborder="0"
+                    allowfullscreen></iframe>
+                <ul class="playlist-container">
+                    <li class="playlist-item" *ngFor="let video of videos; let i = index" style=" font-size: 12px;">
+                        <a (click)="play(i);">
+                       <i style="color:#0606a4;" class="fa fa-play-circle" aria-hidden="true"></i>
+                      &nbsp;&nbsp;&nbsp;<span>{{video.label}}</span>
+                   </a>
+                    </li>
+                </ul>
+            </div>
+            <div id="kide" style="width:58.3%;height:600px; margin-top: 0; margin-left:0"><iframe id="kide-iframe" style="width:100%;height:100%; margin-top: 0; margin-left:0"
+                    [src]="ide" frameborder="0" #iframe></iframe></div>
+        </div>
+    </div>
+</section>

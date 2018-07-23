@@ -1,18 +1,18 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { AuthGuard } from './services/auth/auth.guard';
-import { DashboardComponent } from './views/dashboard/dashboard.component';
-import { ImagesComponent } from './views/images/images.component';
+import { DashboardComponent } from './root/dashboard/dashboard.component';
+import { ImagesComponent } from './root/images/images.component';
 import { LoginComponent } from './login/login.component';
-import { ProfileComponent } from './views/profile/profile.component';
+import { ProfileComponent } from './root/profile/profile.component';
 import { AppComponent } from './app.component';
-import { RootComponent } from './views/root.component';
+import { RootComponent } from './root/root.component';
 import { ModuleWithProviders } from "@angular/core";
-import { CoursesComponent } from './views/courses/courses.component';
-import { LandingPageComponent } from './landing-page/landing-page.component';
-import { CreateCourseComponent } from './views/create-course/create-course.component';
-import { CourseDetailComponent } from './views/course-detail/course-detail.component';
-import { CourseCategoryComponent } from './course-category/course-category.component';
+import { CoursesComponent } from './root/courses/courses.component';
+import { LandingPageComponent } from './root/landing-page/landing-page.component';
+import { CreateCourseComponent } from './root/create-course/create-course.component';
+import { CourseDetailComponent } from './root/course-detail/course-detail.component';
+import { CourseCategoryComponent } from './root/course-category/course-category.component';
 
 const routes: Routes = [
     { path: '',  component: LandingPageComponent},
