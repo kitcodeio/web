@@ -180,7 +180,6 @@ export class ImagesComponent implements OnInit, AfterViewInit {
 //Create image
   createImage() {
     if(this.label && this.tool.nativeElement.value && this.flag){
-      console.log(this.label);
       this.http.postData('Image',{
         "label":this.label,
         "file":this.editor.value
@@ -246,7 +245,6 @@ export class ImagesComponent implements OnInit, AfterViewInit {
         }
 
         this.allTools.push({sTool: this.tool.nativeElement.value, sVersion:this.En_version.nativeElement.value});
-        console.log('version',this.version)
 
         }
     }

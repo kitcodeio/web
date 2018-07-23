@@ -10,7 +10,6 @@ export class UserInfoService {
   userDetail;
   token;
   constructor(private authService: AuthserviceService) {
-    console.log('info',this.userDetail);
    }
 
   getInfo(){

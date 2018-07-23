@@ -82,7 +82,6 @@ export class HttpService {
  //=======================Container Creation API=======================//
   
   getContainer(id: number):Observable<any>{
-	  console.log(id, 'id mil gaya aab hum req karega');
 	  return this.http.post(this.url+'create/api/Container', {course_id: id})
 	  .pipe(catchError((error)=>{return of(error);}));
   }

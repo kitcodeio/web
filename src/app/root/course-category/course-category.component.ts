@@ -24,7 +24,6 @@ export class CourseCategoryComponent implements OnInit {
       this.http.getDataWithId('CourseSection',params.id)
       .subscribe(res=>{
         this.allSections = res.entity;
-        console.log('section',this.allSections);
       })    
     });
   }
@@ -39,8 +38,4 @@ export class CourseCategoryComponent implements OnInit {
     })
   }
 
-  toProfile(s_id, c_index){
-	  this.router.navigate(['/profile/'+this.course_id+'/'+s_id+'/'+c_index]);
-    console.log('jncskjd');
-  }
 }

@@ -56,7 +56,6 @@ export class DashboardComponent implements OnInit {
         this.emptyMessage='you do not have any image';
         this.flag=true;
       }
-      console.log(this.allImages);
     })
 
   }
@@ -97,7 +96,6 @@ export class DashboardComponent implements OnInit {
         "label":this.categoryName,
         "logo": this.catImageUrl
       }).subscribe(res=>{
-        console.log(res);
         if(res.status==201){
           this.toastrService.success('Category succusfully created','Successs',{positionClass:'toast-bottom-right'});
         }
@@ -119,8 +117,6 @@ export class DashboardComponent implements OnInit {
   getcatgory(){
     this.http.getcategory('CourseCategory').subscribe(res=>{
       this.categories = res.entity;
-      //console.log('getres',res.entity);
-      //console.log('in',this.catId);
     })
   }
 

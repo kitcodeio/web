@@ -25,7 +25,6 @@ export class CourseDetailComponent implements OnInit {
       this.http.getDataWithId('CourseSection',params.id)
       .subscribe(res=>{
         this.allSections = res.entity;
-        console.log('section',this.allSections);
       })    
     });
   }

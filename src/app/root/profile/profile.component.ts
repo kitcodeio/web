@@ -75,9 +75,7 @@ export class ProfileComponent implements OnInit {
   }
 
   handleMessage(event: Event) {
-    console.log('frame',this.iframe.nativeElement)
     const message = event as MessageEvent;
-    console.log(message.data);
     if (message.data == 'loaded') this.iframe.nativeElement.contentWindow.postMessage(JSON.stringify(this.data), '*');
     else if (message.data == 'minimize') this.min();
     else if(message.data == 'maximize') this.max();

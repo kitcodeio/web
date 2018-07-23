@@ -34,7 +34,6 @@ export class CustomHttpService {
     this.refreshToken();
     return this.http.post<any>(url,data,this.httpOptions)
       .pipe(catchError((err)=>{
-        console.log(err);
         return of(err);	  
       }));
   }

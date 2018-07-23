@@ -19,7 +19,6 @@ export class AuthserviceService {
       password: password
     }).pipe(
         catchError((err) => {
-          console.log(err);
           return of(err);
         })
     );

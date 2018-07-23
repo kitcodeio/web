@@ -43,7 +43,6 @@ export class LoginComponent implements OnInit {
       		
 $(document).on('focusout','.md-form-control',function(){	
   $(this).each(function(){
-    console.log($(this).val());
     ($(this).val()!="")?$(this).parent('.md-input').find('label').animate({top:'-15px'},300):$(this).parent('.md-input').find('label').animate({top:'10px'},300);
   });
 });
@@ -89,7 +88,6 @@ login(): void {
         this.authService.setToken(response.token);
        // window.location.reload();
         this.router.navigate(['/']);
-        console.log(jwt_decode(response.token).name);
         this.userInfo.userDetail = jwt_decode(response.token);
           }
         
@@ -151,7 +149,6 @@ login(): void {
 
   checkBox(enent){
     this.counter++;
-    console.log(this.counter)
     if(this.counter%2==1){
       this.checked= true;
     }

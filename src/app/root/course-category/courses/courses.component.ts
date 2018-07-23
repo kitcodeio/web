@@ -30,8 +30,6 @@ export class CoursesComponent implements OnInit {
       this.http.getDataWithId('Course',params.id)
       .subscribe(res=>{
         this.allCourses = res.entity; 
-        console.log('course',this.allCourses);
-        console.log('i',params.id);
         if(this.allCourses.length>0){
           this.flag=true;
         }
@@ -45,8 +43,6 @@ export class CoursesComponent implements OnInit {
   populateCatgory(){
     this.http.getcategory('CourseCategory').subscribe(res=>{
       this.allCourseCategory = res.entity;
-      console.log(this.allCourseCategory);
-    
     })
   }
   
@@ -62,8 +58,6 @@ export class CoursesComponent implements OnInit {
     this.http.getDataWithId('Course',id)
     .subscribe(res=>{
       this.allCourses = res.entity; 
-      console.log('course',this.allCourses);
-      console.log('i',id);
       if(this.allCourses.length>0){
         this.flag=true;
       }
