@@ -18,14 +18,6 @@ export class CourseCategoryComponent implements OnInit {
 
   ngOnInit() {
     this.populateCatgory();
-
-    this.route.params.subscribe(params=>{
-      this.course_id = params.id;
-      this.http.getDataWithId('CourseSection',params.id)
-      .subscribe(res=>{
-        this.allSections = res.entity;
-      })    
-    });
   }
 
   ngAfterViewInit() {

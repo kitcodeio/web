@@ -6,11 +6,11 @@
                     <a href="#menu-toggle" class="btn btn-secondary d-sm-none d-lg-none d-md-none" id="menu-toggle">Toggle Menu</a>
                     <button class="buttons-top">Hot</button>&nbsp;&nbsp;&nbsp;<button class="buttons-top">Trending</button>
                     
-                    <app-loadiing *ngIf="!allCourses && !flag"></app-loadiing>
+                    <app-loadiing *ngIf="loading"></app-loadiing>
                     
                     <div class="course_list">
                         <h2 *ngIf="flag && !allCourses">The Category is empty</h2>
-                        <ul class="mt-4" style="list-style-type:none;padding-left:0;" *ngIf="allCourses && flag">
+                        <ul class="mt-4" style="list-style-type:none;padding-left:0;" *ngIf="!loading">
                             <li class="mb-4" *ngFor="let c of allCourses; let i=index;">
                                 <div class="card" style="border:none;">
                                   <div class="card-header" style="background:transparent;border: none;">

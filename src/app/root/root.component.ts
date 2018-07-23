@@ -20,6 +20,8 @@ export class RootComponent implements OnInit {
   constructor(private router: Router, private userInfo: UserInfoService, private authService: AuthserviceService) {}
 
   ngOnInit() {
+
+
     if(this.authService.isTokenExpired()){ 
       this.url = '/login'
       this.label = 'Login/Sign Up';

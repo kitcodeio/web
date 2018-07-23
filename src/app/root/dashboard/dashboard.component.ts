@@ -38,10 +38,7 @@ export class DashboardComponent implements OnInit {
   }
 
   ngOnInit() {
-
-    this.populateCourses();
     this.populateImage();
-
     $(function(){
     });
 
@@ -76,13 +73,6 @@ export class DashboardComponent implements OnInit {
 
   createImage(){
     this.router.navigate(['/root/image']);
-  }
-
-  populateCourses(){
-     this.http.getCourse('Course')
-      .subscribe((res) => {
-        this.allImages=res.entity;
-      });
   }
 
   createCourse(){

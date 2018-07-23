@@ -156,13 +156,6 @@ export class ImagesComponent implements OnInit, AfterViewInit {
 
 // Ace code Editor
   ngAfterViewInit() {
-
-    this.editor.setTheme("eclipse");
-
-    this.editor.getEditor().setOptions({
-        enableBasicAutocompletion: true
-    });
-
     this.editor.getEditor().commands.addCommand({
         name: "showOtherCompletions",
         bindKey: "Ctrl-.",
@@ -170,7 +163,6 @@ export class ImagesComponent implements OnInit, AfterViewInit {
 
         }
     });
-
     this.editor.setOptions({
       fontFamily: "courier",
       fontSize: "10pt"
