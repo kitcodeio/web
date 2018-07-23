@@ -51,6 +51,7 @@ export class CreateCourseComponent implements OnInit {
   indexOfChapter;
   indexOfSection;
   flag:boolean=false;
+  creared_by:string;
   constructor(private http: HttpService, private router: Router, private toastrService: ToastrService) { }
 
   ngOnInit() {
@@ -108,7 +109,8 @@ export class CreateCourseComponent implements OnInit {
         'category_id':this.catId,
         'label':this.courseName,
         'description':this.courseDescription,
-        'image_id':this.imageId
+        'image_id':this.imageId,
+        'created_by':this.creared_by
       }).subscribe(res =>{
         this.courseName=res.entity.label;
         this.courseId=res.entity.id;

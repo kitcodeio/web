@@ -3,6 +3,8 @@ import {Router} from '@angular/router';
 import '../../../node_modules/bootstrap/dist/js/bootstrap.min.js'
 import { UserInfoService } from '../services/userInfo/user-info.service';
 import { AuthserviceService } from '../services/auth/authservice.service';
+import { ViewChild, ElementRef, AfterViewInit } from '@angular/core';
+import * as $ from 'jquery';
 
 @Component({
   selector: 'app-root',
@@ -10,17 +12,31 @@ import { AuthserviceService } from '../services/auth/authservice.service';
   styleUrls: ['./root.component.css']
 })
 export class RootComponent implements OnInit {
+  @ViewChild('dropdown') dropdown:ElementRef;
   userName:string;
   sizeFlag: boolean;
   user: any;
   userHide:boolean;
   label: string;
   url: string;
+  image:string;
 
   constructor(private router: Router, private userInfo: UserInfoService, private authService: AuthserviceService) {}
 
   ngOnInit() {
 
+    $(document).ready(function(){
+      // Show hide popover
+      $(".dropdown").click(function(){
+          $(this).find(".dropdown-menu").slideToggle("fast");
+      });
+  });
+  $(document).on("click", function(event){
+      var $trigger = $(".dropdown");
+      // if($trigger !== event.target && !$trigger.has(event.target).length){
+      //     $(".dropdown-menu").slideUp("fast");
+      //}            
+  });
 
     if(this.authService.isTokenExpired()){ 
       this.url = '/login'
@@ -35,6 +51,10 @@ export class RootComponent implements OnInit {
   logout(): void {
     localStorage.removeItem('jwt_token');
     this.userInfo.token = localStorage.getItem('jwt_token');
-    this.router.navigate(['/']);
+    this.router.navigate(['/root/category']);
+  }
+
+  profileDropdown(){
+    this.dropdown.nativeElement.classList.toggle("show");
   }
 }
