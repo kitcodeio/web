@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { all } from 'q';
 import * as $ from 'jquery';
 import { Router } from '@angular/router';
-import { HttpService } from '../../services/http/http.service';
+import { HttpService } from '../../../services/http/http.service';
 import { MalihuScrollbarService } from 'ngx-malihu-scrollbar';
 import { RouterModule, Routes } from '@angular/router';
 import { ActivatedRoute } from '@angular/router';

@@ -8,10 +8,10 @@ import { ProfileComponent } from './root/profile/profile.component';
 import { AppComponent } from './app.component';
 import { RootComponent } from './root/root.component';
 import { ModuleWithProviders } from "@angular/core";
-import { CoursesComponent } from './root/courses/courses.component';
+import { CoursesComponent } from './root/course-category/courses/courses.component';
 import { LandingPageComponent } from './root/landing-page/landing-page.component';
 import { CreateCourseComponent } from './root/create-course/create-course.component';
-import { CourseDetailComponent } from './root/course-detail/course-detail.component';
+import { CourseDetailComponent } from './root/course-category/course-detail/course-detail.component';
 import { CourseCategoryComponent } from './root/course-category/course-category.component';
 
 const routes: Routes = [
