@@ -14,7 +14,7 @@ const routes: Routes =[
     CommonModule,
     RouterModule.forChild(routes),
     FormsModule,
-  ],
+  ],  
   declarations: [DashboardComponent,
     LoadiingComponent]
 })

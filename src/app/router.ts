@@ -23,10 +23,10 @@ const routes: Routes = [
             { path: 'detail/:id', component:  CoursesComponent },
             { path: 'chapter/:id', component: CourseDetailComponent}
         ]},
-        { path: 'kide/:course/:section/:chapter', component: ProfileComponent, canActivate: [AuthGuard] },
+        { path: 'kide/:course/:section/:chapter', loadChildren: './root/profile/profile.module#ProfileModule', canActivate: [AuthGuard] },
         { path: 'dashboard', loadChildren:'src/app/root/dashboard/dashboard.module#DashboardModule', canActivate: [AuthGuard] },
-        { path: 'image', component: ImagesComponent, canActivate: [AuthGuard] },
-        { path: 'createCourse', component: CreateCourseComponent, canActivate: [AuthGuard] },
+        { path: 'image', loadChildren: './root/images/images.module#ImagesModule', canActivate: [AuthGuard] },
+        { path: 'createCourse', loadChildren: './root/create-course/create-course.module#CreateCourseModule', canActivate: [AuthGuard] },
     ]}];
 
 
