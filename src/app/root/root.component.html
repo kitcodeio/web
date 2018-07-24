@@ -19,7 +19,7 @@
           <a routerLink="/login">Login</a>
         </li>
         <li class="dropdown" *ngIf="!flag">
-            <a class="username">{{user.name}}</a>
+            <a class="username" style="margin-top: 15px;"><img width="40px" height="40px" src="{{user.image}}" alt=""></a>
             <ul class="dropdown-menu">
                 <li><a href="#" (click)="logout();">Logout</a></li>
                 <li *ngIf="user.role_type=='admin'
