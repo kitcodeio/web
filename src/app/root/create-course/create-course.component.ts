@@ -25,12 +25,13 @@ export class CreateCourseComponent implements OnInit {
   chapterFlag1:boolean=false;
   chapterFlag2:boolean=false;
 
+  secId;
   allSection=[];
   allChapter=[];
-  defaultSectionName;
+  defaultSectionName='a';
   defaultChapterName;
-  sectionDescription;
-  defaultCourseName;
+  sectionDescription='a';
+  defaultCourseName='a';
   courseName;
   sectionName;
   sectionIndex:number;
@@ -52,6 +53,8 @@ export class CreateCourseComponent implements OnInit {
   indexOfSection;
   flag:boolean=false;
   creared_by:string;
+  chapters=[];
+
   constructor(private http: HttpService, private router: Router, private toastrService: ToastrService) { }
 
   ngOnInit() {
@@ -76,8 +79,34 @@ export class CreateCourseComponent implements OnInit {
     this.sectionFlag=true;
     this.chapterFlag=false;
     this.chapterFlag1= true;
-    this.allSection.push({name:this.defaultSectionName,description:this.sectionDescription,course:this.selectCourse, chapters: []});
   
+    if(this.courseId){
+    this.http.postsection('CourseSection',{
+      "course_id":this.courseId,
+      "label":this.defaultSectionName,
+      "description":this.sectionDescription 
+  }).subscribe(res=>{
+    this.sectionName= res.entity.label;
+    this.sectionId=res.entity.id;
+    console.log(res.entity.label);
+    this.allSection.push({section:res.entity, chapters: []});
+    let obj; // change the name in dom
+    console.log(this.allSection);
+    if(!this.sectionIndex && this.sectionIndex!=0){
+      obj={name:this.sectionName,description:this.sectionDescription,course:this.selectCourse}
+      this.allSection[this.allSection.length-1].name=obj.name;
+    }
+    else if(this.sectionIndex || this.sectionIndex==0)
+    {
+      obj={name:this.sectionName,description:this.sectionDescription,course:this.selectCourse}
+      this.allSection[this.sectionIndex].name=obj.name;
+    }
+  })
+ }
+else{
+  this.toastrService.info('Create a course first','Error',{positionClass:'toast-bottom-right'});
+}
+
     // start from last index
     this.indexOfChapter = null;
   }
@@ -130,23 +159,25 @@ export class CreateCourseComponent implements OnInit {
   addSection(){
 
     if(this.courseId){
-      this.http.postsection('CourseSection',{
-        "course_id":this.courseId,
+      this.http.putData('CourseSection',{
+        "id":this.secId,
+        "data":{
         "label":this.sectionName,
         "description":this.sectionDescription 
+        }
     }).subscribe(res=>{
-      this.sectionName= res.entity.label;
-      this.sectionId=res.entity.id;
-      let obj; // change the name in dom
-      if(!this.sectionIndex && this.sectionIndex!=0){
-        obj={name:this.sectionName,description:this.sectionDescription,course:this.selectCourse}
-        this.allSection[this.allSection.length-1].name=obj.name;
-      }
-      else if(this.sectionIndex || this.sectionIndex==0)
-      {
-        obj={name:this.sectionName,description:this.sectionDescription,course:this.selectCourse}
-        this.allSection[this.sectionIndex].name=obj.name;
-      }
+      // this.sectionName= res.entity.label;
+      // this.sectionId=res.entity.id;
+      console.log({
+        "id":this.secId,
+        "data":{
+        "label":this.sectionName,
+        "description":this.sectionDescription 
+        }
+    })
+
+    console.log(res);
+
       if(res.status == 201){
         this.populateCatgory();
         this.toastrService.success('Section successfully created','Success',{positionClass:'toast-bottom-right'});
@@ -201,10 +232,12 @@ export class CreateCourseComponent implements OnInit {
 
   }
 
-  getSectionId(i){
+  getSectionId(i,id){
     this.sectionFlag=true;
     this.chapterFlag=false;
     this.sectionIndex=i;
+    this.secId=id;
+    console.log(id);
   }
 
   getChapterId(i,j){
