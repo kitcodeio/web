@@ -20,6 +20,7 @@ export class RootComponent implements OnInit {
   label: string;
   url: string;
   image:string;
+  flag:boolean;
 
   constructor(private router: Router, private userInfo: UserInfoService, private authService: AuthserviceService) {}
 
@@ -41,9 +42,10 @@ export class RootComponent implements OnInit {
     if(this.authService.isTokenExpired()){ 
       this.url = '/login'
       this.label = 'Login/Sign Up';
+      this.flag=true
     } else {
       this.user = this.userInfo.getInfo();
-      this.url='/root/dashboard';
+      // this.url='/root/dashboard';
       this.label = this.user.name;
     }
   }
@@ -52,6 +54,7 @@ export class RootComponent implements OnInit {
     localStorage.removeItem('jwt_token');
     this.userInfo.token = localStorage.getItem('jwt_token');
     this.router.navigate(['/root/category']);
+    this.flag = true;
   }
 
   profileDropdown(){
