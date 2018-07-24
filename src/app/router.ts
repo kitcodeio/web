@@ -1,6 +1,10 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
+
+
 import { AuthGuard } from './services/auth/auth.guard';
+import { RBACService } from './services/rbac/rbac.service';
+
 import { DashboardComponent } from './root/dashboard/dashboard.component';
 import { ImagesComponent } from './root/images/images.component';
 import { LoginComponent } from './login/login.component';
@@ -24,9 +28,9 @@ const routes: Routes = [
             { path: 'chapter/:id', loadChildren: './root/course-category/course-detail/course-detail.module#CourseDetailModule'}
         ]},
         { path: 'kide/:course/:section/:chapter', loadChildren: './root/profile/profile.module#ProfileModule', canActivate: [AuthGuard] },
-        { path: 'dashboard', loadChildren:'src/app/root/dashboard/dashboard.module#DashboardModule', canActivate: [AuthGuard] },
-        { path: 'image', loadChildren: './root/images/images.module#ImagesModule', canActivate: [AuthGuard] },
-        { path: 'createCourse', loadChildren: './root/create-course/create-course.module#CreateCourseModule', canActivate: [AuthGuard] },
+        { path: 'dashboard', loadChildren:'src/app/root/dashboard/dashboard.module#DashboardModule', canActivate: [AuthGuard, RBACService] },
+        { path: 'image', loadChildren: './root/images/images.module#ImagesModule', canActivate: [AuthGuard, RBACService] },
+        { path: 'createCourse', loadChildren: './root/create-course/create-course.module#CreateCourseModule', canActivate: [AuthGuard, RBACService] },
     ]}];
 
 

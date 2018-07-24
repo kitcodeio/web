@@ -54,12 +54,20 @@ export class AuthserviceService {
   }
 
   isTokenExpired(token?: string): boolean {
-   token = this.getToken();
+    token = this.getToken();
     if(!token) return true;
 
     const date = this.getTokenExpirationDate(token);
     if(date === undefined) return false;
     return !(date.valueOf() > new Date().valueOf());
+  }
+  
+  isAdmin(token?: string): boolean {
+    token = this.getToken();
+    if (!token) return false;
+    
+    const user = this.getUserData();
+    return user.role_type=='admin';
   }
 
   getUserData(): any {
