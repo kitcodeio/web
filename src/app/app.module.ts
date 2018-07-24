@@ -6,8 +6,6 @@ import { HttpClientModule } from '@angular/common/http';
 import { AppComponent } from './app.component';
 import { ImagesComponent } from './root/images/images.component';
 import { ProfileComponent } from './root/profile/profile.component';
-import { DashboardComponent } from './root/dashboard/dashboard.component';
-import { LoginComponent } from './login/login.component';
 import { AppRoutingModule } from './router';
 import { RootComponent } from './root/root.component';
 import { AuthserviceService } from './services/auth/authservice.service';
@@ -23,7 +21,7 @@ import { CourseDetailComponent } from './root/course-category/course-detail/cour
 import { MalihuScrollbarModule } from 'ngx-malihu-scrollbar';
 import { CreateCourseComponent } from './root/create-course/create-course.component';
 import { ReactiveFormsModule, FormGroup, FormControl, Validators, FormBuilder } from '@angular/forms';
-import { LoadiingComponent } from './loadiing/loadiing.component';
+// import { LoadiingComponent } from './loadiing/loadiing.component';
 import { CourseCategoryComponent } from './root/course-category/course-category.component';
 
 
@@ -32,14 +30,12 @@ import { CourseCategoryComponent } from './root/course-category/course-category.
     AppComponent,
     ImagesComponent,
     ProfileComponent,
-    DashboardComponent,
-    LoginComponent,
     RootComponent,
     CoursesComponent,
     LandingPageComponent,
     CourseDetailComponent,
     CreateCourseComponent,
-    LoadiingComponent,
+    //LoadiingComponent,
     CourseCategoryComponent
   ],
   imports: [

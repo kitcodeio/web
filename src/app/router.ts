@@ -16,7 +16,7 @@ import { CourseCategoryComponent } from './root/course-category/course-category.
 
 const routes: Routes = [
     { path: '', redirectTo: 'root/category', pathMatch: 'full'},
-    { path: 'login', component: LoginComponent },
+    { path: 'login', loadChildren:'src/app/login/login.module#LoginModule' },
     { path: 'root', component: RootComponent, children: [
         { path: 'category', component: LandingPageComponent },
         { path: 'course', component: CourseCategoryComponent, children: [
@@ -24,7 +24,7 @@ const routes: Routes = [
             { path: 'chapter/:id', component: CourseDetailComponent}
         ]},
         { path: 'kide/:course/:section/:chapter', component: ProfileComponent, canActivate: [AuthGuard] },
-        { path: 'dashboard', component: DashboardComponent, canActivate: [AuthGuard] },
+        { path: 'dashboard', loadChildren:'src/app/root/dashboard/dashboard.module#DashboardModule', canActivate: [AuthGuard] },
         { path: 'image', component: ImagesComponent, canActivate: [AuthGuard] },
         { path: 'createCourse', component: CreateCourseComponent, canActivate: [AuthGuard] },
     ]}];
