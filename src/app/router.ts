@@ -20,8 +20,8 @@ const routes: Routes = [
     { path: 'root', component: RootComponent, children: [
         { path: 'category', component: LandingPageComponent },
         { path: 'course', component: CourseCategoryComponent, children: [
-            { path: 'detail/:id', component:  CoursesComponent },
-            { path: 'chapter/:id', component: CourseDetailComponent}
+            { path: 'detail/:id', loadChildren:'./root/course-category/courses/courses.module#CoursesModule' },
+            { path: 'chapter/:id', loadChildren: './root/course-category/course-detail/course-detail.module#CourseDetailModule'}
         ]},
         { path: 'kide/:course/:section/:chapter', loadChildren: './root/profile/profile.module#ProfileModule', canActivate: [AuthGuard] },
         { path: 'dashboard', loadChildren:'src/app/root/dashboard/dashboard.module#DashboardModule', canActivate: [AuthGuard] },

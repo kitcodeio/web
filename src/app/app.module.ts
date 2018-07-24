@@ -12,9 +12,7 @@ import { AngularFontAwesomeModule } from 'angular-font-awesome';
 import { SimpleNotificationsModule } from 'angular2-notifications';
 import { ToastrModule, ToastNoAnimation, ToastNoAnimationModule,} from 'ngx-toastr';
 import { platformBrowserDynamic } from '@angular/platform-browser-dynamic';
-import { CoursesComponent } from './root/course-category/courses/courses.component';
 import { LandingPageComponent } from './root/landing-page/landing-page.component';
-import { CourseDetailComponent } from './root/course-category/course-detail/course-detail.component';
 import { MalihuScrollbarModule } from 'ngx-malihu-scrollbar';
 import { ReactiveFormsModule, FormGroup, FormControl, Validators, FormBuilder } from '@angular/forms';
 // import { LoadiingComponent } from './loadiing/loadiing.component';
@@ -25,9 +23,7 @@ import { CourseCategoryComponent } from './root/course-category/course-category.
   declarations: [
     AppComponent,
     RootComponent,
-    CoursesComponent,
     LandingPageComponent,
-    CourseDetailComponent,
     //LoadiingComponent,
     CourseCategoryComponent
   ],
