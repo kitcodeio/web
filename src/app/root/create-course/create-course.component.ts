@@ -36,10 +36,11 @@ export class CreateCourseComponent implements OnInit {
   sectionName;
   sectionIndex:number;
   chapterId;
+  chapId;
   chapterName;
   chapterDescription;
   courseDescription;
-  chapterUrl;
+  chapterUrl='url';
   index;
   categories=[];
   allImages=[];
@@ -70,10 +71,24 @@ export class CreateCourseComponent implements OnInit {
     this.chapterFlag=true;
     this.sectionFlag=false;
     this.chapterFlag2=true;
-    this.allSection[i].chapters.push({name:this.defaultChapterName,description:this.chapterDescription, chapterUrl:this.chapterUrl,  section:this.selectSection});
+    //this.allSection[i].chapters.push({name:this.defaultChapterName,description:this.chapterDescription, chapterUrl:this.chapterUrl,  section:this.selectSection});
     this.index=i;
     this.chapterName = 'New Chapter';
+
+    if(this.sectionId){
+      this.http.postchapter('CourseChapter',{
+        "section_id": this.sectionId,
+        "label": this.defaultChapterName,  
+        "url": this.chapterUrl
+    }).subscribe(res=>{
+      this.allSection[i].chapters.push(res.entity);
+      console.log(this.allSection[i].chapters)
+    })
   }
+  else{
+    this.toastrService.info('Create the section first','Error',{positionClass:'toast-bottom-right'});
+  }
+}
 
   sectionForm(){
     this.sectionFlag=true;
@@ -90,17 +105,6 @@ export class CreateCourseComponent implements OnInit {
     this.sectionId=res.entity.id;
     console.log(res.entity.label);
     this.allSection.push({section:res.entity, chapters: []});
-    let obj; // change the name in dom
-    console.log(this.allSection);
-    if(!this.sectionIndex && this.sectionIndex!=0){
-      obj={name:this.sectionName,description:this.sectionDescription,course:this.selectCourse}
-      this.allSection[this.allSection.length-1].name=obj.name;
-    }
-    else if(this.sectionIndex || this.sectionIndex==0)
-    {
-      obj={name:this.sectionName,description:this.sectionDescription,course:this.selectCourse}
-      this.allSection[this.sectionIndex].name=obj.name;
-    }
   })
  }
 else{
@@ -157,30 +161,45 @@ else{
     }
 
   addSection(){
-
+    let id;
     if(this.courseId){
+      if(!this.secId){
+        id = this.allSection[this.allSection.length-1].section.id;
+        console.log('in',id);
+      }
+      else{
+        id = this.secId;
+        console.log('ha',id)
+      }
       this.http.putData('CourseSection',{
-        "id":this.secId,
+        "id":id,
         "data":{
         "label":this.sectionName,
         "description":this.sectionDescription 
         }
     }).subscribe(res=>{
-      // this.sectionName= res.entity.label;
-      // this.sectionId=res.entity.id;
+
+      let obj; // change the name in dom
       console.log({
-        "id":this.secId,
+        "id":id,
         "data":{
         "label":this.sectionName,
         "description":this.sectionDescription 
         }
-    })
-
-    console.log(res);
-
-      if(res.status == 201){
+    });
+      console.log(res);
+      if(!this.sectionIndex && this.sectionIndex!=0){
+        obj={name:this.sectionName,description:this.sectionDescription,course:this.selectCourse}
+        this.allSection[this.allSection.length-1].section.label=obj.name;
+      }
+      else if(this.sectionIndex || this.sectionIndex==0)
+      {
+        obj={name:this.sectionName,description:this.sectionDescription,course:this.selectCourse}
+        this.allSection[this.sectionIndex].section.label=obj.name;
+      }
+      if(res.status == 200){
         this.populateCatgory();
-        this.toastrService.success('Section successfully created','Success',{positionClass:'toast-bottom-right'});
+        this.toastrService.success('updated successfully','Success',{positionClass:'toast-bottom-right'});
         this.sectionName='';
       }
       else{
@@ -191,44 +210,61 @@ else{
     else{
       this.toastrService.info('Create a course first','Error',{positionClass:'toast-bottom-right'});
     }
+    console.log(id);
+    id = null;
+    this.indexOfSection=null;
   }
   
   addChapter(){
     let obj;
+    let id;
     if(this.sectionId){
-      this.http.postchapter('CourseChapter',{
-        "section_id": this.sectionId,
-        "label": this.chapterName,  
-        "url": this.chapterUrl
+
+      if(!this.chapId){
+        let len = this.allSection[this.index].chapters.length-1;
+        id = this.allSection[this.index].chapters[len].id;
+        console.log('in',id);
+      }
+      else{
+        id = this.chapId;
+        console.log('ha',id)
+      }
+
+      this.http.putData('CourseChapter',{
+        "id":id,
+        "data":{
+          "label": this.chapterName,  
+          "url": this.chapterUrl
+        }
     }).subscribe(res=>{
-      this.chapterName=res.entity.label;
-      this.chapterId=res.entity.id;
+      console.log(res);
 
       if(!this.indexOfChapter && this.indexOfChapter!=0){
-        console.log(this.allSection);
         let len = this.allSection[this.index].chapters.length-1;
         obj = {name:this.chapterName,description:this.chapterDescription, chapterUrl:this.chapterUrl, section:this.selectSection}
-        this.allSection[this.index].chapters[len].name=obj.name;
+        this.allSection[this.index].chapters[len].label=obj.name;
       }
       else if(this.indexOfChapter || this.indexOfChapter==0)
       {
         obj = {name:this.chapterName,description:this.chapterDescription, chapterUrl:this.chapterUrl,  section:this.selectSection}
-        this.allSection[this.indexOfSection].chapters[this.indexOfChapter].name=obj.name;
+        this.allSection[this.indexOfSection].chapters[this.indexOfChapter].label=obj.name;
+        console.log(this.indexOfChapter,this.indexOfSection);
       }
-      if(res.status==201){
-       this.toastrService.success('Chapter successfully created','Success',{positionClass:'toast-bottom-right'});
+      if(res.status==200){
+       this.toastrService.success('updated successfully','Success',{positionClass:'toast-bottom-right'});
       }
       else{
         this.toastrService.error(res.error,'Error',{positionClass:'toast-bottom-right'});
       }
-      this.chapterName = '';
+   
       this.chapterDescription='';
       this.chapterUrl = '';
+      this.chapId=null;
     })
-    }
-    else{
-      this.toastrService.info('Create the section first','Error',{positionClass:'toast-bottom-right'});
-    }
+  }
+  else{
+    this.toastrService.info('Create the section first','Error',{positionClass:'toast-bottom-right'});
+  }
 
   }
 
@@ -240,11 +276,12 @@ else{
     console.log(id);
   }
 
-  getChapterId(i,j){
+  getChapterId(i,j,id){
     this.chapterFlag=true;
     this.sectionFlag=false;
     this.indexOfChapter=j;
     this.indexOfSection=i;
+    this.chapId = id;
   }
 
   populateCatgory(){

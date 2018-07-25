@@ -14,7 +14,7 @@
         <div *ngFor="let c of sec.chapters; let j=index;">
             <div *ngIf="chapterFlag2">
                 <!-- <p><a type="click" style="color: rgb(88, 112, 184)" ><strong class="left-nav-headline" (click)="getChapterId(i,j);">{{i+1}}.{{j+1}}.{{c.name}}</strong></a></p> -->
-                <p><a href="#." data-target="#getKeyInfo" data-toggle="modal" class="text-uppercase getKeyInfo" (click)="getChapterId(i,j);">&nbsp;{{i+1}}.{{j+1}}.{{c.name}}</a></p>
+                <p><a href="#." data-target="#getKeyInfo" data-toggle="modal" class="text-uppercase getKeyInfo" (click)="getChapterId(i,j,c.id);">&nbsp;{{i+1}}.{{j+1}}.{{c.label}}</a></p>
             </div>
         </div>
       <button class="list-group-item add-section" (click)="chapterForm(i);"><i class="fa fa-plus"></i> Add Chapter</button> 
@@ -126,13 +126,13 @@
                         <div class="help-block with-errors"></div>
                     </div>
                 </div>
-                <div class="col-md-12">
+                <!-- <div class="col-md-12">
                     <div class="form-group">
                         <label for="form_message">Description</label>
                         <textarea id="form_message" name="message" class="form-control" placeholder="Description *" rows="4" required="required" data-error="Please,leave us a message." [(ngModel)]="chapterDescription"></textarea>
                         <div class="help-block with-errors"></div>
                     </div>
-                </div>
+                </div> -->
                 <div class="col-md-12">
                     <div class="form-group">
                         <label for="form_name">Chapter Url </label>
