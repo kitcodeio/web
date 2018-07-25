@@ -37,4 +37,12 @@ export class CoursesComponent implements OnInit {
       }
     }); 
   }
+
+  deleteCourse(id){
+    console.log('kkk')
+    this.http.deleteData('Course',id)
+    .subscribe(res=>{
+      console.log(res);
+    })
+  }
 }

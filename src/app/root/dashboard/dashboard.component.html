@@ -93,6 +93,18 @@
           <input id="form_name" type="text" name="name" class="form-control" placeholder="Course Category" required="required" data-error="Firstname is required." [(ngModel)]="categoryName">
           <br>
           <input id="form_name" type="text" name="url" class="form-control" placeholder="Category image url" required="required" data-error="Firstname is required." [(ngModel)]="catImageUrl">
+          <br>
+          <div class="col-md-12">
+            <div class="form-group">
+              <label>Visibility</label> &nbsp;
+              <select id="country" name="country" #cat>
+                <option>--select--</option>
+                <option>true</option>
+                <option>false</option>
+              </select> 
+              <div class="help-block with-errors"></div>
+            </div>
+          </div>
         </div>
         <div class="modal-footer">
           <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>

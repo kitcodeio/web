@@ -28,6 +28,7 @@ export class DashboardComponent implements OnInit {
   catImageUrl:string;
   regex1 = new RegExp('(?:(?:https?|ftp|file):\/\/|www\.|ftp\.)(?:\([-A-Z0-9+&@#\/%=~_|$?!:,.]*\)|[-A-Z0-9+&@#\/%=~_|$?!:,.])*(?:\([-A-Z0-9+&@#\/%=~_|$?!:,.]*\)|[A-Z0-9+&@#\/%=~_|$])');
 
+  @ViewChild('cat') catVisibility: ElementRef
   constructor(private userInfo:UserInfoService, private router: Router, private http :HttpService,private elementRef: ElementRef, private toastrService: ToastrService) {
 
   }
@@ -84,7 +85,8 @@ export class DashboardComponent implements OnInit {
     if(this.categoryName &&  this.catImageUrl){
       this.http.postcategory('CourseCategory',{
         "label":this.categoryName,
-        "logo": this.catImageUrl
+        "logo": this.catImageUrl,
+        "visibility":this.catVisibility.nativeElement.value
       }).subscribe(res=>{
         if(res.status==201){
           this.toastrService.success('Category succusfully created','Successs',{positionClass:'toast-bottom-right'});

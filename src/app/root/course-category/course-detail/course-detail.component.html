@@ -29,12 +29,15 @@
                               <h5 class="mb-0">
                                   {{s.label}}
                               </h5>
+                              <button class="float-right" style="border: none; background-color: transparent" (click)="updateCourse(c.id);"><i class="fa fa-trash" aria-hidden="true" style="color: rgb(235, 102, 102)"></i></button>
+                              <button class="float-right" style="border: none; background-color: transparent" (click)="updateCourse(c.id);"><i class="fa fa-pencil" aria-hidden="true" style="color: #74d886"></i></button>
                             </div>
     
                             <div id="collapseOne" class="collapse show" aria-labelledby="headingOne" data-parent="#accordion">  
-                                <div class="list-group" id="list-tab" role="tablist">
-                                  <a type="click" class="list-group-item chapter-item list-group-item-action active" id="list-home-list" data-toggle="list" href="#list-home" role="tab" aria-controls="home"  *ngFor="let c of s.CourseChapters; let j=index;" (click)="toProfile(s.id, j);"><i class="fa fa-play-circle" aria-hidden="true"></i>&nbsp;&nbsp;&nbsp;{{c.label}}<span clwass="float-right">0:53</span></a>
-                              </div>
+                                <div class="list-group" id="list-tab" role="tablist"   *ngFor="let c of s.CourseChapters; let j=index;">
+                                  <a type="click" class="list-group-item chapter-item list-group-item-action active" id="list-home-list" data-toggle="list" href="#list-home" role="tab" aria-controls="home" (click)="toProfile(s.id, j);"><i class="fa fa-play-circle" aria-hidden="true"></i>&nbsp;&nbsp;&nbsp;{{c.label}}<span clwass="float-right">0:53</span>
+                                  </a>
+                                </div>
                             </div>
                           </div>
                         </div>

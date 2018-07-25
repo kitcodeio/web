@@ -17,8 +17,10 @@
                                       <a routerLink="/root/course/chapter/{{c.id}}"><span class="glyphicon glyphicon-log-in"></span><span style="font-size:25px;">{{c.label}}</span></a>
                                     <p class="mb-0 float-right" style="color:#ccc; font-size:14px;">Updated at</p>
                                     <p class="mb-0" style="color:#ccc; font-size: 14px;">Created by <span style="color:#000; font-size: 14px;">{{c.created_by}}</span></p>
+                                    <button class="float-right" style="border: none; background-color: transparent" (click)="updateCourse(c.id);"><i class="fa fa-pencil" aria-hidden="true" style="color: #74d886"></i></button>
                                   </div>
                                   <div class="card-body">
+                                        <button class="float-right" style="border: none; background-color: transparent" (click)="deleteCourse(c.id);"><i class="fa fa-trash" aria-hidden="true" style="color: rgb(235, 102, 102)"></i></button>
                                     <p class="card-text" style="color:#827c7c; font-size: 14px;">
                                         {{c.description}}</p>
                                   </div>

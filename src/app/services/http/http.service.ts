@@ -20,7 +20,7 @@ export class HttpService {
   }
   
   deleteData(model: string, id: number): Observable<any> {
-    return this.http.delete(this.baseUrl+'delete/'+model+"/"+id)
+    return this.http.delete(this.baseUrl+'delete/course/'+model+"/"+id)
       .pipe(catchError((error)=>{return of(error);}));
   }
 

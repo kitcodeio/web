@@ -82,7 +82,6 @@ export class CreateCourseComponent implements OnInit {
         "url": this.chapterUrl
     }).subscribe(res=>{
       this.allSection[i].chapters.push(res.entity);
-      console.log(this.allSection[i].chapters)
     })
   }
   else{
@@ -94,7 +93,7 @@ export class CreateCourseComponent implements OnInit {
     this.sectionFlag=true;
     this.chapterFlag=false;
     this.chapterFlag1= true;
-  
+    this.secId=null;
     if(this.courseId){
     this.http.postsection('CourseSection',{
       "course_id":this.courseId,
@@ -103,7 +102,6 @@ export class CreateCourseComponent implements OnInit {
   }).subscribe(res=>{
     this.sectionName= res.entity.label;
     this.sectionId=res.entity.id;
-    console.log(res.entity.label);
     this.allSection.push({section:res.entity, chapters: []});
   })
  }
@@ -165,11 +163,9 @@ else{
     if(this.courseId){
       if(!this.secId){
         id = this.allSection[this.allSection.length-1].section.id;
-        console.log('in',id);
       }
       else{
         id = this.secId;
-        console.log('ha',id)
       }
       this.http.putData('CourseSection',{
         "id":id,
@@ -180,15 +176,8 @@ else{
     }).subscribe(res=>{
 
       let obj; // change the name in dom
-      console.log({
-        "id":id,
-        "data":{
-        "label":this.sectionName,
-        "description":this.sectionDescription 
-        }
-    });
-      console.log(res);
-      if(!this.sectionIndex && this.sectionIndex!=0){
+
+      if(!this.sectionIndex && this.sectionIndex!=0 && this.indexOfSection==null){
         obj={name:this.sectionName,description:this.sectionDescription,course:this.selectCourse}
         this.allSection[this.allSection.length-1].section.label=obj.name;
       }
@@ -210,7 +199,7 @@ else{
     else{
       this.toastrService.info('Create a course first','Error',{positionClass:'toast-bottom-right'});
     }
-    console.log(id);
+    
     id = null;
     this.indexOfSection=null;
   }
@@ -223,11 +212,9 @@ else{
       if(!this.chapId){
         let len = this.allSection[this.index].chapters.length-1;
         id = this.allSection[this.index].chapters[len].id;
-        console.log('in',id);
       }
       else{
         id = this.chapId;
-        console.log('ha',id)
       }
 
       this.http.putData('CourseChapter',{
@@ -237,8 +224,6 @@ else{
           "url": this.chapterUrl
         }
     }).subscribe(res=>{
-      console.log(res);
-
       if(!this.indexOfChapter && this.indexOfChapter!=0){
         let len = this.allSection[this.index].chapters.length-1;
         obj = {name:this.chapterName,description:this.chapterDescription, chapterUrl:this.chapterUrl, section:this.selectSection}
@@ -248,7 +233,6 @@ else{
       {
         obj = {name:this.chapterName,description:this.chapterDescription, chapterUrl:this.chapterUrl,  section:this.selectSection}
         this.allSection[this.indexOfSection].chapters[this.indexOfChapter].label=obj.name;
-        console.log(this.indexOfChapter,this.indexOfSection);
       }
       if(res.status==200){
        this.toastrService.success('updated successfully','Success',{positionClass:'toast-bottom-right'});
@@ -273,7 +257,6 @@ else{
     this.chapterFlag=false;
     this.sectionIndex=i;
     this.secId=id;
-    console.log(id);
   }
 
   getChapterId(i,j,id){

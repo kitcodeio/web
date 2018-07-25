@@ -383,3 +383,7 @@ ul li ul.dropdown-menu{
 ul li ul.dropdown-menu li{
     display: block;
 }
+
+.img-circle{
+  border-radius: 50%;
+}
