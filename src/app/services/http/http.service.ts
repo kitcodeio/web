@@ -13,6 +13,9 @@ export class HttpService {
 
   baseUrl = 'http://beta.kitcode.io/';
   url ='http://beta.kitcode.io/'
+  Url:any;
+  lastUrl;any;
+
 
   getData(model: string): Observable<any> {
     return this.http.get(this.url+'read/api/'+model)
@@ -84,6 +87,12 @@ export class HttpService {
   getContainer(id: number):Observable<any>{
 	  return this.http.post(this.url+'create/api/Container', {course_id: id})
 	  .pipe(catchError((error)=>{return of(error);}));
+  }
+
+  getUrl(){
+    this.Url = window.location.href.split("#");
+    this.lastUrl = this.Url[this.Url.length-1];
+    return this.lastUrl;
   }
 
   constructor(private http:CustomHttpService) { }

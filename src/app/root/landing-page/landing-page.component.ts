@@ -19,10 +19,26 @@ export class LandingPageComponent implements OnInit {
   userRole;
   userHige:boolean;
   loadingFlag:boolean=false;
+  url:any;
 
   constructor(private userInfo: UserInfoService, private router:Router, private http: HttpService, private useInfo: UserInfoService, private authService: AuthserviceService) { }
 
   ngOnInit() {
+    $('.nav-bar-search').css("display","none");
+    function searchShow(){
+      try{
+        if($(window).scrollTop()>=$('.testimonials').offset().top-150){
+          $('.nav-bar-search').css("display","inline-flex");
+        }
+        else{
+          $('.nav-bar-search').hide();
+        }
+      } catch(err) {}
+    }
+
+    $(window).scroll(function(){
+      searchShow();
+    });
     this.populateCatgory(); 
   }
 
