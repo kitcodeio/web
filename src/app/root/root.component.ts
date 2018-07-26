@@ -3,7 +3,7 @@ import {Router} from '@angular/router';
 import '../../../node_modules/bootstrap/dist/js/bootstrap.min.js'
 import { UserInfoService } from '../services/userInfo/user-info.service';
 import { AuthserviceService } from '../services/auth/authservice.service';
-import { ViewChild, ElementRef, AfterViewInit } from '@angular/core';
+import { ViewChild, ElementRef, AfterViewInit, HostListener } from '@angular/core';
 import * as $ from 'jquery';
 
 @Component({
@@ -13,31 +13,30 @@ import * as $ from 'jquery';
 })
 export class RootComponent implements OnInit {
   @ViewChild('dropdown') dropdown:ElementRef;
+  @ViewChild('image') dd:ElementRef;
+  
+
   userName:string;
   sizeFlag: boolean;
-  user: any;
+  user: any={
+    name:'',
+    image:'',
+    role_type:''
+  };
   userHide:boolean;
   label: string;
   url: string;
   image:string;
   flag:boolean;
+  windowSize;
 
-  constructor(private router: Router, private userInfo: UserInfoService, private authService: AuthserviceService) {}
+  constructor(private eRef: ElementRef, private router: Router, private userInfo: UserInfoService, private authService: AuthserviceService) {}
 
   ngOnInit() {
 
-    $(document).ready(function(){
-      // Show hide popover
-      $(".dropdown").click(function(){
-          $(this).find(".dropdown-menu").slideToggle("fast");
-      });
-  });
-  $(document).on("click", function(event){
-      var $trigger = $(".dropdown");
-      // if($trigger !== event.target && !$trigger.has(event.target).length){
-      //     $(".dropdown-menu").slideUp("fast");
-      //}            
-  });
+    this.windowSize = window.screen.width
+
+    console.log(this.windowSize);
 
     if(this.authService.isTokenExpired()){ 
       this.url = '/login'
@@ -59,5 +58,10 @@ export class RootComponent implements OnInit {
 
   profileDropdown(){
     this.dropdown.nativeElement.classList.toggle("show");
+  }
+  @HostListener('document:click', ['$event'])
+  clickout(event) {
+    //console.log(this.eRef.nativeElement.contains(event.target));
+    console.log(this.dd.nativeElement.contains(event.target));
   }
 }

@@ -87,7 +87,7 @@ login(): void {
           else{
         this.authService.setToken(response.token);
        // window.location.reload();
-        this.router.navigate(['/']);
+        this.router.navigate(['root/category']);
         this.userInfo.userDetail = jwt_decode(response.token);
           }
         
@@ -105,6 +105,7 @@ login(): void {
 
 
   register(): void {
+    console.log(this.checked);
     if(this.passwordReg.length>=6){
       if(this.passwordCon==this.passwordReg){
         if (this.emailReg && this.company && this.passwordReg && this.passwordCon) {
@@ -120,8 +121,7 @@ login(): void {
                 .subscribe(response => {
                   if(!response.error) {	    
                     this.authService.setToken(response.token);
-                    window.location.reload();
-                    //this.router.navigate(['/app/dashboard']);
+                    this.router.navigate(['root/category']);
               
                   } else {
                     this.error = response.error;
@@ -155,5 +155,6 @@ login(): void {
     else{
       this.checked=false;
     }
+    console.log(this.counter);
   }
 }

@@ -308,7 +308,7 @@
   }
   
   .testimonials .testimonial-item {
-    max-width: 18rem;
+    max-width: 7rem;
   }
   
   .testimonials .testimonial-item img {
@@ -384,6 +384,30 @@ ul li ul.dropdown-menu li{
     display: block;
 }
 
-.img-circle{
-  border-radius: 50%;
+
+
+.profile-image{
+  border: 1px solid #ccc;
+}
+
+.navbar-toggler{
+  border:0;
+}
+
+.navbar-toggler:focus{
+  outline:none;
+}
+
+.input-navbar-search{
+  width:50%;
+}
+
+.dropdown-toggle::after{
+  display:none;
+}
+
+@media only screen and (max-width:768px) {
+    .input-navbar-search{
+        width:100%;
+    }
 }

@@ -36,7 +36,8 @@ button{
 }
 
 .register-container{
-	display:none;
+  display:none;
+  padding:3rem;
 }
 
 .login-tc-container{
@@ -379,4 +380,18 @@ button{
 /*===============register css==============================================*/
 .register-input{
 	margin-bottom: 30px;
+}
+
+.login-container{
+  padding: 3rem;
+}
+
+/*=============================Responsive design=============================*/
+@media only screen and (max-width:768px) {
+  .login-container,.register-container {
+    padding-top:3rem;
+    padding-left: 0;
+    padding-bottom:0;
+    padding-right: 0;
+  }
 }

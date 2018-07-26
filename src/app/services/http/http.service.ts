@@ -89,11 +89,5 @@ export class HttpService {
 	  .pipe(catchError((error)=>{return of(error);}));
   }
 
-  getUrl(){
-    this.Url = window.location.href.split("#");
-    this.lastUrl = this.Url[this.Url.length-1];
-    return this.lastUrl;
-  }
-
   constructor(private http:CustomHttpService) { }
 }

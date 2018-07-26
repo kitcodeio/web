@@ -1,4 +1,4 @@
-<body style="margin-top: 70px;">
+<body>
     <!-- Masthead -->
     <header class="masthead text-white text-center">
       <div class="overlay"></div>
@@ -29,7 +29,7 @@
     <section *ngIf="allCourseCategory" style="padding-top:0;padding-bottom:4rem;position:relative;top:-70px;" class="testimonials text-center">
       <div class="container">
         <div class="row mb-5 mx-auto" style="width:80%;">
-          <div class="col-lg-2" *ngFor="let cat of allCourseCategory">
+          <div class="col-lg-2 col-md-4" *ngFor="let cat of allCourseCategory">
             <a routerLink="/root/course/detail/{{cat.id}}" ><span class="glyphicon glyphicon-log-in"></span>
               <div class="testimonial-item mx-auto mb-2">
                 <img class="img-fluid" src="{{cat.logo}}" alt="">
