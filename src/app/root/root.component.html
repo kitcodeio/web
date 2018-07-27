@@ -8,7 +8,6 @@
         <form class="form-inline my-2 w-100">
           <div class="input-group ml-auto mr-5 input-navbar-search">
               <div class="input-group-prepend float-right">
-                <button class="btn search-button" type="button"><i class="fa fa-search" aria-hidden="true"></i></button>
               </div>
               <input type="search" class="form-control search-input" placeholder="Search for languages ..." aria-label="" aria-describedby="basic-addon1" #searchBox id="search-box" (keyup)="search(searchBox.value)">
 
@@ -32,7 +31,7 @@
           <li class="nav-item d-lg-block d-none" *ngIf="flag">
             <a class="nav-link" routerLink="/login">Login<span class="sr-only">(current)</span></a>
           </li>
-          <li class="nav-item dropdown d-lg-block d-none" *ngIf="!flag">
+          <li class="nav-item dropdown d-lg-block d-none" *ngIf="!flag" style="background-color: white;">
               <img #image class="rounded-circle" style="width:50px;" src="{{user.image}}">
           </li>
         </ul>

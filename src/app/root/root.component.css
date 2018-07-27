@@ -103,9 +103,10 @@
 }
 
 .search-input{
-	border-bottom-right-radius:20px;
-	border-top-right-radius:20px;
-	border-left:0;
+	border-bottom-right-radius:20px !important;
+  border-top-right-radius:20px !important;
+  border-top-left-radius: 20px !important;
+  border-bottom-left-radius: 20px !important;
 }
 
 .search-input::placeholder { /* Chrome, Firefox, Opera, Safari 10.1+ */
