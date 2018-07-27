@@ -6,13 +6,10 @@ import { AuthserviceService } from '../services/auth/authservice.service';
 import { ViewChild, ElementRef, AfterViewInit, HostListener, HostBinding } from '@angular/core';
 import * as $ from 'jquery';
 import { Observable, Subject } from 'rxjs';
+
+import { debounceTime, distinctUntilChanged, switchMap } from 'rxjs/operators';
  
-import {
-   debounceTime, distinctUntilChanged, switchMap
- } from 'rxjs/operators';
- 
-import { Hero } from '../services/search/hero';
-import { HeroService } from '../services/search/search.service';
+import { HttpService } from '../services/http/http.service';
 
 @Component({
   selector: 'app-root',
@@ -22,10 +19,8 @@ import { HeroService } from '../services/search/search.service';
 export class RootComponent implements OnInit {
   @ViewChild('dropdown') dropdown:ElementRef;
   @ViewChild('image') dd:ElementRef;
-  heroes: Observable<Hero[]>;
+  courses: Observable<any[]>;
   private searchTerms = new Subject<string>();
-
-  
 
   userName:string;
   sizeFlag: boolean;
@@ -42,8 +37,8 @@ export class RootComponent implements OnInit {
   flag:boolean;
   windowSize;
   private isOpen: boolean =false;
-  items = [{ name: "archie" }, { name: "jake" }, { name: "richard" }];
-  constructor(private heroService: HeroService, private eRef: ElementRef, private router: Router, private userInfo: UserInfoService, private authService: AuthserviceService) {}
+
+  constructor(private http: HttpService, private eRef: ElementRef, private router: Router, private userInfo: UserInfoService, private authService: AuthserviceService) {}
 
   search(term: string): void {
     this.searchTerms.next(term);
@@ -62,15 +57,10 @@ export class RootComponent implements OnInit {
     }
 
     //Search
-    this.heroes = this.searchTerms.pipe(
-      // wait 300ms after each keystroke before considering the term
+    this.courses = this.searchTerms.pipe(
       debounceTime(100),
- 
-      // ignore new term if same as previous term
       distinctUntilChanged(),
- 
-      // switch to new search observable each time the term changes
-      switchMap((term: string) => this.heroService.searchHeroes(term)),
+      switchMap((term: string) => this.http.searchCourse(term))
     );
 
   }

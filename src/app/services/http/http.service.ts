@@ -82,6 +82,10 @@ export class HttpService {
     .pipe(catchError((error)=>{return of(error);}));
   }
 
+  searchCourse(term: string):Observable<any> {
+    return this.http.get(this.url+'search/course?term='+term)
+    .pipe(catchError((error)=>{return of(error);}));
+  }
  //=======================Container Creation API=======================//
   
   getContainer(id: number):Observable<any>{
