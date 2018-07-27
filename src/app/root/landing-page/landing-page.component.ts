@@ -24,14 +24,14 @@ export class LandingPageComponent implements OnInit {
   constructor(private userInfo: UserInfoService, private router:Router, private http: HttpService, private useInfo: UserInfoService, private authService: AuthserviceService) { }
 
   ngOnInit() {
-    $('.nav-bar-search').css("display","none");
+    $('.input-navbar-search').css("display","none");
     function searchShow(){
       try{
-        if($(window).scrollTop()>=$('.testimonials').offset().top-150){
-          $('.nav-bar-search').css("display","inline-flex");
+        if($(window).scrollTop()>=$('.testimonials').offset().top-215){
+          $('.input-navbar-search').css("display","inline-flex");
         }
         else{
-          $('.nav-bar-search').hide();
+          $('.input-navbar-search').hide();
         }
       } catch(err) {}
     }
@@ -39,6 +39,7 @@ export class LandingPageComponent implements OnInit {
     $(window).scroll(function(){
       searchShow();
     });
+
     this.populateCatgory(); 
   }
 

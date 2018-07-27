@@ -17,6 +17,8 @@ import { MalihuScrollbarModule } from 'ngx-malihu-scrollbar';
 import { ReactiveFormsModule, FormGroup, FormControl, Validators, FormBuilder } from '@angular/forms';
 // import { LoadiingComponent } from './loadiing/loadiing.component';
 import { CourseCategoryComponent } from './root/course-category/course-category.component';
+import { HttpClientInMemoryWebApiModule } from 'angular-in-memory-web-api';
+import { InMemoryDataService }  from '../..//src/app/services/search/in-memory-data.service';
 
 
 @NgModule({
@@ -40,7 +42,9 @@ import { CourseCategoryComponent } from './root/course-category/course-category.
       toastComponent: ToastNoAnimation,preventDuplicates: true,
     }),
     MalihuScrollbarModule.forRoot(),
-
+    HttpClientInMemoryWebApiModule.forRoot(
+      InMemoryDataService, { passThruUnknownUrl: true, dataEncapsulation: false }
+    )
   ],
   providers: [AuthserviceService],
   bootstrap: [AppComponent]
