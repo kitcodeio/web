@@ -20,7 +20,6 @@ import { CourseCategoryComponent } from './root/course-category/course-category.
 import { HttpClientInMemoryWebApiModule } from 'angular-in-memory-web-api';
 import { InMemoryDataService }  from '../..//src/app/services/search/in-memory-data.service';
 
-
 @NgModule({
   declarations: [
     AppComponent,

@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { HttpService } from '../../services/http/http.service';
 import { ActivatedRoute, Router } from '@angular/router';
 import { MalihuScrollbarService } from 'ngx-malihu-scrollbar';
+import { UserInfoService } from '../../services/userInfo/user-info.service'
 
 @Component({
   selector: 'app-course-category',
@@ -14,7 +15,8 @@ export class CourseCategoryComponent implements OnInit {
   allSections=[];
   allChapters=[];
   course_id;
-  constructor(private route:ActivatedRoute, private http: HttpService, private scrollbarService: MalihuScrollbarService, private router: Router) { }
+  user;
+  constructor(private userInfo: UserInfoService ,private route:ActivatedRoute, private http: HttpService, private scrollbarService: MalihuScrollbarService, private router: Router) { }
 
   ngOnInit() {
     this.populateCatgory();

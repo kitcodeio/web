@@ -42,7 +42,7 @@ export class RootComponent implements OnInit {
   flag:boolean;
   windowSize;
   private isOpen: boolean =false;
-
+  items = [{ name: "archie" }, { name: "jake" }, { name: "richard" }];
   constructor(private heroService: HeroService, private eRef: ElementRef, private router: Router, private userInfo: UserInfoService, private authService: AuthserviceService) {}
 
   search(term: string): void {
@@ -51,9 +51,6 @@ export class RootComponent implements OnInit {
   ngOnInit() {
 
     this.windowSize = window.screen.width
-
-    console.log(this.windowSize);
-
     if(this.authService.isTokenExpired()){ 
       this.url = '/login'
       this.label = 'Login/Sign Up';

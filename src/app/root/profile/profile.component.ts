@@ -67,13 +67,17 @@ export class ProfileComponent implements OnInit {
 
   ngAfterViewInit(){
     this.http.getContainer(this.course_id).subscribe(res => {
-      this.data.kide = 'http://' + res.entity.kide;
-      this.data.terminal = 'http://' + res.entity.terminal;
-      this.data.preview = 'http://' + res.entity.app;
-      this.ide = this.domSanitizer.bypassSecurityTrustResourceUrl('http://' + res.entity.kide);
+      if (res.status == 200) {
+        this.data.kide = 'http://' + res.entity.kide;
+        this.data.terminal = 'http://' + res.entity.terminal;
+        this.data.preview = 'http://' + res.entity.app;
+        this.ide = this.domSanitizer.bypassSecurityTrustResourceUrl('http://' + res.entity.kide);
+      } else {
+        console.log('gareeb ki aulad.. muh utha k aa gaya.. ja k course kharid aggey');
+      }
     });
   }
-
+  
   handleMessage(event: Event) {
     const message = event as MessageEvent;
     if (message.data == 'loaded') this.iframe.nativeElement.contentWindow.postMessage(JSON.stringify(this.data), '*');
