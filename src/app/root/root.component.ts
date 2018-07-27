@@ -81,8 +81,9 @@ export class RootComponent implements OnInit {
     this.router.navigate(['/root/category']);
     this.flag = true;
   }
-
-  profileDropdown(){
-    this.dropdown.nativeElement.classList.toggle("show");
+  @HostListener('document:click', ['$event'])
+  clickout(event) {
+    if(this.dd.nativeElement.contains(event.target)) $('.dropdown-menu').css("display","inline-flex");
+    else $('.dropdown-menu').hide();
   }
 }
