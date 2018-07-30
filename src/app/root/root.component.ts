@@ -19,6 +19,7 @@ import { HttpService } from '../services/http/http.service';
 export class RootComponent implements OnInit {
   @ViewChild('dropdown') dropdown:ElementRef;
   @ViewChild('image') dd:ElementRef;
+  @ViewChild('searchResult') searchResult: ElementRef;
   courses: Observable<any[]>;
   private searchTerms = new Subject<string>();
 
@@ -35,7 +36,6 @@ export class RootComponent implements OnInit {
   url: string;
   image:string;
   flag:boolean;
-  flag1:boolean = true;
   windowSize;
   private isOpen: boolean =false;
 
@@ -75,15 +75,24 @@ export class RootComponent implements OnInit {
   clickout(event) {
     if(this.dd.nativeElement.contains(event.target)) $('.dropdown-menu').css("display","inline-flex");
     else $('.dropdown-menu').hide();
+
+    if(!this.searchResult.nativeElement.contains(event.target))
+    $('.search-result').hide();
   }
+
+  
 
   //Event trigger when add or remove letters in search bar
   onSearchChange(searchValue : string ) {  
     if(searchValue==''){
-      this.flag1= false;
+      $('.search-result').hide();
     }
     else{
-      this.flag1=true;
+      $('.search-result').show();
     }
+  }
+
+  hideOnClick(){
+    $('.search-result').hide();
   }
 }

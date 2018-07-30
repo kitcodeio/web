@@ -10,10 +10,10 @@
               <div class="input-group-prepend float-right">
               </div>
               <input type="search" class="form-control search-input" placeholder="Search for languages ..." aria-label="" aria-describedby="basic-addon1" #searchBox id="search-box" (keyup)="search(searchBox.value)" (input)="onSearchChange($event.target.value)">
-              
-              <ul class="search-result" *ngIf="flag1">
+             
+              <ul class="search-result" #searchResult>
                 <li *ngFor="let course of courses | async" >
-                  <a href="#">
+                  <a type="click" routerLink="/root/course/chapter/{{course.id}}" (click)="hideOnClick();">
                     {{course.label}}
                   </a>
                 </li>
