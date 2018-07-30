@@ -11,8 +11,8 @@ import { CustomHttpService } from '../custom-http/custom-http.service';
 
 export class HttpService {
 
-  baseUrl = 'http://beta.kitcode.io/';
-  url ='http://beta.kitcode.io/'
+  baseUrl = 'https://beta.kitcode.io/';
+  url ='https://beta.kitcode.io/'
   Url:any;
   lastUrl;any;
 
