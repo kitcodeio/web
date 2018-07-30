@@ -11,7 +11,7 @@
               </div>
               <input type="search" class="form-control search-input" placeholder="Search for languages ..." aria-label="" aria-describedby="basic-addon1" #searchBox id="search-box" (keyup)="search(searchBox.value)" (input)="onSearchChange($event.target.value)">
               
-              <ul class="search-result">
+              <ul class="search-result" *ngIf="flag1">
                 <li *ngFor="let course of courses | async" >
                   <a href="#">
                     {{course.label}}

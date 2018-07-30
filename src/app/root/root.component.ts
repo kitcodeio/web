@@ -35,6 +35,7 @@ export class RootComponent implements OnInit {
   url: string;
   image:string;
   flag:boolean;
+  flag1:boolean = true;
   windowSize;
   private isOpen: boolean =false;
 
@@ -76,9 +77,13 @@ export class RootComponent implements OnInit {
     else $('.dropdown-menu').hide();
   }
 
+  //Event trigger when add or remove letters in search bar
   onSearchChange(searchValue : string ) {  
     if(searchValue==''){
+      this.flag1= false;
     }
-    console.log(this.courses);
+    else{
+      this.flag1=true;
+    }
   }
 }
