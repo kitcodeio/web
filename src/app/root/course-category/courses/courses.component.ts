@@ -61,7 +61,6 @@ export class CoursesComponent implements OnInit {
       id: this.course.id,
       data: this.course
     }).subscribe(res=>{
-      console.log(res);
     });
   }
 

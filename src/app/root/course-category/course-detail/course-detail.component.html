@@ -47,21 +47,22 @@
                           </div>
                         </div> 
 
-                    <div class="course_detail" *ngIf="allSections">
+                    <div class="course_detail" *ngIf="allSections" style="border-top-left-radius: 20px;">
                       <div class="card" style="border:none;">
-                        <div class="card-header" style="background:transparent;border: none;">
+                        <!-- <div class="card-header" style="background:transparent;border: none;">
                           <span style="font-size:25px;"></span>
                           <p class="mb-0 float-right" style="color:#ccc;">Updated on July 04,2018</p>
                           <p class="mb-0" style="color:#ccc;">Created by <span style="color:#000;"></span></p>
-                        </div>
-                        <div class="card-body">
+                        </div> -->
+                        <!-- <div class="card-body">
                           <p class="card-text" style="color:#827c7c;"></p>
-                        </div>
-                        <div class="card-footer text-muted" style="background-color:transparent;">
+                        </div> -->
+                        <!-- <div class="card-footer text-muted" style="background-color:transparent;">
                           <a href="#" style="color:#ccc;" class=""><i class="fa fa-eye" aria-hidden="true"></i> 5 Views</a>&nbsp;&nbsp;&nbsp;
                           <a href="#" style="color:#ccc;" class=""><i class="fa fa-comment-o" aria-hidden="true"></i> 2 Comments</a>
-                        </div>
-                      </div><br/>
+                        </div> -->
+                      </div>
+                      <br/>
                       <div class="sections">
                         <div id="accordion">
                           <div class="card mb-5"  *ngFor="let s of allSections; let i=index;">
@@ -69,14 +70,13 @@
                               <h5 class="mb-0">
                                   {{s.label}}
                               </h5>
-                              <p>{{s.description}}</p>
                               <button class="float-right" style="border: none; background-color: transparent" (click)="setDeleteSectionId(s.id)"  *ngIf="user.role_type=='admin'"><i class="fa fa-trash" aria-hidden="true" style="color: rgb(235, 102, 102)" data-toggle="modal" data-target="#bootstrapModel"></i></button>
                               <button class="float-right" style="border: none; background-color: transparent" (click)="setUpdateSection(s);"  *ngIf="user.role_type=='admin'" data-toggle="modal" data-target="#bootstrapModel1"><i class="fa fa-pencil" aria-hidden="true" style="color: #74d886" ></i></button>
+                              <p>{{s.description}}</p>
                             </div>
-    
                             <div id="collapseOne" class="collapse show" aria-labelledby="headingOne" data-parent="#accordion">  
                                 <div class="list-group" id="list-tab" role="tablist"   *ngFor="let c of s.CourseChapters; let j=index;">
-                                  <a type="click" class="list-group-item chapter-item list-group-item-action active" id="list-home-list" data-toggle="list" href="#list-home" role="tab" aria-controls="home" (click)="toProfile(s.id, j);"><i class="fa fa-play-circle" aria-hidden="true"></i>&nbsp;&nbsp;&nbsp;{{c.label}}<span clwass="float-right">0:53</span>
+                                  <a type="click" class="list-group-item chapter-item list-group-item-action active" id="list-home-list" data-toggle="list" href="#list-home" role="tab" aria-controls="home" (click)="toProfile(s.id, j);"><i class="fa fa-play-circle" aria-hidden="true"></i>&nbsp;&nbsp;&nbsp;{{c.label}}
                                   </a>
                                 </div>
                             </div>
