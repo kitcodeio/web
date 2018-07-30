@@ -29,6 +29,7 @@
                               <h5 class="mb-0">
                                   {{s.label}}
                               </h5>
+                              <p>{{s.description}}</p>
                               <button class="float-right" style="border: none; background-color: transparent" (click)="updateCourse(c.id);"  *ngIf="user.role_type=='admin'"><i class="fa fa-trash" aria-hidden="true" style="color: rgb(235, 102, 102)"></i></button>
                               <button class="float-right" style="border: none; background-color: transparent" (click)="updateCourse(c.id);"  *ngIf="user.role_type=='admin'"><i class="fa fa-pencil" aria-hidden="true" style="color: #74d886" ></i></button>
                             </div>

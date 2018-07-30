@@ -17,11 +17,71 @@
                                       <a routerLink="/root/course/chapter/{{c.id}}"><span class="glyphicon glyphicon-log-in"></span><span style="font-size:25px;">{{c.label}}</span></a>
                                     <p class="mb-0 float-right" style="color:#ccc; font-size:14px;">Updated at {{c.updatedAt | date: 'dd MMM yyyy'}}</p>
                                     <p class="mb-0" style="color:#ccc; font-size: 14px;">Created by <span style="color:#000; font-size: 14px;">{{c.created_by}}</span></p>
-                                    <button class="float-right" style="border: none; background-color: transparent" (click)="updateCourse(c.id);" *ngIf="user.role_type=='admin'"><i class="fa fa-pencil" aria-hidden="true" style="color: #74d886"></i></button>
-                                  </div>
+                                    <button data-toggle="modal" data-target="#bootstrapModel1" class="float-right" style="border: none; background-color: transparent" (click)="showCourseInfo(c);" *ngIf="user.role_type=='admin'"><i class="fa fa-pencil" aria-hidden="true" style="color: #74d886"></i></button>
+                                     <!-- Modal content-->
+                                    <div id="bootstrapModel1" class="modal fade" role="dialog">
+                                            <div class="modal-dialog">
+                                              <!-- Modal content-->
+                                              <div class="modal-content">
+                                                <div class="modal-header">
+                                                </div>
+                                                <h5 class="modal-title" style="margin-left: 16px;">Update course</h5>
+                                          <!-- model body section -->
+                                                <div class="modal-body">
+                                                  <input id="form_name" type="text" name="courseName" class="form-control" placeholder="Course Category" required="required" data-error="Firstname is required." [(ngModel)]="courseName">
+                                                  <br>
+                                                  <input id="form_name" type="text" name="courseDes" class="form-control" placeholder="Category image url" required="required" data-error="Firstname is required." [(ngModel)]="courseDes">
+                                                  <br>
+                                                  <input id="form_name" type="text" name="createdBy" class="form-control" placeholder="Category image url" required="required" data-error="Firstname is required." [(ngModel)]="createdBy">
+                                                  <br>
+                                                  <div class="col-md-12">
+                                                    <div class="form-group">
+                                                      <select id="country" name="country" #cat>
+                                                        <option>--select--</option>
+                                                        <option *ngFor="let cat of allCourseCategory">{{cat.label}}</option>
+                                                      </select> 
+                                                      <div class="help-block with-errors"></div>
+                                                    </div>
+                                                  </div>
+                                                  <div class="col-md-12">
+                                                        <div class="form-group">
+                                                          <select id="country" name="country" #image>
+                                                            <option>--select--</option>
+                                                            <option *ngFor="let image of allImages">{{image.label}}</option>
+                                                          </select> 
+                                                          <div class="help-block with-errors"></div>
+                                                        </div>
+                                                      </div>
+                                                </div>
+                                                <div class="modal-footer">
+                                                    <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                                                  <button type="button" class="btn btn-primary" data-dismiss="modal" (click)="updateCourse(c.id);">Update</button>
+                                                </div>
+                                              </div>
+                                            </div>
+                                          </div>  
+                                </div>
                                   <div class="card-body">
-                                        <button class="float-right" style="border: none; background-color: transparent" (click)="deleteCourse(c.id);" *ngIf="user.role_type=='admin'"><i class="fa fa-trash" aria-hidden="true" style="color: rgb(235, 102, 102)"></i></button>
-                                    <p class="card-text" style="color:#827c7c; font-size: 14px;">
+                                        <button class="float-right" style="border: none; background-color: transparent" *ngIf="user.role_type=='admin'" data-toggle="modal" data-target="#bootstrapModel"><i class="fa fa-trash" aria-hidden="true" style="color: rgb(235, 102, 102)"></i></button>
+                                        <div id="bootstrapModel" class="modal fade" role="dialog">
+                                                <div class="modal-dialog">
+                                                  <!-- Modal content-->
+                                                  <div class="modal-content">
+                                                    <div class="modal-header">
+                                                    </div>
+                                                    <h6 class="modal-title" style="margin-left: 16px;">Are you sure delete the course</h6>
+                                              <!-- model body section -->
+                                                    <div class="modal-body">
+                                                      <br>
+                                                    </div>
+                                                    <div class="modal-footer">
+                                                      <button type="button" class="btn btn-primary" data-dismiss="modal"  (click)="deleteCourse(c.id);">Ok</button>
+                                                    </div>
+                                                  </div>
+                                                </div>
+                                              </div>
+                                    
+                                        <p class="card-text" style="color:#827c7c; font-size: 14px;">
                                         {{c.description}}</p>
                                   </div>
                                   <div class="card-footer text-muted" style="background-color:transparent;">
@@ -38,4 +98,3 @@
     
         </div>
     </body>
-

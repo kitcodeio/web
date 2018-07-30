@@ -70,10 +70,17 @@ export class RootComponent implements OnInit {
     this.userInfo.token = localStorage.getItem('jwt_token');
     this.router.navigate(['/root/category']);
     this.flag = true;
+    $('.dropdown-menu').hide();
   }
+
+  toDashboard(){
+    this.router.navigate(['root/dashboard']);
+    $('.dropdown-menu').hide();
+  }
+
   @HostListener('document:click', ['$event'])
   clickout(event) {
-    if(this.dd.nativeElement.contains(event.target)) $('.dropdown-menu').css("display","inline-flex");
+    if(this.dd.nativeElement.contains(event.target)) $('.dropdown-menu').css("display","inline");
     else $('.dropdown-menu').hide();
 
     if(!this.searchResult.nativeElement.contains(event.target))
