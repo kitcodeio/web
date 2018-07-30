@@ -4,6 +4,7 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { MalihuScrollbarService } from 'ngx-malihu-scrollbar';
 import { RouterModule, Routes } from '@angular/router';
 import { UserInfoService } from '../../../services/userInfo/user-info.service'
+import { Section } from '../../../models/section';
 
 @Component({
   selector: 'app-course-detail',
@@ -17,6 +18,10 @@ export class CourseDetailComponent implements OnInit {
   allChapters=[];
   course_id;
   user;
+  deleteSectionId:number;
+
+  section: Section={} as Section;
+
   constructor(private userInfo: UserInfoService, private route:ActivatedRoute, private http: HttpService, private scrollbarService: MalihuScrollbarService, private router: Router) { }
 
   ngOnInit() {
@@ -44,4 +49,28 @@ export class CourseDetailComponent implements OnInit {
   toProfile(s_id, c_index){
     this.router.navigate(['/root/kide/'+this.course_id+'/'+s_id+'/'+c_index]);
   }
+
+  setDeleteSectionId(id){
+    this.deleteSectionId = id;
+  }
+
+  deleteSection(){
+    this.http.deleteData('CourseSection', this.deleteSectionId)
+    .subscribe(res=>{
+      console.log(res);
+    })
+  }
+
+  setUpdateSection(section: Section) :void{
+    this.section = section;
+  }
+
+  updateSection(){
+  this.http.putData('CourseSection',{
+    id:this.section.id,
+    data:this.section
+}).subscribe(res=>{
+  console.log(res);
+})
+}
 }

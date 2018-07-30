@@ -34,11 +34,11 @@
                                 <h5 class="modal-title" style="margin-left: 16px;">Update course</h5>
                           <!-- model body section -->
                                 <div class="modal-body">
-                                  <input id="form_name" type="text" name="courseName" class="form-control" placeholder="Course Category" required="required" data-error="Firstname is required." [(ngModel)]="course.label">
+                                  <input id="form_name" type="text" name="courseName" class="form-control" placeholder="Course Name" required="required" data-error="Firstname is required." [(ngModel)]="course.label">
                                   <br>
-                                  <input id="form_name" type="text" name="courseDes" class="form-control" placeholder="Category image url" required="required" data-error="Firstname is required." [(ngModel)]="course.description">
+                                  <textarea id="form_name" type="text" name="courseDes" class="form-control" placeholder="Course description" required="required" data-error="Firstname is required." [(ngModel)]="course.description"></textarea>
                                   <br>
-                                  <input id="form_name" type="text" name="createdBy" class="form-control" placeholder="Category image url" required="required" data-error="Firstname is required." [(ngModel)]="course.created_by">
+                                  <input id="form_name" type="text" name="createdBy" class="form-control" placeholder="Created by" required="required" data-error="Firstname is required." [(ngModel)]="course.created_by">
                                   <br>
                                   <div class="col-md-12">
                                     <div class="form-group">
@@ -65,7 +65,7 @@
                             </div>
                           </div> 
                     <div class="course_list">
-                        <h2 *ngIf="allCourses.length == 0">The Category is empty</h2>
+                        <!-- <h2 *ngIf="allCourses.length == 0">The Category is empty</h2> -->
                         <ul class="mt-4" style="list-style-type:none;padding-left:0;" *ngIf="!loading">
                             <li class="mb-4" *ngFor="let c of allCourses; let i=index;">
                                 <div class="card" style="border:none;">
@@ -73,6 +73,7 @@
                                       <a routerLink="/root/course/chapter/{{c.id}}"><span class="glyphicon glyphicon-log-in"></span><span style="font-size:25px;">{{c.label}}</span></a>
                                     <p class="mb-0 float-right" style="color:#ccc; font-size:14px;">Updated at {{c.updatedAt | date: 'dd MMM yyyy'}}</p>
                                     <p class="mb-0" style="color:#ccc; font-size: 14px;">Created by <span style="color:#000; font-size: 14px;">{{c.created_by}}</span></p>
+    
                                     <button data-toggle="modal" data-target="#bootstrapModel1" class="float-right" style="border: none; background-color: transparent" (click)="setUpdateCourse(c);" *ngIf="user.role_type=='admin'"><i class="fa fa-pencil" aria-hidden="true" style="color: #74d886"></i></button>
                                      <!-- Modal content-->
  
@@ -84,10 +85,10 @@
                                         <p class="card-text" style="color:#827c7c; font-size: 14px;">
                                         {{c.description}}</p>
                                   </div>
-                                  <div class="card-footer text-muted" style="background-color:transparent;">
+                                  <!-- <div class="card-footer text-muted" style="background-color:transparent;">
                                     <a href="#" style="color:#ccc; font-size: 14px;" class=""><i class="fa fa-eye" aria-hidden="true"></i> 5 Views</a>&nbsp;&nbsp;&nbsp;
                                     <a href="#" style="color:#ccc; font-size: 14px;" class=""><i class="fa fa-comment-o" aria-hidden="true"></i> 2 Comments</a>
-                                  </div>
+                                  </div> -->
                                 </div>
                             </li>
                         </ul>

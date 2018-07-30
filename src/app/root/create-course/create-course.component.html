@@ -60,7 +60,7 @@
             <div class="form-group">
     <label for="form_lastname">Category </label>
         <select id="country" name="country" #cat>
-        <option>--select--</option>
+        <option disabled>--select--</option>
         <option *ngFor="let cat of categories">{{cat.label}}</option>
       </select>
                 <div class="help-block with-errors"></div>
@@ -70,7 +70,7 @@
       <div class="form-group">
         <label for="form_lastname">Workspace</label>
         <select id="country" name="country" #image>
-        <option>--select--</option>
+        <option disabled>--select--</option>
         <option *ngFor="let image of allImages">{{image.label}}</option>
         </select> 
         <div class="help-block with-errors"></div>
