@@ -9,11 +9,13 @@
           <div class="input-group ml-auto mr-5 input-navbar-search">
               <div class="input-group-prepend float-right">
               </div>
-              <input type="search" class="form-control search-input" placeholder="Search for languages ..." aria-label="" aria-describedby="basic-addon1" #searchBox id="search-box" (keyup)="search(searchBox.value)">
-
-              <ul class="search-result" style="z-index: 99999;">
+              <input type="search" class="form-control search-input" placeholder="Search for languages ..." aria-label="" aria-describedby="basic-addon1" #searchBox id="search-box" (keyup)="search(searchBox.value)" (input)="onSearchChange($event.target.value)">
+              
+              <ul class="search-result">
                 <li *ngFor="let course of courses | async" >
+                  <a href="#">
                     {{course.label}}
+                  </a>
                 </li>
               </ul>
               <!--  -->

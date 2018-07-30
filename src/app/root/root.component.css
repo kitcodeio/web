@@ -413,4 +413,13 @@ ul li ul.dropdown-menu li{
     }
 }
 
+.search-result{
+  position: absolute;
+  top: 50px;
+}
+
+.search-result>li{
+  display:inline;
+  width: 100%;
+}
 

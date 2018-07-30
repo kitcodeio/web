@@ -62,7 +62,6 @@ export class RootComponent implements OnInit {
       distinctUntilChanged(),
       switchMap((term: string) => this.http.searchCourse(term))
     );
-
   }
 
   logout(): void {
@@ -75,5 +74,11 @@ export class RootComponent implements OnInit {
   clickout(event) {
     if(this.dd.nativeElement.contains(event.target)) $('.dropdown-menu').css("display","inline-flex");
     else $('.dropdown-menu').hide();
+  }
+
+  onSearchChange(searchValue : string ) {  
+    if(searchValue==''){
+    }
+    console.log(this.courses);
   }
 }
