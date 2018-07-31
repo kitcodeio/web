@@ -74,7 +74,7 @@
                                     <p class="mb-0 float-right" style="color:#ccc; font-size:14px;">Updated at {{c.updatedAt | date: 'dd MMM yyyy'}}</p>
                                     <p class="mb-0" style="color:#ccc; font-size: 14px;">Created by <span style="color:#000; font-size: 14px;">{{c.created_by}}</span></p>
     
-                                    <button data-toggle="modal" data-target="#bootstrapModel1" class="float-right" style="border: none; background-color: transparent" (click)="setUpdateCourse(c);" *ngIf="user.role_type=='admin'"><i class="fa fa-pencil" aria-hidden="true" style="color: #74d886"></i></button>
+                                    <button data-toggle="modal" data-target="#bootstrapModel1" class="float-right" style="border: none; background-color: transparent" (click)="setUpdateCourse(c,i);" *ngIf="user.role_type=='admin'"><i class="fa fa-pencil" aria-hidden="true" style="color: #74d886"></i></button>
                                      <!-- Modal content-->
  
                                 </div>

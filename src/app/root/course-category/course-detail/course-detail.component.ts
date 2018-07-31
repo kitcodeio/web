@@ -20,6 +20,7 @@ export class CourseDetailComponent implements OnInit {
   course_id;
   user;
   deleteSectionId:number;
+  updateIndex:number;
 
   section: Section={} as Section;
 
@@ -62,8 +63,11 @@ export class CourseDetailComponent implements OnInit {
     })
   }
 
-  setUpdateSection(section: Section) :void{
-    this.section = section;
+  setUpdateSection(section: Section,index: number) :void{
+    let obj = Object.create(section);
+    this.section = obj;
+    this.updateIndex = index;
+    console.log(index);
   }
 
   updateSection(){
@@ -72,10 +76,11 @@ export class CourseDetailComponent implements OnInit {
     data:this.section
 }).subscribe(res=>{
   if(res.status===200){
-    this.toastrService.success('update succusfully','Successs',{positionClass:'toast-bottom-right'});
+    this.toastrService.success(res.message,'Successs',{positionClass:'toast-bottom-right'});
+    this.allSections[this.updateIndex] = this.section;
   }
   else{
-    this.toastrService.error('Error','Error',{positionClass:'toast-bottom-right'});
+    this.toastrService.error(res.error,'Error',{positionClass:'toast-bottom-right'});
   }
 
   console.log(res);

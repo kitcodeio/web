@@ -19,7 +19,7 @@ export class CoursesComponent implements OnInit {
   allCourses:Course[] = [];
   user;
   allImages=[];
-
+  updateIndex: number;
   deleteCourseId: number;
   course: Course = {} as Course;
 
@@ -62,13 +62,13 @@ export class CoursesComponent implements OnInit {
       id: this.course.id,
       data: this.course
     }).subscribe(res=>{
-      if(res.status){
-        this.toastrService.success('update succusfully','Successs',{positionClass:'toast-bottom-right'});
+      if(res.status == 200){
+        this.toastrService.success(res.message,'Successs',{positionClass:'toast-bottom-right'});
+        this.allCourses[this.updateIndex] = this.course;
       }
       else{
-        this.toastrService.error('Error','Error',{positionClass:'toast-bottom-right'});
+        this.toastrService.error(res.error,'Error',{positionClass:'toast-bottom-right'});
       }
-      console.log(res);
     });
   }
 
@@ -88,8 +88,10 @@ export class CoursesComponent implements OnInit {
     this.deleteCourseId = id;
   }
 
-  setUpdateCourse(course: Course): void {
-    this.course = course;
+  setUpdateCourse(course: Course,index:number): void {
+    let obj = Object.create(course);
+    this.course = obj;
+    this.updateIndex = index;
   }
 
 }

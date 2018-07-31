@@ -65,13 +65,13 @@
                       <br/>
                       <div class="sections">
                         <div id="accordion">
-                          <div class="card mb-5"  *ngFor="let s of allSections; let i=index;">
+                          <div class="card mb-5"  *ngFor="let s of allSections;let i=index;">
                             <div class="card-header bg-white" id="headingOne" data-toggle="collapse" data-target="#collapseOne">
                               <h5 class="mb-0">
                                   {{s.label}}
                               </h5>
                               <button class="float-right" style="border: none; background-color: transparent" (click)="setDeleteSectionId(s.id)"  *ngIf="user.role_type=='admin'"><i class="fa fa-trash" aria-hidden="true" style="color: rgb(235, 102, 102)" data-toggle="modal" data-target="#bootstrapModel"></i></button>
-                              <button class="float-right" style="border: none; background-color: transparent" (click)="setUpdateSection(s);"  *ngIf="user.role_type=='admin'" data-toggle="modal" data-target="#bootstrapModel1"><i class="fa fa-pencil" aria-hidden="true" style="color: #74d886" ></i></button>
+                              <button class="float-right" style="border: none; background-color: transparent" (click)="setUpdateSection(s,i);"  *ngIf="user.role_type=='admin'" data-toggle="modal" data-target="#bootstrapModel1"><i class="fa fa-pencil" aria-hidden="true" style="color: #74d886" ></i></button>
                               <p>{{s.description}}</p>
                             </div>
                             <div id="collapseOne" class="collapse show" aria-labelledby="headingOne" data-parent="#accordion">  
