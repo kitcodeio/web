@@ -419,6 +419,6 @@ ul li ul.dropdown-menu li{
 }
 
 .search-result>li{
-  display:inline;
   width: 100%;
+  display:inline;
 }

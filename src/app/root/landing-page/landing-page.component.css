@@ -176,3 +176,19 @@
   input::-ms-input-placeholder{color:#ccc;font-weight:500 !important;}
   input::placeholder{color:#ccc;font-weight:500 !important;}
   
+  .search-result{
+    position: absolute;
+    top: 50px;
+    text-align:left; 
+    background-color: white;
+    width: 40%;
+    padding-left: 0px;
+  }
+  
+  .search-result>li{
+    display:inline-block;
+    width: 100%;
+    color: white;
+    border: 1px solid gray;
+  }
+  
