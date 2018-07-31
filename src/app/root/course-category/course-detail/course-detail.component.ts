@@ -5,6 +5,7 @@ import { MalihuScrollbarService } from 'ngx-malihu-scrollbar';
 import { RouterModule, Routes } from '@angular/router';
 import { UserInfoService } from '../../../services/userInfo/user-info.service'
 import { Section } from '../../../models/section';
+import { ToastContainerDirective, ToastrService } from 'ngx-toastr';
 
 @Component({
   selector: 'app-course-detail',
@@ -22,7 +23,7 @@ export class CourseDetailComponent implements OnInit {
 
   section: Section={} as Section;
 
-  constructor(private userInfo: UserInfoService, private route:ActivatedRoute, private http: HttpService, private scrollbarService: MalihuScrollbarService, private router: Router) { }
+  constructor(private toastrService: ToastrService, private userInfo: UserInfoService, private route:ActivatedRoute, private http: HttpService, private scrollbarService: MalihuScrollbarService, private router: Router) { }
 
   ngOnInit() {
     this.populateCatgory();
@@ -70,6 +71,13 @@ export class CourseDetailComponent implements OnInit {
     id:this.section.id,
     data:this.section
 }).subscribe(res=>{
+  if(res.status===200){
+    this.toastrService.success('update succusfully','Successs',{positionClass:'toast-bottom-right'});
+  }
+  else{
+    this.toastrService.error('Error','Error',{positionClass:'toast-bottom-right'});
+  }
+
   console.log(res);
 })
 }

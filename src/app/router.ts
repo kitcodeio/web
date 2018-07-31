@@ -22,7 +22,7 @@ const routes: Routes = [
     { path: '', redirectTo: 'root/category', pathMatch: 'full'},
     { path: 'login', loadChildren:'src/app/login/login.module#LoginModule' },
     { path: 'root', component: RootComponent, children: [
-        { path: 'category', component: LandingPageComponent },
+        { path: 'category', loadChildren: './root/landing-page/landing-page.module#LandingPageModule' },
         { path: 'course', component: CourseCategoryComponent, children: [
             { path: 'detail/:id', loadChildren:'./root/course-category/courses/courses.module#CoursesModule' },
             { path: 'chapter/:id', loadChildren: './root/course-category/course-detail/course-detail.module#CourseDetailModule'}
