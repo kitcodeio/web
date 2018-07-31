@@ -157,4 +157,13 @@ login(): void {
     }
     console.log(this.counter);
   }
+
+  withGoogle(){
+    console.log('google');
+
+  }
+
+  withFacebook(){
+    console.log('facebook');
+  }
 }

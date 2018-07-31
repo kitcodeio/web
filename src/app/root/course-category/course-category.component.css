@@ -197,3 +197,7 @@ body {
 .chapter-item:hover{
   background-color: #81e0a478;
 }
+
+.mCSB_inside > .mCSB_container{
+  margin-right: 10px !important;
+}
