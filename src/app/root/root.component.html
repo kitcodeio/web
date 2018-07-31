@@ -9,7 +9,7 @@
           <div class="input-group ml-auto mr-5 input-navbar-search">
               <div class="input-group-prepend float-right">
               </div>
-              <input type="search" class="form-control search-input" placeholder="Search for languages ..." aria-label="" aria-describedby="basic-addon1" #searchBox id="search-box" (keyup)="search(searchBox.value)" (input)="onSearchChange($event.target.value)">
+              <input autocomplete="off" type="search" class="form-control search-input" placeholder="What do you want to learn today ?" aria-label="" aria-describedby="basic-addon1" #searchBox id="search-box" (keyup)="search(searchBox.value)" (input)="onSearchChange($event.target.value)">
              
               <ul class="search-result" #searchResult>
                 <li *ngFor="let course of courses | async" >

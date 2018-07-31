@@ -195,3 +195,9 @@ body {
 .chapter-item:hover{
   background-color: #81e0a478;
 }
+
+.subscribeButton{
+  background-color: transparent;
+  color: #74d886;
+  border-color: #74d886; 
+}

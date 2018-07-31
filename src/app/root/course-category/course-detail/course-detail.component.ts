@@ -2,10 +2,11 @@ import { Component, OnInit } from '@angular/core';
 import { HttpService } from '../../../services/http/http.service';
 import { ActivatedRoute, Router } from '@angular/router';
 import { MalihuScrollbarService } from 'ngx-malihu-scrollbar';
-import { RouterModule, Routes } from '@angular/router';
 import { UserInfoService } from '../../../services/userInfo/user-info.service'
 import { Section } from '../../../models/section';
-import { ToastContainerDirective, ToastrService } from 'ngx-toastr';
+import { Course } from '../../../models/course';
+
+import { ToastrService } from 'ngx-toastr';
 
 @Component({
   selector: 'app-course-detail',
@@ -19,22 +20,34 @@ export class CourseDetailComponent implements OnInit {
   allChapters=[];
   course_id;
   user;
+  btnTxt: string = 'Subscribe';
   deleteSectionId:number;
   updateIndex:number;
+  subscribeFlag:boolean;
 
-  section: Section={} as Section;
+  courseDetail: Course = {} as Course;
+  section: Section = {} as Section;
 
   constructor(private toastrService: ToastrService, private userInfo: UserInfoService, private route:ActivatedRoute, private http: HttpService, private scrollbarService: MalihuScrollbarService, private router: Router) { }
 
   ngOnInit() {
     this.populateCatgory();
     this.user = this.userInfo.getInfo();
+
     this.route.params.subscribe(params=>{
-      this.course_id = params.id;
+      this.course_id = params.id; 
       this.http.getDataWithId('CourseSection',params.id)
       .subscribe(res=>{
         this.allSections = res.entity;
       })    
+    });
+
+    this.http.getCoursePurchaseDetails(this.course_id, this.user.id)
+    .subscribe(res=>{
+      this.courseDetail = res.entity
+      if(this.courseDetail.status == 'purchased'){
+        this.btnTxt = 'Subscribed';
+      }
     });
   }
 
@@ -49,7 +62,9 @@ export class CourseDetailComponent implements OnInit {
   }
 
   toProfile(s_id, c_index){
-    this.router.navigate(['/root/kide/'+this.course_id+'/'+s_id+'/'+c_index]);
+    if (this.courseDetail.status == 'purchased')
+      this.router.navigate(['/root/kide/'+this.course_id+'/'+s_id+'/'+c_index]);
+    else alert('bsdk course khareed pehle');
   }
 
   setDeleteSectionId(id){
@@ -84,6 +99,24 @@ export class CourseDetailComponent implements OnInit {
   }
 
   console.log(res);
-})
-}
+    })
+  }
+
+  subscribe(): void{
+    this.subscribeFlag=true;
+    console.log(this.course_id);
+    this.http.subscribeCourse(this.course_id)
+    .subscribe(res=>{
+      console.log(res);
+      this.subscribeFlag = false;
+      if(res.status===200){
+        this.courseDetail.status = 'purchased';
+        this.btnTxt = 'Subscribed';
+        this.toastrService.success(res.message,'Successs',{positionClass:'toast-bottom-right'});
+      }
+      else{
+        this.toastrService.error(res.error,'Error',{positionClass:'toast-bottom-right'});
+      }
+    })
+  }
 }

@@ -5,4 +5,5 @@ export class Course {
     description: string;
     image_id: string;
     created_by: string;
+    status: string;
 }

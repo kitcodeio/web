@@ -49,14 +49,15 @@
 
                     <div class="course_detail" *ngIf="allSections" style="border-top-left-radius: 20px;">
                       <div class="card" style="border:none;">
-                        <!-- <div class="card-header" style="background:transparent;border: none;">
-                          <span style="font-size:25px;"></span>
-                          <p class="mb-0 float-right" style="color:#ccc;">Updated on July 04,2018</p>
-                          <p class="mb-0" style="color:#ccc;">Created by <span style="color:#000;"></span></p>
-                        </div> -->
-                        <!-- <div class="card-body">
+                         <div class="card-header" style="background:transparent;border: none;">
+                          <span style="font-size:25px;">{{courseDetail.label}}</span>
+                          <p class="mb-0 float-right" style="color:#ccc;">Updated on {{courseDetail.updatedAt | date: 'dd MMM yyyy'}}</p>
+                          <p class="mb-0" style="color:#ccc;">Created by <span style="color:#000;">{{courseDetail.created_by}}</span></p>
+                        <button [disabled]="courseDetail.status !== 'not purchased'" class="float-right btn subscribeButton" (click)="subscribe();">{{btnTxt}}&nbsp; <i *ngIf="courseDetail.status=='purchased'" class="fa fa-check" aria-hidden="true"></i> <i *ngIf="subscribeFlag" class="fa fa-spinner fa-pulse fa-3x fa-fw" aria-hidden="true" style="font-size: 15px;"></i></button>
+                        </div>
+                        <div class="card-body">
                           <p class="card-text" style="color:#827c7c;"></p>
-                        </div> -->
+                        </div>
                         <!-- <div class="card-footer text-muted" style="background-color:transparent;">
                           <a href="#" style="color:#ccc;" class=""><i class="fa fa-eye" aria-hidden="true"></i> 5 Views</a>&nbsp;&nbsp;&nbsp;
                           <a href="#" style="color:#ccc;" class=""><i class="fa fa-comment-o" aria-hidden="true"></i> 2 Comments</a>

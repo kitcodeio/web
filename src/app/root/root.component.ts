@@ -41,9 +41,11 @@ export class RootComponent implements OnInit {
 
   constructor(private http: HttpService, private eRef: ElementRef, private router: Router, private userInfo: UserInfoService, private authService: AuthserviceService) {}
 
+  //Method for search next string
   search(term: string): void {
     this.searchTerms.next(term);
   }
+
   ngOnInit() {
 
     this.windowSize = window.screen.width
@@ -80,11 +82,14 @@ export class RootComponent implements OnInit {
 
   @HostListener('document:click', ['$event'])
   clickout(event) {
+    try{
     if(this.dd.nativeElement.contains(event.target)) $('.dropdown-menu').css("display","inline");
     else $('.dropdown-menu').hide();
 
     if(!this.searchResult.nativeElement.contains(event.target))
     $('.search-result').hide();
+    }
+    catch(err){}
   }
 
   

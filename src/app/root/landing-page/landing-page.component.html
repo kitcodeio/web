@@ -15,7 +15,7 @@
                     <div class="input-group-prepend">
                       <button class="btn" style="background-color:#ffffff;color:#ccc;" type="button"><i class="fa fa-search" aria-hidden="true"></i></button>
                     </div>
-                    <input type="text" class="form-control" placeholder="search for languages you want to learn" #searchBox id="search-box" (keyup)="search(searchBox.value)" (input)="onSearchChange($event.target.value)"/>
+                    <input autocomplete="off" type="text" class="form-control" placeholder="What do you want to learn today ?" #searchBox id="search-box" (keyup)="search(searchBox.value)" (input)="onSearchChange($event.target.value)"/>
                    
                     <ul class="search-result" #searchResult>
                       <li *ngFor="let course of courses | async" >

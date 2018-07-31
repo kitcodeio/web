@@ -93,5 +93,16 @@ export class HttpService {
 	  .pipe(catchError((error)=>{return of(error);}));
   }
 
+  //=======================get one course detail=======================//
+  getCoursePurchaseDetails(course_id:number, user_id:string): Observable<any>{
+    return this.http.get(this.url+'read/course/one/Course/'+course_id+'?id='+user_id)
+    .pipe(catchError((error)=>{return of(error);}));
+  }
+
+  subscribeCourse(course_id:number): Observable<any>{
+    return this.http.get(this.url+'course/signup'+'/'+course_id)
+    .pipe(catchError((error)=>{return of(error);}));
+  }
+
   constructor(private http:CustomHttpService) { }
 }
