@@ -182,13 +182,13 @@
     text-align:left; 
     background-color: white;
     width: 40%;
-    padding-left: 0px;
+    /* padding-left: 0px; */
   }
   
   .search-result>li{
     display:inline-block;
     width: 100%;
     color: white;
-    border: 1px solid gray;
+    /* border: 1px solid gray; */
   }
   
