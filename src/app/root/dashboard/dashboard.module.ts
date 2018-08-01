@@ -3,7 +3,6 @@ import { CommonModule } from '@angular/common';
 import { DashboardComponent } from './dashboard.component'
 import { Routes, RouterModule } from '@angular/router'
 import { FormsModule } from '@angular/forms';
-import { LoadiingComponent } from '../../loadiing/loadiing.component';
 
 const routes: Routes =[
   { path: '', component: DashboardComponent }
@@ -16,6 +15,6 @@ const routes: Routes =[
     FormsModule,
   ],  
   declarations: [DashboardComponent,
-    LoadiingComponent]
+    ]
 })
 export class DashboardModule { }
