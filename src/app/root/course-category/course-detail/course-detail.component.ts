@@ -38,6 +38,12 @@ export class CourseDetailComponent implements OnInit {
   constructor(private authService: AuthserviceService, private toastrService: ToastrService, private userInfo: UserInfoService, private route:ActivatedRoute, private http: HttpService, private scrollbarService: MalihuScrollbarService, private router: Router) { }
 
   ngOnInit() {
+    
+    $("#menu-toggle").click(function(e) {
+      e.preventDefault();
+      $("#wrapper").toggleClass("toggled");
+  });
+
     this.populateCatgory();
 
     this.isAdmin=this.authService.isAdmin();
