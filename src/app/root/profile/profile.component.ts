@@ -3,8 +3,6 @@ import { DomSanitizer } from "@angular/platform-browser";
 import { ActivatedRoute } from '@angular/router';
 import { HttpService } from '../../services/http/http.service'
 import { AuthserviceService } from '../../services/auth/authservice.service';
-import * as $ from 'jquery';
-
 
 @Component({
   selector: 'app-profile',

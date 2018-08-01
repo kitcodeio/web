@@ -1,6 +1,5 @@
 import { Component, OnInit, ViewChild, ElementRef, NgModule } from '@angular/core';
 import { HttpService } from '../../services/http/http.service';
-import * as $ from 'jquery';
 import { Router } from '@angular/router';
 import { flatten } from '@angular/compiler';
 import { ToastContainerDirective, ToastrService } from 'ngx-toastr';

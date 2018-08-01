@@ -1,14 +1,10 @@
 import { Component, OnInit } from '@angular/core';
-import {Router} from '@angular/router';
-import '../../../node_modules/bootstrap/dist/js/bootstrap.min.js'
+import { Router } from '@angular/router';
 import { UserInfoService } from '../services/userInfo/user-info.service';
 import { AuthserviceService } from '../services/auth/authservice.service';
 import { ViewChild, ElementRef, AfterViewInit, HostListener, HostBinding } from '@angular/core';
-import * as $ from 'jquery';
 import { Observable, Subject } from 'rxjs';
-
 import { debounceTime, distinctUntilChanged, switchMap } from 'rxjs/operators';
- 
 import { HttpService } from '../services/http/http.service';
 
 @Component({

@@ -20,6 +20,18 @@ export class CourseCategoryComponent implements OnInit {
 
   ngOnInit() {
     this.populateCatgory();
+
+    $("#menu-toggle").click(function(e) {
+      e.preventDefault();
+      $("#wrapper").toggleClass("toggled");
+  });
+  $(function(){
+      $('.scrollPane').mCustomScrollbar(
+          {
+              axis:'y',
+              theme:'dark'
+          });
+  });
   }
 
   ngAfterViewInit() {

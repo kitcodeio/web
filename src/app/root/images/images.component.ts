@@ -1,17 +1,6 @@
 import { Component, OnInit, ViewChild, ElementRef, AfterViewInit } from '@angular/core';
-import { Observable, of} from 'rxjs';
-import { catchError, map, tap } from 'rxjs/operators';
 import { HttpService } from '../../services/http/http.service'
-import * as $ from 'jquery';
-import * as popover from '../../../assets/js/popper.min.js';
-import * as CodeMirror from '../../../assets/js/codemirror.js';
-import '../../../../node_modules/bootstrap/dist/js/bootstrap.min.js'
-import { Conditional, Version } from '@angular/compiler';
-import '../../../../node_modules/jquery/dist/jquery.min.js'
-import { version } from 'codemirror';
-import { shouldCallLifecycleInitHook } from '@angular/core/src/view';
 import { ToastContainerDirective, ToastrService } from 'ngx-toastr';
-import { RouterModule, Routes, } from '@angular/router';
 import { Router } from '@angular/router';
 
 declare var CodeMirror: any;

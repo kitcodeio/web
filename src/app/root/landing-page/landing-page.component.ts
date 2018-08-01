@@ -1,6 +1,4 @@
 import { Component, OnInit } from '@angular/core';
-import '../../../../node_modules/jquery/dist/jquery.min.js';
-import '../../../../node_modules/bootstrap/dist/js/bootstrap.min.js';
 import { Router } from '@angular/router';
 import { HttpService } from '../../services/http/http.service';
 import { UserInfoService } from '../../services/userInfo/user-info.service';

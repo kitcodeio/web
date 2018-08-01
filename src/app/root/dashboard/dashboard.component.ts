@@ -1,11 +1,7 @@
 import { Component, OnInit, ElementRef, ViewChild, Input, HostListener } from '@angular/core';
-import * as $ from 'jquery';
-import { RouterModule, Routes } from '@angular/router';
 import { Router } from '@angular/router';
 import { HttpService } from '../../services/http/http.service'
-import { viewClassName } from '@angular/compiler';
-import '../../../../node_modules/bootstrap/dist/js/bootstrap.min.js'
-import { ToastContainerDirective, ToastrService } from 'ngx-toastr';
+import { ToastrService } from 'ngx-toastr';
 import { UserInfoService } from '../../services/userInfo/user-info.service'
 
 @Component({

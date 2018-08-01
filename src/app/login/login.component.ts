@@ -1,14 +1,7 @@
 import { Component, OnInit, NgZone } from '@angular/core';
-import { RouterModule, Routes, NavigationEnd } from '@angular/router';
 import { Router, ActivatedRoute} from '@angular/router';
 import { AuthserviceService } from '../services/auth/authservice.service';
-import { HttpModule, Http } from '@angular/http';
-import * as $ from 'jquery';
-import { NavigationStart } from '@angular/router';
-import { stringify } from '@angular/core/src/util';
-import { ToastContainerDirective, ToastrService } from 'ngx-toastr';
-import '../../../node_modules/font-awesome/css/font-awesome.css'
-import * as jwt_decode from 'jwt-decode';
+import { ToastrService } from 'ngx-toastr';
 import { UserInfoService } from '../services/userInfo/user-info.service';
 
 
@@ -18,8 +11,6 @@ import { UserInfoService } from '../services/userInfo/user-info.service';
   styleUrls: ['./login.component.css']
 })
 export class LoginComponent implements OnInit {
-  flag1: boolean;
-  flag2: boolean;
   emailLogin: string;
   passwordLogin: string;
 
@@ -86,9 +77,7 @@ login(): void {
           }   
           else{
         this.authService.setToken(response.token);
-       // window.location.reload();
         this.router.navigate(['root/category']);
-        this.userInfo.userDetail = jwt_decode(response.token);
           }
         
     } else {
@@ -105,7 +94,6 @@ login(): void {
 
 
   register(): void {
-    console.log(this.checked);
     if(this.passwordReg.length>=6){
       if(this.passwordCon==this.passwordReg){
         if (this.emailReg && this.company && this.passwordReg && this.passwordCon) {
