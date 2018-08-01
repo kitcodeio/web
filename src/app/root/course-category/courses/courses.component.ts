@@ -32,11 +32,9 @@ export class CoursesComponent implements OnInit {
     this.user=this.authService.isAdmin();
 
     this.route.params.subscribe(params=>{
-      console.log(params.id);
       this.http.getDataWithId('Course',params.id)
       .subscribe(res=>{
-          this.allCourses = res.entity;
-          console.log(this.allCourses);        
+          this.allCourses = res.entity;      
       });    
     });
   }

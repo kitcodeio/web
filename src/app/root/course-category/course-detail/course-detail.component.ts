@@ -76,7 +76,7 @@ export class CourseDetailComponent implements OnInit {
   deleteSection(){
     this.http.deleteData('CourseSection', this.deleteSectionId)
     .subscribe(res=>{
-      console.log(res);
+      
     })
   }
 
@@ -84,7 +84,6 @@ export class CourseDetailComponent implements OnInit {
     let obj = Object.create(section);
     this.section = obj;
     this.updateIndex = index;
-    console.log(index);
   }
 
   updateSection(){
@@ -99,17 +98,14 @@ export class CourseDetailComponent implements OnInit {
   else{
     this.toastrService.error(res.error,'Error',{positionClass:'toast-bottom-right'});
   }
-
-  console.log(res);
+  
     })
   }
 
   subscribe(): void{
     this.subscribeFlag=true;
-    console.log(this.course_id);
     this.http.subscribeCourse(this.course_id)
     .subscribe(res=>{
-      console.log(res);
       this.subscribeFlag = false;
       if(res.status===200){
         this.courseDetail.status = 'purchased';
