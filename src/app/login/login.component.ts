@@ -60,7 +60,7 @@ $(document).on('focus','.md-form-control',function(){
 
     if(!this.authService.isTokenExpired())
    {
-    this.router.navigate(['/app/dashboard']);
+    this.router.navigate(['/root/dashboard']);
    }
   
 }
@@ -94,9 +94,9 @@ login(): void {
 
 
   register(): void {
-    if(this.passwordReg.length>=6){
+    if(this.emailReg && this.company && this.passwordReg && this.passwordCon){
       if(this.passwordCon==this.passwordReg){
-        if (this.emailReg && this.company && this.passwordReg && this.passwordCon) {
+        if (this.passwordReg.length>=6) {
           if(this.emailReg.indexOf('@')!==-1 && this.emailReg.indexOf('.')){
   
             if(this.checked){
@@ -123,7 +123,7 @@ login(): void {
           }   
         }
         else{
-          this.toastrService.error('Please enter all feild','Error',{positionClass:'toast-bottom-right'});
+          this.toastrService.error('Password is too Short ','Error',{positionClass:'toast-bottom-right'});
         }
       }
       else{
@@ -131,7 +131,7 @@ login(): void {
       }
     }
     else{
-      this.toastrService.error('Password is too Short','Error',{positionClass:'toast-bottom-right'});
+      this.toastrService.error('Please enter all feild','Error',{positionClass:'toast-bottom-right'});
     }
   }
 

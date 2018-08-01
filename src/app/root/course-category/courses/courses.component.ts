@@ -6,6 +6,7 @@ import { ActivatedRoute } from '@angular/router';
 import { UserInfoService } from '../../../services/userInfo/user-info.service'
 import { ToastContainerDirective, ToastrService } from 'ngx-toastr';
 import { AuthserviceService } from '../../../services/auth/authservice.service'
+import { DataService } from '../../../services/data/data.service'
 
 import { Course } from '../../../models/course';
 
@@ -24,11 +25,10 @@ export class CoursesComponent implements OnInit {
   deleteCourseId: number;
   course: Course = {} as Course;
 
-  constructor(private authService: AuthserviceService, private toastrService: ToastrService, private eleRef:ElementRef, private userInfo: UserInfoService, private route: ActivatedRoute,private router: Router, private http: HttpService, private scrollbarService: MalihuScrollbarService) { }
+  constructor(private dataService: DataService, private authService: AuthserviceService, private toastrService: ToastrService, private eleRef:ElementRef, private userInfo: UserInfoService, private route: ActivatedRoute,private router: Router, private http: HttpService, private scrollbarService: MalihuScrollbarService) { }
 
   ngOnInit() {
-    //this.populateCatgory();
-    //this.populateImages()
+
     this.user=this.authService.isAdmin();
 
     this.route.params.subscribe(params=>{
@@ -70,25 +70,13 @@ export class CoursesComponent implements OnInit {
     });
   }
 
-
-  populateCatgory(){
-    this.http.getcategory('CourseCategory').subscribe(res=>{
-      this.allCourseCategory = res.entity;
-    });
-  }
-
-  populateImages(){
-    this.http.getData('Image').subscribe(res=>{
-      this.allImages = res.entity;
-    })
-  }
   setDeleteCourseId(id: number): void{
     this.deleteCourseId = id;
   }
 
   setUpdateCourse(course: Course,index:number): void {
-    let obj = Object.create(course);
-    this.course = obj;
+    this.allCourseCategory = this.dataService.getCategories();
+    this.course = Object.create(course);;
     this.updateIndex = index;
   }
 

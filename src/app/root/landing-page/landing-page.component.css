@@ -189,6 +189,7 @@
     display:inline-block;
     width: 100%;
     color: white;
+    text-decoration: none !important;
     /* border: 1px solid gray; */
   }
   
