@@ -6,7 +6,25 @@
                     <a href="#menu-toggle" class="btn btn-secondary d-sm-none d-lg-none d-md-none" id="menu-toggle">Toggle Menu</a>
     <!--                 <button class="buttons-top">Hot</button>&nbsp;&nbsp;&nbsp;<button class="buttons-top">Trending</button> -->
                     <!-- <app-loadiing *ngIf="!allSections"></app-loadiing> -->
-
+                   
+                    <div id="bootstrapModelChapterD" class="modal fade" role="dialog">
+                      <div class="modal-dialog">
+                        <!-- Modal content-->
+                        <div class="modal-content">
+                          <div class="modal-header">
+                          </div>
+                          <h6 class="modal-title" style="margin-left: 16px;">Are you sure ?</h6>
+                    <!-- model body section -->
+                          <div class="modal-body">
+                            <br>
+                          </div>
+                          <div class="modal-footer">
+                            <button type="button" class="btn btn-primary" data-dismiss="modal"  (click)="deleteChapter();">Ok</button>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                    
                     <div id="bootstrapModel" class="modal fade" role="dialog">
                         <div class="modal-dialog">
                           <!-- Modal content-->
@@ -25,13 +43,35 @@
                         </div>
                       </div>
 
+                      <div id="bootstrapModelChapterU" class="modal fade" role="dialog">
+                        <div class="modal-dialog">
+                          <!-- Modal content-->
+                          <div class="modal-content">
+                            <div class="modal-header">
+                            </div>
+                            <h5 class="modal-title" style="margin-left: 16px;">Update chapter</h5>
+                      <!-- model body section -->
+                            <div class="modal-body">
+                              <input id="form_name" type="text" name="chapterName" class="form-control" placeholder="Chapter Name" required="required" data-error="Firstname is required." [(ngModel)]="chapter.label">
+                              <br>
+                              <textarea id="form_name" type="text" name="chapterDes" class="form-control" placeholder="Chapter description" required="required" data-error="Firstname is required." [(ngModel)]="chapter.url"></textarea>
+                              <br>
+                            </div>
+                            <div class="modal-footer">
+                              <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                              <button type="button" class="btn btn-primary" data-dismiss="modal" (click)="updateChapter();">Update</button>
+                            </div>
+                          </div>
+                        </div>
+                      </div> 
+
                       <div id="bootstrapModel1" class="modal fade" role="dialog">
                           <div class="modal-dialog">
                             <!-- Modal content-->
                             <div class="modal-content">
                               <div class="modal-header">
                               </div>
-                              <h5 class="modal-title" style="margin-left: 16px;">Update course</h5>
+                              <h5 class="modal-title" style="margin-left: 16px;">Update section</h5>
                         <!-- model body section -->
                               <div class="modal-body">
                                 <input id="form_name" type="text" name="courseName" class="form-control" placeholder="Section Name" required="required" data-error="Firstname is required." [(ngModel)]="section.label">
@@ -79,6 +119,8 @@
                                 <div class="list-group" id="list-tab" role="tablist"   *ngFor="let c of s.CourseChapters; let j=index;">
                                   <a type="click" class="list-group-item chapter-item list-group-item-action active" id="list-home-list" data-toggle="list" href="#list-home" role="tab" aria-controls="home" (click)="toProfile(s.id, j);"><i class="fa fa-play-circle" aria-hidden="true"></i>&nbsp;&nbsp;&nbsp;{{c.label}}
                                   </a>
+                                  <button data-toggle="modal" data-target="#bootstrapModelChapterD" class="float-right" style="border: none; background-color: transparent; float: right !important" (click)="setDeleteChapter(c.id)"  *ngIf="isAdmin"><i class="fa fa-trash" aria-hidden="true" style="color: rgb(235, 102, 102)"></i></button>
+                                  <button data-toggle="modal" data-target="#bootstrapModelChapterU" class="float-right" style="border: none; background-color: transparent; float: right !important" (click)="setUpdateChapter(c,i,j);"  *ngIf="isAdmin"><i class="fa fa-pencil" aria-hidden="true" style="color: #1daa37" ></i></button>
                                 </div>
                             </div>
                           </div>
