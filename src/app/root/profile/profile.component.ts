@@ -83,9 +83,7 @@ export class ProfileComponent implements OnInit {
         this.data.preview = 'https://' + res.entity.app;
         this.youtubeUrl = this.domSanitizer.bypassSecurityTrustResourceUrl(this.chapters[this.chapter].url);
         this.ide = this.domSanitizer.bypassSecurityTrustResourceUrl('https://' + res.entity.kide);
-      } else {
-        console.log('gareeb ki aulad.. muh utha k aa gaya.. ja k course kharid aggey');
-      }
+      } else {  }
     });
   }
   
@@ -98,7 +96,9 @@ export class ProfileComponent implements OnInit {
     }
     else if (message.data == 'minimize') this.min();
     else if(message.data == 'maximize') this.max();
-    else if(message.data == 'close') console.log('time to close');
+    else if(message.data == 'close'){
+      this.ide = this.domSanitizer.bypassSecurityTrustResourceUrl('http://cdn.kitcode.io/restrict_session.html');
+    }
     else console.log(message.data);
   }
 }
