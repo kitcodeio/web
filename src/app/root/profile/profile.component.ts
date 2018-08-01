@@ -97,7 +97,7 @@ export class ProfileComponent implements OnInit {
     else if (message.data == 'minimize') this.min();
     else if(message.data == 'maximize') this.max();
     else if(message.data == 'close'){
-      this.ide = this.domSanitizer.bypassSecurityTrustResourceUrl('https://cdn.pixabay.com/photo/2013/07/12/12/57/red-146613_640.png');
+      this.ide = this.domSanitizer.bypassSecurityTrustResourceUrl('https://i.giphy.com/media/l0He8XWUYnXlbzleg/giphy.webp');
     }
     else console.log(message.data);
   }
