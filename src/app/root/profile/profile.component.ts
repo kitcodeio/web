@@ -3,7 +3,6 @@ import { DomSanitizer } from "@angular/platform-browser";
 import { ActivatedRoute } from '@angular/router';
 import { HttpService } from '../../services/http/http.service'
 import { AuthserviceService } from '../../services/auth/authservice.service';
-import { LoadiingComponent } from '../../loadiing/loadiing.component';
 
 @Component({
   selector: 'app-profile',
@@ -31,6 +30,8 @@ export class ProfileComponent implements OnInit {
   sizeFlag: boolean;
   maxFlag: boolean = false;
   loadindScreen:boolean;
+  interval;
+  chapter: number;
 
   max() {
     this.maxFlag = true;
@@ -42,9 +43,9 @@ export class ProfileComponent implements OnInit {
   	private renderer: Renderer2,
   	private eRef: ElementRef,
   	private domSanitizer: DomSanitizer,
-	private route: ActivatedRoute,
-	private http: HttpService,
-        private authService: AuthserviceService
+	  private route: ActivatedRoute,
+	  private http: HttpService,
+    private authService: AuthserviceService
   ) {
     this.stopListening = renderer.listen('window', 'message', this.handleMessage.bind(this));
   }
@@ -62,11 +63,16 @@ export class ProfileComponent implements OnInit {
       this.http.getCourseSection('CourseChapter', params.section).subscribe((res) => {
         this.chapters = res.entity;
         this.videos = this.chapters;
+        this.chapter = params.chapter;
         this.youtubeUrl = this.domSanitizer.bypassSecurityTrustResourceUrl(this.chapters[params.chapter].url);
       });
     });
     
     this.user = this.authService.getUserData();
+    this.interval = setInterval(()=>{
+      this.ide = this.domSanitizer.bypassSecurityTrustResourceUrl(this.data.kide);
+      this.youtubeUrl = this.domSanitizer.bypassSecurityTrustResourceUrl(this.chapters[this.chapter].url);
+    },5000);
   }
 
   ngAfterViewInit(){
@@ -75,6 +81,7 @@ export class ProfileComponent implements OnInit {
         this.data.kide = 'https://' + res.entity.kide;
         this.data.terminal = 'https://' + res.entity.terminal;
         this.data.preview = 'https://' + res.entity.app;
+        this.youtubeUrl = this.domSanitizer.bypassSecurityTrustResourceUrl(this.chapters[this.chapter].url);
         this.ide = this.domSanitizer.bypassSecurityTrustResourceUrl('https://' + res.entity.kide);
       } else {
         console.log('gareeb ki aulad.. muh utha k aa gaya.. ja k course kharid aggey');
@@ -87,7 +94,7 @@ export class ProfileComponent implements OnInit {
     if (message.data == 'loaded') {
       this.iframe.nativeElement.contentWindow.postMessage(JSON.stringify(this.data), '*');
       this.loadindScreen = false;
-      console.log('hkjskcd');
+      clearInterval(this.interval);
     }
     else if (message.data == 'minimize') this.min();
     else if(message.data == 'maximize') this.max();

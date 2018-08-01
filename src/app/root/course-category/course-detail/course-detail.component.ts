@@ -7,9 +7,7 @@ import { Section } from '../../../models/section';
 import { Course } from '../../../models/course';
 import { AuthserviceService } from '../../../services/auth/authservice.service';
 import { Chapter } from '../../../models/chapter';
-
 import { ToastrService } from 'ngx-toastr'; 
-import { identifierModuleUrl } from '@angular/compiler';
 
 @Component({
   selector: 'app-course-detail',
@@ -47,7 +45,6 @@ export class CourseDetailComponent implements OnInit {
       this.http.getDataWithId('CourseSection',params.id)
       .subscribe(res=>{
         this.allSections = res.entity;
-        console.log(this.allSections);
       })    
     });
 
