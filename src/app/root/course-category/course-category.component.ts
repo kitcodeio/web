@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { HttpService } from '../../services/http/http.service';
 import { ActivatedRoute, Router } from '@angular/router';
 import { MalihuScrollbarService } from 'ngx-malihu-scrollbar';
-import { UserInfoService } from '../../services/userInfo/user-info.service'
+import {DataService} from '../../services/data/data.service';
 
 @Component({
   selector: 'app-course-category',
@@ -16,7 +16,7 @@ export class CourseCategoryComponent implements OnInit {
   allChapters=[];
   course_id;
   user;
-  constructor(private userInfo: UserInfoService ,private route:ActivatedRoute, private http: HttpService, private scrollbarService: MalihuScrollbarService, private router: Router) { }
+  constructor(private ds:DataService, private route:ActivatedRoute, private http: HttpService, private scrollbarService: MalihuScrollbarService, private router: Router) { }
 
   ngOnInit() {
     this.populateCatgory();
@@ -41,7 +41,7 @@ export class CourseCategoryComponent implements OnInit {
   populateCatgory(){
     this.http.getcategory('CourseCategory').subscribe(res=>{
       this.allCourseCategory = res.entity;
+      this.ds.setCategory(this.allCourseCategory);
     })
   }
-
 }

@@ -60,7 +60,7 @@ $(document).on('focus','.md-form-control',function(){
 
     if(!this.authService.isTokenExpired())
    {
-    this.router.navigate(['/app/dashboard']);
+    this.router.navigate(['/root/dashboard']);
    }
   
 }
