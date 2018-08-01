@@ -5,8 +5,9 @@ import { MalihuScrollbarService } from 'ngx-malihu-scrollbar';
 import { UserInfoService } from '../../../services/userInfo/user-info.service'
 import { Section } from '../../../models/section';
 import { Course } from '../../../models/course';
+import { AuthserviceService } from '../../../services/auth/authservice.service';
 
-import { ToastrService } from 'ngx-toastr';
+import { ToastrService } from 'ngx-toastr'; 
 
 @Component({
   selector: 'app-course-detail',
@@ -19,7 +20,7 @@ export class CourseDetailComponent implements OnInit {
   allSections=[];
   allChapters=[];
   course_id;
-  user;
+  isAdmin:boolean;
   btnTxt: string = 'Subscribe';
   deleteSectionId:number;
   updateIndex:number;
@@ -28,11 +29,12 @@ export class CourseDetailComponent implements OnInit {
   courseDetail: Course = {} as Course;
   section: Section = {} as Section;
 
-  constructor(private toastrService: ToastrService, private userInfo: UserInfoService, private route:ActivatedRoute, private http: HttpService, private scrollbarService: MalihuScrollbarService, private router: Router) { }
+  constructor(private authService: AuthserviceService, private toastrService: ToastrService, private userInfo: UserInfoService, private route:ActivatedRoute, private http: HttpService, private scrollbarService: MalihuScrollbarService, private router: Router) { }
 
   ngOnInit() {
     this.populateCatgory();
-    this.user = this.userInfo.getInfo();
+
+    this.isAdmin=this.authService.isAdmin();
 
     this.route.params.subscribe(params=>{
       this.course_id = params.id; 
@@ -42,7 +44,7 @@ export class CourseDetailComponent implements OnInit {
       })    
     });
 
-    this.http.getCoursePurchaseDetails(this.course_id, this.user.id)
+    this.http.getCoursePurchaseDetails(this.course_id)
     .subscribe(res=>{
       this.courseDetail = res.entity
       if(this.courseDetail.status == 'purchased'){

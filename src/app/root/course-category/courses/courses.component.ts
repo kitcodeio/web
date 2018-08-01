@@ -5,6 +5,7 @@ import { MalihuScrollbarService } from 'ngx-malihu-scrollbar';
 import { ActivatedRoute } from '@angular/router';
 import { UserInfoService } from '../../../services/userInfo/user-info.service'
 import { ToastContainerDirective, ToastrService } from 'ngx-toastr';
+import { AuthserviceService } from '../../../services/auth/authservice.service'
 
 import { Course } from '../../../models/course';
 
@@ -17,26 +18,25 @@ export class CoursesComponent implements OnInit {
   loading:boolean= true;
   allCourseCategory=[];
   allCourses:Course[] = [];
-  user;
+  user:boolean;
   allImages=[];
   updateIndex: number;
   deleteCourseId: number;
   course: Course = {} as Course;
 
-  constructor(private toastrService: ToastrService, private eleRef:ElementRef, private userInfo: UserInfoService, private route: ActivatedRoute,private router: Router, private http: HttpService, private scrollbarService: MalihuScrollbarService) { }
+  constructor(private authService: AuthserviceService, private toastrService: ToastrService, private eleRef:ElementRef, private userInfo: UserInfoService, private route: ActivatedRoute,private router: Router, private http: HttpService, private scrollbarService: MalihuScrollbarService) { }
 
   ngOnInit() {
-    this.populateCatgory();
-    this.populateImages()
+    //this.populateCatgory();
+    //this.populateImages()
+    this.user=this.authService.isAdmin();
 
-    this.user=this.userInfo.getInfo();
     this.route.params.subscribe(params=>{
+      console.log(params.id);
       this.http.getDataWithId('Course',params.id)
       .subscribe(res=>{
-        if(res.status == 200){
-          this.loading = false;
           this.allCourses = res.entity;
-                }
+          console.log(this.allCourses);        
       });    
     });
   }

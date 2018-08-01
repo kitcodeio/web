@@ -4,6 +4,7 @@ import { Observable, of } from 'rxjs';
 import { catchError, map, tap } from 'rxjs/operators';
 
 import { CustomHttpService } from '../custom-http/custom-http.service';
+import { AuthserviceService } from '../auth/authservice.service';
 
 @Injectable({
   providedIn: 'root'
@@ -94,8 +95,13 @@ export class HttpService {
   }
 
   //=======================get one course detail=======================//
-  getCoursePurchaseDetails(course_id:number, user_id:string): Observable<any>{
-    return this.http.get(this.url+'read/course/one/Course/'+course_id+'?id='+user_id)
+  getCoursePurchaseDetails(course_id:number): Observable<any>{
+    let url = this.url+'read/course/one/Course/'+course_id;
+    if(!this.auth.isTokenExpired()){
+      let user = this.auth.getUserData();
+      url = url + '?id='+user.id;
+    }
+    return this.http.get(url)
     .pipe(catchError((error)=>{return of(error);}));
   }
 
@@ -104,5 +110,5 @@ export class HttpService {
     .pipe(catchError((error)=>{return of(error);}));
   }
 
-  constructor(private http:CustomHttpService) { }
+  constructor(private http:CustomHttpService, private auth: AuthserviceService) { }
 }

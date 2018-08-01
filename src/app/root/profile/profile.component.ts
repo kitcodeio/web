@@ -68,9 +68,9 @@ export class ProfileComponent implements OnInit {
   ngAfterViewInit(){
     this.http.getContainer(this.course_id).subscribe(res => {
       if (res.status == 200) {
-        this.data.kide = 'http://' + res.entity.kide;
-        this.data.terminal = 'http://' + res.entity.terminal;
-        this.data.preview = 'http://' + res.entity.app;
+        this.data.kide = 'https://' + res.entity.kide;
+        this.data.terminal = 'https://' + res.entity.terminal;
+        this.data.preview = 'https://' + res.entity.app;
         this.ide = this.domSanitizer.bypassSecurityTrustResourceUrl('http://' + res.entity.kide);
       } else {
         console.log('gareeb ki aulad.. muh utha k aa gaya.. ja k course kharid aggey');
