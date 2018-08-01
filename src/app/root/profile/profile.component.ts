@@ -69,7 +69,7 @@ export class ProfileComponent implements OnInit {
         this.data.kide = 'https://' + res.entity.kide;
         this.data.terminal = 'https://' + res.entity.terminal;
         this.data.preview = 'https://' + res.entity.app;
-        this.ide = this.domSanitizer.bypassSecurityTrustResourceUrl('http://' + res.entity.kide);
+        this.ide = this.domSanitizer.bypassSecurityTrustResourceUrl('https://' + res.entity.kide);
       } else {
         console.log('gareeb ki aulad.. muh utha k aa gaya.. ja k course kharid aggey');
       }
