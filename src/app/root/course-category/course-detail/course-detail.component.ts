@@ -73,7 +73,7 @@ export class CourseDetailComponent implements OnInit {
   toProfile(s_id, c_index){
     if (this.courseDetail.status == 'purchased')
       this.router.navigate(['/root/kide/'+this.course_id+'/'+s_id+'/'+c_index]);
-    else alert('bsdk course khareed pehle');
+    else alert('Buy the course first');
   }
 
   setDeleteSectionId(id){

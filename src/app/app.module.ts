@@ -20,7 +20,6 @@ import { CourseCategoryComponent } from './root/course-category/course-category.
   declarations: [
     AppComponent,
     RootComponent,
-    //LoadiingComponent,
     CourseCategoryComponent
   ],
   imports: [

@@ -3,6 +3,7 @@ import { DomSanitizer } from "@angular/platform-browser";
 import { ActivatedRoute } from '@angular/router';
 import { HttpService } from '../../services/http/http.service'
 import { AuthserviceService } from '../../services/auth/authservice.service';
+import { LoadiingComponent } from '../../loadiing/loadiing.component';
 
 @Component({
   selector: 'app-profile',
@@ -29,6 +30,8 @@ export class ProfileComponent implements OnInit {
   ide;
   sizeFlag: boolean;
   maxFlag: boolean = false;
+  loadindScreen:boolean;
+
   max() {
     this.maxFlag = true;
   }
@@ -51,6 +54,9 @@ export class ProfileComponent implements OnInit {
   }
 	
   ngOnInit() {
+
+    this.loadindScreen = true;
+
     this.route.params.subscribe(params => {
       this.course_id = params.course;
       this.http.getCourseSection('CourseChapter', params.section).subscribe((res) => {
@@ -78,7 +84,11 @@ export class ProfileComponent implements OnInit {
   
   handleMessage(event: Event) {
     const message = event as MessageEvent;
-    if (message.data == 'loaded') this.iframe.nativeElement.contentWindow.postMessage(JSON.stringify(this.data), '*');
+    if (message.data == 'loaded') {
+      this.iframe.nativeElement.contentWindow.postMessage(JSON.stringify(this.data), '*');
+      this.loadindScreen = false;
+      console.log('hkjskcd');
+    }
     else if (message.data == 'minimize') this.min();
     else if(message.data == 'maximize') this.max();
     else if(message.data == 'close') console.log('time to close');
