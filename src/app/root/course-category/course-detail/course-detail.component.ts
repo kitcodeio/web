@@ -56,7 +56,7 @@ export class CourseDetailComponent implements OnInit {
 
     this.http.getCoursePurchaseDetails(this.course_id)
     .subscribe(res=>{
-      this.courseDetail = res.entity
+      this.courseDetail = res.entity;
       if(this.courseDetail.status == 'purchased'){
         this.btnTxt = 'Subscribed';
       }
@@ -76,7 +76,7 @@ export class CourseDetailComponent implements OnInit {
   toProfile(s_id, c_index){
     if (this.courseDetail.status == 'purchased')
       this.router.navigate(['/root/kide/'+this.course_id+'/'+s_id+'/'+c_index]);
-    else alert('Buy the course first');
+    else alert('Subscribe the course first');
   }
 
   setDeleteSectionId(id){
@@ -112,6 +112,7 @@ export class CourseDetailComponent implements OnInit {
     id:this.section.id,
     data:this.section
 }).subscribe(res=>{
+  console.log(res);
   if(res.status===200){
     this.toastrService.success(res.message,'Successs',{positionClass:'toast-bottom-right'});
     this.allSections[this.updateIndex] = this.section;
