@@ -29,7 +29,7 @@ export class CreateCourseComponent implements OnInit {
   allChapter=[];
   defaultSectionName='a';
   defaultChapterName;
-  sectionDescription='a';
+  sectionDescription;
   defaultCourseName;
   courseName;
   sectionName;
@@ -61,6 +61,7 @@ export class CreateCourseComponent implements OnInit {
     this.defaultCourseName='New Course';
     this.defaultSectionName = 'New Section';
     this.chapterUrl='chapterUrl';
+    this.sectionDescription= 'Section Description'
     this.populateImage();
     this.populateCatgory();
   }
@@ -111,6 +112,7 @@ else{
     // start from last index
     this.indexOfChapter = null;
     this.sectionDescription='';
+    this.sectionIndex=null;
 }
 
   courseForm(){
@@ -180,11 +182,13 @@ else{
       if(!this.sectionIndex && this.sectionIndex!=0 && this.indexOfSection==null){
         obj={name:this.sectionName,description:this.sectionDescription,course:this.selectCourse}
         this.allSection[this.allSection.length-1].section.label=obj.name;
+        this.allSection[this.allSection.length-1].section.description=obj.description;
       }
       else if(this.sectionIndex || this.sectionIndex==0)
       {
         obj={name:this.sectionName,description:this.sectionDescription,course:this.selectCourse}
         this.allSection[this.sectionIndex].section.label=obj.name;
+        this.allSection[this.sectionIndex].section.description=obj.description;
       }
       if(res.status == 200){
         this.populateCatgory();
@@ -202,7 +206,8 @@ else{
     
     id = null;
     this.indexOfSection=null;
-  }
+    this.sectionDescription='';
+}
   
   addChapter(){
     let obj;
@@ -253,11 +258,14 @@ else{
 
   }
 
-  getSectionId(i,id){
+  getSectionId(i,s){
+    this.sectionDescription='';
     this.sectionFlag=true;
     this.chapterFlag=false;
     this.sectionIndex=i;
-    this.secId=id;
+    this.secId=s.id;
+    this.sectionName=s.label;
+    this.sectionDescription=s.description;
   }
 
   getChapterId(i,j,c){
