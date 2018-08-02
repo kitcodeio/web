@@ -35,7 +35,7 @@
                     allowfullscreen></iframe>
                 <ul class="playlist-container">
                     <li class="playlist-item" *ngFor="let video of videos; let i = index" style=" font-size: 12px;">
-                        <a (click)="play(i);">
+                        <a (click)="play(i);" style="cursor: pointer;">
                        <i style="color:#0606a4;" class="fa fa-play-circle" aria-hidden="true"></i>
                       &nbsp;&nbsp;&nbsp;<span>{{video.label}}</span>
                    </a>
