@@ -107,10 +107,10 @@ login(): void {
                 this.passwordReg
               )
                 .subscribe(response => {
-                  if(!response.error) {	    
-                    this.authService.setToken(response.token);
-                    this.router.navigate(['root/category']);
-              
+                  if(!response.error) {
+                    this.emailLogin = this.emailReg;
+                    this.passwordLogin = this.passwordReg;
+                    this.login();
                   } else {
                     this.error = response.error;
                     this.toastrService.error(response.error,'Error',{positionClass:'toast-bottom-right'});
