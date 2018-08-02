@@ -93,9 +93,9 @@
                           <span style="font-size:25px;">{{courseDetail.label}}</span>
                           <p class="mb-0 float-right" style="color:#ccc;">Updated on {{courseDetail.updatedAt | date: 'dd MMM yyyy'}}</p>
                           <p class="mb-0" style="color:#ccc;">Created by <span style="color:#000;">{{courseDetail.created_by}}</span></p>
-                        <button [disabled]="courseDetail.status !== 'not purchased'" class="float-right btn subscribeButton" (click)="subscribe();">{{btnTxt}}&nbsp; <i *ngIf="courseDetail.status=='purchased'" class="fa fa-check" aria-hidden="true"></i> <i *ngIf="subscribeFlag" class="fa fa-spinner fa-pulse fa-3x fa-fw" aria-hidden="true" style="font-size: 15px;"></i></button>
                         </div>
                         <div class="card-body">
+                            <button [disabled]="courseDetail.status !== 'not purchased'" class="float-right btn subscribeButton" (click)="subscribe();">{{btnTxt}}&nbsp; <i *ngIf="courseDetail.status=='purchased'" class="fa fa-check" aria-hidden="true"></i> <i *ngIf="subscribeFlag" class="fa fa-spinner fa-pulse fa-3x fa-fw" aria-hidden="true" style="font-size: 15px;"></i></button>
                           <p class="card-text" style="color:#827c7c;">{{courseDetail.description}}</p>
                         </div>
                         <!-- <div class="card-footer text-muted" style="background-color:transparent;">
@@ -111,16 +111,21 @@
                               <h5 class="mb-0">
                                   {{i+1}}. {{s.label}}
                               </h5>
-                              <button class="float-right" style="border: none; background-color: transparent" (click)="setDeleteSectionId(s.id)"  *ngIf="isAdmin"><i class="fa fa-trash" aria-hidden="true" style="color: rgb(235, 102, 102)" data-toggle="modal" data-target="#bootstrapModel"></i></button>
-                              <button class="float-right" style="border: none; background-color: transparent" (click)="setUpdateSection(s,i);"  *ngIf="isAdmin" data-toggle="modal" data-target="#bootstrapModel1"><i class="fa fa-pencil" aria-hidden="true" style="color: #74d886" ></i></button>
+                              <button class="float-right" style="border: none; background-color: transparent" (click)="setDeleteSectionId(s.id)"  *ngIf="isAdmin"><i class="fa fa-trash" aria-hidden="true" style="color: rgb(235, 102, 102);cursor: pointer;" data-toggle="modal" data-target="#bootstrapModel"></i></button>
+                              <button class="float-right" style="border: none; background-color: transparent" (click)="setUpdateSection(s,i);"  *ngIf="isAdmin" data-toggle="modal" data-target="#bootstrapModel1"><i class="fa fa-pencil" aria-hidden="true" style="color: #74d886; cursor: pointer;"></i></button>
                               <p>{{s.description}}</p>
                             </div>
                             <div id="collapseOne" class="collapse show" aria-labelledby="headingOne" data-parent="#accordion">  
-                                <div class="list-group" id="list-tab" role="tablist"   *ngFor="let c of s.CourseChapters; let j=index;">
-                                  <a type="click" class="list-group-item chapter-item list-group-item-action active" id="list-home-list" data-toggle="list" href="#list-home" role="tab" aria-controls="home" (click)="toProfile(s.id, j);"><i class="fa fa-play-circle" aria-hidden="true"></i>&nbsp;&nbsp;&nbsp;{{i+1}}.{{j+1}}. {{c.label}}
+                                <div class="list-group chapterList" id="list-tab" role="tablist"   *ngFor="let c of s.CourseChapters; let j=index;">
+                                  <span>
+                                    <a type="click" style="display:inline-block;width:90%" class="list-group-item chapter-item active" id="list-home-list" data-toggle="list" href="#list-home" role="tab" aria-controls="home" (click)="toProfile(s.id, j);"><i class="fa fa-play-circle" aria-hidden="true"></i>&nbsp;&nbsp;&nbsp;{{i+1}}.{{j+1}}. {{c.label}}
                                   </a>
-                                  <button data-toggle="modal" data-target="#bootstrapModelChapterD" class="float-right edit-button" style="border: none; background-color: transparent; float: right !important" (click)="setDeleteChapter(c.id)"  *ngIf="isAdmin"><i class="fa fa-trash" aria-hidden="true" style="color: rgb(235, 102, 102)"></i></button>
-                                  <button data-toggle="modal" data-target="#bootstrapModelChapterU" class="float-right edit-button" style="border: none; background-color: transparent; float: right !important" (click)="setUpdateChapter(c,i,j);"  *ngIf="isAdmin"><i class="fa fa-pencil" aria-hidden="true" style="color: #1daa37" ></i></button>
+                                      &nbsp;&nbsp;&nbsp;
+                                      <a type="click" style="padding:10px;" data-toggle="modal" data-target="#bootstrapModelChapterU"><i class="fa fa-pencil" aria-hidden="true" style="color: #1daa37; cursor: pointer;" (click)="setUpdateChapter(c,i,j);" *ngIf="isAdmin"></i></a>&nbsp;
+                                      <a data-toggle="modal" data-target="#bootstrapModelChapterD" type="click" style="padding:10px;" (click)="setDeleteChapter(c.id)"  *ngIf="isAdmin"><i class="fa fa-trash" aria-hidden="true" style="color: rgb(235, 102, 102); cursor: pointer;" ></i></a>
+                                  </span>
+                                  <!-- <button data-toggle="modal" data-target="#bootstrapModelChapterD" class="float-right edit-button" style="border: none; background-color: transparent; float: right !important; cursor: pointer;" (click)="setDeleteChapter(c.id)"  *ngIf="isAdmin"><i class="fa fa-trash" aria-hidden="true" style="color: rgb(235, 102, 102)"></i></button> -->
+                                    <!-- <button data-toggle="modal" data-target="#bootstrapModelChapterU" class="float-right edit-button" style="border: none; background-color: transparent; float: right !important; cursor: pointer;" (click)="setUpdateChapter(c,i,j);"  *ngIf="isAdmin"><i class="fa fa-pencil" aria-hidden="true" style="color: #1daa37" ></i></button> -->
                                 </div>
                             </div>
                           </div>

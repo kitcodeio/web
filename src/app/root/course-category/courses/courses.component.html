@@ -66,14 +66,14 @@
                                     <p class="mb-0 float-right" style="color:#ccc; font-size:14px;">Updated at {{c.updatedAt | date: 'dd MMM yyyy'}}</p>
                                     <p class="mb-0" style="color:#ccc; font-size: 14px;">Created by <span style="color:#000; font-size: 14px;">{{c.created_by}}</span></p>
     
-                                    <button data-toggle="modal" data-target="#bootstrapModel1" class="float-right" style="border: none; background-color: transparent" (click)="setUpdateCourse(c,i);" *ngIf="user"><i class="fa fa-pencil" aria-hidden="true" style="color: #74d886"></i></button>
                                      <!-- Modal content-->
  
                                 </div>
                                   <div class="card-body">
-                                        <button (click)="setDeleteCourseId(c.id)" class="float-right" style="border: none; background-color: transparent" *ngIf="user" data-toggle="modal" data-target="#bootstrapModel">
+                                        <button (click)="setDeleteCourseId(c.id)" class="float-right" style="border: none; background-color: transparent; cursor: pointer;" *ngIf="user" data-toggle="modal" data-target="#bootstrapModel">
                                             <i class="fa fa-trash" aria-hidden="true" style="color: rgb(235, 102, 102)"></i>
                                         </button>
+                                        <button data-toggle="modal" data-target="#bootstrapModel1" class="float-right" style="border: none; background-color: transparent; cursor: pointer;" (click)="setUpdateCourse(c,i);" *ngIf="user"><i class="fa fa-pencil" aria-hidden="true" style="color: #74d886"></i></button>
                                         <p class="card-text" style="color:#827c7c; font-size: 14px;">
                                         {{c.description}}</p>
                                   </div>
