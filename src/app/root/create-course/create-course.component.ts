@@ -1,8 +1,7 @@
 import { Component, OnInit, ViewChild, ElementRef, NgModule } from '@angular/core';
 import { HttpService } from '../../services/http/http.service';
 import { Router } from '@angular/router';
-import { flatten } from '@angular/compiler';
-import { ToastContainerDirective, ToastrService } from 'ngx-toastr';
+import { ToastrService } from 'ngx-toastr';
 import { NgForm } from '@angular/forms'
 
 
@@ -31,7 +30,7 @@ export class CreateCourseComponent implements OnInit {
   defaultSectionName='a';
   defaultChapterName;
   sectionDescription='a';
-  defaultCourseName='a';
+  defaultCourseName;
   courseName;
   sectionName;
   sectionIndex:number;
@@ -40,7 +39,7 @@ export class CreateCourseComponent implements OnInit {
   chapterName;
   chapterDescription;
   courseDescription;
-  chapterUrl='url';
+  chapterUrl:string;
   index;
   categories=[];
   allImages=[];
@@ -61,20 +60,19 @@ export class CreateCourseComponent implements OnInit {
   ngOnInit() {
     this.defaultCourseName='New Course';
     this.defaultSectionName = 'New Section';
-
+    this.chapterUrl='chapterUrl';
     this.populateImage();
     this.populateCatgory();
   }
 
   chapterForm(i){
+    this.chapterUrl='';
     this.defaultChapterName ='New Chapter';
     this.chapterFlag=true;
     this.sectionFlag=false;
     this.chapterFlag2=true;
-    //this.allSection[i].chapters.push({name:this.defaultChapterName,description:this.chapterDescription, chapterUrl:this.chapterUrl,  section:this.selectSection});
     this.index=i;
     this.chapterName = 'New Chapter';
-
     if(this.sectionId){
       this.http.postchapter('CourseChapter',{
         "section_id": this.sectionId,
@@ -82,6 +80,7 @@ export class CreateCourseComponent implements OnInit {
         "url": this.chapterUrl
     }).subscribe(res=>{
       this.allSection[i].chapters.push(res.entity);
+      this.indexOfChapter=null;
     })
   }
   else{
@@ -111,7 +110,8 @@ else{
 
     // start from last index
     this.indexOfChapter = null;
-  }
+    this.sectionDescription='';
+}
 
   courseForm(){
     this.chapterFlag=false;
@@ -216,7 +216,7 @@ else{
       else{
         id = this.chapId;
       }
-
+      console.log(this.chapterUrl);
       this.http.putData('CourseChapter',{
         "id":id,
         "data":{
@@ -228,11 +228,13 @@ else{
         let len = this.allSection[this.index].chapters.length-1;
         obj = {name:this.chapterName,description:this.chapterDescription, chapterUrl:this.chapterUrl, section:this.selectSection}
         this.allSection[this.index].chapters[len].label=obj.name;
+        this.allSection[this.index].chapters[len].url=obj.chapterUrl;
       }
       else if(this.indexOfChapter || this.indexOfChapter==0)
       {
         obj = {name:this.chapterName,description:this.chapterDescription, chapterUrl:this.chapterUrl,  section:this.selectSection}
         this.allSection[this.indexOfSection].chapters[this.indexOfChapter].label=obj.name;
+        this.allSection[this.indexOfSection].chapters[this.indexOfChapter].url=obj.chapterUrl;
       }
       if(res.status==200){
        this.toastrService.success('updated successfully','Success',{positionClass:'toast-bottom-right'});
@@ -241,7 +243,6 @@ else{
         this.toastrService.error(res.error,'Error',{positionClass:'toast-bottom-right'});
       }
    
-      this.chapterDescription='';
       this.chapterUrl = '';
       this.chapId=null;
     })
@@ -259,12 +260,18 @@ else{
     this.secId=id;
   }
 
-  getChapterId(i,j,id){
+  getChapterId(i,j,c){
+    this.chapterName='';
+    this.chapterUrl='';
     this.chapterFlag=true;
     this.sectionFlag=false;
     this.indexOfChapter=j;
     this.indexOfSection=i;
-    this.chapId = id;
+    this.chapId = c.id;
+    this.chapterName = c.label;
+    this.chapterUrl = c.url;
+    console.log(c);
+    console.log(this.chapterName,this.chapterUrl);
   }
 
   populateCatgory(){

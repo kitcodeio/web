@@ -14,7 +14,7 @@
         <div *ngFor="let c of sec.chapters; let j=index;">
             <div *ngIf="chapterFlag2">
                 <!-- <p><a type="click" style="color: rgb(88, 112, 184)" ><strong class="left-nav-headline" (click)="getChapterId(i,j);">{{i+1}}.{{j+1}}.{{c.name}}</strong></a></p> -->
-                <p><a href="#." data-target="#getKeyInfo" data-toggle="modal" class="text-uppercase getKeyInfo" (click)="getChapterId(i,j,c.id);">&nbsp;{{i+1}}.{{j+1}}.{{c.label}}</a></p>
+                <p><a href="#." data-target="#getKeyInfo" data-toggle="modal" class="text-uppercase getKeyInfo chapter-link" (click)="getChapterId(i,j,c);">&nbsp;{{i+1}}.{{j+1}}.{{c.label}}</a></p>
             </div>
         </div>
       <button class="list-group-item add-section" (click)="chapterForm(i);"><i class="fa fa-plus"></i> Add Chapter</button> 
@@ -122,21 +122,14 @@
                 <div class="col-md-12">
                     <div class="form-group">
                         <label for="form_name">Chapter Title </label>
-                        <input id="form_name" type="text" name="name" class="form-control" placeholder="New Chapter" required="required" data-error="Firstname is required."  [(ngModel)]="chapterName">
+                        <input id="form_name" type="text" name="chapter" class="form-control" placeholder="New Chapter" required="required" data-error="name is required."  [(ngModel)]="chapterName">
                         <div class="help-block with-errors"></div>
                     </div>
                 </div>
-                <!-- <div class="col-md-12">
-                    <div class="form-group">
-                        <label for="form_message">Description</label>
-                        <textarea id="form_message" name="message" class="form-control" placeholder="Description *" rows="4" required="required" data-error="Please,leave us a message." [(ngModel)]="chapterDescription"></textarea>
-                        <div class="help-block with-errors"></div>
-                    </div>
-                </div> -->
                 <div class="col-md-12">
                     <div class="form-group">
                         <label for="form_name">Chapter Url </label>
-                        <input id="form_name" type="text" name="name" class="form-control" placeholder="New Chapter" required="required" data-error="Firstname is required." [(ngModel)]="chapterUrl">
+                        <input id="form_name" type="text" name="url" class="form-control" placeholder="Chapter Url" required="required" data-error="url is required." [(ngModel)]="chapterUrl">
                         <div class="help-block with-errors"></div>
                     </div>
                 </div>
