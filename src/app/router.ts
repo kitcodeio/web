@@ -1,4 +1,4 @@
-import { NgModule } from '@angular/core';
+import { NgModule, Component } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 
 
@@ -17,6 +17,7 @@ import { LandingPageComponent } from './root/landing-page/landing-page.component
 import { CreateCourseComponent } from './root/create-course/create-course.component';
 import { CourseDetailComponent } from './root/course-category/course-detail/course-detail.component';
 import { CourseCategoryComponent } from './root/course-category/course-category.component';
+import { UserProfileComponent } from './root/user-profile/user-profile.component'
 
 const routes: Routes = [
     { path: '', redirectTo: 'root/category', pathMatch: 'full'},
@@ -31,6 +32,7 @@ const routes: Routes = [
         { path: 'dashboard', loadChildren:'src/app/root/dashboard/dashboard.module#DashboardModule', canActivate: [AuthGuard, RBACService] },
         { path: 'image', loadChildren: './root/images/images.module#ImagesModule', canActivate: [AuthGuard, RBACService] },
         { path: 'createCourse', loadChildren: './root/create-course/create-course.module#CreateCourseModule', canActivate: [AuthGuard, RBACService] },
+        { path: 'user/:id', component: UserProfileComponent }
     ]}];
 
 

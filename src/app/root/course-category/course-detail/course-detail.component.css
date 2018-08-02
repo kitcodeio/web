@@ -190,6 +190,7 @@ body {
 .chapter-item.active{
   background-color: #81e0a4;
   border-color: #81e0a4;
+  width: 93%;
 }
 
 .chapter-item:hover{

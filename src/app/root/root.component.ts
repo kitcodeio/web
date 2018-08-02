@@ -51,7 +51,6 @@ export class RootComponent implements OnInit {
       this.flag=true
     } else {
       this.user = this.userInfo.getInfo();
-      // this.url='/root/dashboard';
       this.label = this.user.name;
     }
 

@@ -15,12 +15,14 @@ import { platformBrowserDynamic } from '@angular/platform-browser-dynamic';
 import { MalihuScrollbarModule } from 'ngx-malihu-scrollbar';
 import { ReactiveFormsModule, FormGroup, FormControl, Validators, FormBuilder } from '@angular/forms';
 import { CourseCategoryComponent } from './root/course-category/course-category.component';
+import { UserProfileComponent } from './root/user-profile/user-profile.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     RootComponent,
-    CourseCategoryComponent
+    CourseCategoryComponent,
+    UserProfileComponent
   ],
   imports: [
     BrowserModule,
