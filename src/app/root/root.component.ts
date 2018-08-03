@@ -6,6 +6,7 @@ import { ViewChild, ElementRef, AfterViewInit, HostListener, HostBinding } from 
 import { Observable, Subject } from 'rxjs';
 import { debounceTime, distinctUntilChanged, switchMap } from 'rxjs/operators';
 import { HttpService } from '../services/http/http.service';
+import { ToastrService } from 'ngx-toastr';
 
 @Component({
   selector: 'app-root',
@@ -18,6 +19,18 @@ export class RootComponent implements OnInit {
   @ViewChild('searchResult') searchResult: ElementRef;
   courses: Observable<any[]>;
   private searchTerms = new Subject<string>();
+
+  emailLogin: string;
+  passwordLogin: string;
+
+  error: string;
+  emailReg: string;
+  passwordReg: string;
+  company: string;
+  passwordCon:string;
+  checked:boolean;
+  counter:number=0;
+  regex = new RegExp('^([^0-9!$@#$%^&*\(\)-_+=\[\]~`\<\>,.?\/\'";\{\}|\\]*)$');
 
   userName:string;
   sizeFlag: boolean;
@@ -33,9 +46,9 @@ export class RootComponent implements OnInit {
   image:string;
   flag:boolean;
   windowSize;
-  private isOpen: boolean =false;
+  loginModelFlag: boolean =true;
 
-  constructor(private http: HttpService, private eRef: ElementRef, private router: Router, private userInfo: UserInfoService, private authService: AuthserviceService) {}
+  constructor(private toastrService: ToastrService, private http: HttpService, private eRef: ElementRef, private router: Router, private userInfo: UserInfoService, private authService: AuthserviceService) {}
 
   //Method for search next string
   search(term: string): void {
@@ -44,9 +57,38 @@ export class RootComponent implements OnInit {
 
   ngOnInit() {
 
+    $(function(){
+      		
+      $(document).on('focusout','.md-form-control',function(){	
+        $(this).each(function(){
+          ($(this).val()!="")?$(this).parent('.md-input').find('label').animate({top:'-15px'},300):$(this).parent('.md-input').find('label').animate({top:'10px'},300);
+        });
+      });
+      
+      
+      $(document).on('focus','.md-form-control',function(){	
+        $(this).each(function(){
+          $(this).parent('.md-input').find('label').animate({top:'-15px'},300);
+        });
+      });
+            $(document).on('click','.login-register-button',function(e){
+              e.preventDefault();
+              $('.login-container').fadeOut(200,function(){
+                $('.register-container').fadeIn(200);		
+              }); 
+            });
+            $(document).on('click','.login-sign-button',function(e){
+              e.preventDefault();
+              $('.register-container').fadeOut(200,function(){
+                $('.login-container').fadeIn(200);
+              });
+            });
+          });
+      
+
     this.windowSize = window.screen.width
     if(this.authService.isTokenExpired()){ 
-      this.url = '/login'
+      //this.url = '/login'
       this.label = 'Login/Sign Up';
       this.flag=true
     } else {
@@ -102,4 +144,91 @@ export class RootComponent implements OnInit {
   hideOnClick(){
     $('.search-result').hide();
   }
+
+
+  login(): void {
+    if(this.emailLogin && this.passwordLogin){	  
+      if(this.emailLogin.indexOf('@')!==-1 && this.emailLogin.indexOf('.')){
+        this.authService.login(this.emailLogin, this.passwordLogin)
+          .subscribe(response => { 
+              
+            if(response.error){
+              this.toastrService.error('incorrect password','Error',{positionClass:'toast-bottom-right'});
+            }   
+            else{
+              this.authService.setToken(response.token);
+              window.location.reload();
+            }
+         });
+      } else {
+        this.toastrService.error('Please enter valid email','Error',{positionClass:'toast-bottom-right'});
+      }
+    } else {
+      this.toastrService.error('Please enter all fields','Error', {positionClass:'toast-bottom-right'});
+    }
+  }
+  
+  
+    register(): void {
+      if(this.emailReg && this.company && this.passwordReg && this.passwordCon){
+        if(this.passwordCon==this.passwordReg){
+          if (this.passwordReg.length>=6) {
+            if(this.emailReg.indexOf('@')!==-1 && this.emailReg.indexOf('.')){
+    
+              if(this.checked){
+    
+                this.authService.register(
+                  this.company,
+                  this.emailReg,
+                  this.passwordReg
+                )
+                  .subscribe(response => {
+                    if(!response.error) {
+                      this.emailLogin = this.emailReg;
+                      this.passwordLogin = this.passwordReg;
+                      this.loginModelFlag=false;
+                      this.login();
+                    } else {
+                      this.error = response.error;
+                      this.toastrService.error(response.error,'Error',{positionClass:'toast-bottom-right'});
+                    }
+                 });  
+              } 
+              else{
+                this.toastrService.info('You did not agree to the terms and conditions','Error',{positionClass:'toast-bottom-right'});
+              }  
+            }   
+          }
+          else{
+            this.toastrService.error('Password is too Short ','Error',{positionClass:'toast-bottom-right'});
+          }
+        }
+        else{
+          this.toastrService.error('Password does not match','Error',{positionClass:'toast-bottom-right'});
+        }
+      }
+      else{
+        this.toastrService.error('Please enter all feild','Error',{positionClass:'toast-bottom-right'});
+      }
+    }
+  
+    checkBox(enent){
+      this.counter++;
+      if(this.counter%2==1){
+        this.checked= true;
+      }
+      else{
+        this.checked=false;
+      }
+      console.log(this.counter);
+    }
+  
+    withGoogle(){
+      console.log('google');
+  
+    }
+  
+    withFacebook(){
+      console.log('facebook');
+    }
 }

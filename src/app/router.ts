@@ -30,7 +30,8 @@ const routes: Routes = [
         ]},
         { path: 'kide/:course/:section/:chapter', loadChildren: './root/profile/profile.module#ProfileModule', canActivate: [AuthGuard] },
         { path: 'dashboard', loadChildren:'src/app/root/dashboard/dashboard.module#DashboardModule', canActivate: [AuthGuard, RBACService] },
-        { path: 'image', loadChildren: './root/images/images.module#ImagesModule', canActivate: [AuthGuard, RBACService] },
+        { path: 'list-image', loadChildren:'src/app/root/images/images.module#ImagesModule', canActivate: [AuthGuard, RBACService] },
+        { path: 'create-image', loadChildren: './root/create-image/create-image.module#CreateImageModule', canActivate: [AuthGuard, RBACService] },
         { path: 'createCourse', loadChildren: './root/create-course/create-course.module#CreateCourseModule', canActivate: [AuthGuard, RBACService] },
         { path: 'user/:id', component: UserProfileComponent }
     ]}];

@@ -1,6 +1,6 @@
 <nav class="navbar sticky-top navbar-expand-lg navbar-light bg-white" style="border-bottom:1px solid #f7f7f7;">
         <a class="navbar-brand d-block" href="#"><img src="../../../assets/images/kitcode logo.png" width="137"></a>
-            <a class="nav-link d-lg-none d-block" routerLink="/login" *ngIf="flag && windowSize<=768">Login<span class="sr-only">(current)</span></a>
+            <a routerLink="/login" class="nav-link d-lg-none d-block" *ngIf="flag && windowSize<=768">Login<span class="sr-only">(current)</span></a>
             <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarTogglerDemo01" *ngIf="!flag && windowSize<=768">
               <img class="rounded-circle" style="width:50px;" src="{{user.image}}">
             </button>
@@ -29,7 +29,7 @@
             <a type="click" class="nav-link" href="#" (click)="logout();" *ngIf="!flag && windowSize<=768">Logout<span class="sr-only">(current)</span></a>
           </li>
           <li class="nav-item d-lg-block d-none" *ngIf="flag">
-            <a class="nav-link" routerLink="/login">Login<span class="sr-only">(current)</span></a>
+            <a class="nav-link" routerLink="/login" >Login<span class="sr-only">(current)</span></a>
           </li>
           <li class="nav-item dropdown d-lg-block d-none" *ngIf="!flag" style="background-color: white; cursor: pointer;">
               <img #image class="rounded-circle" style="width:50px;" src="{{user.image}}">
@@ -42,4 +42,5 @@
           </div>
       </div>
     </nav>
+
 <router-outlet></router-outlet>

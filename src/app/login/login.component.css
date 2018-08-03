@@ -395,3 +395,10 @@ button{
     padding-right: 0;
   }
 }
+
+.fa-times{
+  float: right; font-weight: 100;font-size: 35px;margin-right: 10px; margin-top: 10px;
+}
+.fa-times:hover{
+  cursor: pointer;
+}

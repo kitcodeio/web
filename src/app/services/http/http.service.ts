@@ -12,7 +12,8 @@ import { AuthserviceService } from '../auth/authservice.service';
 
 export class HttpService {
 
-  baseUrl = '/'; //local env change url to beta.kitcode.io
+  baseUrl = 'https://beta.kitcode.io/';
+  //baseUrl = '/'; //local env change url to beta.kitcode.io
 
   getData(model: string): Observable<any> {
     return this.http.get(this.baseUrl+'read/api/'+model)

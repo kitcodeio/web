@@ -107,7 +107,7 @@
                       <div class="sections">
                         <div id="accordion">
                           <div class="card mb-5"  *ngFor="let s of allSections;let i=index;">
-                            <div class="card-header bg-white" id="headingOne" data-toggle="collapse" data-target="#collapseOne">
+                            <div class="card-header bg-white" data-toggle="collapse" [attr.data-target]="'#'+i">
                               <h5 class="mb-0">
                                   {{i+1}}. {{s.label}}
                               </h5>
@@ -115,7 +115,7 @@
                               <button class="float-right" style="border: none; background-color: transparent" (click)="setUpdateSection(s,i);"  *ngIf="isAdmin" data-toggle="modal" data-target="#bootstrapModel1"><i class="fa fa-pencil" aria-hidden="true" style="color: #74d886; cursor: pointer;"></i></button>
                               <p>{{s.description}}</p>
                             </div>
-                            <div id="collapseOne" class="collapse show" aria-labelledby="headingOne" data-parent="#accordion">  
+                            <div id="{{i}}" class="collapse show" aria-labelledby="headingOne" data-parent="#accordion">  
                                 <div class="list-group chapterList" id="list-tab" role="tablist"   *ngFor="let c of s.CourseChapters; let j=index;">
                                   <span>
                                     <a type="click" style="display:inline-block;width:90%" class="list-group-item chapter-item active" id="list-home-list" data-toggle="list" href="#list-home" role="tab" aria-controls="home" (click)="toProfile(s.id, j);"><i class="fa fa-play-circle" aria-hidden="true"></i>&nbsp;&nbsp;&nbsp;{{i+1}}.{{j+1}}. {{c.label}}

@@ -1,99 +1,105 @@
-<body>
-<section class="content-section">
-  <div class="container-fluid">
-    <div class="row">
-      <div class="col-lg-6 col-md-6 col-sm-6">
-        <div class="create-image-container">
-          <h5>Creating Image</h5>
-        </div>
-        <div class="row mt-4">
-          <div class="col-lg-6 col-md-6">
-            <div class="form-group">
-              <input type="text" class="image-name-field form-control" placeholder="Enter the Image Name" [(ngModel)]="label">
-            </div>
-          </div>
-          <div class="col-lg-6 col-md-6"></div>
-          <div class="col-lg-3 col-md-3">
-            <p class="mt-1">OS&nbsp;Environment</p>
-          </div>
-          <div class="col-lg-9 col-md-9">
-            <div class="form-group">
-              <select class="select-os" id="exampleFormControlSelect1">
-                <option #linux>Ubuntu</option>
-              </select>
-            </div>
-          </div>
-          <div class="col-lg-12 col-md-12 mt-5">
-            <p>Components</p>
-          </div>
-          <div class="col-lg-12 col-md-12">
-            <ul class="list-inline">
-              <li class="version-select-item list-inline-item">
-                  <select class="select-os" id="exampleFormControlSelect1"  #select (change)="uniqueV();">
-                    <option value="" selected="" disabled="" id="choose_loc">Dependency</option>
-                    <option>Angular</option>
-                    <option>Node</option>
-                    <option>Python</option>
-                    <option>Jupyter</option>
-                    <option>Tensorflow</option>
-                  </select>
-              </li>
-              <li class="version-select-item list-inline-item">
-                  <select class="select-os" id="exampleFormControlSelect1"  #version>
-                    <option value="" selected="" disabled="" id="choose_loc">Version</option>
-                    <option *ngFor="let tool of versionArray">{{ tool }}</option>
-                  </select>
-              </li>
-              <li class="version-select-item list-inline-item">
-                <button class="btn add-component-button" (click)="addTools();">Add</button>
-              </li>
-            </ul>
-            <div class="component-list-container">
-              <ul class="list-group component-list">
-                  <li class='component-list-item list-group-item d-flex justify-content-between align-items-center' *ngFor="let tool of allTools; let i = index"> 
-                    <span>{{tool.sTool}}{{tool.sVersion}}
-                  </span> 
-                  <span class='remove-list-component'> 
-                    <button class="remove-list-icon" (click)="removeTools(i);">
-                      <i class="fa fa-times-circle-o" aria-hidden="true"></i>
-                    </button>
-                    </span>
-                </li>
-              </ul>
-            </div>
+
+  <section class="container-fluid" style="margin-top: 20px; margin-left: 20px;">
+      <div class="row no-gutters">
+        
+	  <div class="col-lg-12 col-md-12 col-sm-12">
+	  <div class="create-image-container">
+        <!-- <button class="btn create-image-button" (click)="createImage();"><i class="fa fa-plus" aria-hidden="true"></i> Image</button> &nbsp;
+        <button class="btn create-image-button" data-toggle="modal" data-target="#bootstrapModel"><i class="fa fa-plus" aria-hidden="true"></i> Category</button>&nbsp;
+        <button class="btn create-image-button" (click)="createCourse();"><i class="fa fa-plus" aria-hidden="true"></i> Courses</button> -->
+      </div>
+	  </div>
+      </div>
+      <div class="mt-4"></div>
+      <div class="row no-gutters">
+        <div class="col-lg-3 col-md-3 col-sm-3" *ngFor="let image of allImages; let i=index">
+          <div class="card image-container">
+            <!-- <img class="card-img-top" src="../../../assets/images/image.png" alt="Card image cap"> -->
+            <div class="card-body"><!--
+              <a href="#" class="float-right crud-menu" (click)="deleteImage(image.id);">
+                <i class="crud-menu-delete fa fa-trash" aria-hidden="true"></i>
+	      </a>-->
+              <h5 class="card-title" #ref>{{image.label}}</h5>
+              <p class="image-desc-container card-text">{{image.description}}</p>
+              <!-- <a (click)="getVideos(i);">&nbsp;&nbsp;&nbsp;Get started</a><br> -->
+              <i class="fa fa-unlock-alt" aria-hidden="true"></i><a href="#." data-target="#getKeyInfo" data-toggle="modal" class="text-uppercase getKeyInfo" (click)="change(image);">&nbsp;Key Info</a>
+            </div> 
+            <!-- <div class="row bg-light no-gutters image-stats-container">
+              <div class="col-lg-4 col-md-4 col-lg-4">
+                <div class="text-center p-2">
+                  <div class="image-running-info">Running<br/>5</div>
+                </div>
+              </div>
+              <div class="col-lg-4 col-md-4 col-lg-4">
+                <div class="text-center p-2">
+                  <div class="image-idle-info">Idle<br/>12</div>
+                </div>
+              </div>
+              <div class="col-lg-4 col-md-4 col-lg-4">
+                <div class="text-center p-2">
+                  <div class="image-stop-info">Stopped<br/>10</div>
+                </div>
+              </div>
+            </div> -->
           </div>
           <br>
-          <div class="col-lg-12 col-md-12 mt-5">
-            <button class="btn generate-button" (click)="createDockerfile();">Generate</button>
+        </div>
+      </div>
+  </section>
+
+  <!--modal for get key information-->
+  <div class="modal fade" id="getKeyInfo" tabindex="-1" role="dialog" *ngIf="allImages">
+    <div class="modal-dialog" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="exampleModalLabel">{{selected?.label}}</h5>
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+        <div class="modal-body">
+          <p>Image Id:  {{selected?.id}}</p>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+        </div>
+      </div>
+    </div>
+  </div>
+  <!-- Open model for Add category -->
+
+<!-- <button type="button" class="btn btn-info btn-lg" data-toggle="modal" data-target="#bootstrapModel">click to open</button> -->
+<!-- Modal section -->
+<div id="bootstrapModel" class="modal fade" role="dialog">
+    <div class="modal-dialog">
+      <!-- Modal content-->
+      <div class="modal-content">
+        <div class="modal-header">
+          <button type="button" class="close" data-dismiss="modal">&times;</button>
+        </div>
+        <h4 class="modal-title" style="margin-left: 16px;">Add Category</h4>
+  <!-- model body section -->
+        <div class="modal-body">
+          <input id="form_name" type="text" name="name" class="form-control" placeholder="Course Category" required="required" data-error="Firstname is required." [(ngModel)]="categoryName">
+          <br>
+          <input id="form_name" type="text" name="url" class="form-control" placeholder="Category image url" required="required" data-error="Firstname is required." [(ngModel)]="catImageUrl">
+          <br>
+          <div class="col-md-12">
+            <div class="form-group">
+              <label>Visibility</label> &nbsp;
+              <select id="country" name="country" #cat>
+                <option disabled>--select--</option>
+                <option>true</option>
+                <option>false</option>
+              </select> 
+              <div class="help-block with-errors"></div>
+            </div>
           </div>
         </div>
-      </div>
-      <div class="col-lg-6 col-md-6 col-sm-6">
-        <div>
-          <ace-editor
-       [(text)]="text"
-        #editor style="height:400px;"></ace-editor>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+          <button type="button" class="btn btn-default" data-dismiss="modal" (click)="addCategory();">Save</button>
         </div>
-        <br/>
-          <button class="btn save-image-button mt-3" (click)="createImage();">Save</button>
       </div>
     </div>
   </div>
-</section>
-
-<!--image upload and color change section modal section-->
-<div class="modal fade" id="getKeyInfo" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-  <div class="modal-dialog" role="document">
-    <div class="modal-content">
-      <div class="modal-header" style="border:none;">
-        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-          <span aria-hidden="true"><i class="fa fa-times-circle" aria-hidden="true"></i></span>
-        </button>
-      </div>
-      <div class="modal-body">
-      </div>
-    </div>
-  </div>
-</div>
-</body>
-<div toastContainer ></div>

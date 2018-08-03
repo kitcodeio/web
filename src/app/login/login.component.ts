@@ -3,7 +3,7 @@ import { Router, ActivatedRoute} from '@angular/router';
 import { AuthserviceService } from '../services/auth/authservice.service';
 import { ToastrService } from 'ngx-toastr';
 import { UserInfoService } from '../services/userInfo/user-info.service';
-
+import {Location} from '@angular/common';
 
 @Component({
   selector: 'app-login',
@@ -23,7 +23,7 @@ export class LoginComponent implements OnInit {
   counter:number=0;
   regex = new RegExp('^([^0-9!$@#$%^&*\(\)-_+=\[\]~`\<\>,.?\/\'";\{\}|\\]*)$');
 
-  constructor(private userInfo: UserInfoService, private router: Router, private authService: AuthserviceService, private route: ActivatedRoute, private toastrService: ToastrService) {
+  constructor(private _location:Location, private userInfo: UserInfoService, private router: Router, private authService: AuthserviceService, private route: ActivatedRoute, private toastrService: ToastrService) {
   
    }
 
@@ -144,6 +144,11 @@ login(): void {
       this.checked=false;
     }
     console.log(this.counter);
+  }
+
+
+  backClicked() {
+    this._location.back();
   }
 
   withGoogle(){

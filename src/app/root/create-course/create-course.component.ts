@@ -308,5 +308,4 @@ else{
       $(id).addClass('selected');
     });
   }
-
 }

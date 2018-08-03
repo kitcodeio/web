@@ -164,4 +164,11 @@ export class CourseDetailComponent implements OnInit {
       }
     })
   }
+
+  highlight(id: string): void {
+    setTimeout(()=>{
+      $('.selected').removeClass('selected');
+      $(id).addClass('selected');
+    });
+  }
 }
