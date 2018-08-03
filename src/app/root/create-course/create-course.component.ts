@@ -54,6 +54,7 @@ export class CreateCourseComponent implements OnInit {
   flag:boolean=false;
   creared_by:string;
   chapters=[];
+  sectionButtonFlag:boolean;
 
   constructor(private http: HttpService, private router: Router, private toastrService: ToastrService) { }
 
@@ -64,6 +65,7 @@ export class CreateCourseComponent implements OnInit {
     this.sectionDescription= 'Section Description'
     this.populateImage();
     this.populateCatgory();
+    this.sectionButtonFlag=false;
   }
 
   chapterForm(i){
@@ -82,6 +84,7 @@ export class CreateCourseComponent implements OnInit {
     }).subscribe(res=>{
       this.allSection[i].chapters.push(res.entity);
       this.indexOfChapter=null;
+      this.highlight('#'+i+(this.allSection[i].chapters.length - 1));
     })
   }
   else{
@@ -103,6 +106,7 @@ export class CreateCourseComponent implements OnInit {
     this.sectionName= res.entity.label;
     this.sectionId=res.entity.id;
     this.allSection.push({section:res.entity, chapters: []});
+    this.highlight('#'+(this.allSection.length-1));
   })
  }
 else{
@@ -149,6 +153,7 @@ else{
         this.courseId=res.entity.id;
         if(res.status==201){
           this.toastrService.success('Course successfully created','success',{positionClass:'toast-bottom-right'});
+          this.sectionButtonFlag=true;
         }
         else{
           this.toastrService.error(res.error,'Error',{positionClass:'toast-bottom-right'});
@@ -206,7 +211,6 @@ else{
     
     id = null;
     this.indexOfSection=null;
-    this.sectionDescription='';
 }
   
   addChapter(){
@@ -259,13 +263,14 @@ else{
   }
 
   getSectionId(i,s){
-    this.sectionDescription='';
     this.sectionFlag=true;
     this.chapterFlag=false;
     this.sectionIndex=i;
     this.secId=s.id;
     this.sectionName=s.label;
     this.sectionDescription=s.description;
+    console.log(s);
+    this.highlight('#'+i);
   }
 
   getChapterId(i,j,c){
@@ -278,6 +283,7 @@ else{
     this.chapId = c.id;
     this.chapterName = c.label;
     this.chapterUrl = c.url;
+    this.highlight('#'+i+j);
     console.log(c);
     console.log(this.chapterName,this.chapterUrl);
   }
@@ -295,4 +301,12 @@ else{
     })
 
   }
+
+  highlight(id: string): void {
+    setTimeout(()=>{
+      $('.selected').removeClass('selected');
+      $(id).addClass('selected');
+    });
+  }
+
 }

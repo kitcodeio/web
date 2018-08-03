@@ -114,7 +114,7 @@ export class ImagesComponent implements OnInit, AfterViewInit {
     });
 }
 
-//Create image
+  //Create image
   createImage() {
     if(this.label && this.tool.nativeElement.value && this.flag || this.editor.value){
       this.http.postData('Image',{

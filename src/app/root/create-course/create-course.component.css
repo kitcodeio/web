@@ -75,3 +75,9 @@ input[type=submit]:hover {
 .col-lg-12{
 	width:100%;
 }
+
+.selected {
+    background-color: #45a049;
+    padding: 10px;
+    color: #CD853F;
+}

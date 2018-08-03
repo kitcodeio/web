@@ -7,11 +7,11 @@
   <div class="course-left-nav">
 <!-- <p><a type="click" style="color: rgb(3, 47, 177)"><strong class="left-nav-headline" (click)="courseForm();">{{defaultCourseName}}</strong></a></p> -->
 <p><a href="#." data-target="#getKeyInfo" data-toggle="modal" class="text-uppercase getKeyInfo" (click)="courseForm();">&nbsp;{{defaultCourseName}}</a></p>
-<div class="panel panel-default"  *ngFor="let sec of allSection; let i=index;">
+<div class="panel panel-default" id="{{i}}" *ngFor="let sec of allSection; let i=index;">
     <div class="panel-heading" *ngIf="chapterFlag1">
         <!-- <p><a type="click" style="color: rgb(45, 81, 189)" ><strong class="left-nav-headline" (click)="getSectionId(i);">{{i+1}}.{{sec.name}}</strong></a></p> -->
         <p><a href="#." data-target="#getKeyInfo" data-toggle="modal" class="text-uppercase getKeyInfo" (click)="getSectionId(i,sec.section);">&nbsp;{{i+1}}.{{sec.section.label}}</a></p>
-        <div *ngFor="let c of sec.chapters; let j=index;">
+        <div id="{{i}}{{j}}" *ngFor="let c of sec.chapters; let j=index;">
             <div *ngIf="chapterFlag2">
                 <!-- <p><a type="click" style="color: rgb(88, 112, 184)" ><strong class="left-nav-headline" (click)="getChapterId(i,j);">{{i+1}}.{{j+1}}.{{c.name}}</strong></a></p> -->
                 <p><a href="#." data-target="#getKeyInfo" data-toggle="modal" class="text-uppercase getKeyInfo chapter-link" (click)="getChapterId(i,j,c);">&nbsp;{{i+1}}.{{j+1}}.{{c.label}}</a></p>
@@ -22,7 +22,7 @@
   </div>
   <br>
 <div class="panel panel-default">
-    <div class="panel-heading"><button class="list-group-item add-section" (click)="sectionForm();"><i class="fa fa-plus"></i> Add Section</button></div>
+    <div class="panel-heading"><button class="list-group-item add-section" (click)="sectionForm();" *ngIf="sectionButtonFlag"><i class="fa fa-plus"></i> Add Section</button></div>
   </div>
 </div>
 </div>
