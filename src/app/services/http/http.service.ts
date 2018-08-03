@@ -12,14 +12,10 @@ import { AuthserviceService } from '../auth/authservice.service';
 
 export class HttpService {
 
-  baseUrl = 'https://beta.kitcode.io/';
-  url ='https://beta.kitcode.io/'
-  Url:any;
-  lastUrl;any;
-
+  baseUrl = '/'; //local env change url to beta.kitcode.io
 
   getData(model: string): Observable<any> {
-    return this.http.get(this.url+'read/api/'+model)
+    return this.http.get(this.baseUrl+'read/api/'+model)
       .pipe(catchError((error)=>{return of(error);}));
   }
   
@@ -29,25 +25,25 @@ export class HttpService {
   }
 
   postData(model: string, data:any): Observable<any> {
-    return this.http.post(this.url+'create/api/'+model,data)
+    return this.http.post(this.baseUrl+'create/api/'+model,data)
       .pipe(catchError((error)=>{return of(error);}));
   }
 
   postCourse(model: string, data:any): Observable<any> {
-    return this.http.post(this.url+'create/course/'+model,data)
+    return this.http.post(this.baseUrl+'create/course/'+model,data)
       .pipe(catchError((error)=>{return of(error);}));
   }
   postsection(model: string, data:any): Observable<any> {
-    return this.http.post(this.url+'create/course/'+model,data)
+    return this.http.post(this.baseUrl+'create/course/'+model,data)
       .pipe(catchError((error)=>{return of(error);}));
   }
 
   postchapter(model:string, data:any): Observable<any>{
-    return this.http.post(this.url+'create/course/'+model,data)
+    return this.http.post(this.baseUrl+'create/course/'+model,data)
     .pipe(catchError((error)=>{return of(error);}))
   }
   postcategory(model:string, data:any): Observable<any>{
-    return this.http.post(this.url+'create/course/'+model,data)
+    return this.http.post(this.baseUrl+'create/course/'+model,data)
     .pipe(catchError((error)=>{return of(error);}))
   }
   
@@ -61,42 +57,42 @@ export class HttpService {
       .pipe(catchError((error)=>{return of(error);}));
   }
   getCourse(model: string): Observable<any> {
-    return this.http.get(this.url+'read/'+model)
+    return this.http.get(this.baseUrl+'read/'+model)
     .pipe(catchError((error)=>{return of(error);}));
   }
   getCourseSection(model: string, id:number): Observable<any> {
-    return this.http.get(this.url+'read/course/'+model+'/'+id)
+    return this.http.get(this.baseUrl+'read/course/'+model+'/'+id)
     .pipe(catchError((error)=>{return of(error);}));
   }
   getcategory(model:string):Observable<any>{
-    return this.http.get(this.url+'read/course/'+model)
+    return this.http.get(this.baseUrl+'read/course/'+model)
     .pipe(catchError((error)=>{return of(error);}));
   }
 
   getChapter(model: string, id:number): Observable<any> {
-    return this.http.get(this.url+'read/course/'+model+'/'+id)
+    return this.http.get(this.baseUrl+'read/course/'+model+'/'+id)
     .pipe(catchError((error)=>{return of(error);}));
   }
 
   getDataWithId(model:string,id:number):Observable<any>{
-    return this.http.get(this.url+'read/course/'+model+'/'+id)
+    return this.http.get(this.baseUrl+'read/course/'+model+'/'+id)
     .pipe(catchError((error)=>{return of(error);}));
   }
 
   searchCourse(term: string):Observable<any> {
-    return this.http.get(this.url+'search/course?term='+term)
+    return this.http.get(this.baseUrl+'search/course?term='+term)
     .pipe(catchError((error)=>{return of(error);}));
   }
  //=======================Container Creation API=======================//
   
   getContainer(id: number):Observable<any>{
-	  return this.http.post(this.url+'create/api/Container', {course_id: id})
+	  return this.http.post(this.baseUrl+'create/api/Container', {course_id: id})
 	  .pipe(catchError((error)=>{return of(error);}));
   }
 
   //=======================get one course detail=======================//
   getCoursePurchaseDetails(course_id:number): Observable<any>{
-    let url = this.url+'read/course/one/Course/'+course_id;
+    let url = this.baseUrl+'read/course/one/Course/'+course_id;
     if(!this.auth.isTokenExpired()){
       let user = this.auth.getUserData();
       url = url + '?id='+user.id;
@@ -106,7 +102,7 @@ export class HttpService {
   }
 
   subscribeCourse(course_id:number): Observable<any>{
-    return this.http.get(this.url+'course/signup'+'/'+course_id)
+    return this.http.get(this.baseUrl+'course/signup'+'/'+course_id)
     .pipe(catchError((error)=>{return of(error);}));
   }
 
