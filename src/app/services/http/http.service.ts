@@ -5,7 +5,6 @@ import { catchError, map, tap } from 'rxjs/operators';
 
 import { CustomHttpService } from '../custom-http/custom-http.service';
 import { AuthserviceService } from '../auth/authservice.service';
-import { UrlServiceService } from '../url-service/url-service.service';
 
 @Injectable({
   providedIn: 'root'
@@ -108,7 +107,7 @@ export class HttpService {
 
   constructor(private http:CustomHttpService, private auth: AuthserviceService) {
     let url = window.location.href;
-    if(url.includes('localhost')) this.baseUrl = 'https://staging.kitcode.io/';
+    if(url.includes('localhost')) this.baseUrl = 'https://beta.kitcode.io/';
     else this.baseUrl = '/';
   }
 }
