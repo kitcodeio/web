@@ -32,6 +32,9 @@ export class CourseDetailComponent implements OnInit {
   courseDetail: Course = {} as Course;
   section: Section = {} as Section;
   chapter: Chapter = {} as Chapter;
+  deletedSectionIndex:number;
+  deletedChapterIndex:number;
+  deletedSectionIndexWithChapter:number;
 
   constructor(private authService: AuthserviceService, private toastrService: ToastrService, private userInfo: UserInfoService, private route:ActivatedRoute, private http: HttpService, private scrollbarService: MalihuScrollbarService, private router: Router) { }
 
@@ -79,18 +82,21 @@ export class CourseDetailComponent implements OnInit {
     else alert('Subscribe the course first');
   }
 
-  setDeleteSectionId(id){
+  setDeleteSectionId(id,index){
     this.deleteSectionId = id;
+    this.deletedSectionIndex=index;
   }
 
-  setDeleteChapter(id){
+  setDeleteChapter(id,secIndex,chapIndex){
     this.deleteChapterId = id
+    this.deletedSectionIndexWithChapter=secIndex;
+    this.deletedChapterIndex=chapIndex;
   }
 
   deleteSection(){
     this.http.deleteData('CourseSection', this.deleteSectionId)
     .subscribe(res=>{
-      
+      this.allSections.splice(this.deletedSectionIndex,1);
     })
   }
 
@@ -112,7 +118,6 @@ export class CourseDetailComponent implements OnInit {
     id:this.section.id,
     data:this.section
 }).subscribe(res=>{
-  console.log(res);
   if(res.status===200){
     this.toastrService.success(res.message,'Successs',{positionClass:'toast-bottom-right'});
     this.allSections[this.updateIndex] = this.section;
@@ -125,12 +130,10 @@ export class CourseDetailComponent implements OnInit {
   }
 
   updateChapter(){
-    console.log('hi..')
     this.http.putData('CourseChapter',{
       id:this.chapter.id,
       data:this.chapter
   }).subscribe(res=>{
-    console.log(res)
     if(res.status===200){
       this.toastrService.success(res.message,'Successs',{positionClass:'toast-bottom-right'});
       this.allSections[this.updateSectionIndex].CourseChapters[this.updateChapterIndex]= this.chapter;
@@ -145,7 +148,7 @@ export class CourseDetailComponent implements OnInit {
   deleteChapter(){
     this.http.deleteData('CourseChapter', this.deleteChapterId)
     .subscribe(res=>{ 
-      console.log(res);
+      this.allSections[this.deletedSectionIndexWithChapter].CourseChapters.splice(this.deletedChapterIndex,1);
     })
   }
 

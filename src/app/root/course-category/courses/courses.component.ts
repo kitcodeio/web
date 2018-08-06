@@ -24,6 +24,7 @@ export class CoursesComponent implements OnInit {
   updateIndex: number;
   deleteCourseId: number;
   course: Course = {} as Course;
+  deletedCourseIndex:number;
 
   constructor(private dataService: DataService, private authService: AuthserviceService, private toastrService: ToastrService, private eleRef:ElementRef, private userInfo: UserInfoService, private route: ActivatedRoute,private router: Router, private http: HttpService, private scrollbarService: MalihuScrollbarService) { }
 
@@ -52,6 +53,7 @@ export class CoursesComponent implements OnInit {
   deleteCourse(){
     this.http.deleteData('Course', this.deleteCourseId)
     .subscribe(res=>{
+      this.allCourses.splice(this.deletedCourseIndex,1);
     })
   }
 
@@ -70,8 +72,9 @@ export class CoursesComponent implements OnInit {
     });
   }
 
-  setDeleteCourseId(id: number): void{
+  setDeleteCourseId(id: number,index: number): void{
     this.deleteCourseId = id;
+    this.deletedCourseIndex= index;
   }
 
   setUpdateCourse(course: Course,index:number): void {
