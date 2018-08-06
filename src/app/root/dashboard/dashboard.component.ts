@@ -43,14 +43,14 @@ export class DashboardComponent implements OnInit {
 
   populateImage(){
 
-    this.http.getData('Image')
-    .subscribe((res) => {
-      this.allImages=res.entity;
-      if(this.allImages.length==0){
-        this.emptyMessage='you do not have any image';
-        this.flag=true;
-      }
-    })
+    // this.http.getData('Image')
+    // .subscribe((res) => {
+    //   this.allImages=res.entity;
+    //   if(this.allImages.length==0){
+    //     this.emptyMessage='you do not have any image';
+    //     this.flag=true;
+    //   }
+    // })
 
   }
 

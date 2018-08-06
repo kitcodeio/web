@@ -1,0 +1,46 @@
+<div class="container">
+    <button style="background-color: transparent; border: 1px solid #72d5a4; color: #72d5a4; margin-top: 1%;" class="btn create-image-button" data-toggle="modal" data-target="#bootstrapModel"><i class="fa fa-plus" aria-hidden="true"></i> Sub Domain</button>&nbsp;
+  <br>
+    <div style="">
+        <h4>Sub Domain List</h4>
+        <table class="table">
+            <thead class="table-head">
+                <tr>
+                    <th>Id</th>
+                    <th>Sub Domain</th>
+                    <th>Occupied</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr *ngFor="let domain of allSubDomain; let i = index">
+                    <th scope="row">{{domain.id}}</th>
+                    <td>{{domain.salt}}</td>
+                    <td>{{domain.occupied}}</td>
+                    <td>
+                        <!-- <span title="Delete Domain" class="glyphicon glyphicon-edit"><i class="fa fa-trash" aria-hidden="true" style="color: rgb(235, 102, 102);cursor: pointer;" data-toggle="modal" data-target="#bootstrapModel"></i></span>&nbsp;&nbsp;&nbsp;&nbsp;
+                        <span style="color:red;" class="glyphicon glyphicon-trash"></span> -->
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+</div>
+
+<div id="bootstrapModel" class="modal fade" role="dialog">
+    <div class="modal-dialog">
+      <!-- Modal content-->
+      <div class="modal-content">
+        <div class="modal-header">
+        </div>
+        <h5 class="modal-title" style="margin-left: 16px;">Create Sub-Domain</h5>
+  <!-- model body section -->
+        <div class="modal-body">
+          <input id="form_name" type="text" name="chapterName" class="form-control" placeholder="Sub Domain" required="required" data-error="Domain is required." [(ngModel)]="domainName">
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+          <button type="button" class="btn btn-primary" data-dismiss="modal" (click)="addSubDomain();">Submit</button>
+        </div>
+      </div>
+    </div>
+  </div> 

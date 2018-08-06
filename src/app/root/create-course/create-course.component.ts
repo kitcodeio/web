@@ -225,7 +225,6 @@ else{
       else{
         id = this.chapId;
       }
-      console.log(this.chapterUrl);
       this.http.putData('CourseChapter',{
         "id":id,
         "data":{
@@ -269,7 +268,6 @@ else{
     this.secId=s.id;
     this.sectionName=s.label;
     this.sectionDescription=s.description;
-    console.log(s);
     this.highlight('#'+i);
   }
 
@@ -284,8 +282,6 @@ else{
     this.chapterName = c.label;
     this.chapterUrl = c.url;
     this.highlight('#'+i+j);
-    console.log(c);
-    console.log(this.chapterName,this.chapterUrl);
   }
 
   populateCatgory(){

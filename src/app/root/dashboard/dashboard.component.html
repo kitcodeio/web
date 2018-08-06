@@ -1,19 +1,20 @@
 <div class="sidebar">
   <ul>
     <li>
-      <a title="Create Image" routerLink="/root/create-image">
+      <a title="Create Image" routerLink="/root/dashboard/create-image">
         <i class="fa fa-archive" aria-hidden="true"></i>
       </a>
     </li>
     <li>
-      <a title="Create Course" routerLink="/root/createCourse">
+      <a title="Create Course" routerLink="/root/dashboard/createCourse">
         <i class="fa fa-book" aria-hidden="true"></i>
       </a>
     </li>
-    <!-- <li>
-      <a>
+    <li>
+      <a title="Create Sub Domain" routerLink="/root/dashboard/sub-domain">
         <i class="fa fa-globe" aria-hidden="true"></i>
       </a>
-    </li> -->
+    </li>
   </ul>
 </div>
+<router-outlet></router-outlet>

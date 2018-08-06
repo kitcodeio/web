@@ -8,6 +8,7 @@ import { AuthService } from "angularx-social-login";
 import { FacebookLoginProvider, GoogleLoginProvider, LinkedInLoginProvider } from "angularx-social-login";
 import { Http } from '@angular/http';
 import { async } from '@angular/core/testing';
+import { SocialUser } from "angularx-social-login";
 
 @Component({
   selector: 'app-login',
@@ -27,11 +28,14 @@ export class LoginComponent implements OnInit {
   counter:number=0;
   regex = new RegExp('^([^0-9!$@#$%^&*\(\)-_+=\[\]~`\<\>,.?\/\'";\{\}|\\]*)$');
 
-  constructor(private _location:Location, private userInfo: UserInfoService, private router: Router, private authService: AuthserviceService, private route: ActivatedRoute, private toastrService: ToastrService) {
+  //For Social login
+  private user: SocialUser;
+  private loggedIn: boolean;
+
+  constructor(private authSocialService: AuthService, private _location:Location, private userInfo: UserInfoService, private router: Router, private authService: AuthserviceService, private route: ActivatedRoute, private toastrService: ToastrService) {
    }
 
   ngOnInit() {
-
     
     $(function(){
       		
@@ -146,7 +150,6 @@ login(): void {
     else{
       this.checked=false;
     }
-    console.log(this.counter);
   }
 
 
@@ -155,16 +158,28 @@ login(): void {
   }
 
   signInWithGoogle(): void {
+    this.authSocialService.signIn(GoogleLoginProvider.PROVIDER_ID);
+    
+    this.authSocialService.authState.subscribe((user) => {
+      this.user = user;
+      this.loggedIn = (user != null);
+    });
   }
  
   signInWithFB(): void {
-    console.log(this.authService.fbLogin());
+    this.authSocialService.signIn(FacebookLoginProvider.PROVIDER_ID);
+    
+    this.authSocialService.authState.subscribe((user) => {
+      this.user = user;
+      this.loggedIn = (user != null);
+    });
   }
   
   signInWithLinkedIn(): void {
+    this.authSocialService.signIn(LinkedInLoginProvider.PROVIDER_ID);
   }  
  
   signOut(): void {
-    //this.authSocialService.signOut();
+    this.authSocialService.signOut();
   }
 }

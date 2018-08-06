@@ -18,6 +18,7 @@ import { CreateCourseComponent } from './root/create-course/create-course.compon
 import { CourseDetailComponent } from './root/course-category/course-detail/course-detail.component';
 import { CourseCategoryComponent } from './root/course-category/course-category.component';
 import { UserProfileComponent } from './root/user-profile/user-profile.component'
+import { SubDomainComponent } from './sub-domain/sub-domain.component';
 
 const routes: Routes = [
     { path: '', redirectTo: 'root/category', pathMatch: 'full'},
@@ -29,10 +30,14 @@ const routes: Routes = [
             { path: 'chapter/:id', loadChildren: './root/course-category/course-detail/course-detail.module#CourseDetailModule'}
         ]},
         { path: 'kide/:course/:section/:chapter', loadChildren: './root/profile/profile.module#ProfileModule', canActivate: [AuthGuard] },
-        { path: 'dashboard', loadChildren:'src/app/root/dashboard/dashboard.module#DashboardModule', canActivate: [AuthGuard, RBACService] },
+        { path: 'dashboard', component:DashboardComponent, canActivate: [AuthGuard, RBACService],children:[
+            { path: 'create-image', loadChildren: './root/create-image/create-image.module#CreateImageModule' },
+            { path: 'createCourse', loadChildren: './root/create-course/create-course.module#CreateCourseModule' },
+            { path: 'sub-domain', component: SubDomainComponent }
+        ] },
         { path: 'list-image', loadChildren:'src/app/root/images/images.module#ImagesModule', canActivate: [AuthGuard, RBACService] },
-        { path: 'create-image', loadChildren: './root/create-image/create-image.module#CreateImageModule', canActivate: [AuthGuard, RBACService] },
-        { path: 'createCourse', loadChildren: './root/create-course/create-course.module#CreateCourseModule', canActivate: [AuthGuard, RBACService] },
+        
+        
         { path: 'user/:id', component: UserProfileComponent }
     ]}];
 

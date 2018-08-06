@@ -17,14 +17,32 @@ import { CourseCategoryComponent } from './root/course-category/course-category.
 import { UserProfileComponent } from './root/user-profile/user-profile.component';
 import { SocialLoginModule, AuthServiceConfig } from "angularx-social-login";
 import { GoogleLoginProvider, FacebookLoginProvider, LinkedInLoginProvider} from "angularx-social-login";
-import { FacebookModule } from 'ngx-facebook';
+import { SubDomainComponent } from './sub-domain/sub-domain.component';
+import { DashboardComponent } from './root/dashboard/dashboard.component';
+
+let config = new AuthServiceConfig([
+  {
+    id: GoogleLoginProvider.PROVIDER_ID,
+    provider: new GoogleLoginProvider("35446698823-4veieo9dr53l44jc4fqkts4m6jf6vs1d.apps.googleusercontent.com")
+  },
+  {
+    id: FacebookLoginProvider.PROVIDER_ID,
+    provider: new FacebookLoginProvider("248217116002964")
+  }
+]);
+ 
+export function provideConfig() {
+  return config;
+}
 
 @NgModule({
   declarations: [
     AppComponent,
     RootComponent,
     CourseCategoryComponent,
-    UserProfileComponent
+    UserProfileComponent,
+    SubDomainComponent,
+    DashboardComponent
   ],
   imports: [
     BrowserModule,
@@ -39,10 +57,14 @@ import { FacebookModule } from 'ngx-facebook';
       toastComponent: ToastNoAnimation,preventDuplicates: true,
     }),
     MalihuScrollbarModule.forRoot(),
-    FacebookModule.forRoot(),
+    SocialLoginModule
 
   ],
-  providers: [AuthserviceService
+  providers: [AuthserviceService,
+    {
+      provide: AuthServiceConfig,
+      useFactory: provideConfig
+    }
   ],
   bootstrap: [AppComponent]
 })

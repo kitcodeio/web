@@ -5,7 +5,7 @@ import { HttpModule, Http } from '@angular/http';
 import { catchError, map, tap } from 'rxjs/operators';
 import * as jwt_decode from 'jwt-decode';
 import { decode } from '@angular/router/src/url_tree';
-import { FacebookService, LoginResponse, LoginOptions, UIResponse, UIParams, FBVideoComponent } from 'ngx-facebook';
+
 
 
 @Injectable({
@@ -13,31 +13,12 @@ import { FacebookService, LoginResponse, LoginOptions, UIResponse, UIParams, FBV
 })
 export class AuthserviceService {
   baseUrl: string;
-  constructor(private http: HttpClient, private fb: FacebookService) {
+  constructor(private http: HttpClient) {
     let url = window.location.href;
     if(url.includes('localhost')) this.baseUrl = 'https://staging.kitcode.io/';
     else this.baseUrl = '/';
-    fb.init({
-      appId: '248217116002964',
-      version: 'v2.9'
-    });
+   
   }
-
-  fbLogin(){
-    this.fb.login()
-      .then((res: LoginResponse) => {
-        console.log(res.authResponse.accessToken);
-        return res.authResponse.accessToken;
-      })
-      .catch(this.handleError);
-  }
-
-
-  private handleError(error: any): Promise<any> {
-    console.error('An error occurred', error); // for demo purposes only
-    return Promise.reject(error.message || error);
- }
-
 
   login(email: string, password: string): Observable<any> {
     return this.http.post(this.baseUrl+'login', {
