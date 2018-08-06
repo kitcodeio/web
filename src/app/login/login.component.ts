@@ -6,6 +6,8 @@ import { UserInfoService } from '../services/userInfo/user-info.service';
 import {Location} from '@angular/common';
 import { AuthService } from "angularx-social-login";
 import { FacebookLoginProvider, GoogleLoginProvider, LinkedInLoginProvider } from "angularx-social-login";
+import { Http } from '@angular/http';
+import { async } from '@angular/core/testing';
 
 @Component({
   selector: 'app-login',
@@ -25,8 +27,7 @@ export class LoginComponent implements OnInit {
   counter:number=0;
   regex = new RegExp('^([^0-9!$@#$%^&*\(\)-_+=\[\]~`\<\>,.?\/\'";\{\}|\\]*)$');
 
-  constructor(private authSocialService: AuthService,private _location:Location, private userInfo: UserInfoService, private router: Router, private authService: AuthserviceService, private route: ActivatedRoute, private toastrService: ToastrService) {
-  
+  constructor(private _location:Location, private userInfo: UserInfoService, private router: Router, private authService: AuthserviceService, private route: ActivatedRoute, private toastrService: ToastrService) {
    }
 
   ngOnInit() {
@@ -154,20 +155,16 @@ login(): void {
   }
 
   signInWithGoogle(): void {
-    console.log('hi..')
-    this.authSocialService.signIn(GoogleLoginProvider.PROVIDER_ID);
   }
  
   signInWithFB(): void {
-    this.authSocialService.signIn(FacebookLoginProvider.PROVIDER_ID);
-    console.log()
+    console.log(this.authService.fbLogin());
   }
   
   signInWithLinkedIn(): void {
-    this.authSocialService.signIn(LinkedInLoginProvider.PROVIDER_ID);
   }  
  
   signOut(): void {
-    this.authSocialService.signOut();
+    //this.authSocialService.signOut();
   }
 }

@@ -107,7 +107,7 @@ export class HttpService {
 
   constructor(private http:CustomHttpService, private auth: AuthserviceService) {
     let url = window.location.href;
-    if(url.includes('localhost')) this.baseUrl = 'https://beta.kitcode.io/';
+    if(url.includes('localhost')) this.baseUrl = 'https://staging.kitcode.io/';
     else this.baseUrl = '/';
   }
 }

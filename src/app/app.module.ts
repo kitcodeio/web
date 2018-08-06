@@ -17,25 +17,7 @@ import { CourseCategoryComponent } from './root/course-category/course-category.
 import { UserProfileComponent } from './root/user-profile/user-profile.component';
 import { SocialLoginModule, AuthServiceConfig } from "angularx-social-login";
 import { GoogleLoginProvider, FacebookLoginProvider, LinkedInLoginProvider} from "angularx-social-login";
-
-let config = new AuthServiceConfig([
-  {
-    id: GoogleLoginProvider.PROVIDER_ID,
-    provider: new GoogleLoginProvider("Google-OAuth-Client-Id")
-  },
-  {
-    id: FacebookLoginProvider.PROVIDER_ID,
-    provider: new FacebookLoginProvider("248217116002964")
-  },
-  {
-    id: LinkedInLoginProvider.PROVIDER_ID,
-    provider: new LinkedInLoginProvider("LinkedIn-client-Id", false, 'en_US')
-  }
-]);
-
-export function provideConfig() {
-  return config;
-}
+import { FacebookModule } from 'ngx-facebook';
 
 @NgModule({
   declarations: [
@@ -57,13 +39,10 @@ export function provideConfig() {
       toastComponent: ToastNoAnimation,preventDuplicates: true,
     }),
     MalihuScrollbarModule.forRoot(),
-    SocialLoginModule,
+    FacebookModule.forRoot(),
+
   ],
-  providers: [AuthserviceService,
-    {
-    provide: AuthServiceConfig,
-    useFactory: provideConfig
-    }
+  providers: [AuthserviceService
   ],
   bootstrap: [AppComponent]
 })
