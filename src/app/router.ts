@@ -10,6 +10,8 @@ import { RootComponent } from './root/root.component';
 import { ModuleWithProviders } from "@angular/core";
 import { CourseCategoryComponent } from './root/course-category/course-category.component';
 import { UserProfileComponent } from './root/user-profile/user-profile.component'
+import { CategoriesComponent } from './root/categories/categories.component';
+import { CreateSectionComponent } from './create-section/create-section.component';
 
 const routes: Routes = [
     { path: '', redirectTo: 'root/category', pathMatch: 'full'},
@@ -23,11 +25,12 @@ const routes: Routes = [
         { path: 'kide/:course/:section/:chapter', loadChildren: './root/profile/profile.module#ProfileModule', canActivate: [AuthGuard] },
         { path: 'dashboard', component:DashboardComponent, canActivate: [AuthGuard, RBACService],children:[
             { path: 'create-image', loadChildren: './root/create-image/create-image.module#CreateImageModule' },
-            { path: 'createCourse', loadChildren: './root/create-course/create-course.module#CreateCourseModule' },
             { path: 'sub-domain', loadChildren: './root/sub-domain/sub-domain.module#SubDomainModule' },
             { path: 'list-image', loadChildren:'src/app/root/images/images.module#ImagesModule'},
+            { path: 'createCourse/:id', loadChildren: './root/create-course/create-course.module#CreateCourseModule' },
+            { path: 'category', component: CategoriesComponent },
+            { path: 'createSection/:id', component: CreateSectionComponent }
         ] },     
-        
         { path: 'user/:id', component: UserProfileComponent }
     ]}];
 

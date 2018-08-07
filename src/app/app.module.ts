@@ -18,6 +18,8 @@ import { UserProfileComponent } from './root/user-profile/user-profile.component
 import { SocialLoginModule, AuthServiceConfig } from "angularx-social-login";
 import { GoogleLoginProvider, FacebookLoginProvider, LinkedInLoginProvider} from "angularx-social-login";
 import { DashboardComponent } from './root/dashboard/dashboard.component';
+import { CategoriesComponent } from './root/categories/categories.component';
+import { CreateSectionComponent } from './create-section/create-section.component';
 
 let config = new AuthServiceConfig([
   {
@@ -40,7 +42,9 @@ export function provideConfig() {
     RootComponent,
     CourseCategoryComponent,
     UserProfileComponent,
-    DashboardComponent
+    DashboardComponent,
+    CategoriesComponent,
+    CreateSectionComponent
   ],
   imports: [
     BrowserModule,

@@ -1,0 +1,190 @@
+<body style="background:#f5f5f5; margin-left: 3%">
+    <div id="wrapper">
+        <!-- Page Content -->
+        <div id="page-content-wrapper">
+            <div class="container-fluid">
+                <a href="#menu-toggle" class="btn btn-secondary d-sm-none d-lg-none d-md-none" id="menu-toggle">Toggle Menu</a>
+                <!--<button class="buttons-top">Hot</button>&nbsp;&nbsp;&nbsp;<button class="buttons-top">Trending</button> -->
+                <!-- <app-loadiing *ngIf="!allSections"></app-loadiing> -->
+               
+                <div id="bootstrapModelChapterD" class="modal fade" role="dialog">
+                  <div class="modal-dialog">
+                    <!-- Modal content-->
+                    <div class="modal-content">
+                      <div class="modal-header">
+                      </div>
+                      <h6 class="modal-title" style="margin-left: 16px;">Are you sure ?</h6>
+                      <!-- model body section -->
+                      <div class="modal-body">
+                        <br>
+                      </div>
+                      <div class="modal-footer">
+                        <button type="button" class="btn btn-primary" data-dismiss="modal"  (click)="deleteChapter();">Ok</button>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                
+                <div id="bootstrapModel" class="modal fade" role="dialog">
+                    <div class="modal-dialog">
+                      <!-- Modal content-->
+                      <div class="modal-content">
+                        <div class="modal-header">
+                        </div>
+                        <h6 class="modal-title" style="margin-left: 16px;">Are you sure ?</h6>
+                  <!-- model body section -->
+                        <div class="modal-body">
+                          <br>
+                        </div>
+                        <div class="modal-footer">
+                          <button type="button" class="btn btn-primary" data-dismiss="modal"  (click)="deleteSection();">Ok</button>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+
+                  <div id="bootstrapModelChapterU" class="modal fade" role="dialog">
+                    <div class="modal-dialog">
+                      <!-- Modal content-->
+                      <div class="modal-content">
+                        <div class="modal-header">
+                        </div>
+                        <h5 class="modal-title" style="margin-left: 16px;">Update chapter</h5>
+                  <!-- model body section -->
+                        <div class="modal-body">
+                          <input id="form_name" type="text" name="chapterName" class="form-control" placeholder="Chapter Name" required="required" data-error="Firstname is required." [(ngModel)]="chapter.label">
+                          <br>
+                          <textarea id="form_name" type="text" name="chapterDes" class="form-control" placeholder="Chapter description" required="required" data-error="Firstname is required." [(ngModel)]="chapter.url"></textarea>
+                          <br>
+                        </div>
+                        <div class="modal-footer">
+                          <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                          <button type="button" class="btn btn-primary" data-dismiss="modal" (click)="updateChapter();">Update</button>
+                        </div>
+                      </div>
+                    </div>
+                  </div> 
+
+                  <div id="bootstrapModelAddSec" class="modal fade" role="dialog">
+                      <div class="modal-dialog">
+                        <!-- Modal content-->
+                        <div class="modal-content">
+                          <div class="modal-header">
+                          </div>
+                          <h5 class="modal-title" style="margin-left: 16px;">Add Section</h5>
+                    <!-- model body section -->
+                          <div class="modal-body">
+                            <input id="form_name" type="text" name="chapterName" class="form-control" placeholder="Chapter Name" required="required" data-error="Firstname is required." [(ngModel)]="sectionName">
+                            <br>
+                            <textarea id="form_name" type="text" name="chapterDes" class="form-control" placeholder="Chapter description" required="required" data-error="Firstname is required." [(ngModel)]="sectionDescription"></textarea>
+                            <br>
+                          </div>
+                          <div class="modal-footer">
+                            <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                            <button type="button" class="btn btn-primary" data-dismiss="modal" (click)="addSection();">Add</button>
+                          </div>
+                        </div>
+                      </div>
+                    </div> 
+
+
+                    <div id="bootstrapModelAddChap" class="modal fade" role="dialog">
+                        <div class="modal-dialog">
+                          <!-- Modal content-->
+                          <div class="modal-content">
+                            <div class="modal-header">
+                            </div>
+                            <h5 class="modal-title" style="margin-left: 16px;">Add Chapter</h5>
+                      <!-- model body section -->
+                            <div class="modal-body">
+                              <input id="form_name" type="text" name="chapterName" class="form-control" placeholder="Chapter Name" required="required" data-error="Firstname is required." [(ngModel)]="chapterName">
+                              <br>
+                              <textarea id="form_name" type="text" name="chapterDes" class="form-control" placeholder="Chapter description" required="required" data-error="Firstname is required." [(ngModel)]="chapterDescription"></textarea>
+                              <br>
+                            </div>
+                            <div class="modal-footer">
+                              <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                              <button type="button" class="btn btn-primary" data-dismiss="modal" (click)="addChapter();">Add</button>
+                            </div>
+                          </div>
+                        </div>
+                      </div> 
+
+                  <div id="bootstrapModel1" class="modal fade" role="dialog">
+                      <div class="modal-dialog">
+                        <!-- Modal content-->
+                        <div class="modal-content">
+                          <div class="modal-header">
+                          </div>
+                          <h5 class="modal-title" style="margin-left: 16px;">Update section</h5>
+                    <!-- model body section -->
+                          <div class="modal-body">
+                            <input id="form_name" type="text" name="courseName" class="form-control" placeholder="Section Name" required="required" data-error="Firstname is required." [(ngModel)]="section.label">
+                            <br>
+                            <textarea id="form_name" type="text" name="courseDes" class="form-control" placeholder="Section description" required="required" data-error="Firstname is required." [(ngModel)]="section.description"></textarea>
+                            <br>
+                          </div>
+                          <div class="modal-footer">
+                              <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                            <button type="button" class="btn btn-primary" data-dismiss="modal" (click)="updateSection();">Update</button>
+                          </div>
+                        </div>
+                      </div>
+                    </div> 
+
+                <div class="course_detail" *ngIf="allSections" style="border-top-left-radius: 20px;">
+                  <div class="card" style="border:none;">
+                     <div class="card-header" style="background:transparent;border: none;">
+                      <span style="font-size:25px;">{{courseDetail.label}}</span>
+                      <p class="mb-0 float-right" style="color:#ccc;">Updated on {{courseDetail.updatedAt | date: 'dd MMM yyyy'}}</p>
+                      <p class="mb-0" style="color:#ccc;">Created by <span style="color:#000;">{{courseDetail.created_by}}</span></p>
+                    </div>
+                    <div class="card-body">
+                        <button [disabled]="courseDetail.status !== 'not purchased'" class="float-right btn subscribeButton" (click)="subscribe();">{{btnTxt}}&nbsp; <i *ngIf="courseDetail.status=='purchased'" class="fa fa-check" aria-hidden="true"></i> <i *ngIf="subscribeFlag" class="fa fa-spinner fa-pulse fa-3x fa-fw" aria-hidden="true" style="font-size: 15px;"></i></button>
+                      <p class="card-text" style="color:#827c7c;">{{courseDetail.description}}</p>
+                    </div>
+                    <!-- <div class="card-footer text-muted" style="background-color:transparent;">
+                      <a href="#" style="color:#ccc;" class=""><i class="fa fa-eye" aria-hidden="true"></i> 5 Views</a>&nbsp;&nbsp;&nbsp;
+                      <a href="#" style="color:#ccc;" class=""><i class="fa fa-comment-o" aria-hidden="true"></i> 2 Comments</a>
+                    </div> -->
+                  </div>
+                  <br/>
+                  <div class="sections">
+                    <div id="accordion">
+                      <div class="card mb-5"  *ngFor="let s of allSections;let i=index;">
+                        <div class="card-header bg-white" data-toggle="collapse" [attr.data-target]="'#'+i">
+                          <h5 class="mb-0">
+                              {{i+1}}. {{s.label}}
+                          </h5>
+                          <button class="float-right" style="border: none; background-color: transparent" (click)="setDeleteSectionId(s.id,i)"  *ngIf="isAdmin"><i class="fa fa-trash" aria-hidden="true" style="color: rgb(235, 102, 102);cursor: pointer;" data-toggle="modal" data-target="#bootstrapModel"></i></button>
+                          <button class="float-right" style="border: none; background-color: transparent" (click)="setUpdateSection(s,i);"  *ngIf="isAdmin" data-toggle="modal" data-target="#bootstrapModel1"><i class="fa fa-pencil" aria-hidden="true" style="color: #74d886; cursor: pointer;"></i></button>
+                          <p>{{s.description}}</p>
+                        </div>
+                        <div id="{{i}}" class="collapse show" aria-labelledby="headingOne" data-parent="#accordion">  
+                            <div class="list-group chapterList" id="list-tab" role="tablist"   *ngFor="let c of s.CourseChapters; let j=index;">
+                              <span>
+                                <a type="click" style="display:inline-block;width:90%" class="list-group-item chapter-item active" id="list-home-list" data-toggle="list" href="#list-home" role="tab" aria-controls="home" (click)="toProfile(s.id, j);"><i class="fa fa-play-circle" aria-hidden="true"></i>&nbsp;&nbsp;&nbsp;{{i+1}}.{{j+1}}. {{c.label}}
+                              </a>
+                                  &nbsp;&nbsp;&nbsp;
+                                  <a type="click" style="padding:10px;" data-toggle="modal" data-target="#bootstrapModelChapterU"><i class="fa fa-pencil" aria-hidden="true" style="color: #1daa37; cursor: pointer;" (click)="setUpdateChapter(c,i,j);" *ngIf="isAdmin"></i></a>&nbsp;
+                                  <a data-toggle="modal" data-target="#bootstrapModelChapterD" type="click" style="padding:10px;" (click)="setDeleteChapter(c.id,i,j)"  *ngIf="isAdmin"><i class="fa fa-trash" aria-hidden="true" style="color: rgb(235, 102, 102); cursor: pointer;" ></i></a>
+                              </span>
+                            </div>
+                            <button (click)="getSectionId(s.id);" style="background-color: transparent; border: 1px solid #72d5a4; color: #72d5a4; margin-right: 50px; cursor: pointer;" class="btn create-image-button float-right" data-toggle="modal" data-target="#bootstrapModelAddChap"><i class="fa fa-plus" aria-hidden="true"></i> Chapter</button>
+                        </div>
+                      </div>
+                    </div>
+                    <button style="background-color: transparent; border: 1px solid #72d5a4; color: #72d5a4; margin-right: 50px; cursor: pointer;" class="btn create-image-button float-right" data-toggle="modal" data-target="#bootstrapModelAddSec"><i class="fa fa-plus" aria-hidden="true"></i> Section</button>
+
+                  </div>
+            </div>
+        </div>
+        <!-- /#page-content-wrapper -->
+
+    </div>
+  </div>
+    <!-- /#wrapper -->
+
+
+</body>
+

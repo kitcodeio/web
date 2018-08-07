@@ -79,7 +79,7 @@ export class HttpService {
   }
 
   searchCourse(term: string):Observable<any> {
-    return this.http.get(this.baseUrl+'search/course?term='+term)
+    return this.http.get(this.baseUrl+'search/Course?term='+term)
     .pipe(catchError((error)=>{return of(error);}));
   }
  //=======================Container Creation API=======================//

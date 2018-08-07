@@ -25,6 +25,7 @@ export class CoursesComponent implements OnInit {
   deleteCourseId: number;
   course: Course = {} as Course;
   deletedCourseIndex:number;
+  categoryId:number;
 
   constructor(private dataService: DataService, private authService: AuthserviceService, private toastrService: ToastrService, private eleRef:ElementRef, private userInfo: UserInfoService, private route: ActivatedRoute,private router: Router, private http: HttpService, private scrollbarService: MalihuScrollbarService) { }
 
@@ -35,10 +36,16 @@ export class CoursesComponent implements OnInit {
     this.route.params.subscribe(params=>{
       this.http.getDataWithId('Course',params.id)
       .subscribe(res=>{
-          this.allCourses = res.entity;      
+          this.allCourses = res.entity;
+          this.categoryId = params.id;    
       });    
     });
   }
+
+  toCourseCreation(){
+    this.router.navigate(['/root/dashboard/createCourse'],{ queryParams: { id: this.course.id } })
+  }
+
   courseDetail(id){
     this.loading = true;
     this.http.getDataWithId('Course',id)

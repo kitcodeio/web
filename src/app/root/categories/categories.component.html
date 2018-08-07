@@ -1,0 +1,19 @@
+<body style="margin-top: 7%;">
+    <!-- Testimonials -->
+    <section *ngIf="allCourseCategory" style="padding-top:0;padding-bottom:4rem;position:relative;top:-70px;" class="testimonials text-center">
+      <div class="container">
+        <div class="row mb-5 mx-auto" style="width:100%;">
+          <div class="col-lg-2 col-md-4" *ngFor="let cat of allCourseCategory" >
+            <a routerLink="/root/dashboard/createCourse/{{cat.id}}" ><span class="glyphicon glyphicon-log-in"></span>
+              <div class="testimonial-item mx-auto mb-2"style="background-color: #a8e9c9">
+                <img class="img-fluid" src="{{cat.logo}}" alt="">
+              </div>
+              {{cat.label}}
+            </a>
+          </div>
+        </div>
+      </div>
+    </section>
+  </body>
+
+  
