@@ -18,20 +18,16 @@ export class SubDomainComponent implements OnInit {
 
 
   addSubDomain(){
-    if(this.domainName){
       this.http.postData('Subdomain',{"subdomain":this.domainName})
       .subscribe(res=>{
       if(res.status==201){
         this.toastrService.success('Sub Domain created successfully','Success',{positionClass:'toast-bottom-right'});
+        this.populateDomain();
       }
       else{
         this.toastrService.error(res.error,'Error',{positionClass:'toast-bottom-right'});
       }
     })
-    }
-    else{
-      this.toastrService.info('Please enter domain name','Error',{positionClass:'toast-bottom-right'});
-    }
   }
 
   populateDomain(){

@@ -113,7 +113,7 @@ export class RootComponent implements OnInit {
   }
 
   toDashboard(){
-    this.router.navigate(['root/dashboard']);
+    this.router.navigate(['root/dashboard/']);
     $('.dropdown-menu').hide();
   }
 
@@ -222,13 +222,5 @@ export class RootComponent implements OnInit {
       }
       console.log(this.counter);
     }
-  
-    withGoogle(){
-      console.log('google');
-  
-    }
-  
-    withFacebook(){
-      console.log('facebook');
-    }
+
 }
