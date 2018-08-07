@@ -17,7 +17,6 @@ import { CourseCategoryComponent } from './root/course-category/course-category.
 import { UserProfileComponent } from './root/user-profile/user-profile.component';
 import { SocialLoginModule, AuthServiceConfig } from "angularx-social-login";
 import { GoogleLoginProvider, FacebookLoginProvider, LinkedInLoginProvider} from "angularx-social-login";
-import { SubDomainComponent } from './sub-domain/sub-domain.component';
 import { DashboardComponent } from './root/dashboard/dashboard.component';
 
 let config = new AuthServiceConfig([
@@ -41,7 +40,6 @@ export function provideConfig() {
     RootComponent,
     CourseCategoryComponent,
     UserProfileComponent,
-    SubDomainComponent,
     DashboardComponent
   ],
   imports: [

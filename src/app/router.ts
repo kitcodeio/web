@@ -6,19 +6,10 @@ import { AuthGuard } from './services/auth/auth.guard';
 import { RBACService } from './services/rbac/rbac.service';
 
 import { DashboardComponent } from './root/dashboard/dashboard.component';
-import { ImagesComponent } from './root/images/images.component';
-import { LoginComponent } from './login/login.component';
-import { ProfileComponent } from './root/profile/profile.component';
-import { AppComponent } from './app.component';
 import { RootComponent } from './root/root.component';
 import { ModuleWithProviders } from "@angular/core";
-import { CoursesComponent } from './root/course-category/courses/courses.component';
-import { LandingPageComponent } from './root/landing-page/landing-page.component';
-import { CreateCourseComponent } from './root/create-course/create-course.component';
-import { CourseDetailComponent } from './root/course-category/course-detail/course-detail.component';
 import { CourseCategoryComponent } from './root/course-category/course-category.component';
 import { UserProfileComponent } from './root/user-profile/user-profile.component'
-import { SubDomainComponent } from './sub-domain/sub-domain.component';
 
 const routes: Routes = [
     { path: '', redirectTo: 'root/category', pathMatch: 'full'},
@@ -33,7 +24,7 @@ const routes: Routes = [
         { path: 'dashboard', component:DashboardComponent, canActivate: [AuthGuard, RBACService],children:[
             { path: 'create-image', loadChildren: './root/create-image/create-image.module#CreateImageModule' },
             { path: 'createCourse', loadChildren: './root/create-course/create-course.module#CreateCourseModule' },
-            { path: 'sub-domain', component: SubDomainComponent },
+            { path: 'sub-domain', loadChildren: './root/sub-domain/sub-domain.module#SubDomainModule' },
             { path: 'list-image', loadChildren:'src/app/root/images/images.module#ImagesModule'},
         ] },     
         
