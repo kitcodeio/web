@@ -33,10 +33,9 @@ const routes: Routes = [
         { path: 'dashboard', component:DashboardComponent, canActivate: [AuthGuard, RBACService],children:[
             { path: 'create-image', loadChildren: './root/create-image/create-image.module#CreateImageModule' },
             { path: 'createCourse', loadChildren: './root/create-course/create-course.module#CreateCourseModule' },
-            { path: 'sub-domain', component: SubDomainComponent }
-        ] },
-        { path: 'list-image', loadChildren:'src/app/root/images/images.module#ImagesModule', canActivate: [AuthGuard, RBACService] },
-        
+            { path: 'sub-domain', component: SubDomainComponent },
+            { path: 'list-image', loadChildren:'src/app/root/images/images.module#ImagesModule'},
+        ] },     
         
         { path: 'user/:id', component: UserProfileComponent }
     ]}];

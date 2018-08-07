@@ -113,7 +113,7 @@ export class RootComponent implements OnInit {
   }
 
   toDashboard(){
-    this.router.navigate(['root/dashboard/']);
+    this.router.navigate(['root/dashboard/list-image']);
     $('.dropdown-menu').hide();
   }
 
