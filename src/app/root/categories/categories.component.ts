@@ -30,6 +30,8 @@ export class CategoriesComponent implements OnInit {
   regex1 = new RegExp('(?:(?:https?|ftp|file):\/\/|www\.|ftp\.)(?:\([-A-Z0-9+&@#\/%=~_|$?!:,.]*\)|[-A-Z0-9+&@#\/%=~_|$?!:,.])*(?:\([-A-Z0-9+&@#\/%=~_|$?!:,.]*\)|[A-Z0-9+&@#\/%=~_|$])');
 
   @ViewChild('cat') catVisibility: ElementRef
+  deletedCategoryId:number;
+  updateCategoryId:number;
 
 
   constructor(private userInfo: UserInfoService, private router:Router, private http: HttpService, private useInfo: UserInfoService, private authService: AuthserviceService,private toastrService: ToastrService) { }
@@ -43,6 +45,46 @@ export class CategoriesComponent implements OnInit {
       this.allCourseCategory = res.entity;
     })
   }
+
+  deleteCategory(){
+    this.http.deleteData('CourseCategory',this.deletedCategoryId)
+    .subscribe(res=>{
+      console.log(res);
+      this.populateCatgory();
+    })
+  }
+
+  setDeleteCategory(id){
+    this.deletedCategoryId = id;
+  }
+
+  setUpdateCategory(cat,id){
+    console.log(cat);
+    this.categoryName = cat.label;
+    this.catImageUrl = cat.logo;
+    this.updateCategoryId = cat.id;
+  }
+
+  updateCategory(){
+    this.http.putData('CourseCategory',{
+      id:this.updateCategoryId,
+      data:{
+        "label":this.categoryName,
+        "logo": this.catImageUrl,
+        "visibility":this.catVisibility.nativeElement.value
+      }
+  }).subscribe(res=>{
+    console.log(res);
+    if(res.status===200){
+      this.toastrService.success(res.message,'Successs',{positionClass:'toast-bottom-right'});
+      this.populateCatgory();
+    }
+    else{
+      this.toastrService.error(res.error,'Error',{positionClass:'toast-bottom-right'});
+    }
+    
+      })
+    }
 
   addCategory(){
     if(this.regex1.test(this.catImageUrl)){  

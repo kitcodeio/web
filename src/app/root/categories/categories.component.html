@@ -5,15 +5,17 @@
         <div class="row mb-5 mx-auto" style="width:100%;">
           <div class="col-lg-2 col-md-4" *ngFor="let cat of allCourseCategory" >
             <a routerLink="/root/dashboard/createCourse/{{cat.id}}" ><span class="glyphicon glyphicon-log-in"></span>
-              <div class="testimonial-item mx-auto mb-2"style="background-color: #a8e9c9">
+              <div class="testimonial-item mx-auto mb-2">
                 <img class="img-fluid" src="{{cat.logo}}" alt="">
               </div>
               {{cat.label}}
-            </a>
+            </a><br>
+            <a type="click" style="padding:10px;" data-toggle="modal" data-target="#bootstrapModelu" (click)="setUpdateCategory(cat);"><i class="fa fa-pencil" aria-hidden="true" style="color: #1daa37; cursor: pointer;"></i></a>&nbsp;
+            <a data-toggle="modal" data-target="#bootstrapModelCat" type="click" style="padding:10px;" (click)="setDeleteCategory(cat.id)" ><i class="fa fa-trash" aria-hidden="true" style="color: rgb(235, 102, 102); cursor: pointer;" ></i></a>
           </div>
           <div class="col-lg-2 col-md-4">
             <a style="cursor: pointer;" data-toggle="modal" data-target="#bootstrapModel"><span class="glyphicon glyphicon-log-in"></span>
-              <div style="text-align: center;" class="testimonial-item mx-auto mb-2"style="background-color: #a8e9c9">
+              <div style="text-align: center;" class="testimonial-item mx-auto mb-2">
                 <i class="fa fa-plus" aria-hidden="true"></i><p>Category</p>
               </div>
             </a>
@@ -22,6 +24,58 @@
       </div>
     </section>
   </body>
+
+  <div id="bootstrapModelCat" class="modal fade" role="dialog">
+      <div class="modal-dialog">
+        <!-- Modal content-->
+        <div class="modal-content">
+          <div class="modal-header">
+          </div>
+          <h6 class="modal-title" style="margin-left: 16px;">Are you sure delete the category ?</h6>
+    <!-- model body section -->
+          <div class="modal-body">
+            <br>
+          </div>
+          <div class="modal-footer">
+              <button type="button" class="btn btn-primary" data-dismiss="modal">Close</button>
+            <button type="button" class="btn btn-primary" data-dismiss="modal"  (click)="deleteCategory();">Ok</button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div id="bootstrapModelu" class="modal fade" role="dialog">
+        <div class="modal-dialog">
+          <!-- Modal content-->
+          <div class="modal-content">
+            <div class="modal-header">
+              <button type="button" class="close" data-dismiss="modal">&times;</button>
+            </div>
+            <h4 class="modal-title" style="margin-left: 16px;">Add Category</h4>
+      <!-- model body section -->
+            <div class="modal-body">
+              <input id="form_name" type="text" name="name" class="form-control" placeholder="Course Category" required="required" data-error="Firstname is required." [(ngModel)]="categoryName">
+              <br>
+              <input id="form_name" type="text" name="url" class="form-control" placeholder="Category image url" required="required" data-error="Firstname is required." [(ngModel)]="catImageUrl">
+              <br>
+              <div class="col-md-12">
+                <div class="form-group">
+                  <label>Visibility</label> &nbsp;
+                  <select id="country" name="country" #cat>
+                    <option>true</option>
+                    <option>false</option>
+                  </select> 
+                  <div class="help-block with-errors"></div>
+                </div>
+              </div>
+            </div>
+            <div class="modal-footer">
+              <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+              <button type="button" class="btn btn-default" data-dismiss="modal" (click)="updateCategory();">Update</button>
+            </div>
+          </div>
+        </div>
+      </div>
 
   <div id="bootstrapModel" class="modal fade" role="dialog">
       <div class="modal-dialog">

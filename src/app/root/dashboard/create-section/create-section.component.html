@@ -19,6 +19,7 @@
                         <br>
                       </div>
                       <div class="modal-footer">
+                        <button type="button" class="btn btn-primary" data-dismiss="modal">Close</button>
                         <button type="button" class="btn btn-primary" data-dismiss="modal"  (click)="deleteChapter();">Ok</button>
                       </div>
                     </div>
@@ -37,6 +38,7 @@
                           <br>
                         </div>
                         <div class="modal-footer">
+                            <button type="button" class="btn btn-primary" data-dismiss="modal">Close</button>
                           <button type="button" class="btn btn-primary" data-dismiss="modal"  (click)="deleteSection();">Ok</button>
                         </div>
                       </div>
@@ -74,9 +76,9 @@
                           <h5 class="modal-title" style="margin-left: 16px;">Add Section</h5>
                     <!-- model body section -->
                           <div class="modal-body">
-                            <input id="form_name" type="text" name="chapterName" class="form-control" placeholder="Chapter Name" required="required" data-error="Firstname is required." [(ngModel)]="sectionName">
+                            <input id="form_name" type="text" name="chapterName" class="form-control" placeholder="Section Name" required="required" data-error="Firstname is required." [(ngModel)]="sectionName">
                             <br>
-                            <textarea id="form_name" type="text" name="chapterDes" class="form-control" placeholder="Chapter description" required="required" data-error="Firstname is required." [(ngModel)]="sectionDescription"></textarea>
+                            <textarea id="form_name" type="text" name="chapterDes" class="form-control" placeholder="Section description" required="required" data-error="Firstname is required." [(ngModel)]="sectionDescription"></textarea>
                             <br>
                           </div>
                           <div class="modal-footer">
