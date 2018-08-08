@@ -6,6 +6,7 @@
               <div>
                   <button (click)="test();" style="background-color: transparent; border: 1px solid #72d5a4; color: #72d5a4; margin-right: 50px; cursor: pointer;" class="btn create-image-button float-right" data-toggle="modal" data-target="#bootstrapModelAdd"><i class="fa fa-plus" aria-hidden="true"></i> Course</button>
               </div>
+              <br>
                 <div class="container-fluid">
                     <!-- <a href="#menu-toggle" class="btn btn-secondary d-sm-none d-lg-none d-md-none" id="menu-toggle">Toggle Menu</a>
                     <button class="buttons-top">Hot</button>&nbsp;&nbsp;&nbsp;<button class="buttons-top">Trending</button> -->
@@ -75,14 +76,6 @@
                                     <br>
                                     <input id="form_name" type="text" name="createdBy" class="form-control" placeholder="Created by" required="required" data-error="Firstname is required." [(ngModel)]="createdBy">
                                     <br>
-                                    <!-- <div class="col-md-12">
-                                      <div class="form-group">
-                                        <select id="country" name="country" #cat>
-                                          <option *ngFor="let cat of allCourseCategory" [value]="cat.id">{{cat.label}}</option>
-                                        </select> 
-                                        <div class="help-block with-errors"></div>
-                                      </div>
-                                    </div> -->
                                     <div class="col-md-12">
                                         <div class="form-group">
                                           <select id="country" name="country" #image>
@@ -99,35 +92,34 @@
                                 </div>
                               </div>
                             </div>
-                    <div class="course_list">
-                        <!-- <h2 *ngIf="allCourses.length == 0">The Category is empty</h2> -->
-                        <ul class="mt-4" style="list-style-type:none;padding-left:0;">
-                            <li class="mb-4" *ngFor="let c of allCourses; let i=index;">
-                                <div class="card" style="border:none;">
-                                  <div class="card-header" style="background:transparent;border: none;">
-                                      <a routerLink="/root/dashboard/createSection/{{c.id}}"><span class="glyphicon glyphicon-log-in"></span><span style="font-size:25px;">{{c.label}}</span></a>
-                                    <p class="mb-0 float-right" style="color:#ccc; font-size:14px;">Updated at {{c.updatedAt | date: 'dd MMM yyyy'}}</p>
-                                    <p class="mb-0" style="color:#ccc; font-size: 14px;">Created by <span style="color:#000; font-size: 14px;">{{c.created_by}}</span></p>
-                                    <button (click)="setDeleteCourseId(c.id,i)" class="float-right" style="border: none; background-color: transparent; cursor: pointer;" *ngIf="user" data-toggle="modal" data-target="#bootstrapModel">
-                                      <i class="fa fa-trash" aria-hidden="true" style="color: rgb(235, 102, 102)"></i>
-                                  </button>
-                                  <button data-toggle="modal" data-target="#bootstrapModel1" class="float-right" style="border: none; background-color: transparent; cursor: pointer;" (click)="setUpdateCourse(c,i);" *ngIf="user"><i class="fa fa-pencil" aria-hidden="true" style="color: #74d886"></i></button>
-
-                                     <!-- Modal content-->
- 
-                                </div>
-                                  <!-- <div class="card-body"> 
-                                    <p class="card-text" style="color:#827c7c; font-size: 14px;">
-                                        {{c.description}}</p>
-                                  </div> -->
-                                  <!-- <div class="card-footer text-muted" style="background-color:transparent;">
-                                    <a href="#" style="color:#ccc; font-size: 14px;" class=""><i class="fa fa-eye" aria-hidden="true"></i> 5 Views</a>&nbsp;&nbsp;&nbsp;
-                                    <a href="#" style="color:#ccc; font-size: 14px;" class=""><i class="fa fa-comment-o" aria-hidden="true"></i> 2 Comments</a>
-                                  </div> -->
-                                </div>
-                            </li>
-                        </ul>
-                    </div>
+                          <div class="row">
+                            <div class="col-md-4" *ngFor="let c of allCourses; let i=index;">
+                                      <div class="card" style="border:none;">
+                                        <div class="card-header" style="background:transparent;border: none;">
+                                          <a title="{{c.label}}" class="ellipsis" routerLink="/root/dashboard/createSection/{{c.id}}"><span class="glyphicon glyphicon-log-in"></span><span style="font-size:25px;">{{c.label}}</span></a>
+                                          <p class="mb-0 float-right" style="color:#ccc; font-size:14px;">Updated at {{c.updatedAt | date: 'dd MMM yyyy'}}</p>
+                                          <p class="mb-0" style="color:#ccc; font-size: 14px;">Created by <span style="color:#000; font-size: 14px;">{{c.created_by}}</span></p>
+                                          <button (click)="setDeleteCourseId(c.id,i)" class="float-right" style="border: none; background-color: transparent; cursor: pointer;" *ngIf="user" data-toggle="modal" data-target="#bootstrapModel">
+                                            <i class="fa fa-trash" aria-hidden="true" style="color: rgb(235, 102, 102)"></i>
+                                        </button>
+                                        <button data-toggle="modal" data-target="#bootstrapModel1" class="float-right" style="border: none; background-color: transparent; cursor: pointer;" (click)="setUpdateCourse(c,i);" *ngIf="user"><i class="fa fa-pencil" aria-hidden="true" style="color: #74d886"></i></button>
+      
+                                           <!-- Modal content-->
+       
+                                      </div>
+                                      
+                                        <!-- <div class="card-body"> 
+                                          <p class="card-text" style="color:#827c7c; font-size: 14px;">
+                                              {{c.description}}</p>
+                                        </div> -->
+                                        <!-- <div class="card-footer text-muted" style="background-color:transparent;">
+                                          <a href="#" style="color:#ccc; font-size: 14px;" class=""><i class="fa fa-eye" aria-hidden="true"></i> 5 Views</a>&nbsp;&nbsp;&nbsp;
+                                          <a href="#" style="color:#ccc; font-size: 14px;" class=""><i class="fa fa-comment-o" aria-hidden="true"></i> 2 Comments</a>
+                                        </div> -->
+                                      </div>
+                          </div>
+                          <br>
+                        </div>
                 </div>
             </div>
             <!-- /#page-content-wrapper -->

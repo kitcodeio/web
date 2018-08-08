@@ -191,3 +191,11 @@
     margin-bottom: 16px;
     resize: vertical;
   }
+
+  div{
+    text-overflow: ellipsis;
+  
+    /* Required for text-overflow to do anything */
+    white-space: nowrap;
+    overflow: hidden;
+  }
