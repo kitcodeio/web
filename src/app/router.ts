@@ -27,7 +27,7 @@ const routes: Routes = [
             { path: 'create-image', loadChildren: './root/create-image/create-image.module#CreateImageModule' },
             { path: 'sub-domain', loadChildren: './root/sub-domain/sub-domain.module#SubDomainModule' },
             { path: 'list-image', loadChildren:'src/app/root/images/images.module#ImagesModule'},
-            { path: 'createCourse/:id', loadChildren: './root/create-course/create-course.module#CreateCourseModule' },
+            { path: 'createCourse/:id', loadChildren: './root/dashboard/create-course/create-course.module#CreateCourseModule' },
             { path: 'category', component: CategoriesComponent },
             { path: 'createSection/:id', component: CreateSectionComponent }
         ] },     
