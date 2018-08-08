@@ -1,12 +1,12 @@
 import { Component, OnInit } from '@angular/core';
-import { HttpService } from '../services/http/http.service';
+import { HttpService } from '../../../services/http/http.service';
 import { ActivatedRoute, Router } from '@angular/router';
 import { MalihuScrollbarService } from 'ngx-malihu-scrollbar';
-import { UserInfoService } from '../services/userInfo/user-info.service'
-import { Section } from '../models/section';
-import { Course } from '../models/course';
-import { AuthserviceService } from '../services/auth/authservice.service';
-import { Chapter } from '../models/chapter';
+import { UserInfoService } from '../../../services/userInfo/user-info.service'
+import { Section } from '../../../models/section';
+import { Course } from '../../../models/course';
+import { AuthserviceService } from '../../../services/auth/authservice.service';
+import { Chapter } from '../../../models/chapter';
 import { ToastrService } from 'ngx-toastr'; 
 
 @Component({
@@ -52,8 +52,20 @@ export class CreateSectionComponent implements OnInit {
   });
 
     this.populateCatgory();
+    this.populateSectionWithCourseId();
 
     this.isAdmin=this.authService.isAdmin();
+
+    this.http.getCoursePurchaseDetails(this.course_id)
+    .subscribe(res=>{
+      this.courseDetail = res.entity;
+      if(this.courseDetail.status == 'purchased'){
+        this.btnTxt = 'Subscribed';
+      }
+    });
+  }
+
+  populateSectionWithCourseId(){
 
     this.route.params.subscribe(params=>{
       this.course_id = params.id; 
@@ -64,13 +76,6 @@ export class CreateSectionComponent implements OnInit {
       })    
     });
 
-    this.http.getCoursePurchaseDetails(this.course_id)
-    .subscribe(res=>{
-      this.courseDetail = res.entity;
-      if(this.courseDetail.status == 'purchased'){
-        this.btnTxt = 'Subscribed';
-      }
-    });
   }
 
   populateCatgory(){
@@ -184,7 +189,7 @@ export class CreateSectionComponent implements OnInit {
 	    "label":this.sectionName,
 	    "description": this.sectionDescription
     }).subscribe(res=>{
-      console.log(res);
+      this.populateSectionWithCourseId();
     })
   }
 
@@ -193,17 +198,12 @@ export class CreateSectionComponent implements OnInit {
   }
 
   addChapter(){
-    console.log({
-      "section_id": this.sectionIdForAddChapter,
-	    "label": this.chapterName,
-	    "url": this.chapterDescription
-    });
     this.http.postchapter('CourseChapter',{
       "section_id": this.sectionIdForAddChapter,
 	    "label": this.chapterName,
 	    "url": this.chapterDescription
     }).subscribe(res=>{
-      console.log(res);
+      this.populateSectionWithCourseId();
     })
   }
 }

@@ -11,7 +11,7 @@ import { ModuleWithProviders } from "@angular/core";
 import { CourseCategoryComponent } from './root/course-category/course-category.component';
 import { UserProfileComponent } from './root/user-profile/user-profile.component'
 import { CategoriesComponent } from './root/categories/categories.component';
-import { CreateSectionComponent } from './create-section/create-section.component';
+import { CreateSectionComponent } from './root/dashboard/create-section/create-section.component';
 
 const routes: Routes = [
     { path: '', redirectTo: 'root/category', pathMatch: 'full'},

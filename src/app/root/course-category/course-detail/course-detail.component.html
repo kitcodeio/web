@@ -111,8 +111,6 @@
                               <h5 class="mb-0">
                                   {{i+1}}. {{s.label}}
                               </h5>
-                              <button class="float-right" style="border: none; background-color: transparent" (click)="setDeleteSectionId(s.id,i)"  *ngIf="isAdmin"><i class="fa fa-trash" aria-hidden="true" style="color: rgb(235, 102, 102);cursor: pointer;" data-toggle="modal" data-target="#bootstrapModel"></i></button>
-                              <button class="float-right" style="border: none; background-color: transparent" (click)="setUpdateSection(s,i);"  *ngIf="isAdmin" data-toggle="modal" data-target="#bootstrapModel1"><i class="fa fa-pencil" aria-hidden="true" style="color: #74d886; cursor: pointer;"></i></button>
                               <p>{{s.description}}</p>
                             </div>
                             <div id="{{i}}" class="collapse show" aria-labelledby="headingOne" data-parent="#accordion">  
@@ -120,12 +118,7 @@
                                   <span>
                                     <a type="click" style="display:inline-block;width:90%" class="list-group-item chapter-item active" id="list-home-list" data-toggle="list" href="#list-home" role="tab" aria-controls="home" (click)="toProfile(s.id, j);"><i class="fa fa-play-circle" aria-hidden="true"></i>&nbsp;&nbsp;&nbsp;{{i+1}}.{{j+1}}. {{c.label}}
                                   </a>
-                                      &nbsp;&nbsp;&nbsp;
-                                      <a type="click" style="padding:10px;" data-toggle="modal" data-target="#bootstrapModelChapterU"><i class="fa fa-pencil" aria-hidden="true" style="color: #1daa37; cursor: pointer;" (click)="setUpdateChapter(c,i,j);" *ngIf="isAdmin"></i></a>&nbsp;
-                                      <a data-toggle="modal" data-target="#bootstrapModelChapterD" type="click" style="padding:10px;" (click)="setDeleteChapter(c.id,i,j)"  *ngIf="isAdmin"><i class="fa fa-trash" aria-hidden="true" style="color: rgb(235, 102, 102); cursor: pointer;" ></i></a>
                                   </span>
-                                  <!-- <button data-toggle="modal" data-target="#bootstrapModelChapterD" class="float-right edit-button" style="border: none; background-color: transparent; float: right !important; cursor: pointer;" (click)="setDeleteChapter(c.id)"  *ngIf="isAdmin"><i class="fa fa-trash" aria-hidden="true" style="color: rgb(235, 102, 102)"></i></button> -->
-                                    <!-- <button data-toggle="modal" data-target="#bootstrapModelChapterU" class="float-right edit-button" style="border: none; background-color: transparent; float: right !important; cursor: pointer;" (click)="setUpdateChapter(c,i,j);"  *ngIf="isAdmin"><i class="fa fa-pencil" aria-hidden="true" style="color: #1daa37" ></i></button> -->
                                 </div>
                             </div>
                           </div>

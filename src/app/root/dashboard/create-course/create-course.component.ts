@@ -1,12 +1,12 @@
 import { Component, OnInit, ViewChild, ElementRef, NgModule } from '@angular/core';
-import { HttpService } from '../../services/http/http.service';
+import { HttpService } from '../../../services/http/http.service';
 import { Router } from '@angular/router';
 import { ToastrService } from 'ngx-toastr';
 import { NgForm } from '@angular/forms'
 import { ActivatedRoute } from '@angular/router';
 import 'rxjs/add/operator/filter';
-import {Course} from '../../models/course'
-import { AuthserviceService } from '../../services/auth/authservice.service'
+import {Course} from '../../../models/course'
+import { AuthserviceService } from '../../../services/auth/authservice.service'
 
 @Component({
   selector: 'app-create-course',
@@ -44,6 +44,12 @@ export class CreateCourseComponent implements OnInit {
 
     this.user=this.authService.isAdmin();
 
+    this.populateImage();
+    this.populateCatgory();
+    this.populateCourseWithCatId();
+  }
+
+  populateCourseWithCatId(){
     this.route.params.subscribe(params=>{
       this.http.getDataWithId('Course',params.id)
       .subscribe(res=>{
@@ -51,9 +57,6 @@ export class CreateCourseComponent implements OnInit {
           this.categoryId = params.id;    
       });    
     });
-
-    this.populateImage();
-    this.populateCatgory();
   }
 
   courseDetail(id){
@@ -123,15 +126,6 @@ export class CreateCourseComponent implements OnInit {
   }
 
   addCourse(){
-
-    console.log({
-      "category_id": this.categoryId,
-	    "label":this.courseName,
-	    "description":this.courseDescription,
-	    "created_by": this.createdBy,
-	    "image_id":this.imageName.nativeElement.value
-    })
-
     this.http.postCourse('Course',{
       "category_id": this.categoryId,
 	    "label":this.courseName,
@@ -139,7 +133,7 @@ export class CreateCourseComponent implements OnInit {
 	    "created_by": this.createdBy,
 	    "image_id":this.imageName.nativeElement.value
     }).subscribe(res=>{
-      console.log(res);
+      this.populateCourseWithCatId();
     })
   }
 }

@@ -3,9 +3,6 @@
             <!-- Page Content -->
             <div id="page-content-wrapper">
                 <div class="container-fluid">
-                    <!-- <a href="#menu-toggle" class="btn btn-secondary d-sm-none d-lg-none d-md-none" id="menu-toggle">Toggle Menu</a>
-                    <button class="buttons-top">Hot</button>&nbsp;&nbsp;&nbsp;<button class="buttons-top">Trending</button> -->
-                    
                     <!-- <app-loadiing *ngIf="loading"></app-loadiing> -->
                     <div id="bootstrapModel" class="modal fade" role="dialog">
                             <div class="modal-dialog">
@@ -71,10 +68,6 @@
  
                                 </div>
                                   <div class="card-body">
-                                        <button (click)="setDeleteCourseId(c.id,i)" class="float-right" style="border: none; background-color: transparent; cursor: pointer;" *ngIf="user" data-toggle="modal" data-target="#bootstrapModel">
-                                            <i class="fa fa-trash" aria-hidden="true" style="color: rgb(235, 102, 102)"></i>
-                                        </button>
-                                        <button data-toggle="modal" data-target="#bootstrapModel1" class="float-right" style="border: none; background-color: transparent; cursor: pointer;" (click)="setUpdateCourse(c,i);" *ngIf="user"><i class="fa fa-pencil" aria-hidden="true" style="color: #74d886"></i></button>
                                         <p class="card-text" style="color:#827c7c; font-size: 14px;">
                                         {{c.description}}</p>
                                   </div>

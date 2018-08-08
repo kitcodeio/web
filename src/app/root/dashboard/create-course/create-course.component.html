@@ -54,7 +54,6 @@
                                   </div>
                                 </div>
                                 <div class="modal-footer">
-                                  <button (click)="toCourseCreation();" style="margin-right: 43%;" type="button" class="btn btn-primary" data-dismiss="modal">Advance</button>
                                   <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
                                   <button type="button" class="btn btn-primary" data-dismiss="modal" (click)="updateCourse();">Update</button>
                                 </div>
@@ -109,18 +108,18 @@
                                       <a routerLink="/root/dashboard/createSection/{{c.id}}"><span class="glyphicon glyphicon-log-in"></span><span style="font-size:25px;">{{c.label}}</span></a>
                                     <p class="mb-0 float-right" style="color:#ccc; font-size:14px;">Updated at {{c.updatedAt | date: 'dd MMM yyyy'}}</p>
                                     <p class="mb-0" style="color:#ccc; font-size: 14px;">Created by <span style="color:#000; font-size: 14px;">{{c.created_by}}</span></p>
-    
+                                    <button (click)="setDeleteCourseId(c.id,i)" class="float-right" style="border: none; background-color: transparent; cursor: pointer;" *ngIf="user" data-toggle="modal" data-target="#bootstrapModel">
+                                      <i class="fa fa-trash" aria-hidden="true" style="color: rgb(235, 102, 102)"></i>
+                                  </button>
+                                  <button data-toggle="modal" data-target="#bootstrapModel1" class="float-right" style="border: none; background-color: transparent; cursor: pointer;" (click)="setUpdateCourse(c,i);" *ngIf="user"><i class="fa fa-pencil" aria-hidden="true" style="color: #74d886"></i></button>
+
                                      <!-- Modal content-->
  
                                 </div>
-                                  <div class="card-body">
-                                        <button (click)="setDeleteCourseId(c.id,i)" class="float-right" style="border: none; background-color: transparent; cursor: pointer;" *ngIf="user" data-toggle="modal" data-target="#bootstrapModel">
-                                            <i class="fa fa-trash" aria-hidden="true" style="color: rgb(235, 102, 102)"></i>
-                                        </button>
-                                        <button data-toggle="modal" data-target="#bootstrapModel1" class="float-right" style="border: none; background-color: transparent; cursor: pointer;" (click)="setUpdateCourse(c,i);" *ngIf="user"><i class="fa fa-pencil" aria-hidden="true" style="color: #74d886"></i></button>
-                                        <p class="card-text" style="color:#827c7c; font-size: 14px;">
+                                  <!-- <div class="card-body"> 
+                                    <p class="card-text" style="color:#827c7c; font-size: 14px;">
                                         {{c.description}}</p>
-                                  </div>
+                                  </div> -->
                                   <!-- <div class="card-footer text-muted" style="background-color:transparent;">
                                     <a href="#" style="color:#ccc; font-size: 14px;" class=""><i class="fa fa-eye" aria-hidden="true"></i> 5 Views</a>&nbsp;&nbsp;&nbsp;
                                     <a href="#" style="color:#ccc; font-size: 14px;" class=""><i class="fa fa-comment-o" aria-hidden="true"></i> 2 Comments</a>
