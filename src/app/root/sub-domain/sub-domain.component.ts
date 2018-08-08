@@ -33,7 +33,7 @@ export class SubDomainComponent implements OnInit {
   populateDomain(){
     this.http.getData('Subdomain')
     .subscribe(res=>{
-      this.allSubDomain = res.entity;
+      this.allSubDomain = res.entity.rows;
     })
   }
 }

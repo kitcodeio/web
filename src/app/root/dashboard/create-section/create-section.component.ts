@@ -68,8 +68,7 @@ export class CreateSectionComponent implements OnInit {
 
   onItemDrop(e: any,i) {
     // Get the dropped data here
-    let y = e.dragData;
-    this.allSections[i].CourseChapters.push(e.dragData);
+    this.allSections.push(e.dragData);
 }
 
   populateSectionWithCourseId(){

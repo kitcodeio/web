@@ -150,9 +150,9 @@
                   </div>
                   <br/>
                   <div class="sections">
-                    <div id="accordion">
+                    <div id="accordion" droppable (onDrop)="onItemDrop($event)">
                       <div class="card mb-5"  *ngFor="let s of allSections;let i=index;">
-                        <div class="card-header bg-white" data-toggle="collapse" [attr.data-target]="'#'+i">
+                        <div draggable [dragData]="s" class="card-header bg-white" data-toggle="collapse" [attr.data-target]="'#'+i">
                           <h5 class="mb-0">
                               {{i+1}}. {{s.label}}
                           </h5>
@@ -161,7 +161,7 @@
                           <p>{{s.description}}</p>
                         </div>
                         <div id="{{i}}" class="collapse show" aria-labelledby="headingOne" data-parent="#accordion">  
-                            <div droppable class="list-group chapterList" id="list-tab" role="tablist"   *ngFor="let c of s.CourseChapters; let j=index;">
+                            <div droppable (onDrop)="onItemDrop($event)" class="list-group chapterList" id="list-tab" role="tablist"   *ngFor="let c of s.CourseChapters; let j=index;">
                               <span>
                                 <a draggable [dragData]="c" type="click" style="display:inline-block;width:90%" class="list-group-item chapter-item active" id="list-home-list" data-toggle="list" href="#list-home" role="tab" aria-controls="home" (click)="toProfile(s.id, j);"><i class="fa fa-play-circle" aria-hidden="true"></i>&nbsp;&nbsp;&nbsp;{{i+1}}.{{j+1}}. {{c.label}}
                               </a>
