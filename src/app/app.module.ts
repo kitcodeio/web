@@ -20,6 +20,7 @@ import { GoogleLoginProvider, FacebookLoginProvider, LinkedInLoginProvider} from
 import { DashboardComponent } from './root/dashboard/dashboard.component';
 import { CategoriesComponent } from './root/categories/categories.component';
 import { CreateSectionComponent } from './root/dashboard/create-section/create-section.component';
+import { Ng2DragDropModule } from 'ng2-drag-drop';
 
 let config = new AuthServiceConfig([
   {
@@ -59,7 +60,8 @@ export function provideConfig() {
       toastComponent: ToastNoAnimation,preventDuplicates: true,
     }),
     MalihuScrollbarModule.forRoot(),
-    SocialLoginModule
+    SocialLoginModule,
+    Ng2DragDropModule.forRoot()
 
   ],
   providers: [AuthserviceService,

@@ -1,10 +1,11 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild, ElementRef } from '@angular/core';
 import { Router } from '@angular/router';
 import { HttpService } from '../../services/http/http.service';
 import { UserInfoService } from '../../services/userInfo/user-info.service';
 import { AuthserviceService } from '../../services/auth/authservice.service';
 import { debounceTime, distinctUntilChanged, switchMap } from 'rxjs/operators';
 import { Observable, Subject } from 'rxjs';
+import { ToastContainerDirective, ToastrService } from 'ngx-toastr';
 
 @Component({
   selector: 'app-categories',
@@ -23,9 +24,15 @@ export class CategoriesComponent implements OnInit {
   userHige:boolean;
   loadingFlag:boolean=false;
   url:any;
+  categoryName;
+  categories=[];
+  catImageUrl:string;
+  regex1 = new RegExp('(?:(?:https?|ftp|file):\/\/|www\.|ftp\.)(?:\([-A-Z0-9+&@#\/%=~_|$?!:,.]*\)|[-A-Z0-9+&@#\/%=~_|$?!:,.])*(?:\([-A-Z0-9+&@#\/%=~_|$?!:,.]*\)|[A-Z0-9+&@#\/%=~_|$])');
+
+  @ViewChild('cat') catVisibility: ElementRef
 
 
-  constructor(private userInfo: UserInfoService, private router:Router, private http: HttpService, private useInfo: UserInfoService, private authService: AuthserviceService) { }
+  constructor(private userInfo: UserInfoService, private router:Router, private http: HttpService, private useInfo: UserInfoService, private authService: AuthserviceService,private toastrService: ToastrService) { }
 
   ngOnInit() {
     this.populateCatgory();
@@ -34,7 +41,32 @@ export class CategoriesComponent implements OnInit {
   populateCatgory(){
     this.http.getcategory('CourseCategory').subscribe(res=>{
       this.allCourseCategory = res.entity;
-      console.log(this.allCourseCategory);
     })
+  }
+
+  addCategory(){
+    if(this.regex1.test(this.catImageUrl)){  
+    if(this.categoryName &&  this.catImageUrl){
+      this.http.postcategory('CourseCategory',{
+        "label":this.categoryName,
+        "logo": this.catImageUrl,
+        "visibility":this.catVisibility.nativeElement.value
+      }).subscribe(res=>{
+        if(res.status==201){
+          this.toastrService.success('Category succusfully created','Successs',{positionClass:'toast-bottom-right'});
+          this.populateCatgory();
+        }
+        else{
+          this.toastrService.error('Something is wrong','Error',{positionClass:'toast-bottom-right'});
+        }
+      })
+      }
+      else{
+        this.toastrService.error('please enter category name','Error',{positionClass:'toast-bottom-right'});
+      }
+     }
+     else{
+       this.toastrService.error('Enter valid url','Error',{positionClass:'toast-bottom-right'});
+     }
   }
 }

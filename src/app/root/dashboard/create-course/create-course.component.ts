@@ -65,7 +65,7 @@ export class CreateCourseComponent implements OnInit {
     .subscribe(res=>{
       if(res.status == 200){
         this.loading = false;
-        this.allCourses = res.entity;
+        this.allCourses = res.entity.rows;
       }
     }); 
   }
@@ -110,7 +110,7 @@ export class CreateCourseComponent implements OnInit {
   populateImage(){
     this.http.getData('Image')
     .subscribe((res) => {
-      this.allImages=res.entity;
+      this.allImages=res.entity.rows;
     })
 
   }

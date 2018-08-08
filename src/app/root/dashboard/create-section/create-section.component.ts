@@ -41,6 +41,7 @@ export class CreateSectionComponent implements OnInit {
   chapterName:string;
   chapterDescription:string;
   sectionIdForAddChapter:string;
+  angular:any;
 
   constructor(private authService: AuthserviceService, private toastrService: ToastrService, private userInfo: UserInfoService, private route:ActivatedRoute, private http: HttpService, private scrollbarService: MalihuScrollbarService, private router: Router) { }
 
@@ -64,6 +65,12 @@ export class CreateSectionComponent implements OnInit {
       }
     });
   }
+
+  onItemDrop(e: any,i) {
+    // Get the dropped data here
+    let y = e.dragData;
+    this.allSections[i].CourseChapters.push(e.dragData);
+}
 
   populateSectionWithCourseId(){
 

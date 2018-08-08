@@ -11,9 +11,50 @@
               {{cat.label}}
             </a>
           </div>
+          <div class="col-lg-2 col-md-4">
+            <a style="cursor: pointer;" data-toggle="modal" data-target="#bootstrapModel"><span class="glyphicon glyphicon-log-in"></span>
+              <div style="text-align: center;" class="testimonial-item mx-auto mb-2"style="background-color: #a8e9c9">
+                <i class="fa fa-plus" aria-hidden="true"></i><p>Category</p>
+              </div>
+            </a>
+          </div>
         </div>
       </div>
     </section>
   </body>
+
+  <div id="bootstrapModel" class="modal fade" role="dialog">
+      <div class="modal-dialog">
+        <!-- Modal content-->
+        <div class="modal-content">
+          <div class="modal-header">
+            <button type="button" class="close" data-dismiss="modal">&times;</button>
+          </div>
+          <h4 class="modal-title" style="margin-left: 16px;">Add Category</h4>
+    <!-- model body section -->
+          <div class="modal-body">
+            <input id="form_name" type="text" name="name" class="form-control" placeholder="Course Category" required="required" data-error="Firstname is required." [(ngModel)]="categoryName">
+            <br>
+            <input id="form_name" type="text" name="url" class="form-control" placeholder="Category image url" required="required" data-error="Firstname is required." [(ngModel)]="catImageUrl">
+            <br>
+            <div class="col-md-12">
+              <div class="form-group">
+                <label>Visibility</label> &nbsp;
+                <select id="country" name="country" #cat>
+                  <option>true</option>
+                  <option>false</option>
+                </select> 
+                <div class="help-block with-errors"></div>
+              </div>
+            </div>
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+            <button type="button" class="btn btn-default" data-dismiss="modal" (click)="addCategory();">Save</button>
+          </div>
+        </div>
+      </div>
+    </div>
+
 
   
