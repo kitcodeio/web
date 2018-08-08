@@ -16,6 +16,7 @@ import { Course } from '../../../models/course';
   styleUrls: ['./courses.component.css']
 })
 export class CoursesComponent implements OnInit {
+  
   loading:boolean= true;
   allCourseCategory=[];
   allCourses:Course[] = [];

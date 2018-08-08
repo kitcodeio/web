@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { HttpService } from '../../services/http/http.service';
 import { ActivatedRoute, Router } from '@angular/router';
 import { MalihuScrollbarService } from 'ngx-malihu-scrollbar';
-import {DataService} from '../../services/data/data.service';
+import { DataService } from '../../services/data/data.service';
 
 @Component({
   selector: 'app-course-category',

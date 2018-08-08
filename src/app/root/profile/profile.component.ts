@@ -3,6 +3,7 @@ import { DomSanitizer } from "@angular/platform-browser";
 import { ActivatedRoute } from '@angular/router';
 import { HttpService } from '../../services/http/http.service'
 import { AuthserviceService } from '../../services/auth/authservice.service';
+import { ToastrService } from 'ngx-toastr';
 
 @Component({
   selector: 'app-profile',
@@ -45,7 +46,8 @@ export class ProfileComponent implements OnInit {
   	private domSanitizer: DomSanitizer,
 	  private route: ActivatedRoute,
 	  private http: HttpService,
-    private authService: AuthserviceService
+    private authService: AuthserviceService,
+    private toastrService:ToastrService
   ) {
     this.stopListening = renderer.listen('window', 'message', this.handleMessage.bind(this));
   }
@@ -83,7 +85,9 @@ export class ProfileComponent implements OnInit {
         this.data.preview = 'https://' + res.entity.app;
         this.youtubeUrl = this.domSanitizer.bypassSecurityTrustResourceUrl(this.chapters[this.chapter].url);
         this.ide = this.domSanitizer.bypassSecurityTrustResourceUrl('https://' + res.entity.kide);
-      } else {  }
+      } else { 
+        this.loadindScreen = false;
+        this.toastrService.error(res.error,'Error',{positionClass:'toast-bottom-right'});       }
     });
   }
   
