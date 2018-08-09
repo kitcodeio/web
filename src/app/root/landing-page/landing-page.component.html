@@ -18,11 +18,11 @@
                     <input autocomplete="off" type="text" class="form-control" placeholder="What do you want to learn today ?" #searchBox id="search-box" (keyup)="search(searchBox.value)" (input)="onSearchChange($event.target.value)"/>
                    
                     <ul class="search-result" #searchResult>
-                      <li *ngFor="let course of courses | async" >
-                        <a style="width:100%;" type="click" routerLink="/root/course/chapter/{{course.id}}">
+                      <a style="text-decoration:none !important;" *ngFor="let course of courses | async" style="width:100%;" type="click" routerLink="/root/course/chapter/{{course.id}}">
+                      <li >
                           {{course.label}}
-                        </a>
                       </li>
+                      </a>
                     </ul>
                   </div>
                 </div>

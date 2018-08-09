@@ -142,6 +142,7 @@ export class CreateSectionComponent implements OnInit {
     id:this.section.id,
     data:this.section
 }).subscribe(res=>{
+  console.log(res);
   if(res.status===200){
     this.toastrService.success(res.message,'Successs',{positionClass:'toast-bottom-right'});
     this.allSections[this.updateIndex] = this.section;

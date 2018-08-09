@@ -1,7 +1,7 @@
 
   <section class="container-fluid" style="margin-top: 2%; margin-left: 8%;">
       <div class="row no-gutters">
-        
+
 	  <div class="col-lg-12 col-md-12 col-sm-12">
 	  <div class="create-image-container">
         <!-- <button class="btn create-image-button" (click)="createImage();"><i class="fa fa-plus" aria-hidden="true"></i> Image</button> &nbsp;
@@ -23,7 +23,7 @@
               <p class="image-desc-container card-text">{{image.description}}</p>
               <!-- <a (click)="getVideos(i);">&nbsp;&nbsp;&nbsp;Get started</a><br> -->
               <i class="fa fa-unlock-alt" aria-hidden="true"></i><a href="#." data-target="#getKeyInfo" data-toggle="modal" class="text-uppercase getKeyInfo" (click)="change(image);">&nbsp;Key Info</a>
-            </div> 
+            </div>
             <!-- <div class="row bg-light no-gutters image-stats-container">
               <div class="col-lg-4 col-md-4 col-lg-4">
                 <div class="text-center p-2">
@@ -44,7 +44,7 @@
           </div>
           <br>
         </div>
-        
+
             <div class="col-lg-3 col-md-3 col-sm-3">
                 <div class="card image-container">
                   <a style="text-decoration:none; color: rgb(32, 28, 28)" routerLink="/root/dashboard/create-image">
@@ -56,6 +56,25 @@
               <br>
           </div>
       </div>
+
+    <!-- pagination for images list -->
+      <!-- <div>
+        <ul class="pagination">
+            <li class="page-item">
+              <a class="page-link" (click)="changePage(page-1)" aria-label="Previous">
+                <span aria-hidden="true">&laquo;</span>
+                <span class="sr-only">Previous</span>
+              </a>
+            </li>
+            <li class="page-item" *ngFor="let i of pages"><a class="page-link" (click)="changePage(i)">{{i}}</a></li>
+            <li class="page-item">
+              <a class="page-link" (click)="changePage(page+1)" aria-label="Next">
+                <span aria-hidden="true">&raquo;</span>
+                <span class="sr-only">Next</span>
+              </a>
+            </li>
+          </ul>
+    </div> -->
   </section>
 
   <!--modal for get key information-->
