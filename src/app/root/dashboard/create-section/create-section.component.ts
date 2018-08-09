@@ -8,6 +8,8 @@ import { Course } from '../../../models/course';
 import { AuthserviceService } from '../../../services/auth/authservice.service';
 import { Chapter } from '../../../models/chapter';
 import { ToastrService } from 'ngx-toastr'; 
+// Drag & drop
+import { DragulaService } from 'ng2-dragula';
 
 @Component({
   selector: 'app-create-section',
@@ -43,10 +45,9 @@ export class CreateSectionComponent implements OnInit {
   sectionIdForAddChapter:string;
   angular:any;
 
-  constructor(private authService: AuthserviceService, private toastrService: ToastrService, private userInfo: UserInfoService, private route:ActivatedRoute, private http: HttpService, private scrollbarService: MalihuScrollbarService, private router: Router) { }
+  constructor(private _dragulaService: DragulaService, private authService: AuthserviceService, private toastrService: ToastrService, private userInfo: UserInfoService, private route:ActivatedRoute, private http: HttpService, private scrollbarService: MalihuScrollbarService, private router: Router) { }
 
   ngOnInit() {
-
     $("#menu-toggle").click(function(e) {
       e.preventDefault();
       $("#wrapper").toggleClass("toggled");

@@ -15,7 +15,7 @@ export class AuthserviceService {
   baseUrl: string;
   constructor(private http: HttpClient) {
     let url = window.location.href;
-    if(url.includes('localhost')) this.baseUrl = 'https://staging.kitcode.io/';
+    if(url.includes('localhost')) this.baseUrl = 'http://localhost:7070/';
     else this.baseUrl = '/';
    
   }
