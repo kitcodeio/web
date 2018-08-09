@@ -56,7 +56,6 @@ export class ImagesComponent implements OnInit {
         this.flag=true;
       }
     })
-
   }
 
     //Delete image
@@ -79,32 +78,6 @@ export class ImagesComponent implements OnInit {
 
   createCourse(){
     this.router.navigate(['/root/createCourse']);
-  }
-
-  addCategory(){
-    if(this.regex1.test(this.catImageUrl)){  
-    if(this.categoryName &&  this.catImageUrl){
-      this.http.postcategory('CourseCategory',{
-        "label":this.categoryName,
-        "logo": this.catImageUrl,
-        "visibility":this.catVisibility.nativeElement.value
-      }).subscribe(res=>{
-        if(res.status==201){
-          this.toastrService.success('Category succusfully created','Successs',{positionClass:'toast-bottom-right'});
-        }
-        else{
-          this.toastrService.error('Something is wrong','Error',{positionClass:'toast-bottom-right'});
-        }
-      })
-      this.getcatgory();
-      }
-      else{
-        this.toastrService.error('please enter category name','Error',{positionClass:'toast-bottom-right'});
-      }
-    }
-    else{
-      this.toastrService.error('Enter valid url','Error',{positionClass:'toast-bottom-right'});
-    }
   }
 
   getcatgory(){

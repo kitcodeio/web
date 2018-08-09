@@ -136,4 +136,8 @@ export class CreateCourseComponent implements OnInit {
       this.populateCourseWithCatId();
     })
   }
+
+  toSectionPage(id){
+    this.router.navigate(['/root/dashboard/createSection'],{ queryParams: { id: id } })
+  }
 }
