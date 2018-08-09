@@ -48,6 +48,15 @@ export class CreateSectionComponent implements OnInit {
   constructor(private _dragulaService: DragulaService, private authService: AuthserviceService, private toastrService: ToastrService, private userInfo: UserInfoService, private route:ActivatedRoute, private http: HttpService, private scrollbarService: MalihuScrollbarService, private router: Router) { }
 
   ngOnInit() {
+
+    this._dragulaService.drag().subscribe(res=>{
+      console.log(res);
+    });
+
+    this._dragulaService.drop().subscribe(res=>{
+      console.log(res);
+    });
+
     $("#menu-toggle").click(function(e) {
       e.preventDefault();
       $("#wrapper").toggleClass("toggled");

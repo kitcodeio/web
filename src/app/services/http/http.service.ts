@@ -13,8 +13,10 @@ export class HttpService {
 
   baseUrl: string;
 
-  getData(model: string): Observable<any> {
-    return this.http.get(this.baseUrl+'read/api/'+model)
+  getData(model: string, pageNo?:number): Observable<any> {
+    let url = this.baseUrl+'read/api/'+model;
+    url = (pageNo)?url+'?page='+pageNo:url;
+    return this.http.get(url)
       .pipe(catchError((error)=>{return of(error);}));
   }
   

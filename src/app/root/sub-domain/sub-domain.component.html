@@ -19,13 +19,30 @@
                     </td>
                     <td *ngIf="domain.occupied" style="color: red; text-align: center;"><i class="fa fa-times-circle-o" aria-hidden="true"></i>
                     </td>
-                    <td>
-                        <!-- <span title="Delete Domain" class="glyphicon glyphicon-edit"><i class="fa fa-trash" aria-hidden="true" style="color: rgb(235, 102, 102);cursor: pointer;" data-toggle="modal" data-target="#bootstrapModel"></i></span>&nbsp;&nbsp;&nbsp;&nbsp;
-                        <span style="color:red;" class="glyphicon glyphicon-trash"></span> -->
-                    </td>
+                    <!-- <td>
+                      <span title="Delete Domain" class="glyphicon glyphicon-edit"><i class="fa fa-trash" aria-hidden="true" style="color: rgb(235, 102, 102);cursor: pointer;" data-toggle="modal" data-target="#bootstrapModel"></i></span>&nbsp;&nbsp;&nbsp;&nbsp;
+                        <span style="color:red;" class="glyphicon glyphicon-trash"></span>
+                    </td> -->
                 </tr>
             </tbody>
         </table>
+        <div>
+            <ul class="pagination">
+                <li class="page-item">
+                  <a class="page-link" (click)="changePage(page-1)" *ngIf="page!==1" aria-label="Previous">
+                    <span aria-hidden="true">&laquo;</span>
+                    <span class="sr-only">Previous</span>
+                  </a>
+                </li>
+                <li class="page-item" *ngFor="let i of pages"><a class="page-link" (click)="changePage(i)">{{i}}</a></li>
+                <li class="page-item">
+                  <a class="page-link" (click)="changePage(page+1)" aria-label="Next">
+                    <span aria-hidden="true">&raquo;</span>
+                    <span class="sr-only">Next</span>
+                  </a>
+                </li>
+              </ul>
+        </div>
     </div>
     <br>
     <button style="background-color: transparent; border: 1px solid #72d5a4; color: #72d5a4; margin-right: 50px;" class="btn create-image-button float-right" (click)="addSubDomain();"><i class="fa fa-plus" aria-hidden="true"></i> Sub Domain</button>

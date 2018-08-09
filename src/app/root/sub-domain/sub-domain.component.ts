@@ -10,6 +10,10 @@ import { ToastrService } from 'ngx-toastr';
 export class SubDomainComponent implements OnInit {
   domainName:string;
   allSubDomain=[];
+
+  pages: number[];
+  page: number = 1;
+
   constructor(private http: HttpService, private toastrService: ToastrService) { }
 
   ngOnInit() {
@@ -30,10 +34,22 @@ export class SubDomainComponent implements OnInit {
     })
   }
 
+  changePage(index: number): void {
+    this.page = index;
+    this.http.getData('Subdomain', index)
+    .subscribe(res=>{
+      this.allSubDomain = res.entity.rows;
+    })
+  }
+
   populateDomain(){
     this.http.getData('Subdomain')
     .subscribe(res=>{
+      let n = Math.ceil(res.entity.count/10);
+      this.pages = Array(n);
+      for(var i = 0; i < n; i++) this.pages[i]=i+1;
       this.allSubDomain = res.entity.rows;
+      console.log(this.pages);
     })
   }
 }

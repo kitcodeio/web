@@ -1,6 +1,7 @@
 <body style="background:#f5f5f5; margin-left: 3%">
     <div id="wrapper">
         <!-- Page Content -->
+        <button style="background-color: transparent; border: 1px solid #72d5a4; color: #72d5a4; margin-left: 5%; cursor: pointer;" class="btn create-image-button float-left" routerLink="/root/dashboard/category"><i class="fa fa-plus" aria-hidden="true"></i> Back</button>
         <div id="page-content-wrapper">
             <div class="container-fluid">
                 <a href="#menu-toggle" class="btn btn-secondary d-sm-none d-lg-none d-md-none" id="menu-toggle">Toggle Menu</a>
@@ -153,7 +154,7 @@
                   <br/>
                   <div class="sections">
                     <div id="accordion">
-                      <div [dragula]='"allSections"' dragulaName="allSections" class="card mb-5"  *ngFor="let s of allSections;let i=index;">
+                      <div class="card mb-5"  *ngFor="let s of allSections;let i=index;">
                         <div class="card-header bg-white" data-toggle="collapse" [attr.data-target]="'#'+i">
                           <h5 class="mb-0">
                               {{i+1}}. {{s.label}}
