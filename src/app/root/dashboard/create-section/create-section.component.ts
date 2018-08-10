@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild, ElementRef } from '@angular/core';
 import { HttpService } from '../../../services/http/http.service';
 import { ActivatedRoute, Router } from '@angular/router';
 import { MalihuScrollbarService } from 'ngx-malihu-scrollbar';
@@ -10,6 +10,7 @@ import { Chapter } from '../../../models/chapter';
 import { ToastrService } from 'ngx-toastr'; 
 // Drag & drop
 import { DragulaService } from 'ng2-dragula';
+
 
 @Component({
   selector: 'app-create-section',
@@ -44,17 +45,59 @@ export class CreateSectionComponent implements OnInit {
   chapterDescription:string;
   sectionIdForAddChapter:string;
   angular:any;
+  sectionIndexForDAD:number;
+  @ViewChild('Chapter1') Chapter:ElementRef;
+  chapterIndexOnDrag:number;
+  chapterIndexOnDrop:number;
 
-  constructor(private _dragulaService: DragulaService, private authService: AuthserviceService, private toastrService: ToastrService, private userInfo: UserInfoService, private route:ActivatedRoute, private http: HttpService, private scrollbarService: MalihuScrollbarService, private router: Router) { }
+  constructor(private elRef: ElementRef, private _dragulaService: DragulaService, private authService: AuthserviceService, private toastrService: ToastrService, private userInfo: UserInfoService, private route:ActivatedRoute, private http: HttpService, private scrollbarService: MalihuScrollbarService, private router: Router) { 
+
+  }
+
+  private getElementIndex(el: any) {
+    return [].slice.call(el.parentElement.children).indexOf(el);
+}
+
+  onClick(i){
+    this.sectionIndexForDAD=i;
+    console.log(this.sectionIndexForDAD);
+  }
 
   ngOnInit() {
 
     this._dragulaService.drag().subscribe(res=>{
-      console.log(res);
+      let index = this.getElementIndex(res.el);
+      let item = this.allSections[this.sectionIndexForDAD].CourseChapters[index];
+      this.chapterIndexOnDrag = index;
     });
 
-    this._dragulaService.drop().subscribe(res=>{
-      console.log(res);
+    this._dragulaService.drop().subscribe((res:any)=>{
+      let index = this.getElementIndex(res.el);
+      let item = this.allSections[this.sectionIndexForDAD].CourseChapters[index];
+      let item1 = this.allSections[this.sectionIndexForDAD].CourseChapters[this.chapterIndexOnDrag]; 
+      this.allSections[this.sectionIndexForDAD].CourseChapters[index] = this.allSections[this.sectionIndexForDAD].CourseChapters[this.chapterIndexOnDrag];
+      this.allSections[this.sectionIndexForDAD].CourseChapters[this.chapterIndexOnDrag] = item;
+    
+      this.http.putData('CourseChapter',{
+        id:item.id,
+        data:{
+          label:item1.label,
+          url:item1.url
+        }
+      })
+      .subscribe(res=>{
+      });
+
+      this.http.putData('CourseChapter',{
+        id:item1.id,
+        data:{
+          label:item.label,
+          url:item.url
+        }
+      })
+      .subscribe(res=>{
+        this.populateSectionWithCourseId();
+      });
     });
 
     $("#menu-toggle").click(function(e) {

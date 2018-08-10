@@ -62,6 +62,7 @@ export function provideConfig() {
     MalihuScrollbarModule.forRoot(),
     SocialLoginModule,
     DragulaModule.forRoot(),
+    DragulaModule
 
   ],
   providers: [AuthserviceService,
