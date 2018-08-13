@@ -50,7 +50,6 @@ export class ImagesComponent implements OnInit {
     this.http.getData('Image')
     .subscribe((res) => {
       this.allImages=res.entity.rows;
-      console.log(res);
       if(this.allImages.length==0){
         this.emptyMessage='you do not have any image';
         this.flag=true;

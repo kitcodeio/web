@@ -122,7 +122,6 @@ export class CreateCourseComponent implements OnInit {
     });
   }
   test(){
-    console.log('hi..')
   }
 
   addCourse(){

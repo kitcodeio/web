@@ -49,7 +49,6 @@ export class SubDomainComponent implements OnInit {
       this.pages = Array(n);
       for(var i = 0; i < n; i++) this.pages[i]=i+1;
       this.allSubDomain = res.entity.rows;
-      console.log(this.pages);
     })
   }
 }

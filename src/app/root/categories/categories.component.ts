@@ -49,7 +49,6 @@ export class CategoriesComponent implements OnInit {
   deleteCategory(){
     this.http.deleteData('CourseCategory',this.deletedCategoryId)
     .subscribe(res=>{
-      console.log(res);
       this.populateCatgory();
     })
   }
@@ -59,7 +58,6 @@ export class CategoriesComponent implements OnInit {
   }
 
   setUpdateCategory(cat,id){
-    console.log(cat);
     this.categoryName = cat.label;
     this.catImageUrl = cat.logo;
     this.updateCategoryId = cat.id;
@@ -74,7 +72,6 @@ export class CategoriesComponent implements OnInit {
         "visibility":this.catVisibility.nativeElement.value
       }
   }).subscribe(res=>{
-    console.log(res);
     if(res.status===200){
       this.toastrService.success(res.message,'Successs',{positionClass:'toast-bottom-right'});
       this.populateCatgory();

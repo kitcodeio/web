@@ -55,7 +55,7 @@ export class CreateSectionComponent implements OnInit {
   constructor(private elRef: ElementRef, private _dragulaService: DragulaService, private authService: AuthserviceService, private toastrService: ToastrService, private userInfo: UserInfoService, private route:ActivatedRoute, private http: HttpService, private scrollbarService: MalihuScrollbarService, private router: Router) { 
 
     this._dragulaService.createGroup("COLUMNS", {
-      direction: 'vertical',
+      direction: 'horizontal',
       moves: (el, source, handle) => handle.className === "group-handle"
     });
   }
@@ -66,17 +66,14 @@ export class CreateSectionComponent implements OnInit {
 
   onClick(i){
     this.sectionIndexForDAD=i;
-    console.log(this.sectionIndexForDAD);
   }
 
   ngOnInit() {
 
     //chapter drag and drop
     this._dragulaService.drag().subscribe(res=>{
-      console.log(this._dragulaService.find('Chapter').name);
       this.chapterIndexOnDrag = this.getElementIndex(res.el);
       this.sectionIndexOnDrag = this.getElementIndex(res.el);
-      console.log(this.sectionIndexOnDrag);
     });
 
     this._dragulaService.drop().subscribe((res:any)=>{
@@ -113,11 +110,8 @@ export class CreateSectionComponent implements OnInit {
           this.populateSectionWithCourseId();
         });
       }
-
-  
-
-    //section drag and drop
-
+      else{
+            //section drag and drop
     this.http.putData('CourseSection',{
       id:section1.id,
       data:{
@@ -126,7 +120,6 @@ export class CreateSectionComponent implements OnInit {
       }
     })
     .subscribe(res=>{
-      console.log(res);
     });
 
     this.http.putData('CourseSection',{
@@ -137,10 +130,10 @@ export class CreateSectionComponent implements OnInit {
       }
     })
     .subscribe(res=>{
-      console.log(res);
       this.populateSectionWithCourseId();
      });
 
+      }
     });
 
     $("#menu-toggle").click(function(e) {
@@ -175,6 +168,7 @@ export class CreateSectionComponent implements OnInit {
       .subscribe(res=>{
         this.allSections = res.entity;
         this.courseId=params.id;
+        console.log(res);
       })    
     });
 
@@ -222,7 +216,6 @@ export class CreateSectionComponent implements OnInit {
     id:this.section.id,
     data:this.section
 }).subscribe(res=>{
-  console.log(res);
   if(res.status===200){
     this.toastrService.success(res.message,'Successs',{positionClass:'toast-bottom-right'});
     this.allSections[this.updateIndex] = this.section;
@@ -284,21 +277,25 @@ export class CreateSectionComponent implements OnInit {
     this.http.postsection('CourseSection',{
       "course_id": this.courseId,
 	    "label":this.sectionName,
-	    "description": this.sectionDescription
+      "description": this.sectionDescription,
+      "index": this.allSections.length
     }).subscribe(res=>{
       this.populateSectionWithCourseId();
     })
   }
 
-  getSectionId(id){
+  sectionIndex:number;
+  getSectionId(id,index){
     this.sectionIdForAddChapter=id;
+    this.sectionIndex = index;
   }
 
   addChapter(){
     this.http.postchapter('CourseChapter',{
       "section_id": this.sectionIdForAddChapter,
 	    "label": this.chapterName,
-	    "url": this.chapterDescription
+      "url": this.chapterDescription,
+      "index": this.allSections[this.sectionIndex].CourseChapters.length
     }).subscribe(res=>{
       this.populateSectionWithCourseId();
     })
