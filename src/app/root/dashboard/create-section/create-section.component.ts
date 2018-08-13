@@ -49,9 +49,15 @@ export class CreateSectionComponent implements OnInit {
   @ViewChild('Chapter1') Chapter:ElementRef;
   chapterIndexOnDrag:number;
   chapterIndexOnDrop:number;
+  sectionIndexOnDrag:number;
+  sectionIndexOnDrop:number;
 
   constructor(private elRef: ElementRef, private _dragulaService: DragulaService, private authService: AuthserviceService, private toastrService: ToastrService, private userInfo: UserInfoService, private route:ActivatedRoute, private http: HttpService, private scrollbarService: MalihuScrollbarService, private router: Router) { 
 
+    this._dragulaService.createGroup("COLUMNS", {
+      direction: 'vertical',
+      moves: (el, source, handle) => handle.className === "group-handle"
+    });
   }
 
   private getElementIndex(el: any) {
@@ -65,39 +71,76 @@ export class CreateSectionComponent implements OnInit {
 
   ngOnInit() {
 
+    //chapter drag and drop
     this._dragulaService.drag().subscribe(res=>{
-      let index = this.getElementIndex(res.el);
-      let item = this.allSections[this.sectionIndexForDAD].CourseChapters[index];
-      this.chapterIndexOnDrag = index;
+      console.log(this._dragulaService.find('Chapter').name);
+      this.chapterIndexOnDrag = this.getElementIndex(res.el);
+      this.sectionIndexOnDrag = this.getElementIndex(res.el);
+      console.log(this.sectionIndexOnDrag);
     });
 
     this._dragulaService.drop().subscribe((res:any)=>{
-      let index = this.getElementIndex(res.el);
-      let item = this.allSections[this.sectionIndexForDAD].CourseChapters[index];
-      let item1 = this.allSections[this.sectionIndexForDAD].CourseChapters[this.chapterIndexOnDrag]; 
-      this.allSections[this.sectionIndexForDAD].CourseChapters[index] = this.allSections[this.sectionIndexForDAD].CourseChapters[this.chapterIndexOnDrag];
-      this.allSections[this.sectionIndexForDAD].CourseChapters[this.chapterIndexOnDrag] = item;
-    
-      this.http.putData('CourseChapter',{
-        id:item.id,
-        data:{
-          label:item1.label,
-          url:item1.url
-        }
-      })
-      .subscribe(res=>{
-      });
+      this.chapterIndexOnDrop = this.getElementIndex(res.el);
+      this.sectionIndexOnDrop = this.getElementIndex(res.el);
 
-      this.http.putData('CourseChapter',{
-        id:item1.id,
-        data:{
-          label:item.label,
-          url:item.url
-        }
-      })
-      .subscribe(res=>{
-        this.populateSectionWithCourseId();
-      });
+      let section1 = this.allSections[this.sectionIndexOnDrag];
+      let section2 = this.allSections[this.sectionIndexOnDrop];
+
+      let item,item1;
+
+      if(this.sectionIndexForDAD){
+        item = this.allSections[this.sectionIndexForDAD].CourseChapters[this.chapterIndexOnDrop];
+        item1 = this.allSections[this.sectionIndexForDAD].CourseChapters[this.chapterIndexOnDrag];
+
+        this.http.putData('CourseChapter',{
+          id:item.id,
+          data:{
+            label:item1.label,
+            url:item1.url
+          }
+        })
+        .subscribe(res=>{
+        });
+  
+        this.http.putData('CourseChapter',{
+          id:item1.id,
+          data:{
+            label:item.label,
+            url:item.url
+          }
+        })
+        .subscribe(res=>{
+          this.populateSectionWithCourseId();
+        });
+      }
+
+  
+
+    //section drag and drop
+
+    this.http.putData('CourseSection',{
+      id:section1.id,
+      data:{
+        label:section2.label,
+        description:section2.description
+      }
+    })
+    .subscribe(res=>{
+      console.log(res);
+    });
+
+    this.http.putData('CourseSection',{
+      id:section2.id,
+      data:{
+        label:section1.label,
+        description:section1.description
+      }
+    })
+    .subscribe(res=>{
+      console.log(res);
+      this.populateSectionWithCourseId();
+     });
+
     });
 
     $("#menu-toggle").click(function(e) {
@@ -141,12 +184,6 @@ export class CreateSectionComponent implements OnInit {
     this.http.getcategory('CourseCategory').subscribe(res=>{
       this.allCourseCategory = res.entity;
     })
-  }
-
-  toProfile(s_id, c_index){
-    if (this.courseDetail.status == 'purchased')
-      this.router.navigate(['/root/kide/'+this.course_id+'/'+s_id+'/'+c_index]);
-    else alert('Subscribe the course first');
   }
 
   setDeleteSectionId(id,index){

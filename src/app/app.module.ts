@@ -21,6 +21,7 @@ import { DashboardComponent } from './root/dashboard/dashboard.component';
 import { CategoriesComponent } from './root/categories/categories.component';
 import { CreateSectionComponent } from './root/dashboard/create-section/create-section.component';
 import { DragulaModule } from 'ng2-dragula';
+import { DragDropDirectiveModule} from "angular4-drag-drop";
 
 let config = new AuthServiceConfig([
   {
@@ -62,7 +63,8 @@ export function provideConfig() {
     MalihuScrollbarModule.forRoot(),
     SocialLoginModule,
     DragulaModule.forRoot(),
-    DragulaModule
+    DragulaModule,
+    DragDropDirectiveModule
 
   ],
   providers: [AuthserviceService,
