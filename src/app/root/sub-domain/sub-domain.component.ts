@@ -24,7 +24,7 @@ export class SubDomainComponent implements OnInit {
   addSubDomain(){
       this.http.postData('Subdomain',{"subdomain":this.domainName})
       .subscribe(res=>{
-      if(res.status==201){
+      if(res.statusCode==201){
         this.toastrService.success('Sub Domain created successfully','Success',{positionClass:'toast-bottom-right'});
         this.populateDomain();
       }

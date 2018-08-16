@@ -75,7 +75,7 @@ export class CategoriesComponent implements OnInit {
       }
   }).subscribe(res=>{
     console.log(res);
-    if(res.status===200){
+    if(res.statusCode===200){
       this.toastrService.success(res.message,'Successs',{positionClass:'toast-bottom-right'});
       this.populateCatgory();
     }
@@ -94,7 +94,7 @@ export class CategoriesComponent implements OnInit {
         "logo": this.catImageUrl,
         "visibility":this.catVisibility.nativeElement.value
       }).subscribe(res=>{
-        if(res.status==201){
+        if(res.statusCode==201){
           this.toastrService.success('Category succusfully created','Successs',{positionClass:'toast-bottom-right'});
           this.populateCatgory();
         }

@@ -84,7 +84,7 @@ export class DashboardComponent implements OnInit {
         "logo": this.catImageUrl,
         "visibility":this.catVisibility.nativeElement.value
       }).subscribe(res=>{
-        if(res.status==201){
+        if(res.statusCode==201){
           this.toastrService.success('Category succusfully created','Successs',{positionClass:'toast-bottom-right'});
         }
         else{

@@ -63,7 +63,7 @@ export class CreateCourseComponent implements OnInit {
     this.loading = true;
     this.http.getDataWithId('Course',id)
     .subscribe(res=>{
-      if(res.status == 200){
+      if(res.statusCode == 200){
         this.loading = false;
         this.allCourses = res.entity.rows;
       }
@@ -82,7 +82,7 @@ export class CreateCourseComponent implements OnInit {
       id: this.course.id,
       data: this.course
     }).subscribe(res=>{
-      if(res.status == 200){
+      if(res.statusCode == 200){
         this.toastrService.success(res.message,'Successs',{positionClass:'toast-bottom-right'});
         this.allCourses[this.updateIndex] = this.course;
       }

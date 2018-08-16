@@ -120,7 +120,7 @@ export class CreateImageComponent implements OnInit, AfterViewInit {
         "label":this.label,
         "file":this.editor.value
       }).subscribe((res) => {
-        if(res.status==201)
+        if(res.statusCode==201)
         {
           this.toastrService.success('Image creation started','Success',{positionClass:'toast-bottom-right'});
           this.router.navigate(['/root/dashboard/list-image']);

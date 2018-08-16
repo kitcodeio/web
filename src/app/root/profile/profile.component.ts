@@ -79,7 +79,7 @@ export class ProfileComponent implements OnInit {
 
   ngAfterViewInit(){
     this.http.getContainer(this.course_id).subscribe(res => {
-      if (res.status == 200) {
+      if (res.statusCode == 200) {
         this.data.kide = 'https://' + res.entity.kide;
         this.data.terminal = 'https://' + res.entity.terminal;
         this.data.preview = 'https://' + res.entity.app;
