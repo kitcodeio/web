@@ -166,7 +166,11 @@ login(): void {
  
   signInWithFB(): void {
     this.authSocialService.signIn(FacebookLoginProvider.PROVIDER_ID).then(data=>{
-      console.log(data);
+      this.authService.socialLogin(data).subscribe(res=>{
+        console.log(res);
+        this.authService.setToken(res.token);
+        this.router.navigate(['root/category']);
+      })
     });
   }
  

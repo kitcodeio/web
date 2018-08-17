@@ -83,4 +83,13 @@ export class AuthserviceService {
     return decoded;
   }
 
+  socialLogin(data:object): Observable<any>{
+    return this.http.post(this.baseUrl+'login/social',data)
+    .pipe(
+      catchError((err) => {
+        return of(err.error);
+    })
+  );
+  }
+
 }
