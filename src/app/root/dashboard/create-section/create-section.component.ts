@@ -54,10 +54,6 @@ export class CreateSectionComponent implements OnInit {
 
   constructor(private elRef: ElementRef, private _dragulaService: DragulaService, private authService: AuthserviceService, private toastrService: ToastrService, private userInfo: UserInfoService, private route:ActivatedRoute, private http: HttpService, private scrollbarService: MalihuScrollbarService, private router: Router) { 
 
-    this._dragulaService.createGroup("COLUMNS", {
-      direction: 'horizontal',
-      moves: (el, source, handle) => handle.className === "group-handle"
-    });
   }
 
   private getElementIndex(el: any) {
@@ -74,7 +70,6 @@ export class CreateSectionComponent implements OnInit {
     this._dragulaService.drag().subscribe(res=>{
       this.chapterIndexOnDrag = this.getElementIndex(res.el);
       this.sectionIndexOnDrag = this.getElementIndex(res.el);
-      console.log(this.chapterIndexOnDrag);
     });
 
     this._dragulaService.drop().subscribe((res:any)=>{
@@ -85,12 +80,10 @@ export class CreateSectionComponent implements OnInit {
       let section2 = this.allSections[this.sectionIndexOnDrop];
 
       let item,item1;
-      console.log(this.sectionIndexForDAD)
 
         item = this.allSections[this.sectionIndexForDAD].CourseChapters[this.chapterIndexOnDrop];
         item1 = this.allSections[this.sectionIndexForDAD].CourseChapters[this.chapterIndexOnDrag];
 
-        console.log(item,item1);
         this.http.putData('CourseChapter',{
           id:item.id,
           data:{
@@ -99,7 +92,6 @@ export class CreateSectionComponent implements OnInit {
           }
         })
         .subscribe(res=>{
-          console.log(res);
         });
   
         this.http.putData('CourseChapter',{
@@ -146,7 +138,6 @@ export class CreateSectionComponent implements OnInit {
       .subscribe(res=>{
         this.allSections = res.entity;
         this.courseId=params.id;
-        console.log(res);
       })    
     });
 
@@ -199,7 +190,8 @@ export class CreateSectionComponent implements OnInit {
     this.allSections[this.updateIndex] = this.section;
   }
   else{
-    this.toastrService.error(res.error,'Error',{positionClass:'toast-bottom-right'});
+    console.log(res);
+    this.toastrService.error(res.error.message,'Error',{positionClass:'toast-bottom-right'});
   }
   
     })
@@ -215,7 +207,7 @@ export class CreateSectionComponent implements OnInit {
       this.allSections[this.updateSectionIndex].CourseChapters[this.updateChapterIndex]= this.chapter;
     }
     else{
-      this.toastrService.error(res.error,'Error',{positionClass:'toast-bottom-right'});
+      this.toastrService.error(res.error.error,'Error',{positionClass:'toast-bottom-right'});
     }
     
       })
@@ -239,7 +231,7 @@ export class CreateSectionComponent implements OnInit {
         this.toastrService.success(res.message,'Successs',{positionClass:'toast-bottom-right'});
       }
       else{
-        this.toastrService.error(res.error,'Error',{positionClass:'toast-bottom-right'});
+        this.toastrService.error(res.error.error,'Error',{positionClass:'toast-bottom-right'});
       }
     })
   }

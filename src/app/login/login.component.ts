@@ -3,7 +3,7 @@ import { Router, ActivatedRoute} from '@angular/router';
 import { AuthserviceService } from '../services/auth/authservice.service';
 import { ToastrService } from 'ngx-toastr';
 import { UserInfoService } from '../services/userInfo/user-info.service';
-import {Location} from '@angular/common';
+import { Location } from '@angular/common';
 import { AuthService } from "angularx-social-login";
 import { FacebookLoginProvider, GoogleLoginProvider, LinkedInLoginProvider } from "angularx-social-login";
 import { Http } from '@angular/http';
@@ -158,25 +158,20 @@ login(): void {
   }
 
   signInWithGoogle(): void {
-    this.authSocialService.signIn(GoogleLoginProvider.PROVIDER_ID);
-    
-    this.authSocialService.authState.subscribe((user) => {
-      this.user = user;
-      this.loggedIn = (user != null);
-    });
+    this.authSocialService.signIn(GoogleLoginProvider.PROVIDER_ID).then(data=>{
+      console.log(data);
+    })
   }
  
   signInWithFB(): void {
-    this.authSocialService.signIn(FacebookLoginProvider.PROVIDER_ID);
-    
-    this.authSocialService.authState.subscribe((user) => {
-      this.user = user;
-      this.loggedIn = (user != null);
-    });
+    this.authSocialService.signIn(FacebookLoginProvider.PROVIDER_ID).then(data=>{
+      console.log(data);
+    })
   }
-  
+
   signInWithLinkedIn(): void {
     this.authSocialService.signIn(LinkedInLoginProvider.PROVIDER_ID);
+
   }  
  
   signOut(): void {

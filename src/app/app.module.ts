@@ -26,7 +26,7 @@ import { DragDropDirectiveModule} from "angular4-drag-drop";
 let config = new AuthServiceConfig([
   {
     id: GoogleLoginProvider.PROVIDER_ID,
-    provider: new GoogleLoginProvider("35446698823-4veieo9dr53l44jc4fqkts4m6jf6vs1d.apps.googleusercontent.com")
+    provider: new GoogleLoginProvider("35446698823-r8cah6sm4mjd9hjua0mkttstgtpf88tf.apps.googleusercontent.com")
   },
   {
     id: FacebookLoginProvider.PROVIDER_ID,
