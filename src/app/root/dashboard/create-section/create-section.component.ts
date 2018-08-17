@@ -185,7 +185,9 @@ export class CreateSectionComponent implements OnInit {
     id:this.section.id,
     data:this.section
 }).subscribe(res=>{
-  if(res.status===200){
+
+  console.log(res);
+  if(res.statusCode===200){
     this.toastrService.success(res.message,'Successs',{positionClass:'toast-bottom-right'});
     this.allSections[this.updateIndex] = this.section;
   }
@@ -202,7 +204,7 @@ export class CreateSectionComponent implements OnInit {
       id:this.chapter.id,
       data:this.chapter
   }).subscribe(res=>{
-    if(res.status===200){
+    if(res.statusCode===200){
       this.toastrService.success(res.message,'Successs',{positionClass:'toast-bottom-right'});
       this.allSections[this.updateSectionIndex].CourseChapters[this.updateChapterIndex]= this.chapter;
     }
@@ -225,7 +227,7 @@ export class CreateSectionComponent implements OnInit {
     this.http.subscribeCourse(this.course_id)
     .subscribe(res=>{
       this.subscribeFlag = false;
-      if(res.status===200){
+      if(res.statusCode===200){
         this.courseDetail.status = 'purchased';
         this.btnTxt = 'Subscribed';
         this.toastrService.success(res.message,'Successs',{positionClass:'toast-bottom-right'});
