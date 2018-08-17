@@ -123,6 +123,7 @@ export class CreateSectionComponent implements OnInit {
         this.btnTxt = 'Subscribed';
       }
     });
+    
   }
 
   onItemDrop(e: any,i) {

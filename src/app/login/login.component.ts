@@ -9,6 +9,7 @@ import { FacebookLoginProvider, GoogleLoginProvider, LinkedInLoginProvider } fro
 import { Http } from '@angular/http';
 import { async } from '@angular/core/testing';
 import { SocialUser } from "angularx-social-login";
+import * as jwt_decode from 'jwt-decode';
 
 @Component({
   selector: 'app-login',
@@ -160,19 +161,14 @@ login(): void {
   signInWithGoogle(): void {
     this.authSocialService.signIn(GoogleLoginProvider.PROVIDER_ID).then(data=>{
       console.log(data);
-    })
+    });
   }
  
   signInWithFB(): void {
     this.authSocialService.signIn(FacebookLoginProvider.PROVIDER_ID).then(data=>{
       console.log(data);
-    })
+    });
   }
-
-  signInWithLinkedIn(): void {
-    this.authSocialService.signIn(LinkedInLoginProvider.PROVIDER_ID);
-
-  }  
  
   signOut(): void {
     this.authSocialService.signOut();

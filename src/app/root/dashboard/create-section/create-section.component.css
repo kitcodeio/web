@@ -241,3 +241,17 @@ body {
   -ms-filter: "progid:DXImageTransform.Microsoft.Alpha(Opacity=20)";
   filter: alpha(opacity=20);
 }
+
+.list-group-item { 
+  text-overflow: ellipsis;
+  overflow: hidden; 
+  width: 160px; 
+  white-space: nowrap;
+}
+
+.section-description {
+  text-overflow: ellipsis;
+  overflow: hidden; 
+  width: 1000px; 
+  white-space: nowrap;
+}
