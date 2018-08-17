@@ -74,6 +74,7 @@ export class CreateSectionComponent implements OnInit {
     this._dragulaService.drag().subscribe(res=>{
       this.chapterIndexOnDrag = this.getElementIndex(res.el);
       this.sectionIndexOnDrag = this.getElementIndex(res.el);
+      console.log(this.chapterIndexOnDrag);
     });
 
     this._dragulaService.drop().subscribe((res:any)=>{
@@ -84,11 +85,12 @@ export class CreateSectionComponent implements OnInit {
       let section2 = this.allSections[this.sectionIndexOnDrop];
 
       let item,item1;
+      console.log(this.sectionIndexForDAD)
 
-      if(this.sectionIndexForDAD){
         item = this.allSections[this.sectionIndexForDAD].CourseChapters[this.chapterIndexOnDrop];
         item1 = this.allSections[this.sectionIndexForDAD].CourseChapters[this.chapterIndexOnDrag];
 
+        console.log(item,item1);
         this.http.putData('CourseChapter',{
           id:item.id,
           data:{
@@ -97,6 +99,7 @@ export class CreateSectionComponent implements OnInit {
           }
         })
         .subscribe(res=>{
+          console.log(res);
         });
   
         this.http.putData('CourseChapter',{
@@ -109,31 +112,6 @@ export class CreateSectionComponent implements OnInit {
         .subscribe(res=>{
           this.populateSectionWithCourseId();
         });
-      }
-      else{
-            //section drag and drop
-    this.http.putData('CourseSection',{
-      id:section1.id,
-      data:{
-        label:section2.label,
-        description:section2.description
-      }
-    })
-    .subscribe(res=>{
-    });
-
-    this.http.putData('CourseSection',{
-      id:section2.id,
-      data:{
-        label:section1.label,
-        description:section1.description
-      }
-    })
-    .subscribe(res=>{
-      this.populateSectionWithCourseId();
-     });
-
-      }
     });
 
     $("#menu-toggle").click(function(e) {
