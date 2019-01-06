@@ -1,9 +1,11 @@
-import { Component, OnInit, HostListener, ViewChild, ElementRef, Renderer2 } from '@angular/core';
+import { Component, OnInit, OnDestroy, HostListener, ViewChild, ElementRef, Renderer2 } from '@angular/core';
 import { DomSanitizer } from "@angular/platform-browser";
 import { ActivatedRoute } from '@angular/router';
 import { HttpService } from '../../services/http/http.service'
 import { AuthserviceService } from '../../services/auth/authservice.service';
 import { ToastrService } from 'ngx-toastr';
+
+import { SocketService } from '../../services/socket/socket.service';
 
 @Component({
   selector: 'app-profile',
@@ -11,12 +13,8 @@ import { ToastrService } from 'ngx-toastr';
   styleUrls: ['./profile.component.css']
 })
 
-export class ProfileComponent implements OnInit {
-  data: any  = {
-    kide: '',
-    terminal: '',
-    preview: ''
-  };
+export class ProfileComponent implements OnInit, OnDestroy {
+
   stopListening: Function;
   course_id: number;
   chapters: any;
@@ -33,6 +31,11 @@ export class ProfileComponent implements OnInit {
   loadindScreen:boolean;
   interval;
   chapter: number;
+  youtubeVideo:boolean;
+  loadingButton:boolean;
+  loadIde:boolean;
+  container_id: any;
+  isActive: boolean;
 
   max() {
     this.maxFlag = true;
@@ -41,25 +44,27 @@ export class ProfileComponent implements OnInit {
     this.maxFlag = false;
   }
   constructor(
-  	private renderer: Renderer2,
-  	private eRef: ElementRef,
-  	private domSanitizer: DomSanitizer,
-	  private route: ActivatedRoute,
-	  private http: HttpService,
+    private renderer: Renderer2,
+    private eRef: ElementRef,
+    private domSanitizer: DomSanitizer,
+    private route: ActivatedRoute,
+    private http: HttpService,
     private authService: AuthserviceService,
-    private toastrService:ToastrService
+    private toastrService:ToastrService,
+    private socket: SocketService
   ) {
     this.stopListening = renderer.listen('window', 'message', this.handleMessage.bind(this));
   }
 	
   play(index) {
     this.youtubeUrl = this.domSanitizer.bypassSecurityTrustResourceUrl(this.videos[index].url);
+    this.youtubeVideo = this.youtubeUrl.changingThisBreaksApplicationSecurity.includes('youtube');
   }
 	
   ngOnInit() {
 
-    this.loadindScreen = true;
-
+    this.loadingButton = true;
+    this.loadIde = false;
     this.route.params.subscribe(params => {
       this.course_id = params.course;
       this.http.getCourseSection('CourseChapter', params.section).subscribe((res) => {
@@ -67,41 +72,67 @@ export class ProfileComponent implements OnInit {
         this.videos = this.chapters;
         this.chapter = params.chapter;
         this.youtubeUrl = this.domSanitizer.bypassSecurityTrustResourceUrl(this.chapters[params.chapter].url);
+        this.youtubeVideo = this.youtubeUrl.changingThisBreaksApplicationSecurity.includes('youtube');
       });
     });
-    
     this.user = this.authService.getUserData();
-    this.interval = setInterval(()=>{
-      this.ide = this.domSanitizer.bypassSecurityTrustResourceUrl(this.data.kide);
-      this.youtubeUrl = this.domSanitizer.bypassSecurityTrustResourceUrl(this.chapters[this.chapter].url);
-    },5000);
   }
 
   ngAfterViewInit(){
+    // this.http.getContainer(this.course_id).subscribe(res => {
+    //   if (res.statusCode == 200) {
+    //     this.youtubeUrl = this.domSanitizer.bypassSecurityTrustResourceUrl(this.chapters[this.chapter].url);
+    //     this.ide = this.domSanitizer.bypassSecurityTrustResourceUrl('https://' + res.entity.kide);
+    //   } else { 
+    //     this.loadindScreen = false;
+    //     this.toastrService.error(res.error.error,'Error',{positionClass:'toast-bottom-right'});       }
+    // });
+  }
+
+  ngOnDestroy() {
+    if(this.isActive) this.socket.emit('kide:closed');
+  }
+
+  startContainer(): void {
+    let self = this;
+    this.loadindScreen = true;
+    $('.loading').css("height", $(document).height());
+    this.loadingButton = false;
+    this.loadIde = true;
     this.http.getContainer(this.course_id).subscribe(res => {
       if (res.statusCode == 200) {
-        this.data.kide = 'https://' + res.entity.kide;
-        this.data.terminal = 'https://' + res.entity.terminal;
-        this.data.preview = 'https://' + res.entity.app;
-        this.youtubeUrl = this.domSanitizer.bypassSecurityTrustResourceUrl(this.chapters[this.chapter].url);
-        this.ide = this.domSanitizer.bypassSecurityTrustResourceUrl('https://' + res.entity.kide);
+	this.container_id = res.entity.container_id;
+	this.loadIde = true;
+	$('#kide').css("height", $(document).height() - 71);      
+	this.ide = this.domSanitizer.bypassSecurityTrustResourceUrl('https://' + res.entity.subdomain + '-kide.kitcode.io');
+        this.interval = setInterval(()=>{
+          this.ide = this.domSanitizer.bypassSecurityTrustResourceUrl('https://' + res.entity.subdomain + '-kide.kitcode.io');
+          this.youtubeVideo = this.youtubeUrl.changingThisBreaksApplicationSecurity.includes('youtube');
+        },5000);
       } else { 
         this.loadindScreen = false;
-        this.toastrService.error(res.error,'Error',{positionClass:'toast-bottom-right'});       }
+	this.toastrService.error(res.error.error,'Error',{positionClass:'toast-bottom-right'});
+      }
     });
   }
   
   handleMessage(event: Event) {
     const message = event as MessageEvent;
-    if (message.data == 'loaded') {
-      this.iframe.nativeElement.contentWindow.postMessage(JSON.stringify(this.data), '*');
+    if (message.data == 'loaded' && this.loadindScreen) {
       this.loadindScreen = false;
+      this.isActive = true;
       clearInterval(this.interval);
+      this.socket.emit('info', {
+        id: this.container_id
+      });
+      this.socket.on('close').subscribe(()=>{
+	this.isActive = false;
+        this.ide = this.domSanitizer.bypassSecurityTrustResourceUrl('https://i.giphy.com/media/l0He8XWUYnXlbzleg/giphy.webp');
+      });
     }
     else if (message.data == 'minimize') this.min();
     else if(message.data == 'maximize') this.max();
     else if(message.data == 'close'){
-      this.ide = this.domSanitizer.bypassSecurityTrustResourceUrl('https://i.giphy.com/media/l0He8XWUYnXlbzleg/giphy.webp');
     }
     else console.log(message.data);
   }

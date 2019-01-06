@@ -1,99 +1,94 @@
 <body>
-    <section class="content-section">
-      <div class="container-fluid">
-        <div class="row">
-          <div class="col-lg-6 col-md-6 col-sm-6">
-            <div class="create-image-container">
-              <h5>Creating Image</h5>
-            </div>
-            <div class="row mt-4">
-              <div class="col-lg-6 col-md-6">
-                <div class="form-group">
-                  <input type="text" class="image-name-field form-control" placeholder="Enter the Image Name" [(ngModel)]="label">
+   <i class="fa fa-times" aria-hidden="true" (click)="location.back()" style="position: absolute;right: 0; z-index: 10;"></i>
+  <section class="content-section">
+    <div class="container-fluid">
+      <div class="row">
+        <div class="col-lg-6 col-md-6 col-sm-6">
+          <div class="form-group">
+            <h5>Image Name</h5>
+            <input required type="text" [(ngModel)]="label" class="form-control form-control-md"
+              placeholder="Image Name">
+          </div>
+          <hr>
+          <div class="row">
+            <div class="col-lg-12 col-md-12">
+              <h5>Dependencies</h5>
+              <div class="dependencies">
+                <div class="row" *ngFor="let el of tools | keyvalue">
+                  <div class="col-lg-4 col-md-4">
+                    <img src="{{el.value.image}}" width="25px" alt="">&nbsp;{{el.key}}
+                  </div>
+                  <div class="col-lg-4 col-md-4">
+                    @{{el.value.version}}
+                  </div>
+                  <div class="col-lg-4 col-md-4">
+                    <a class="tool-trash hoverable" (click)="removeTools(el.key)">
+                    <i class="fa fa-trash" style="color: red;"></i>
+		</a>
+                  </div>
                 </div>
               </div>
-              <div class="col-lg-6 col-md-6"></div>
-              <div class="col-lg-3 col-md-3">
-                <p class="mt-1">OS&nbsp;Environment</p>
-              </div>
-              <div class="col-lg-9 col-md-9">
-                <div class="form-group">
-                  <select class="select-os" id="exampleFormControlSelect1">
-                    <option #linux>Ubuntu</option>
-                  </select>
-                </div>
-              </div>
-              <div class="col-lg-12 col-md-12 mt-5">
-                <p>Components</p>
-              </div>
-              <div class="col-lg-12 col-md-12">
-                <ul class="list-inline">
-                  <li class="version-select-item list-inline-item">
-                      <select class="select-os" id="exampleFormControlSelect1"  #select (change)="uniqueV();">
-                        <option value="" selected="" disabled="" id="choose_loc">Dependency</option>
-                        <option>Angular</option>
-                        <option>Node</option>
-                        <option>Python</option>
-                        <option>Jupyter</option>
-                        <option>Tensorflow</option>
-                      </select>
-                  </li>
-                  <li class="version-select-item list-inline-item">
-                      <select class="select-os" id="exampleFormControlSelect1"  #version>
-                        <option value="" selected="" disabled="" id="choose_loc">Version</option>
-                        <option *ngFor="let tool of versionArray">{{ tool }}</option>
-                      </select>
-                  </li>
-                  <li class="version-select-item list-inline-item">
-                    <button class="btn add-component-button" (click)="addTools();">Add</button>
-                  </li>
-                </ul>
-                <div class="component-list-container">
-                  <ul class="list-group component-list">
-                      <li class='component-list-item list-group-item d-flex justify-content-between align-items-center' *ngFor="let tool of allTools; let i = index"> 
-                        <span>{{tool.sTool}}{{tool.sVersion}}
-                      </span> 
-                      <span class='remove-list-component'> 
-                        <button class="remove-list-icon" (click)="removeTools(i);">
-                          <i class="fa fa-times-circle-o" aria-hidden="true"></i>
-                        </button>
-                        </span>
-                    </li>
+              <hr>
+              <div class="row">
+                <div class="col-lg-4 col-md-4">
+                  <input (click)="searchTool()" [(ngModel)]="toolname" class="form-control" type="text"
+                    placeholder="Name" (keyup)="searchTool()">
+                  <ul class="search-box">
+                    <li *ngFor="let tool of toolSearch" (click)="selectTool(tool)">{{tool}}</li>
                   </ul>
                 </div>
-              </div>
-              <br>
-              <div class="col-lg-12 col-md-12 mt-5">
-                <button class="btn generate-button" (click)="createDockerfile();">Generate</button>
+                <div class="col-lg-4 col-md-4">
+                  <div class="input-group mb-2 mr-sm-2">
+                    <div class="input-group-prepend">
+                      <div class="input-group-text">@</div>
+                    </div>
+                    <input [(ngModel)]="toolversion" (click)="searchVersion()" [attr.disabled]="!versionEnabled ? '' : null"
+                      type="text" class="form-control" placeholder="version" (keyup)="searchVersion()">
+                    <ul class="search-box">
+                      <li class="version-li" *ngFor="let version of versionSearch" (click)="selectToolVersion(version)">{{version}}</li>
+                    </ul>
+                  </div>
+                </div>
+                <div class="col-lg-4 col-md-4">
+                  <button (click)="addTools(toolname, toolversion)" [attr.disabled]="!addButtonEnabled ? '': null"
+                    class="btn btn-primary">Add</button>
+                </div>
               </div>
             </div>
-          </div>
-          <div class="col-lg-6 col-md-6 col-sm-6">
-            <div>
-              <ace-editor
-           [(text)]="text"
-            #editor style="height:400px;"></ace-editor>
-            </div>
-            <br/>
-              <button class="btn save-image-button mt-3" (click)="createImage();">Save</button>
           </div>
         </div>
+        <div class="col-lg-6 col-md-6 col-sm-6">
+          <div>
+            <ace-editor [(text)]="text" #editor style="height:400px;"></ace-editor>
+          </div>
+          <br/>
+	  <button [disabled]="btnText!=='Build'" class="btn save-image-button mt-3" (click)="createImage();">{{btnText}} </button> 
+	  &nbsp;&nbsp;<span class="hoverable" data-toggle="modal" data-target="#image-log" ><i *ngIf="btnText=='Building'" class="fa fa-cog fa-spin fa-3x fa-fw" style="font-size: inherit;"></i> {{logs[logs.length -1]}}</span>
+        </div>
       </div>
-    </section>
-    
-    <!--image upload and color change section modal section-->
-    <div class="modal fade" id="getKeyInfo" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-      <div class="modal-dialog" role="document">
-        <div class="modal-content">
-          <div class="modal-header" style="border:none;">
-            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+    </div>
+  </section>
+
+  <!--image upload and color change section modal section-->
+  <div class="modal fade" id="image-log" tabindex="-1" role="dialog" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+      <div class="modal-content">
+        <div class="modal-header" style="border:none;">
+          Image Creation
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
               <span aria-hidden="true"><i class="fa fa-times-circle" aria-hidden="true"></i></span>
             </button>
-          </div>
-          <div class="modal-body">
+        </div>
+        <div class="modal-body">
+          <div class="log">
+            <div *ngFor="let log of logs;">
+              <code>
+                        {{log}}
+                    </code>
+            </div>
           </div>
         </div>
       </div>
     </div>
-    </body>
-    <div toastContainer ></div>
+  </div>
+</body>

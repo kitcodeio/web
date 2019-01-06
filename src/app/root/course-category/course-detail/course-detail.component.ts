@@ -7,7 +7,7 @@ import { Section } from '../../../models/section';
 import { Course } from '../../../models/course';
 import { AuthserviceService } from '../../../services/auth/authservice.service';
 import { Chapter } from '../../../models/chapter';
-import { ToastrService } from 'ngx-toastr'; 
+import { ToastrService } from 'ngx-toastr';
 
 @Component({
   selector: 'app-course-detail',
@@ -35,6 +35,7 @@ export class CourseDetailComponent implements OnInit {
   deletedSectionIndex:number;
   deletedChapterIndex:number;
   deletedSectionIndexWithChapter:number;
+  user:object;
 
   constructor(private authService: AuthserviceService, private toastrService: ToastrService, private userInfo: UserInfoService, private route:ActivatedRoute, private http: HttpService, private scrollbarService: MalihuScrollbarService, private router: Router) { }
 
@@ -64,6 +65,8 @@ export class CourseDetailComponent implements OnInit {
         this.btnTxt = 'Subscribed';
       }
     });
+
+    this.user=this.userInfo.getInfo();
   }
 
   ngAfterViewInit() {

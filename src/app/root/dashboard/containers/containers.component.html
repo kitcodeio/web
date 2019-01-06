@@ -1,0 +1,90 @@
+<div class="container">
+  <br>
+  <div>
+    <h4>Containers List</h4>
+    <br>
+    <table class="table">
+      <thead class="table-head">
+        <tr>
+          <th style="text-align:center;">S. No.</th>
+          <th style="text-align:center;">IP</th>
+          <th style="text-align:center;">State</th>
+          <th style="text-align:center;">Container id</th>
+          <th style="text-align:center;">Last update</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr href="#container-user" data-toggle="modal" type="click" *ngFor="let c of allContainers; let i = index"
+          style="cursor: pointer;" (click)="getContainerId(c.id);">
+          <th style="text-align:center;">{{i+1}}.</th>
+          <td style="text-align:center;">
+            <a>
+                          {{c.ip}}
+                        </a>
+          </td>
+          <td style="text-align:center;">
+            <a>
+                          {{c.state}}    
+                        </a>
+          </td>
+          <td style="text-align:center;">
+            <a>
+                          {{c.container_id}}
+                        </a>
+          </td>
+          <td style="text-align:center;">
+            <a>
+                          {{c.updatedAt | date:'short' }}    
+                        </a>
+          </td>
+          <!-- <td>
+                        <span title="Delete Domain" class="glyphicon glyphicon-edit"><i class="fa fa-trash" aria-hidden="true" style="color: rgb(235, 102, 102);cursor: pointer;" data-toggle="modal" data-target="#bootstrapModel"></i></span>&nbsp;&nbsp;&nbsp;&nbsp;
+                          <span style="color:red;" class="glyphicon glyphicon-trash"></span>
+                      </td> -->
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</div>
+
+<div id="container-user" class="modal" tabindex="-1" role="dialog">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content" style="width:750px;">
+      <div class="modal-header">
+        <h5 class="modal-title">User</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <table class="table">
+          <thead class="table-head">
+            <tr>
+              <th>Sr. No.</th>
+              <th>Name</th>
+              <th>Email</th>
+              <th>credit</th>
+              <th>github</th>
+              <th>facebook</th>
+              <th>google</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr *ngFor="let user of users; let i = index">
+              <th>{{i+1}}</th>
+	      <td>{{user.Client.name}}</td>
+              <td>{{user.Client.email}}</td>
+              <td>{{user.Client.credit}}</td>
+              <td>{{user.Client.github}}</td>
+              <td>{{user.Client.facebook}}</td>
+              <td>{{user.Client.google}}</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+      </div>
+    </div>
+  </div>
+</div>

@@ -6,10 +6,10 @@ import { UserInfoService } from '../services/userInfo/user-info.service';
 import { Location } from '@angular/common';
 import { AuthService } from "angularx-social-login";
 import { FacebookLoginProvider, GoogleLoginProvider, LinkedInLoginProvider } from "angularx-social-login";
-import { Http } from '@angular/http';
-import { async } from '@angular/core/testing';
 import { SocialUser } from "angularx-social-login";
 import * as jwt_decode from 'jwt-decode';
+
+declare var $:any;
 
 @Component({
   selector: 'app-login',
@@ -37,7 +37,6 @@ export class LoginComponent implements OnInit {
    }
 
   ngOnInit() {
-    
     $(function(){
       		
 $(document).on('focusout','.md-form-control',function(){	
@@ -68,7 +67,7 @@ $(document).on('focus','.md-form-control',function(){
 
     if(!this.authService.isTokenExpired())
    {
-    this.router.navigate(['/root/dashboard']);
+    this.router.navigate(['/']);
    }
   
 }
@@ -79,9 +78,8 @@ login(): void {
       this.authService.login(this.emailLogin, this.passwordLogin)
         .subscribe(response => { 
           if(response) {	
-
           if(response.error){
-            this.toastrService.error('incorrect password','Error',{positionClass:'toast-bottom-right'});
+            this.toastrService.error(response.error.error,'Error',{positionClass:'toast-bottom-right'});
           }   
           else{
         this.authService.setToken(response.token);
@@ -118,7 +116,10 @@ login(): void {
                   if(!response.error) {
                     this.emailLogin = this.emailReg;
                     this.passwordLogin = this.passwordReg;
-                    this.login();
+                    $('#confirmation').modal({
+                      backdrop: 'static',
+                      keyboard: false
+                    });
                   } else {
                     this.error = response.error;
                     this.toastrService.error(response.error,'Error',{positionClass:'toast-bottom-right'});
@@ -160,16 +161,28 @@ login(): void {
 
   signInWithGoogle(): void {
     this.authSocialService.signIn(GoogleLoginProvider.PROVIDER_ID).then(data=>{
-      console.log(data);
+      this.authService.socialLogin(data).subscribe(res=>{
+        if(!res.error){
+        this.authService.setToken(res.token);
+        this.router.navigate(['root/category']);
+        }
+        else{
+          this.toastrService.error(res.error,'Error',{positionClass:'toast-bottom-right'});
+        }
+      })
     });
   }
  
   signInWithFB(): void {
     this.authSocialService.signIn(FacebookLoginProvider.PROVIDER_ID).then(data=>{
       this.authService.socialLogin(data).subscribe(res=>{
-        console.log(res);
-        this.authService.setToken(res.token);
-        this.router.navigate(['root/category']);
+        if(!res.error){
+          this.authService.setToken(res.token);
+          this.router.navigate(['root/category']);
+          }
+          else{
+            this.toastrService.error(res.error,'Error',{positionClass:'toast-bottom-right'});
+          }
       })
     });
   }

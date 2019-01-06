@@ -5,95 +5,94 @@ import { catchError, map, tap } from 'rxjs/operators';
 
 import { CustomHttpService } from '../custom-http/custom-http.service';
 import { AuthserviceService } from '../auth/authservice.service';
+import { UrlService } from '../url/url.service';
+
 
 @Injectable({
   providedIn: 'root'
 })
 export class HttpService {
 
-  baseUrl: string;
-
   getData(model: string, pageNo?:number): Observable<any> {
-    let url = this.baseUrl+'read/api/'+model;
+    let url = this.url.baseUrl+'read/api/'+model;
     url = (pageNo)?url+'?page='+pageNo:url;
     return this.http.get(url)
       .pipe(catchError((error)=>{return of(error);}));
   }
   
   deleteData(model: string, id: number): Observable<any> {
-    return this.http.delete(this.baseUrl+'delete/course/'+model+"/"+id)
+    return this.http.delete(this.url.baseUrl+'delete/course/'+model+"/"+id)
       .pipe(catchError((error)=>{return of(error);}));
   }
 
   postData(model: string, data:any): Observable<any> {
-    return this.http.post(this.baseUrl+'create/api/'+model,data)
+    return this.http.post(this.url.baseUrl+'create/api/'+model,data)
       .pipe(catchError((error)=>{return of(error);}));
   }
 
   postCourse(model: string, data:any): Observable<any> {
-    return this.http.post(this.baseUrl+'create/course/'+model,data)
+    return this.http.post(this.url.baseUrl+'create/course/'+model,data)
       .pipe(catchError((error)=>{return of(error);}));
   }
   postsection(model: string, data:any): Observable<any> {
-    return this.http.post(this.baseUrl+'create/course/'+model,data)
+    return this.http.post(this.url.baseUrl+'create/course/'+model,data)
       .pipe(catchError((error)=>{return of(error);}));
   }
 
   postchapter(model:string, data:any): Observable<any>{
-    return this.http.post(this.baseUrl+'create/course/'+model,data)
+    return this.http.post(this.url.baseUrl+'create/course/'+model,data)
     .pipe(catchError((error)=>{return of(error);}))
   }
   postcategory(model:string, data:any): Observable<any>{
-    return this.http.post(this.baseUrl+'create/course/'+model,data)
+    return this.http.post(this.url.baseUrl+'create/course/'+model,data)
     .pipe(catchError((error)=>{return of(error);}))
   }
   
   putData(model: string, data:any): Observable<any> {
-    return this.http.put(this.baseUrl+'update/'+model,data)
+    return this.http.put(this.url.baseUrl+'update/'+model,data)
       .pipe(catchError((error)=>{return of(error);}));
   }
   
   getDataFromOne(model:string, id:number) {
-    return this.http.get(this.baseUrl+'read/course'+model+'/'+id)
+    return this.http.get(this.url.baseUrl+'read/course'+model+'/'+id)
       .pipe(catchError((error)=>{return of(error);}));
   }
   getCourse(model: string): Observable<any> {
-    return this.http.get(this.baseUrl+'read/'+model)
+    return this.http.get(this.url.baseUrl+'read/'+model)
     .pipe(catchError((error)=>{return of(error);}));
   }
   getCourseSection(model: string, id:number): Observable<any> {
-    return this.http.get(this.baseUrl+'read/course/'+model+'/'+id)
+    return this.http.get(this.url.baseUrl+'read/course/'+model+'/'+id)
     .pipe(catchError((error)=>{return of(error);}));
   }
   getcategory(model:string):Observable<any>{
-    return this.http.get(this.baseUrl+'read/course/'+model)
+    return this.http.get(this.url.baseUrl+'read/course/'+model)
     .pipe(catchError((error)=>{return of(error);}));
   }
 
   getChapter(model: string, id:number): Observable<any> {
-    return this.http.get(this.baseUrl+'read/course/'+model+'/'+id)
+    return this.http.get(this.url.baseUrl+'read/course/'+model+'/'+id)
     .pipe(catchError((error)=>{return of(error);}));
   }
 
-  getDataWithId(model:string,id:number):Observable<any>{
-    return this.http.get(this.baseUrl+'read/course/'+model+'/'+id)
+  getDataWithId(model:string,id:any):Observable<any>{
+    return this.http.get(this.url.baseUrl+'read/course/'+model+'/'+id)
     .pipe(catchError((error)=>{return of(error);}));
   }
 
   searchCourse(term: string):Observable<any> {
-    return this.http.get(this.baseUrl+'search/Course?term='+term)
+    
+    return this.http.get(this.url.baseUrl+'search/course/Course?term='+term)
     .pipe(catchError((error)=>{return of(error);}));
   }
- //=======================Container Creation API=======================//
   
   getContainer(id: number):Observable<any>{
-	  return this.http.post(this.baseUrl+'create/api/Container', {course_id: id})
-	  .pipe(catchError((error)=>{return of(error);}));
+    return this.http.post(this.url.baseUrl+'create/api/Container', {course_id: id})
+      .pipe(catchError((error)=>{return of(error);}));
   }
 
-  //=======================get one course detail=======================//
   getCoursePurchaseDetails(course_id:number): Observable<any>{
-    let url = this.baseUrl+'read/course/one/Course/'+course_id;
+    let url = this.url.baseUrl+'read/course/one/Course/'+course_id;
     if(!this.auth.isTokenExpired()){
       let user = this.auth.getUserData();
       url = url + '?id='+user.id;
@@ -103,13 +102,30 @@ export class HttpService {
   }
 
   subscribeCourse(course_id:number): Observable<any>{
-    return this.http.get(this.baseUrl+'course/signup'+'/'+course_id)
+    return this.http.get(this.url.baseUrl+'course/signup'+'/'+course_id)
     .pipe(catchError((error)=>{return of(error);}));
   }
+  
+  readContainer(by?: string, id?: string): Observable<any>{
+    let url = 'read/api/Container' + ((by)?`?by=${by}&id=${id}`:'');
+    return this.http.get(this.url.baseUrl+url)
+      .pipe(catchError((error)=>{return of(error);}));
+  };
 
-  constructor(private http:CustomHttpService, private auth: AuthserviceService) {
-    let url = window.location.href;
-    if(url.includes('localhost')) this.baseUrl = 'http://localhost:7070/';
-    else this.baseUrl = '/';
-  }
+  verifyToken(token): Observable<any>{
+    return this.http.get(this.url.baseUrl+'verify?verifyToken='+token)
+      .pipe(catchError(error=>of(error)));
+  };
+
+  runContainer(id: string): Observable<any>{
+    return this.http.get(this.url.baseUrl+'run/'+id)
+      .pipe(catchError(error=>of(error)));
+  };
+
+  upload(data: any):  Observable<any>{
+    return this.http.post(this.url.baseUrl+'upload', data)
+      .pipe(catchError(error=>of(error)));
+  };
+
+  constructor(private http:CustomHttpService, private auth: AuthserviceService, private url: UrlService) { }
 }

@@ -147,3 +147,31 @@
 }
 
 .fa { transform: scale(.7,.7); }
+
+.container {
+    position: relative;
+    width: 100%;
+    max-width: 400px;
+}
+
+.container .btn {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    -ms-transform: translate(-50%, -50%);
+    background-color: #f1f1f1;
+    color: black;
+    font-size: 16px;
+    padding: 16px 30px;
+    border: none;
+    cursor: pointer;
+    border-radius: 5px;
+    text-align: center;
+    border:1px solid rgb(27, 180, 109);
+}
+
+.container .btn:hover {
+    background-color: rgb(27, 180, 109);
+    color: rgb(255, 255, 255);
+}

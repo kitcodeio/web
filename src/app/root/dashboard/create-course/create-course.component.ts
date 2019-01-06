@@ -36,6 +36,8 @@ export class CreateCourseComponent implements OnInit {
   courseDescription:string;
   createdBy:string;
   imageId:number;
+  course_price:number;
+  course_discount:number;
 
 
   constructor(private authService:AuthserviceService ,private route:ActivatedRoute, private http: HttpService, private router: Router, private toastrService: ToastrService) { }
@@ -54,7 +56,7 @@ export class CreateCourseComponent implements OnInit {
       this.http.getDataWithId('Course',params.id)
       .subscribe(res=>{
           this.allCourses = res.entity;
-          this.categoryId = params.id;    
+          this.categoryId = params.id;
       });    
     });
   }
@@ -130,7 +132,9 @@ export class CreateCourseComponent implements OnInit {
 	    "label":this.courseName,
 	    "description":this.courseDescription,
 	    "created_by": this.createdBy,
-	    "image_id":this.imageName.nativeElement.value
+      "image_id":this.imageName.nativeElement.value,
+      "price":this.course_price,
+      "discount":this.course_discount
     }).subscribe(res=>{
       this.populateCourseWithCatId();
     })

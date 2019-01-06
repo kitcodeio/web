@@ -1,4 +1,6 @@
 <body>
+  <div id="body">
+
     <!-- Masthead -->
     <header class="masthead text-white text-center">
       <div class="overlay"></div>
@@ -15,13 +17,16 @@
                     <div class="input-group-prepend">
                       <button class="btn" style="background-color:#ffffff;color:#ccc;" type="button"><i class="fa fa-search" aria-hidden="true"></i></button>
                     </div>
-                    <input autocomplete="off" type="text" class="form-control" placeholder="What do you want to learn today ?" #searchBox id="search-box" (keyup)="search(searchBox.value)" (input)="onSearchChange($event.target.value)"/>
-                   
+                    <input autocomplete="off" type="text" class="form-control" placeholder="What do you want to learn today ?"
+                      #searchBox id="search-box" (keyup)="search(searchBox.value)"
+                      (input)="onSearchChange($event.target.value)" />
+
                     <ul class="search-result" #searchResult>
-                      <a style="text-decoration:none !important;" *ngFor="let course of courses | async" style="width:100%;" type="click" routerLink="/root/course/chapter/{{course.id}}">
-                      <li >
+                      <a style="text-decoration:none !important;" *ngFor="let course of courses | async"
+                        style="width:100%;" type="click" routerLink="/root/course/chapter/{{course.id}}">
+                        <li>
                           {{course.label}}
-                      </li>
+                        </li>
                       </a>
                     </ul>
                   </div>
@@ -32,13 +37,14 @@
         </div>
       </div>
     </header>
-      
+
     <!-- Testimonials -->
-    <section *ngIf="allCourseCategory" style="padding-top:0;padding-bottom:4rem;position:relative;top:-70px;" class="testimonials text-center">
+    <section *ngIf="allCourseCategory" style="padding-top:0;padding-bottom:4rem;position:relative;top:-70px;"
+      class="testimonials text-center">
       <div class="container">
         <div class="row mb-5 mx-auto" style="width:80%;">
           <div class="col-lg-2 col-md-4" *ngFor="let cat of allCourseCategory">
-            <a routerLink="/root/course/detail/{{cat.id}}" ><span class="glyphicon glyphicon-log-in"></span>
+            <a *ngIf="cat.visibility" routerLink="/root/course/detail/{{cat.id}}"><span class="glyphicon glyphicon-log-in"></span>
               <div class="testimonial-item mx-auto mb-2">
                 <img class="img-fluid" src="{{cat.logo}}" alt="">
               </div>
@@ -49,13 +55,13 @@
       </div>
     </section>
     <!-- <app-loadiing *ngIf="!allCourseCategory"></app-loadiing> -->
+  </div>
+  <!-- Footer -->
+  <footer class="footer" style="background-color: #292929;">
+    <div class="container" style="text-align: center;">
 
-    <!-- Footer -->
-    <footer class="footer" style="background-color: #292929;">
-      <div class="container" style="text-align: center;">
-        
-            <small style="color: white; text-align: center;">&copy; Copyright, KITCODE.IO PRIVATE LIMITED</small>
-        <!-- <div class="row">
+      <small style="color: white; text-align: center;">&copy; Copyright, KITCODE.IO PRIVATE LIMITED</small>
+      <!-- <div class="row">
           <div class="col-lg-3">
             <p class="text-white">OfficeSuite</p>
             <ul style="color:#ccc;" class="list-unstyled">
@@ -89,8 +95,28 @@
             </ul>
           </div>
         </div> -->
+    </div>
+  </footer>
+  <div class="modal" tabindex="-1" role="dialog" id="sorry-message">
+    <div class="modal-dialog modallg" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5>We're working on it.&nbsp;<i class="fa fa-cogs"></i></h5>
+        </div>
+        <div class="modal-body">
+          <p>Hi {{userInfo.getInfo().name}},</p>
+          <p>We're sorry about the loss of course progress data. If you are new to
+            the platform then you might experince some data loss. We're exploring
+            this issue more now. I just want to let you know that your issue is
+            important to us, and we’ll get back to you ASAP with proper insight
+            and solutions.</p>
+          <p>Thanks for your patience,<br>kitcode.io team</p>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" (click)="acceptApology()">Close</button>
+        </div>
       </div>
-    </footer>
-  </body>
+    </div>
+  </div>
 
-  
+</body>

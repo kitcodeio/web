@@ -6,95 +6,21 @@
                     <a href="#menu-toggle" class="btn btn-secondary d-sm-none d-lg-none d-md-none" id="menu-toggle">Toggle Menu</a>
                     <!--<button class="buttons-top">Hot</button>&nbsp;&nbsp;&nbsp;<button class="buttons-top">Trending</button> -->
                     <!-- <app-loadiing *ngIf="!allSections"></app-loadiing> -->
-                   
-                    <div id="bootstrapModelChapterD" class="modal fade" role="dialog">
-                      <div class="modal-dialog">
-                        <!-- Modal content-->
-                        <div class="modal-content">
-                          <div class="modal-header">
-                          </div>
-                          <h6 class="modal-title" style="margin-left: 16px;">Are you sure ?</h6>
-                          <!-- model body section -->
-                          <div class="modal-body">
-                            <br>
-                          </div>
-                          <div class="modal-footer">
-                            <button type="button" class="btn btn-primary" data-dismiss="modal"  (click)="deleteChapter();">Ok</button>
-                          </div>
-                        </div>
-                      </div>
-                    </div>
-                    
-                    <div id="bootstrapModel" class="modal fade" role="dialog">
-                        <div class="modal-dialog">
-                          <!-- Modal content-->
-                          <div class="modal-content">
-                            <div class="modal-header">
-                            </div>
-                            <h6 class="modal-title" style="margin-left: 16px;">Are you sure ?</h6>
-                      <!-- model body section -->
-                            <div class="modal-body">
-                              <br>
-                            </div>
-                            <div class="modal-footer">
-                              <button type="button" class="btn btn-primary" data-dismiss="modal"  (click)="deleteSection();">Ok</button>
-                            </div>
-                          </div>
-                        </div>
-                      </div>
-
-                      <div id="bootstrapModelChapterU" class="modal fade" role="dialog">
-                        <div class="modal-dialog">
-                          <!-- Modal content-->
-                          <div class="modal-content">
-                            <div class="modal-header">
-                            </div>
-                            <h5 class="modal-title" style="margin-left: 16px;">Update chapter</h5>
-                      <!-- model body section -->
-                            <div class="modal-body">
-                              <input id="form_name" type="text" name="chapterName" class="form-control" placeholder="Chapter Name" required="required" data-error="Firstname is required." [(ngModel)]="chapter.label">
-                              <br>
-                              <textarea id="form_name" type="text" name="chapterDes" class="form-control" placeholder="Chapter description" required="required" data-error="Firstname is required." [(ngModel)]="chapter.url"></textarea>
-                              <br>
-                            </div>
-                            <div class="modal-footer">
-                              <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-                              <button type="button" class="btn btn-primary" data-dismiss="modal" (click)="updateChapter();">Update</button>
-                            </div>
-                          </div>
-                        </div>
-                      </div> 
-
-                      <div id="bootstrapModel1" class="modal fade" role="dialog">
-                          <div class="modal-dialog">
-                            <!-- Modal content-->
-                            <div class="modal-content">
-                              <div class="modal-header">
-                              </div>
-                              <h5 class="modal-title" style="margin-left: 16px;">Update section</h5>
-                        <!-- model body section -->
-                              <div class="modal-body">
-                                <input id="form_name" type="text" name="courseName" class="form-control" placeholder="Section Name" required="required" data-error="Firstname is required." [(ngModel)]="section.label">
-                                <br>
-                                <textarea id="form_name" type="text" name="courseDes" class="form-control" placeholder="Section description" required="required" data-error="Firstname is required." [(ngModel)]="section.description"></textarea>
-                                <br>
-                              </div>
-                              <div class="modal-footer">
-                                  <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-                                <button type="button" class="btn btn-primary" data-dismiss="modal" (click)="updateSection();">Update</button>
-                              </div>
-                            </div>
-                          </div>
-                        </div> 
-
                     <div class="course_detail" *ngIf="allSections" style="border-top-left-radius: 20px;">
                       <div class="card" style="border:none;">
                          <div class="card-header" style="background:transparent;border: none;">
                           <span style="font-size:25px;">{{courseDetail.label}}</span>
                           <p class="mb-0 float-right" style="color:#ccc;">Updated on {{courseDetail.updatedAt | date: 'dd MMM yyyy'}}</p>
                           <p class="mb-0" style="color:#ccc;">Created by <span style="color:#000;">{{courseDetail.created_by}}</span></p>
+                          <div class="progress" *ngIf="user">
+                            <div class="progress-bar bg-success" role="progressbar" style="width: 25%" aria-valuenow="25" aria-valuemin="0" aria-valuemax="100">25% completed</div>
+                          </div>     
+                          <i *ngIf="courseDetail.discount!==0 && courseDetail.discount!==100" class="fa fa-inr float-right" aria-hidden="true" style="color: rgb(8, 187, 67); margin-top: 2px;">{{courseDetail.price - courseDetail.price*courseDetail.discount/100  | number: '1.0-0'}}</i>
+                          <i *ngIf="courseDetail.discount===0 && courseDetail.discount!==100" class="fa fa-inr float-right" aria-hidden="true" style="color: rgb(8, 187, 67); margin-top: 2px;">{{courseDetail.price}}</i>
+                          <i *ngIf="courseDetail.discount===100 && courseDetail.discount!==0" class="float-right" aria-hidden="true" style="color: rgb(8, 187, 67); font-style:inherit; margin-top: -3px;">Free</i>
+                          <i *ngIf="courseDetail.discount!==0" class="fa fa-inr float-right" aria-hidden="true" style="color: #ff5e2f; text-decoration: line-through; font-size: 14px;margin-right: 1%; margin-top: 2px;">{{courseDetail.price}}</i>&nbsp; &nbsp; &nbsp;
                         </div>
-                        <div class="card-body">
+                        <div class="card-body">                           
                             <button [disabled]="courseDetail.status !== 'not purchased'" class="float-right btn subscribeButton" (click)="subscribe();">{{btnTxt}}&nbsp; <i *ngIf="courseDetail.status=='purchased'" class="fa fa-check" aria-hidden="true"></i> <i *ngIf="subscribeFlag" class="fa fa-spinner fa-pulse fa-3x fa-fw" aria-hidden="true" style="font-size: 15px;"></i></button>
                           <p class="card-text" style="color:#827c7c;">{{courseDetail.description}}</p>
                         </div>
@@ -131,7 +57,5 @@
         </div>
       </div>
         <!-- /#wrapper -->
-    
-
     </body>
 

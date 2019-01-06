@@ -1,3 +1,12 @@
+.hoverable:hover{
+  cursor: pointer;
+}
+.dependencies{
+    max-height: 188px;
+    overflow-y: -webkit-paged-y;
+    height: 188px;
+}
+
 /*===============general css=========================*/
 @font-face{
 	font-family:'Montserrat';
@@ -448,6 +457,14 @@ button{
     background-color:#002c42;
 }*/
 
+.fa-times{
+  float: right; font-weight: 100;font-size: 35px;margin-right: 10px; margin-top: 10px;
+  top: 5px;
+}
+.fa-times:hover{
+  cursor: pointer;
+}
+
  .nav-text{
  	font-size:14px;
  }
@@ -472,8 +489,9 @@ button{
 }
 
 .content-section{
-    margin-top: 40px;
+    margin-top: 100px;
     margin-left: 100px;
+    margin-right: 100px;
 }
 
 .create-image-button{
@@ -939,3 +957,41 @@ button.toast-close-button {
   }
 }
 
+.log{
+  height: 400px;
+  overflow: auto;
+}
+  .search-box{
+    position: absolute;
+    top: 35px;
+    text-align:left; 
+    background-color: white;
+    width: 100%;
+    padding-left: 0px;
+  }
+  
+  .search-box>li{
+	  /*
+    display:inline-block;
+    text-decoration: none !important;
+    border: 1px solid gray;
+    padding-left: 14px;*/
+  color: black;
+  padding: 12px 16px;
+  text-decoration: none;
+  display: block;  
+  background-color: #f6f6f6;
+  overflow: auto;
+  border: 1px solid #ddd;
+  z-index: 1;
+    width: 86.5%;
+}
+
+  .search-box>li:hover{
+    cursor: pointer;
+background-color: #ddd;  
+}
+
+.version-li {
+  width: 100% !important;
+}

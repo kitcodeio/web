@@ -22,6 +22,7 @@ import { CategoriesComponent } from './root/categories/categories.component';
 import { CreateSectionComponent } from './root/dashboard/create-section/create-section.component';
 import { DragulaModule } from 'ng2-dragula';
 import { DragDropDirectiveModule} from "angular4-drag-drop";
+import { ContainersComponent } from './root/dashboard/containers/containers.component';
 
 let config = new AuthServiceConfig([
   {
@@ -46,7 +47,8 @@ export function provideConfig() {
     UserProfileComponent,
     DashboardComponent,
     CategoriesComponent,
-    CreateSectionComponent
+    CreateSectionComponent,
+    ContainersComponent,
   ],
   imports: [
     BrowserModule,
@@ -64,7 +66,7 @@ export function provideConfig() {
     SocialLoginModule,
     DragulaModule.forRoot(),
     DragulaModule,
-    DragDropDirectiveModule
+    DragDropDirectiveModule,
 
   ],
   providers: [AuthserviceService,

@@ -13,6 +13,7 @@ export class UserInfoService {
    }
 
   getInfo(){
-    return jwt_decode(this.authService.getToken());
+    if(this.authService.isTokenExpired() == false) return jwt_decode(this.authService.getToken());
+    else return false;
   }
 }

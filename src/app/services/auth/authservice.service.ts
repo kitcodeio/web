@@ -4,24 +4,18 @@ import { Observable, of} from 'rxjs';
 import { HttpModule, Http } from '@angular/http';
 import { catchError, map, tap } from 'rxjs/operators';
 import * as jwt_decode from 'jwt-decode';
-import { decode } from '@angular/router/src/url_tree';
 
-
+import { UrlService } from '../url/url.service';
 
 @Injectable({
   providedIn: 'root'
 })
 export class AuthserviceService {
-  baseUrl: string;
-  constructor(private http: HttpClient) {
-    let url = window.location.href;
-    if(url.includes('localhost')) this.baseUrl = 'http://localhost:7070/';
-    else this.baseUrl = '/';
-   
-  }
+	
+  constructor(private http: HttpClient, private url: UrlService) { }
 
   login(email: string, password: string): Observable<any> {
-    return this.http.post(this.baseUrl+'login', {
+    return this.http.post(this.url.baseUrl+'login', {
       email: email,
       password: password
     }).pipe(
@@ -32,7 +26,7 @@ export class AuthserviceService {
   }
 
   register(name: string, email: string, password: string): Observable<any> {
-    return this.http.post(this.baseUrl+'register', {
+    return this.http.post(this.url.baseUrl+'register', {
       name: name,
       email: email,
       password: password
@@ -84,7 +78,7 @@ export class AuthserviceService {
   }
 
   socialLogin(data:object): Observable<any>{
-    return this.http.post(this.baseUrl+'login/social',data)
+    return this.http.post(this.url.baseUrl+'login/social',data)
     .pipe(
       catchError((err) => {
         return of(err.error);

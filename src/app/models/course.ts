@@ -6,4 +6,6 @@ export class Course {
     image_id: string;
     created_by: string;
     status: string;
+    price:number;
+    discount:number;
 }

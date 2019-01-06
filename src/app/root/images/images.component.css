@@ -1,3 +1,11 @@
+.new-btn {
+  text-align: center;
+  font-size: 75px;
+}
+
+.hoverable:hover{
+  cursor: pointer;
+}
 
 .sidebar {
   position: fixed;

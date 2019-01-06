@@ -1,4 +1,6 @@
-
+.hoverable:hover{
+  cursor: pointer;
+}
 
 .btn:focus,.btn:active,.btn:hover{
     box-shadow: none;
@@ -192,4 +194,10 @@
     text-decoration: none !important;
     /* border: 1px solid gray; */
   }
-  
+ 
+.image-upload > input {
+  visibility:hidden;
+  width:0;
+  height:0
+}
+

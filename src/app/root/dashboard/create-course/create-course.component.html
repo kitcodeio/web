@@ -26,8 +26,8 @@
                                   <br>
                                 </div>
                                 <div class="modal-footer">
-                                    <button type="button" class="btn btn-primary" data-dismiss="modal">Close</button>
-                                  <button type="button" class="btn btn-primary" data-dismiss="modal"  (click)="deleteCourse();">Ok</button>
+                                    <button type="button" class="btn btn-primary" data-dismiss="modal">cancel</button>
+                                  <button type="button" class="btn btn-primary" data-dismiss="modal"  (click)="deleteCourse();">ok</button>
                                 </div>
                               </div>
                             </div>
@@ -47,6 +47,10 @@
                                   <textarea id="form_name" type="text" name="courseDes" class="form-control" placeholder="Course description" required="required" data-error="Firstname is required." [(ngModel)]="course.description"></textarea>
                                   <br>
                                   <input id="form_name" type="text" name="createdBy" class="form-control" placeholder="Created by" required="required" data-error="Firstname is required." [(ngModel)]="course.created_by">
+                                  <br>
+                                  <input id="form_name" type="text" name="price" class="form-control" placeholder="price" required="required" data-error="Firstname is required." [(ngModel)]="course.price">
+                                  <br>
+                                  <input id="form_name" type="text" name="discount" class="form-control" placeholder="discount" required="required" data-error="Firstname is required." [(ngModel)]="course.discount">
                                   <br>
                                   <div class="col-md-12">
                                     <div class="form-group">
@@ -78,6 +82,10 @@
                                     <textarea id="form_name" type="text" name="courseDes" class="form-control" placeholder="Course description" required="required" data-error="Firstname is required." [(ngModel)]="courseDescription">courseDes</textarea>
                                     <br>
                                     <input id="form_name" type="text" name="createdBy" class="form-control" placeholder="Created by" required="required" data-error="Firstname is required." [(ngModel)]="createdBy">
+                                    <br>
+                                    <input id="form_name" type="text" name="price" class="form-control" placeholder="Course price" required="required" data-error="Firstname is required." [(ngModel)]="course_price">
+                                    <br>
+                                    <input id="form_name" type="text" name="discount" class="form-control" placeholder="Course discount in percentage" required="required" data-error="Firstname is required." [(ngModel)]="course_discount">
                                     <br>
                                     <div class="col-md-12">
                                         <div class="form-group">

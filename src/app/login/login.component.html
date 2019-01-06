@@ -1,84 +1,113 @@
-	<body>
-		<i class="fa fa-times" aria-hidden="true" (click)="backClicked()" style="position: absolute;right: 0; z-index: 10;"></i>
-		<section>
-			<div class="row no-gutters">
-				<div class="col-lg-3 col-md-3 col-sm-0 d-lg-block d-none">
-				
-				</div>
-				<div class="col-lg-6 col-md-6 col-sm-6 col-12">
-					<div class="login-container">
-						<div class="mb-5">
-							<h2 class="text-center">Sign In</h2>
-						</div>
-						<div class="login-form-container ml-5 mr-5 pt-5">
-							<form>
-											<div class="md-input login-email-input">
-												<input class="md-form-control" placeholder="" required="" [(ngModel)]="emailLogin" type="email" name="email">
-												<span class="highlight"></span>
-												<span class="bar"></span>
-												<label>Email ID</label>
-											</div>
-											<div class="md-input">
-												<input class="md-form-control" required="" [(ngModel)]="passwordLogin" type="password" name="password">
-												<span class="highlight"></span>
-												<span class="bar"></span>
-												<label>Password</label>
-											</div>
-								<button type="submit" class="btn login-btn-container pr-4 pl-4" (click)="login();">Sign In</button>
-								<span class="login-register-container">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;New User? <a class="login-register-button" href="#">Create account</a></span><br><br>&nbsp;
-								<span style="font-size: 14px;">Sign in with</span>&nbsp;&nbsp;&nbsp;
-								<a type="click" (click)="signInWithGoogle();" style="background-color: transparent; cursor: pointer;"><img alt="Google" height="30px" width="30px;" title="Sign in with Google" class="js-lazy-loaded" src="https://assets.gitlab-static.net/assets/auth_buttons/google_64-37d98b7033cc7059a484199ffdd766adf69babbc6e5fc64b43006ca866629f17.png"></a>&nbsp;&nbsp;
-								<a type="click" (click)="signInWithFB();" style="background-color: transparent; cursor: pointer;"><img alt="Google" height="30px" width="30px;" title="Sign in with Google" class="js-lazy-loaded" src="../../assets/images/facebook .png"></a>&nbsp;&nbsp;
-								
-							</form>
-						</div>
-					</div>
-					<div class="register-container">
-						<div class="mb-4">
-							<h2 class="text-center">Register</h2>
-						</div>
-						<div class="login-form-container ml-5 mr-5 pt-5">
-							<form>
-											<div class="md-input register-input">
-												<input class="md-form-control" required="" [(ngModel)]="company" type="text" name="name">
-												<span class="highlight"></span>
-												<span class="bar"></span>
-												<label>Name</label>
-											</div>
-											<div class="md-input register-input">
-												<input class="md-form-control" required="" [(ngModel)]="emailReg" type="email" name="email">
-												<span class="highlight"></span>
-												<span class="bar"></span>
-												<label>Email ID</label>
-											</div>
-											<div class="md-input register-input">
-												<input class="md-form-control" required="" [(ngModel)]="passwordReg" type="password" name="password">
-												<span class="highlight"></span>
-												<span class="bar"></span>
-												<label>Password</label>
-											</div>
-											<div class="md-input">
-												<input class="md-form-control" required="" [(ngModel)]="passwordCon" type="password" name="password">
-												<span class="highlight"></span>
-												<span class="bar"></span>
-												<label>Confirm password</label>
-											</div>
-								<div class="pure-checkbox form-group form-check mb-4 pl-0">
-									<input type="checkbox" class="form-check-input" id="exampleCheck2" (change)="checkBox($event);">
-									<label class="form-check-label login-tc-container" for="exampleCheck2">&nbsp;&nbsp;&nbsp;I agree all statement in <a href="#">Terms & Conditions</a></label>
-								</div>
-								<button type="submit" class="btn login-btn-container pr-4 pl-4" (click)="register();">Sign Up</button>
-								<span class="login-register-container">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Already have an account? <a class="login-sign-button" href="#">Sign In</a></span><br><br>
-								<span style="font-size: 14px;">Sign in with</span>&nbsp;&nbsp;&nbsp;
-								<a type="click" (click)="signInWithGoogle();" style="background-color: transparent; cursor: pointer;"><img alt="Google" height="30px" width="30px;" title="Sign in with Google" class="js-lazy-loaded" src="https://assets.gitlab-static.net/assets/auth_buttons/google_64-37d98b7033cc7059a484199ffdd766adf69babbc6e5fc64b43006ca866629f17.png"></a>&nbsp;&nbsp;
-								
-								<a type="click" (click)="signInWithFB();" style="background-color: transparent; cursor: pointer;"><img alt="Google" height="30px" width="30px;" title="Sign in with Google" class="js-lazy-loaded" src="../../assets/images/facebook .png"></a>&nbsp; &nbsp;
-							</form>
-						</div>
-					</div>
-				</div>
-				<div class="col-lg-3 col-md-3 col-sm-0 d-lg-block d-none">	
-			</div>
-			</div>
-		</section>
-	</body>
+<body>
+  <i class="fa fa-times" aria-hidden="true" (click)="backClicked()" style="position: absolute;right: 0; z-index: 10;"></i>
+  <section>
+    <div class="row no-gutters">
+      <div class="col-lg-3 col-md-3 col-sm-0 d-lg-block d-none">
+
+      </div>
+      <div class="col-lg-6 col-md-6 col-sm-6 col-12">
+        <div class="login-container">
+          <div class="mb-5">
+            <h2 class="text-center">Sign In</h2>
+          </div>
+          <div class="login-form-container ml-5 mr-5 pt-5">
+            <form>
+              <div class="md-input login-email-input">
+                <input class="md-form-control" placeholder="" required="" [(ngModel)]="emailLogin"
+                  type="email" name="email">
+                <span class="highlight"></span>
+                <span class="bar"></span>
+                <label>Email ID</label>
+              </div>
+              <div class="md-input">
+                <input class="md-form-control" required="" [(ngModel)]="passwordLogin" type="password"
+                  name="password">
+                <span class="highlight"></span>
+                <span class="bar"></span>
+                <label>Password</label>
+              </div>
+              <button type="submit" class="btn login-btn-container pr-4 pl-4" (click)="login();">Sign In</button>
+              <span class="login-register-container">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;New User? <a class="login-register-button" href="#">Create account</a></span><br><br>&nbsp;
+              <!-- <span style="font-size: 14px;">Sign in with</span>&nbsp;&nbsp;&nbsp;
+								<a type="click" (click)="signInWithGoogle();" style="background-color: transparent; cursor: pointer;"><img alt="Google" height="30px" width="30px;" title="Sign in with Google" class="js-lazy-loaded" src="https://cdn4.iconfinder.com/data/icons/new-google-logo-2015/400/new-google-favicon-512.png"></a>&nbsp;&nbsp;
+								<a type="click" (click)="signInWithFB();" style="background-color: transparent; cursor: pointer;"><img alt="Facebook" height="30px" width="30px;" title="Sign in with Facebook" class="js-lazy-loaded" src="../../assets/images/facebook .png"></a>&nbsp;&nbsp;
+								 -->
+            </form>
+          </div>
+        </div>
+        <div class="register-container">
+          <div class="mb-4">
+            <h2 class="text-center">Register</h2>
+          </div>
+          <div class="login-form-container ml-5 mr-5 pt-5">
+            <form>
+              <div class="md-input register-input">
+                <input class="md-form-control" required="" [(ngModel)]="company" type="text" name="name">
+                <span class="highlight"></span>
+                <span class="bar"></span>
+                <label>Name</label>
+              </div>
+              <div class="md-input register-input">
+                <input class="md-form-control" required="" [(ngModel)]="emailReg" type="email"
+                  name="email">
+                <span class="highlight"></span>
+                <span class="bar"></span>
+                <label>Email ID</label>
+              </div>
+              <div class="md-input register-input">
+                <input class="md-form-control" required="" [(ngModel)]="passwordReg" type="password"
+                  name="password">
+                <span class="highlight"></span>
+                <span class="bar"></span>
+                <label>Password</label>
+              </div>
+              <div class="md-input">
+                <input class="md-form-control" required="" [(ngModel)]="passwordCon" type="password"
+                  name="password">
+                <span class="highlight"></span>
+                <span class="bar"></span>
+                <label>Confirm password</label>
+              </div>
+              <div class="pure-checkbox form-group form-check mb-4 pl-0">
+                <input type="checkbox" class="form-check-input" id="exampleCheck2" (change)="checkBox($event);">
+                <label class="form-check-label login-tc-container" for="exampleCheck2">&nbsp;&nbsp;&nbsp;I agree all statement in <a href="#">Terms & Conditions</a></label>
+              </div>
+              <button type="submit" class="btn login-btn-container pr-4 pl-4" (click)="register();">Sign Up</button>
+              <span class="login-register-container">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Already have an account? <a class="login-sign-button" href="#">Sign In</a></span><br><br>
+              <!-- <span style="font-size: 14px;">Sign in with</span>&nbsp;&nbsp;&nbsp;
+								<a type="click" (click)="signInWithGoogle();" style="background-color: transparent; cursor: pointer;"><img alt="Google" height="30px" width="30px;" title="Sign in with Google" class="js-lazy-loaded" src="https://cdn4.iconfinder.com/data/icons/new-google-logo-2015/400/new-google-favicon-512.png"></a>&nbsp;&nbsp;
+								<a type="click" (click)="signInWithFB();" style="background-color: transparent; cursor: pointer;"><img alt="Google" height="30px" width="30px;" title="Sign in with Google" class="js-lazy-loaded" src="../../assets/images/facebook .png"></a>&nbsp; &nbsp; -->
+            </form>
+          </div>
+        </div>
+        <hr>
+        <div class="ml-5 mr-5 social-login">
+          <span style="font-size: 14px;">Sign in with :</span>&nbsp;&nbsp;&nbsp;
+          <!--<a type="click" (click)="signInWithGoogle();" style="background-color: transparent; cursor: pointer;"><img alt="Google" height="30px" width="30px;" title="Sign in with Google" class="js-lazy-loaded" src="https://cdn4.iconfinder.com/data/icons/new-google-logo-2015/400/new-google-favicon-512.png"></a>&nbsp;&nbsp;-->
+          <a type="click" (click)="signInWithFB();" style="background-color: transparent; cursor: pointer;"><img alt="Facebook" height="30px" width="30px;" title="Sign in with Facebook" class="js-lazy-loaded" src="../../assets/images/facebook .png"></a>&nbsp;&nbsp;
+
+        </div>
+      </div>
+      <div class="col-lg-3 col-md-3 col-sm-0 d-lg-block d-none">
+      </div>
+    </div>
+  </section>
+  <div class="modal" tabindex="-1" role="dialog" id="confirmation">
+    <div class="modal-dialog modallg" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title"> <i class="fa fa-check-circle" style="color: green; font-size: larger;"
+              aria-hidden="true"></i>&nbsp;&nbsp;A verification link has been sent
+            to your email account</h5>
+        </div>
+        <div class="modal-body">
+          <p>Please click on the link that has just been sent to your email account
+            to verify your email address and continue the registration process.</p>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" routerLink="/root/category" data-dismiss="modal">Close</button>
+        </div>
+      </div>
+    </div>
+  </div>
+</body>

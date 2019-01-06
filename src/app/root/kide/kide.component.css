@@ -1,0 +1,10 @@
+#kide-container > iframe{
+  width: 100%;
+  height: 100%;
+}
+
+#kide-container > .loading {
+  text-align: center;
+  color: #717ab9;
+  height: 100%;
+}

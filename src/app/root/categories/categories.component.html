@@ -1,114 +1,126 @@
 <body style="margin-top: 7%;">
-    <!-- Testimonials -->
-    <section *ngIf="allCourseCategory" style="padding-top:0;padding-bottom:4rem;position:relative;top:-70px;" class="testimonials text-center">
-      <div class="container">
-        <div class="row mb-5 mx-auto" style="width:100%;">
-          <div class="col-lg-2 col-md-4" *ngFor="let cat of allCourseCategory" >
-            <a routerLink="/root/dashboard/createCourse/{{cat.id}}" ><span class="glyphicon glyphicon-log-in"></span>
+  <!-- Testimonials -->
+  <section *ngIf="allCourseCategory" style="padding-top:0;padding-bottom:4rem;position:relative;top:-70px;"
+    class="testimonials text-center">
+    <div class="container">
+      <div class="row mb-5 mx-auto" style="width:100%;">
+        <div class="col-lg-2 col-md-4" *ngFor="let cat of allCourseCategory">
+          <a routerLink="/root/dashboard/createCourse/{{cat.id}}"><span class="glyphicon glyphicon-log-in"></span>
               <div class="testimonial-item mx-auto mb-2">
                 <img class="img-fluid" src="{{cat.logo}}" alt="">
               </div>
               {{cat.label}}
             </a><br>
-            <a type="click" style="padding:10px;" data-toggle="modal" data-target="#bootstrapModelu" (click)="setUpdateCategory(cat);"><i class="fa fa-pencil" aria-hidden="true" style="color: #74d886; cursor: pointer;"></i></a>&nbsp;
-            <a data-toggle="modal" data-target="#bootstrapModelCat" type="click" style="padding:10px;" (click)="setDeleteCategory(cat.id)" ><i class="fa fa-trash" aria-hidden="true" style="color: rgb(235, 102, 102); cursor: pointer;" ></i></a>
-          </div>
-          <div class="col-lg-2 col-md-4">
-            <a style="cursor: pointer;" data-toggle="modal" data-target="#bootstrapModel"><span class="glyphicon glyphicon-log-in"></span>
+          <a type="click" style="padding:10px;" data-toggle="modal" data-target="#bootstrapModelu"
+            (click)="setUpdateCategory(cat);"><i class="fa fa-pencil" aria-hidden="true" style="color: #74d886; cursor: pointer;"></i></a>&nbsp;
+          <a data-toggle="modal" data-target="#bootstrapModelCat" type="click" style="padding:10px;"
+            (click)="setDeleteCategory(cat.id)"><i class="fa fa-trash" aria-hidden="true" style="color: rgb(235, 102, 102); cursor: pointer;" ></i></a>
+        </div>
+        <div class="col-lg-2 col-md-4">
+          <a style="cursor: pointer;" data-toggle="modal" data-target="#bootstrapModel"><span class="glyphicon glyphicon-log-in"></span>
               <div style="text-align: center;" class="testimonial-item mx-auto mb-2">
                 <i class="fa fa-plus" aria-hidden="true"></i><p>Category</p>
               </div>
             </a>
-          </div>
-        </div>
-      </div>
-    </section>
-  </body>
-
-  <div id="bootstrapModelCat" class="modal fade" role="dialog">
-      <div class="modal-dialog">
-        <!-- Modal content-->
-        <div class="modal-content">
-          <div class="modal-header">
-          </div>
-          <h6 class="modal-title" style="margin-left: 16px;">Are you sure delete the category ?</h6>
-    <!-- model body section -->
-          <div class="modal-body">
-            <br>
-          </div>
-          <div class="modal-footer">
-              <button type="button" class="btn btn-primary" data-dismiss="modal">Close</button>
-            <button type="button" class="btn btn-primary" data-dismiss="modal"  (click)="deleteCategory();">Ok</button>
-          </div>
         </div>
       </div>
     </div>
+  </section>
+</body>
 
-    <div id="bootstrapModelu" class="modal fade" role="dialog">
-        <div class="modal-dialog">
-          <!-- Modal content-->
-          <div class="modal-content">
-            <div class="modal-header">
-              <button type="button" class="close" data-dismiss="modal">&times;</button>
-            </div>
-            <h4 class="modal-title" style="margin-left: 16px;">Add Category</h4>
+<div id="bootstrapModelCat" class="modal fade" role="dialog">
+  <div class="modal-dialog">
+    <!-- Modal content-->
+    <div class="modal-content">
+      <div class="modal-header">
+      </div>
+      <h6 class="modal-title" style="margin-left: 16px;">Are you sure delete the category ?</h6>
       <!-- model body section -->
-            <div class="modal-body">
-              <input id="form_name" type="text" name="name" class="form-control" placeholder="Course Category" required="required" data-error="Firstname is required." [(ngModel)]="categoryName">
-              <br>
-              <input id="form_name" type="text" name="url" class="form-control" placeholder="Category image url" required="required" data-error="Firstname is required." [(ngModel)]="catImageUrl">
-              <br>
-              <div class="col-md-12">
-                <div class="form-group">
-                  <label>Visibility</label> &nbsp;
-                  <select id="country" name="country" #cat>
-                    <option>true</option>
-                    <option>false</option>
-                  </select> 
-                  <div class="help-block with-errors"></div>
-                </div>
-              </div>
-            </div>
-            <div class="modal-footer">
-              <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-              <button type="button" class="btn btn-default" data-dismiss="modal" (click)="updateCategory();">Update</button>
-            </div>
-          </div>
-        </div>
+      <div class="modal-body">
+        <br>
       </div>
-
-  <div id="bootstrapModel" class="modal fade" role="dialog">
-      <div class="modal-dialog">
-        <!-- Modal content-->
-        <div class="modal-content">
-          <div class="modal-header">
-            <button type="button" class="close" data-dismiss="modal">&times;</button>
-          </div>
-          <h4 class="modal-title" style="margin-left: 16px;">Add Category</h4>
-    <!-- model body section -->
-          <div class="modal-body">
-            <input id="form_name" type="text" name="name" class="form-control" placeholder="Course Category" required="required" data-error="Firstname is required." [(ngModel)]="categoryName">
-            <br>
-            <input id="form_name" type="text" name="url" class="form-control" placeholder="Category image url" required="required" data-error="Firstname is required." [(ngModel)]="catImageUrl">
-            <br>
-            <div class="col-md-12">
-              <div class="form-group">
-                <label>Visibility</label> &nbsp;
-                <select id="country" name="country" #cat>
-                  <option>true</option>
-                  <option>false</option>
-                </select> 
-                <div class="help-block with-errors"></div>
-              </div>
-            </div>
-          </div>
-          <div class="modal-footer">
-            <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-            <button type="button" class="btn btn-default" data-dismiss="modal" (click)="addCategory();">Save</button>
-          </div>
-        </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-primary" data-dismiss="modal">cancel</button>
+        <button type="button" class="btn btn-primary" data-dismiss="modal" (click)="deleteCategory();">ok</button>
       </div>
     </div>
+  </div>
+</div>
 
+<div id="bootstrapModelu" class="modal fade" role="dialog">
+  <div class="modal-dialog">
+    <!-- Modal content-->
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal">&times;</button>
+      </div>
+      <h4 class="modal-title" style="margin-left: 16px;">Edit Category</h4>
+      <!-- model body section -->
+      <div class="modal-body" style="text-align: center;">
+        <div class="image-upload hoverable">
+          <label for="old-file-input" class="hoverable">
+            <div class="testimonial-item mx-auto mb-2 " style="width:116px;">
+              <img class="img-fluid rounded-circle" [src]="uploadImgUrl" alt="">
+            </div>
+	  </label>
+          <input id="old-file-input" type="file" (change)="readUrl($event, 'old')"/>
+        </div>
+        <input id="form_name" type="text" name="name" class="form-control" placeholder="Course Category"
+          required="required" data-error="Firstname is required." [(ngModel)]="updateCategory.label">
+        <br>
+        <div class="col-md-12">
+          <div class="form-group">
+            <label>Visibility</label> &nbsp;
+            <select [(ngModel)]="updateCategory.visibility">
+                  <option [value]="true">true</option>
+                  <option [value]="false">false</option>
+                </select>
+            <div class="help-block with-errors"></div>
+          </div>
+        </div>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+	<button type="button" class="btn btn-default" (click)="update();">{{updateBtnText}}<i *ngIf="updateBtnText !== 'Update'" style="font-size: inherit;" class="fa fa-spinner fa-pulse fa-3x fa-fw"></i></button>
+      </div>
+    </div>
+  </div>
+</div>
 
-  
+<div id="bootstrapModel" class="modal fade" role="dialog">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal">&times;</button>
+      </div>
+      <h4 class="modal-title" style="margin-left: 16px;">Add Category</h4>
+      <div class="modal-body" style="text-align: center;">
+        <div class="image-upload hoverable">
+          <label for="new-file-input" class="hoverable">
+            <div class="testimonial-item mx-auto mb-2 " style="width:116px;">
+              <img class="img-fluid rounded-circle" [src]="uploadImgUrl" alt="">
+            </div>
+	  </label>
+          <input id="new-file-input" type="file" (change)="readUrl($event, 'new')"/>
+        </div>
+        <input id="form_name" type="text" name="name" class="form-control" placeholder="Course Category"
+          required="required" data-error="Firstname is required." [(ngModel)]="newCategory.label">
+        <br>
+        <div class="col-md-12">
+          <div class="form-group">
+            <label>Visibility</label> &nbsp;
+            <select [(ngModel)]="newCategory.visibility">
+                  <option [value]="true">true</option>
+                  <option [value]="false">false</option>
+                </select>
+            <div class="help-block with-errors"></div>
+          </div>
+        </div>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+	<button type="button" class="btn btn-default" (click)="addCategory();">{{saveBtnText}}<i *ngIf="saveBtnText !== 'Save'" style="font-size: inherit;" class="fa fa-spinner fa-pulse fa-3x fa-fw"></i></button>
+      </div>
+    </div>
+  </div>
+</div>

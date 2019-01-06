@@ -27,6 +27,20 @@ export class CoursesComponent implements OnInit {
   course: Course = {} as Course;
   deletedCourseIndex:number;
   categoryId:number;
+  allSections=[];
+  courseDetail:any;
+  btnTxt: string = 'Subscribe';
+  course_id:number;
+  subscribeFlag:boolean;
+  popup:boolean=false;
+  pariceAfterDiscount:any;
+  courseDiscount:number;
+  coursePrice:number;
+  courseStatus:any;
+  courseLabel:string;
+  courseDis:string;
+  courseCreated:any;
+  courseUpdatedAt:any;
 
   constructor(private dataService: DataService, private authService: AuthserviceService, private toastrService: ToastrService, private eleRef:ElementRef, private userInfo: UserInfoService, private route: ActivatedRoute,private router: Router, private http: HttpService, private scrollbarService: MalihuScrollbarService) { }
 
@@ -47,7 +61,7 @@ export class CoursesComponent implements OnInit {
     this.router.navigate(['/root/dashboard/createCourse'],{ queryParams: { id: this.course.id } })
   }
 
-  courseDetail(id){
+  allCourseDetail(id){
     this.loading = true;
     this.http.getDataWithId('Course',id)
     .subscribe(res=>{
@@ -75,7 +89,7 @@ export class CoursesComponent implements OnInit {
         this.allCourses[this.updateIndex] = this.course;
       }
       else{
-        this.toastrService.error(res.error,'Error',{positionClass:'toast-bottom-right'});
+        this.toastrService.error(res.error.error,'Error',{positionClass:'toast-bottom-right'});
       }
     });
   }
@@ -89,6 +103,66 @@ export class CoursesComponent implements OnInit {
     this.allCourseCategory = this.dataService.getCategories();
     this.course = Object.create(course);;
     this.updateIndex = index;
+  }
+
+  populateSection(course_id){
+    this.http.getDataWithId('CourseSection',course_id)
+    .subscribe(res=>{
+      this.allSections = res.entity;
+    })   
+  }
+  getCourse(course_id){
+    this.http.getCoursePurchaseDetails(course_id)
+    .subscribe(res=>{
+      this.courseDetail = res.entity;
+      this.pariceAfterDiscount = this.courseDetail.price - this.courseDetail.price*this.courseDetail.discount/100;
+      this.courseDiscount = this.courseDetail.discount;
+      this.coursePrice = this.courseDetail.price;
+      this.courseStatus = this.courseDetail.status;
+      this.courseCreated= this.courseDetail.created_by;
+      this.courseLabel = this.courseDetail.label;
+      this.courseDis = this.courseDetail.description;
+      this.courseUpdatedAt = this.courseDetail.updatedAt;
+      if(this.courseDetail.status == 'purchased'){
+        this.btnTxt = 'Subscribed';
+       }
+    });
+  }
+
+  getCourseId(course){
+    this.populateSection(course.id);
+    this.getCourse(course.id);
+    this.course_id = course.id;
+    this.popup=true
+  }
+
+  subscribe(): void{
+    this.subscribeFlag=true;
+    this.http.subscribeCourse(this.course_id)
+    .subscribe(res=>{
+      this.subscribeFlag = false;
+      if(res.statusCode===200){
+        this.courseDetail.status = 'purchased';
+        this.btnTxt = 'Subscribed';
+        this.toastrService.success(res.message,'Successs',{positionClass:'toast-bottom-right'});
+      }
+      else{
+        this.toastrService.error(res.error,'Error',{positionClass:'toast-bottom-right'});
+      }
+    })
+  }
+
+  toProfile(s_id, c_index){
+    if (this.courseDetail.status == 'purchased')
+      this.router.navigate(['/root/kide/'+this.course_id+'/'+s_id+'/'+c_index]);
+    else alert('Subscribe the course first');
+  }
+
+  highlight(id: string): void {
+    setTimeout(()=>{
+      $('.selected').removeClass('selected');
+      $(id).addClass('selected');
+    });
   }
 
 }

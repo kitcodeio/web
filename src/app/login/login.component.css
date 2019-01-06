@@ -384,6 +384,7 @@ button{
 
 .login-container{
   padding: 3rem;
+  height: 597px;
 }
 
 /*=============================Responsive design=============================*/
@@ -401,4 +402,13 @@ button{
 }
 .fa-times:hover{
   cursor: pointer;
+}
+
+.social-login{
+  padding-left: 3rem;
+  padding-right: 3rem;
+}
+
+.modallg{
+  max-width: 617px;
 }

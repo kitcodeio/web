@@ -1,0 +1,7 @@
+<div id="kide-container">
+  <div *ngIf="loading" class="loading">
+    <img src="../../assets/load.gif">
+    <h4>Loading...</h4>
+  </div>
+  <iframe [src]="kide" frameborder="0"></iframe>
+</div>

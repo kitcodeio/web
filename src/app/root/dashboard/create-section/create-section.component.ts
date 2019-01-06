@@ -1,6 +1,6 @@
-import { Component, OnInit, ViewChild, ElementRef } from '@angular/core';
+import { Component, OnInit, ViewChild, ElementRef, NgZone } from '@angular/core';
 import { HttpService } from '../../../services/http/http.service';
-import { ActivatedRoute, Router } from '@angular/router';
+import { ActivatedRoute, Router, NavigationEnd } from '@angular/router';
 import { MalihuScrollbarService } from 'ngx-malihu-scrollbar';
 import { UserInfoService } from '../../../services/userInfo/user-info.service'
 import { Section } from '../../../models/section';
@@ -10,6 +10,7 @@ import { Chapter } from '../../../models/chapter';
 import { ToastrService } from 'ngx-toastr'; 
 // Drag & drop
 import { DragulaService } from 'ng2-dragula';
+import { PlatformLocation } from '@angular/common'
 
 
 @Component({
@@ -52,8 +53,15 @@ export class CreateSectionComponent implements OnInit {
   sectionIndexOnDrag:number;
   sectionIndexOnDrop:number;
 
-  constructor(private elRef: ElementRef, private _dragulaService: DragulaService, private authService: AuthserviceService, private toastrService: ToastrService, private userInfo: UserInfoService, private route:ActivatedRoute, private http: HttpService, private scrollbarService: MalihuScrollbarService, private router: Router) { 
+  constructor(private zone: NgZone, location: PlatformLocation, private elRef: ElementRef, private _dragulaService: DragulaService, private authService: AuthserviceService, private toastrService: ToastrService, private userInfo: UserInfoService, private route:ActivatedRoute, private http: HttpService, private scrollbarService: MalihuScrollbarService, private router: Router) { 
+    this._dragulaService.createGroup("COLUMNS", {
+      direction: 'horizontal',
+      moves: (el, source, handle) => handle.className === "group-handle"
+    });
 
+    location.onPopState(() => {
+      window.location.reload();
+    });
   }
 
   private getElementIndex(el: any) {
@@ -65,7 +73,7 @@ export class CreateSectionComponent implements OnInit {
   }
 
   ngOnInit() {
-
+    
     //chapter drag and drop
     this._dragulaService.drag().subscribe(res=>{
       this.chapterIndexOnDrag = this.getElementIndex(res.el);
@@ -81,6 +89,7 @@ export class CreateSectionComponent implements OnInit {
 
       let item,item1;
 
+      if(this.sectionIndexForDAD || this.sectionIndexForDAD==0){
         item = this.allSections[this.sectionIndexForDAD].CourseChapters[this.chapterIndexOnDrop];
         item1 = this.allSections[this.sectionIndexForDAD].CourseChapters[this.chapterIndexOnDrag];
 
@@ -103,7 +112,33 @@ export class CreateSectionComponent implements OnInit {
         })
         .subscribe(res=>{
           this.populateSectionWithCourseId();
+          this.sectionIndexForDAD=null;
         });
+      }
+
+      else{
+        this.http.putData('CourseSection',{
+          id:section1.id,
+          data:{
+            label:section1.label,
+            description:section1.description,
+            index:section2.index
+          }
+      }).subscribe(res=>{
+      })
+
+      this.http.putData('CourseSection',{
+        id:section2.id,
+        data:{
+          label:section2.label,
+          description:section2.description,
+          index:section1.index
+        }
+    }).subscribe(res=>{
+      this.populateSectionWithCourseId();
+    })
+      }
+        
     });
 
     $("#menu-toggle").click(function(e) {
@@ -186,14 +221,11 @@ export class CreateSectionComponent implements OnInit {
     id:this.section.id,
     data:this.section
 }).subscribe(res=>{
-
-  console.log(res);
   if(res.statusCode===200){
     this.toastrService.success(res.message,'Successs',{positionClass:'toast-bottom-right'});
     this.allSections[this.updateIndex] = this.section;
   }
   else{
-    console.log(res);
     this.toastrService.error(res.error.message,'Error',{positionClass:'toast-bottom-right'});
   }
   
@@ -206,7 +238,7 @@ export class CreateSectionComponent implements OnInit {
       data:this.chapter
   }).subscribe(res=>{
     if(res.statusCode===200){
-      this.toastrService.success(res.message,'Successs',{positionClass:'toast-bottom-right'});
+      this.toastrService.success(res.message,'Success',{positionClass:'toast-bottom-right'});
       this.allSections[this.updateSectionIndex].CourseChapters[this.updateChapterIndex]= this.chapter;
     }
     else{

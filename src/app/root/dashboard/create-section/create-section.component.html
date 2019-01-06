@@ -20,8 +20,8 @@
                         <br>
                       </div>
                       <div class="modal-footer">
-                        <button type="button" class="btn btn-primary" data-dismiss="modal">Close</button>
-                        <button type="button" class="btn btn-primary" data-dismiss="modal"  (click)="deleteChapter();">Ok</button>
+                        <button type="button" class="btn btn-primary" data-dismiss="modal">cancel</button>
+                        <button type="button" class="btn btn-primary" data-dismiss="modal"  (click)="deleteChapter();">ok</button>
                       </div>
                     </div>
                   </div>
@@ -39,8 +39,8 @@
                           <br>
                         </div>
                         <div class="modal-footer">
-                            <button type="button" class="btn btn-primary" data-dismiss="modal">Close</button>
-                          <button type="button" class="btn btn-primary" data-dismiss="modal"  (click)="deleteSection();">Ok</button>
+                            <button type="button" class="btn btn-primary" data-dismiss="modal">cancel</button>
+                          <button type="button" class="btn btn-primary" data-dismiss="modal"  (click)="deleteSection();">ok</button>
                         </div>
                       </div>
                     </div>
@@ -143,7 +143,7 @@
                       <p class="mb-0" style="color:#ccc;">Created by <span style="color:#000;">{{courseDetail.created_by}}</span></p>
                     </div>
                     <div class="card-body">
-                        <button [disabled]="courseDetail.status !== 'not purchased'" class="float-right btn subscribeButton" (click)="subscribe();">{{btnTxt}}&nbsp; <i *ngIf="courseDetail.status=='purchased'" class="fa fa-check" aria-hidden="true"></i> <i *ngIf="subscribeFlag" class="fa fa-spinner fa-pulse fa-3x fa-fw" aria-hidden="true" style="font-size: 15px;"></i></button>
+                        <!-- <button [disabled]="courseDetail.status !== 'not purchased'" class="float-right btn subscribeButton" (click)="subscribe();">{{btnTxt}}&nbsp; <i *ngIf="courseDetail.status=='purchased'" class="fa fa-check" aria-hidden="true"></i> <i *ngIf="subscribeFlag" class="fa fa-spinner fa-pulse fa-3x fa-fw" aria-hidden="true" style="font-size: 15px;"></i></button> -->
                       <p class="card-text" style="color:#827c7c;">{{courseDetail.description}}</p>
                     </div>
                     <!-- <div class="card-footer text-muted" style="background-color:transparent;">
@@ -153,31 +153,59 @@
                   </div>
                   <br/>
                   <div class="sections">
-                    <div id="accordion">
-                      <div class="card mb-5 container"  *ngFor="let s of allSections;let i=index;">
-                        <div class="card-header bg-white" data-toggle="collapse" [attr.data-target]="'#'+i">
-                          <span class="group-handle"><h5 class="mb-0">
-                            {{i+1}}. {{s.label}}
-                        </h5></span>
-                          <button class="float-right" style="border: none; background-color: transparent" (click)="setDeleteSectionId(s.id,i)"  *ngIf="isAdmin"><i class="fa fa-trash" aria-hidden="true" style="color: rgb(235, 102, 102);cursor: pointer;" data-toggle="modal" data-target="#bootstrapModel"></i></button>
-                          <button class="float-right" style="border: none; background-color: transparent" (click)="setUpdateSection(s,i);"  *ngIf="isAdmin" data-toggle="modal" data-target="#bootstrapModel1"><i class="fa fa-pencil" aria-hidden="true" style="color: #74d886; cursor: pointer;"></i></button>
-                          <p title="{{s.description}}" class="section-description">{{s.description}}</p>
-                        </div>
-                        <div [dragula]='"Chapter"' dragulaName="s.CourseChapters" id="{{i}}" class="collapse show container" aria-labelledby="headingOne" data-parent="#accordion">  
-                            <div class="list-group chapterList" id="list-tab" role="tablist"   *ngFor="let c of s.CourseChapters; let j=index;" (mousedown)="onClick(i);">
-                              <span>
-                                <a title="{{c.label}}" type="click" style="display:inline-block;width:90%" class="list-group-item chapter-item active" id="list-home-list" data-toggle="list" href="#list-home" role="tab" aria-controls="home"><i class="fa fa-play-circle" aria-hidden="true"></i>&nbsp;&nbsp;&nbsp;{{i+1}}.{{j+1}}. {{c.label}}
-                              </a>
-                                  &nbsp;&nbsp;&nbsp;
-                                  <a type="click" style="padding:10px;" data-toggle="modal" data-target="#bootstrapModelChapterU"><i class="fa fa-pencil" aria-hidden="true" style="color: #1daa37; cursor: pointer;" (click)="setUpdateChapter(c,i,j);" *ngIf="isAdmin"></i></a>&nbsp;
-                                  <a data-toggle="modal" data-target="#bootstrapModelChapterD" type="click" style="padding:10px;" (click)="setDeleteChapter(c.id,i,j)"  *ngIf="isAdmin"><i class="fa fa-trash" aria-hidden="true" style="color: rgb(235, 102, 102); cursor: pointer;" ></i></a>
-                              </span>
+                    <div  class="wrapper" dragula="COLUMNS" [(dragulaModel)]="allSections">
+                        <div class="container card mb-5"  *ngFor="let s of allSections;let i=index;">
+                            <div class="card-header bg-white" data-toggle="collapse" [attr.data-target]="'#'+i">
+                              <span class="group-handle" style="font-size: 1.25rem; cursor: pointer;">
+                                {{i+1}}. {{s.label}}
+                            </span>
+                              <button class="float-right" style="border: none; background-color: transparent" (click)="setDeleteSectionId(s.id,i)"  *ngIf="isAdmin"><i class="fa fa-trash" aria-hidden="true" style="color: rgb(235, 102, 102);cursor: pointer;" data-toggle="modal" data-target="#bootstrapModel"></i></button>
+                              <button class="float-right" style="border: none; background-color: transparent" (click)="setUpdateSection(s,i);"  *ngIf="isAdmin" data-toggle="modal" data-target="#bootstrapModel1"><i class="fa fa-pencil" aria-hidden="true" style="color: #74d886; cursor: pointer;"></i></button>
+                              <p title="{{s.description}}" class="section-description">{{s.description}}</p>
                             </div>
-                            <a style="display:inline-block;width:100%; background-color: #81e0a4;" class="list-group-item chapter-item active" id="list-home-list" data-toggle="list" href="#list-home" role="tab" aria-controls="home" (click)="getSectionId(s.id,i);" data-toggle="modal" data-target="#bootstrapModelAddChap"><i class="fa fa-plus" aria-hidden="true"></i>&nbsp;Chapter
-                            </a>
-                        </div>
-                      </div>
-                      
+                            <div dragula="ITEMS" [(dragulaModel)]="s.CourseChapters" id="{{i}}" class="container collapse show" aria-labelledby="headingOne" data-parent="#accordion">  
+                                <div class="list-group chapterList" id="list-tab" role="tablist"   *ngFor="let c of s.CourseChapters; let j=index;" (mousedown)="onClick(i);">
+                                  <span>
+                                    <a title="{{c.label}}" type="ssclick" style="display:inline-block;width:90%" class="list-group-item chapter-item active" id="list-home-list" data-toggle="list" href="#list-home" role="tab" aria-controls="home"><i class="fa fa-play-circle" aria-hidden="true"></i>&nbsp;&nbsp;&nbsp;{{i+1}}.{{j+1}}. {{c.label}}
+                                  </a>
+                                      &nbsp;&nbsp;&nbsp;
+                                      <a type="click" style="padding:10px;" data-toggle="modal" data-target="#bootstrapModelChapterU"><i class="fa fa-pencil" aria-hidden="true" style="color: #1daa37; cursor: pointer;" (click)="setUpdateChapter(c,i,j);" *ngIf="isAdmin"></i></a>&nbsp;
+                                      <a data-toggle="modal" data-target="#bootstrapModelChapterD" type="click" style="padding:10px;" (click)="setDeleteChapter(c.id,i,j)"  *ngIf="isAdmin"><i class="fa fa-trash" aria-hidden="true" style="color: rgb(235, 102, 102); cursor: pointer;" ></i></a>
+                                  </span>
+                                </div>
+                                <a style="display:inline-block;width:100%; background-color: #81e0a4;" class="list-group-item chapter-item active" id="list-home-list" data-toggle="list" href="#list-home" role="tab" aria-controls="home" (click)="getSectionId(s.id,i);" data-toggle="modal" data-target="#bootstrapModelAddChap"><i class="fa fa-plus" aria-hidden="true"></i>&nbsp;Chapter
+                                </a>
+                            </div>
+                          </div>
+                    </div>
+
+                                          <!-- <div class="wrapper" dragula="COLUMNS" [(dragulaModel)]="allSections">
+                          <div class="container card mb-5" *ngFor="let s of allSections;let i=index;">
+                              <div class="card-header bg-white" data-toggle="collapse" [attr.data-target]="'#'+i">
+                                  <span class="group-handle" style="font-size: 1.25rem; cursor: pointer;">
+                                    {{i+1}}. {{s.label}}
+                                </span>
+                                  <button class="float-right" style="border: none; background-color: transparent" (click)="setDeleteSectionId(s.id,i)"  *ngIf="isAdmin"><i class="fa fa-trash" aria-hidden="true" style="color: rgb(235, 102, 102);cursor: pointer;" data-toggle="modal" data-target="#bootstrapModel"></i></button>
+                                  <button class="float-right" style="border: none; background-color: transparent" (click)="setUpdateSection(s,i);"  *ngIf="isAdmin" data-toggle="modal" data-target="#bootstrapModel1"><i class="fa fa-pencil" aria-hidden="true" style="color: #74d886; cursor: pointer;"></i></button>
+                                  <p title="{{s.description}}" class="section-description">{{s.description}}</p>
+                                </div>
+                            <div class="container collapse show" dragula="ITEMS" [(dragulaModel)]="s.CourseChapters" id="{{i}}" aria-labelledby="headingOne" data-parent="#accordion">
+                              <div *ngFor="let c of s.CourseChapters; let j=index;">
+                                  <span>
+                                      <a title="{{c.label}}" type="click" style="display:inline-block;width:90%" class="list-group-item chapter-item active" id="list-home-list" data-toggle="list" href="#list-home" role="tab" aria-controls="home"><i class="fa fa-play-circle" aria-hidden="true"></i>&nbsp;&nbsp;&nbsp;{{i+1}}.{{j+1}}. {{c.label}}
+                                    </a>
+                                        &nbsp;&nbsp;&nbsp;
+                                        <a type="click" style="padding:10px;" data-toggle="modal" data-target="#bootstrapModelChapterU"><i class="fa fa-pencil" aria-hidden="true" style="color: #1daa37; cursor: pointer;" (click)="setUpdateChapter(c,i,j);" *ngIf="isAdmin"></i></a>&nbsp;
+                                        <a data-toggle="modal" data-target="#bootstrapModelChapterD" type="click" style="padding:10px;" (click)="setDeleteChapter(c.id,i,j)"  *ngIf="isAdmin"><i class="fa fa-trash" aria-hidden="true" style="color: rgb(235, 102, 102); cursor: pointer;" ></i></a>
+                                    </span>
+                              </div>
+                              <a style="display:inline-block;width:100%; background-color: #81e0a4;" class="list-group-item chapter-item active" id="list-home-list" data-toggle="list" href="#list-home" role="tab" aria-controls="home" (click)="getSectionId(s.id,i);" data-toggle="modal" data-target="#bootstrapModelAddChap"><i class="fa fa-plus" aria-hidden="true"></i>&nbsp;Chapter
+                              </a>
+                            </div>
+                          </div>
+                      </div> -->
+
+
                       <div class="card mb-5">
                         <a data-toggle="modal" data-target="#bootstrapModelAddSec" style="cursor: pointer;">
                           <div class="card-header bg-white">
@@ -187,13 +215,12 @@
                           </div>
                         </a>
                       </div>
-                    </div>
                   </div>
             </div>
         </div>
         <!-- /#page-content-wrapper -->
-
     </div>
   </div>
 </body>
+
 
