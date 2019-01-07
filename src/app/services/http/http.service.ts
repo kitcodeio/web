@@ -127,5 +127,15 @@ export class HttpService {
       .pipe(catchError(error=>of(error)));
   };
 
+  getTutorials(): Observable<any>{
+    return this.http.get(this.url.baseUrl+'tutorial')
+      .pipe(catchError(error=>of(error)));
+  };
+
+   createTutorial(data: any): Observable<any>{
+    return this.http.post(this.url.baseUrl+'tutorial', data)
+      .pipe(catchError(error=>of(error)));
+  }; 
+
   constructor(private http:CustomHttpService, private auth: AuthserviceService, private url: UrlService) { }
 }

@@ -1,46 +1,72 @@
-<nav class="navbar sticky-top navbar-expand-lg navbar-light bg-white" style="border-bottom:1px solid #f7f7f7;">
-        <a class="navbar-brand d-block" href="#"><img src="../../../assets/images/kitcode logo.png" width="137"></a>
-            <a routerLink="/login" class="nav-link d-lg-none d-block" *ngIf="flag && windowSize<=768">Login<span class="sr-only">(current)</span></a>
-            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarTogglerDemo01" *ngIf="!flag && windowSize<=768">
+<nav *ngIf="!showForm" class="navbar sticky-top navbar-expand-lg navbar-light bg-white"
+  style="border-bottom:1px solid #f7f7f7;">
+  <a class="navbar-brand d-block" href="#"><img src="../../../assets/images/kitcode logo.png" width="137"></a>
+  <a routerLink="/login" class="nav-link d-lg-none d-block" *ngIf="flag && windowSize<=768">Login<span class="sr-only">(current)</span></a>
+  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarTogglerDemo01"
+    *ngIf="!flag && windowSize<=768">
               <img class="rounded-circle" style="width:50px; height:50px;" src="{{user.image}}">
             </button>
-      <div class="collapse navbar-collapse" id="navbarTogglerDemo01">
-        <form class="form-inline my-2 w-100">
-          <div class="input-group ml-auto mr-5 input-navbar-search">
-              <div class="input-group-prepend float-right">
-              </div>
-              <input autocomplete="off" type="search" class="form-control search-input" placeholder="What do you want to learn today ?" aria-label="" aria-describedby="basic-addon1" #searchBox id="search-box" (keyup)="search(searchBox.value)" (input)="onSearchChange($event.target.value)">
-             
-              <ul class="search-result" #searchResult>
-                <li *ngFor="let course of courses | async" >
-                  <a type="click" routerLink="/root/course/chapter/{{course.id}}" (click)="hideOnClick();">
+  <div class="collapse navbar-collapse" id="navbarTogglerDemo01">
+    <form class="form-inline my-2 w-100">
+      <div class="input-group ml-auto mr-5 input-navbar-search">
+        <div class="input-group-prepend float-right">
+        </div>
+        <input autocomplete="off" type="search" class="form-control search-input" placeholder="What do you want to learn today ?"
+          aria-label="" aria-describedby="basic-addon1" #searchBox id="search-box"
+          (keyup)="search(searchBox.value)" (input)="onSearchChange($event.target.value)">
+        <ul class="search-result" #searchResult>
+          <li *ngFor="let course of courses | async">
+            <a type="click" routerLink="/root/course/chapter/{{course.id}}" (click)="hideOnClick();">
                     {{course.label}}
-                  </a>
-                </li>
-              </ul>
-              <!--  -->
-            </div>
-        </form>
-        <ul class="nav navbar-nav ml-auto">
-          <li class="nav-item d-lg-none d-block" *ngIf="!flag && windowSize<=768">
-            <a class="nav-link" routerLink="/root/dashboard" *ngIf="!flag && windowSize<=768 && user.role_type=='admin'">Dashboard<span class="sr-only">(current)</span></a>
-          </li>
-          <li class="nav-item d-lg-none d-block">
-            <a type="click" class="nav-link" href="#" (click)="logout();" *ngIf="!flag && windowSize<=768">Logout<span class="sr-only">(current)</span></a>
-          </li>
-          <li class="nav-item d-lg-block d-none" *ngIf="flag">
-            <a class="nav-link" routerLink="/login" >Login<span class="sr-only">(current)</span></a>
-          </li>
-          <li class="nav-item dropdown d-lg-block d-none" *ngIf="!flag" style="background-color: white; cursor: pointer;">
-              <img #image class="rounded-circle" style="width:50px; height:50px;" src="{{user.image}}">
+            </a>
           </li>
         </ul>
-        <div class="dropdown-menu dropdown-menu-right" style="z-index: 10;" aria-labelledby="navbarDropdown">
-                <a class="dropdown-item" (click)="toDashboard();" *ngIf="user.role_type=='admin'
-                " style="cursor: pointer;">Dashboard</a>
-              <a style="color: #212529" type="click" class="dropdown-item" href="#" (click)="logout();">Logout</a>
-          </div>
       </div>
-    </nav>
+    </form>
+    <ul class="navbar-nav ml-auto">
+      <li class="nav-item d-lg-none d-block" *ngIf="!flag && windowSize<=768">
+        <a class="nav-link" routerLink="/root/dashboard" *ngIf="!flag && windowSize<=768 && user.role_type=='admin'">Dashboard<span class="sr-only">(current)</span></a>
+      </li>
+      <li class="nav-item d-lg-none d-block">
+        <a type="click" class="nav-link" href="#" (click)="logout();" *ngIf="!flag && windowSize<=768">Logout<span class="sr-only">(current)</span></a>
+      </li>
+      <li class="nav-item submit hoverable" (click)="toggleCourseForm()">+ Submit a tutorial</li>
+      <li class="nav-item d-lg-block d-none" *ngIf="flag">
+        <a class="nav-link" routerLink="/login">Login<span class="sr-only">(current)</span></a>
+      </li>
+      <li class="nav-item dropdown d-lg-block d-none" *ngIf="!flag" style="background-color: white; cursor: pointer;">
+        <img #image class="rounded-circle" style="width:50px; height:50px;" src="{{user.image}}">
+      </li>
+    </ul>
+    <div class="dropdown-menu dropdown-menu-right" style="z-index: 10;" aria-labelledby="navbarDropdown">
+      <a class="dropdown-item" (click)="toDashboard();" *ngIf="user.role_type=='admin'
+                " style="cursor: pointer;">Dashboard</a>
+      <a style="color: #212529" type="click" class="dropdown-item" href="#" (click)="logout();">Logout</a>
+    </div>
+  </div>
+</nav>
 
-<router-outlet></router-outlet>
+<router-outlet *ngIf="!showForm"></router-outlet>
+<div class="form" *ngIf="showForm">
+  <button class="close-btn hoverable" (click)="toggleCourseForm()">X</button>
+  <div class="row">
+    <div class="col-lg-4 col-md-4 col-sm-2 col-xs-1"></div>
+    <div class="col-lg-4 col-md-4 col-sm-8 col-xs-10">
+      <h3 class="form-heading">Submit Course/Tutorial</h3>
+      <div class="alert alert-success" role="alert" *ngIf="!url && btnTxt=='Saved'">
+        Thanks! Your submission will be reviewed shortly. Submit another?
+      </div>
+      <p class="form-subheading">Paste the Course/Tutorial link below:</p>
+      <input [(ngModel)]="url" (click)="resetBtn()" class="form-control" type="text" placeholder="Insert course/tutorial link here">
+      <br>
+      <input [(ngModel)]="tags" class="form-control form-control-sm" id="tags" placeholder="insert tags here. eg. node, angular6, mysql">
+      <br>
+      <!-- <ngx-multiselect [(ngModel)]="model" [options]="tags" [displayName]="'name'" [trackBy]="'id'" [multiple]="true"></ngx-multiselect> -->
+      <button class="btn submit-button" (click)="submitCourse()">{{btnTxt}} <i *ngIf="btnTxt=='Saving'" style="font-size: inherit;" class="fa fa-spinner fa-pulse fa-3x fa-fw"></i></button>
+      <div *ngIf="progress" id="myProgress">
+        <div id="myBar"></div>
+      </div>
+    </div>
+    <div class="col-lg-4 col-md-4 col-sm-2 col-xs-1"></div>
+  </div>
+</div>

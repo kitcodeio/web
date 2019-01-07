@@ -23,6 +23,7 @@ import { CreateSectionComponent } from './root/dashboard/create-section/create-s
 import { DragulaModule } from 'ng2-dragula';
 import { DragDropDirectiveModule} from "angular4-drag-drop";
 import { ContainersComponent } from './root/dashboard/containers/containers.component';
+import { MultiselectModule } from 'ngx-multiselect';
 
 let config = new AuthServiceConfig([
   {
@@ -67,7 +68,7 @@ export function provideConfig() {
     DragulaModule.forRoot(),
     DragulaModule,
     DragDropDirectiveModule,
-
+    MultiselectModule.forRoot()
   ],
   providers: [AuthserviceService,
     {

@@ -8,6 +8,8 @@ import { debounceTime, distinctUntilChanged, switchMap } from 'rxjs/operators';
 import { HttpService } from '../services/http/http.service';
 import { ToastrService } from 'ngx-toastr';
 
+declare var $:any;
+
 @Component({
   selector: 'app-root',
   templateUrl: './root.component.html',
@@ -20,18 +22,7 @@ export class RootComponent implements OnInit {
   courses: Observable<any[]>;
   private searchTerms = new Subject<string>();
 
-  emailLogin: string;
-  passwordLogin: string;
-
-  error: string;
-  emailReg: string;
-  passwordReg: string;
-  company: string;
-  passwordCon:string;
-  checked:boolean;
-  counter:number=0;
-  regex = new RegExp('^([^0-9!$@#$%^&*\(\)-_+=\[\]~`\<\>,.?\/\'";\{\}|\\]*)$');
-
+  showForm: boolean = false;
   userName:string;
   sizeFlag: boolean;
   dropdownFlag:boolean;
@@ -42,11 +33,19 @@ export class RootComponent implements OnInit {
   };
   userHide:boolean;
   label: string;
-  url: string;
   image:string;
   flag:boolean;
   windowSize;
   loginModelFlag: boolean =true;
+
+  url:string;
+  tags:string;
+  progress: number;
+  loader: Function;
+  interval: any;
+  time: number;
+  noRes: boolean;
+  btnTxt: string = "Submit Course/Tutorial";
 
   constructor(private toastrService: ToastrService, private http: HttpService, private eRef: ElementRef, private router: Router, private userInfo: UserInfoService, private authService: AuthserviceService) {}
 
@@ -56,36 +55,6 @@ export class RootComponent implements OnInit {
   }
 
   ngOnInit() {
-
-    $(function(){
-      		
-      $(document).on('focusout','.md-form-control',function(){	
-        $(this).each(function(){
-          ($(this).val()!="")?$(this).parent('.md-input').find('label').animate({top:'-15px'},300):$(this).parent('.md-input').find('label').animate({top:'10px'},300);
-        });
-      });
-      
-      
-      $(document).on('focus','.md-form-control',function(){	
-        $(this).each(function(){
-          $(this).parent('.md-input').find('label').animate({top:'-15px'},300);
-        });
-      });
-            $(document).on('click','.login-register-button',function(e){
-              e.preventDefault();
-              $('.login-container').fadeOut(200,function(){
-                $('.register-container').fadeIn(200);		
-              }); 
-            });
-            $(document).on('click','.login-sign-button',function(e){
-              e.preventDefault();
-              $('.register-container').fadeOut(200,function(){
-                $('.login-container').fadeIn(200);
-              });
-            });
-          });
-      
-
     this.windowSize = window.screen.width
     if(this.authService.isTokenExpired()){ 
       //this.url = '/login'
@@ -145,81 +114,56 @@ export class RootComponent implements OnInit {
     $('.search-result').hide();
   }
 
+  toggleCourseForm(): any {
+    if (this.flag) return this.router.navigate(['/login']);
+    this.showForm = !this.showForm;
+    this.btnTxt =  "Submit Course/Tutorial";
+    this.url = '';
+    this.tags = '';
+  }
 
-  login(): void {
-    if(this.emailLogin && this.passwordLogin){	  
-      if(this.emailLogin.indexOf('@')!==-1 && this.emailLogin.indexOf('.')){
-        this.authService.login(this.emailLogin, this.passwordLogin)
-          .subscribe(response => { 
-              
-            if(response.error){
-              this.toastrService.error('incorrect password','Error',{positionClass:'toast-bottom-right'});
-            }   
-            else{
-              this.authService.setToken(response.token);
-              window.location.reload();
-            }
-         });
-      } else {
-        this.toastrService.error('Please enter valid email','Error',{positionClass:'toast-bottom-right'});
-      }
+  resetBtn(): void {
+    this.btnTxt =  "Submit Course/Tutorial";
+  }
+
+  submitCourse(): void {
+    let self =this;
+    let regex = /((([A-Za-z]{4,9}:(?:\/\/)?)(?:[-;:&=\+\$,\w]+@)?[A-Za-z0-9.-]+|(?:www.|[-;:&=\+\$,\w]+@)[A-Za-z0-9.-]+)((?:\/[\+~%\/.\w-_]*)?\??(?:[-\+=&;%@.\w_]*)#?(?:[\w]*))?)/;
+    let loader = () => {
+      if (self.progress >= 50 && self.noRes) {
+	clearInterval(self.interval);
+        self.time = self.time * 2;
+        self.interval = setInterval(self.loader, self.time);
+      } else if (self.progress >= 100) {
+	self.btnTxt = 'Saved';
+	self.url = "";
+	self.tags = "";
+	self.progress = 0;
+        return clearInterval(self.interval)
+      };
+      self.progress = self.progress + 1;
+      $('#myBar').css("width", self.progress + '%');
+    };
+    if (regex.test(this.url)) {
+      this.btnTxt = "Saving";
+      this.progress = 1;
+      this.time = 10;
+      this.noRes = true;
+      this.interval = setInterval(loader, this.time);
+      this.http.createTutorial({
+        link: this.url,
+	tags: this.tags
+      }).subscribe(res => {
+        if (res.statusCode == 201) {
+	  clearInterval(this.interval);
+          this.noRes = false;
+	  this.interval = setInterval(loader, 5);
+	}
+      });
     } else {
-      this.toastrService.error('Please enter all fields','Error', {positionClass:'toast-bottom-right'});
+      this.toastrService.error('invalid url','Error',{positionClass:'toast-bottom-right'});
     }
   }
-  
-  
-    register(): void {
-      if(this.emailReg && this.company && this.passwordReg && this.passwordCon){
-        if(this.passwordCon==this.passwordReg){
-          if (this.passwordReg.length>=6) {
-            if(this.emailReg.indexOf('@')!==-1 && this.emailReg.indexOf('.')){
-    
-              if(this.checked){
-    
-                this.authService.register(
-                  this.company,
-                  this.emailReg,
-                  this.passwordReg
-                )
-                  .subscribe(response => {
-                    if(!response.error) {
-                      this.emailLogin = this.emailReg;
-                      this.passwordLogin = this.passwordReg;
-                      this.loginModelFlag=false;
-                      this.login();
-                    } else {
-                      this.error = response.error;
-                      this.toastrService.error(response.error,'Error',{positionClass:'toast-bottom-right'});
-                    }
-                 });  
-              } 
-              else{
-                this.toastrService.info('You did not agree to the terms and conditions','Error',{positionClass:'toast-bottom-right'});
-              }  
-            }   
-          }
-          else{
-            this.toastrService.error('Password is too Short ','Error',{positionClass:'toast-bottom-right'});
-          }
-        }
-        else{
-          this.toastrService.error('Password does not match','Error',{positionClass:'toast-bottom-right'});
-        }
-      }
-      else{
-        this.toastrService.error('Please enter all feild','Error',{positionClass:'toast-bottom-right'});
-      }
-    }
-  
-    checkBox(enent){
-      this.counter++;
-      if(this.counter%2==1){
-        this.checked= true;
-      }
-      else{
-        this.checked=false;
-      }
-    }
+
 
 }
