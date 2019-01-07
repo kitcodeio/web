@@ -39,3 +39,7 @@ li{
 .fa-globe:hover{
     color: green;
 }
+
+.fa-link:hover{
+  color: blue;
+}

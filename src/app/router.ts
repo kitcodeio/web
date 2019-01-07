@@ -13,6 +13,7 @@ import { UserProfileComponent } from './root/user-profile/user-profile.component
 import { CategoriesComponent } from './root/categories/categories.component';
 import { CreateSectionComponent } from './root/dashboard/create-section/create-section.component';
 import { ContainersComponent } from './root/dashboard/containers/containers.component';
+import { TutorialComponent } from './root/dashboard/tutorial/tutorial.component';
 
 const routes: Routes = [
     { path: '', redirectTo: 'root/category', pathMatch: 'full'},
@@ -31,7 +32,8 @@ const routes: Routes = [
             { path: 'createCourse/:id', loadChildren: './root/dashboard/create-course/create-course.module#CreateCourseModule' },
             { path: 'category', component: CategoriesComponent },
             { path: 'createSection/:id', component: CreateSectionComponent },
-            { path: 'container', component:ContainersComponent }
+            { path: 'container', component: ContainersComponent },
+	    { path: 'tutorial', component: TutorialComponent }
 	] },
         { path: 'user/:id', component: UserProfileComponent },
         { path: 'verification_complete', loadChildren: 'src/app/verification/verification.module#VerificationModule'},

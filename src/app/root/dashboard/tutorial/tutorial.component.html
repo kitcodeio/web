@@ -1,0 +1,20 @@
+<div class="container">
+  <table class="table">
+    <thead>
+      <tr>
+        <th>Sr No.</th>
+        <th>Link</th>
+        <th>Tags</th>
+        <th>Status</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let t of tutorials; let i = index;">
+        <th>{{ i + 1}}</th>
+	<td><a target="_blank" href="{{t.link}}">{{t.link}}</a></td>
+	<td>{{t.tags}} <i style="float: right;" class="fa fa-pencil"></i></td>
+	<td><button class="btn" (click)="approve(t, i)">{{t.approved?'Dissaprove':'Approve'}}</button></td>
+      </tr>
+    </tbody>
+  </table>
+</div>
