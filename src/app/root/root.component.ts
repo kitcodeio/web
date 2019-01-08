@@ -193,7 +193,7 @@ export class RootComponent implements OnInit {
       this.interval = setInterval(loader, this.time);
       this.http.createTutorial({
         link: this.url,
-	tags: this.tags.join(',')
+	tags: this.tags.map(tag => tag.label).join(',')
       }).subscribe(res => {
         if (res.statusCode == 201) {
 	  clearInterval(this.interval);
