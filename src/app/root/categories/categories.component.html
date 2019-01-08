@@ -63,7 +63,7 @@
               <img class="img-fluid rounded-circle" [src]="uploadImgUrl" alt="">
             </div>
 	  </label>
-          <input id="old-file-input" type="file" (change)="readUrl($event, 'old')"/>
+          <input id="old-file-input" type="file" (change)="readUrl($event, 'old')" />
         </div>
         <input id="form_name" type="text" name="name" class="form-control" placeholder="Course Category"
           required="required" data-error="Firstname is required." [(ngModel)]="updateCategory.label">
@@ -78,10 +78,42 @@
             <div class="help-block with-errors"></div>
           </div>
         </div>
+        <hr>
+        <h3>Versions</h3>
+          <div class="row">
+            <div class="col-lg-3">
+              <h6>Version</h6>
+	    </div>
+            <div class="col-lg-8">
+              <h6>Command</h6>
+	    </div>
+            <div class="col-lg-1">
+	    </div>
+          </div>
+          <br>
+        <div *ngFor="let v of updateCategory.versions; let i = index;">
+          <div class="row">
+            <div class="col-lg-3">
+              <input class="form-control" [(ngModel)]="v.version" type="text" placeholder="version number">
+            </div>
+            <div class="col-lg-8">
+              <input class="form-control" [(ngModel)]="v.command" type="text" placeholder="installation command">
+            </div>
+            <div class="col-lg-1">
+              <i style="color: red;" (click)="deleteTag(v.id, i)" class="fa fa-trash hoverable"></i>
+            </div>
+          </div>
+          <br>
+        </div>
+        <button (click)="updateCategory.versions.push({category_id: updateCategory.id})"
+          class="btn">Add Version</button>
+
+
+
       </div>
       <div class="modal-footer">
         <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-	<button type="button" class="btn btn-default" (click)="update();">{{updateBtnText}}<i *ngIf="updateBtnText !== 'Update'" style="font-size: inherit;" class="fa fa-spinner fa-pulse fa-3x fa-fw"></i></button>
+        <button type="button" class="btn btn-default" (click)="update();">{{updateBtnText}}<i *ngIf="updateBtnText !== 'Update'" style="font-size: inherit;" class="fa fa-spinner fa-pulse fa-3x fa-fw"></i></button>
       </div>
     </div>
   </div>
@@ -101,7 +133,7 @@
               <img class="img-fluid rounded-circle" [src]="uploadImgUrl" alt="">
             </div>
 	  </label>
-          <input id="new-file-input" type="file" (change)="readUrl($event, 'new')"/>
+          <input id="new-file-input" type="file" (change)="readUrl($event, 'new')" />
         </div>
         <input id="form_name" type="text" name="name" class="form-control" placeholder="Course Category"
           required="required" data-error="Firstname is required." [(ngModel)]="newCategory.label">
@@ -119,7 +151,7 @@
       </div>
       <div class="modal-footer">
         <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-	<button type="button" class="btn btn-default" (click)="addCategory();">{{saveBtnText}}<i *ngIf="saveBtnText !== 'Save'" style="font-size: inherit;" class="fa fa-spinner fa-pulse fa-3x fa-fw"></i></button>
+        <button type="button" class="btn btn-default" (click)="addCategory();">{{saveBtnText}}<i *ngIf="saveBtnText !== 'Save'" style="font-size: inherit;" class="fa fa-spinner fa-pulse fa-3x fa-fw"></i></button>
       </div>
     </div>
   </div>

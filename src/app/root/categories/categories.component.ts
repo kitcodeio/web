@@ -55,9 +55,13 @@ export class CategoriesComponent implements OnInit {
   populateCatgory(){
     this.http.getcategory('CourseCategory').subscribe(res=>{
       this.allCourseCategory = res.entity;
-      console.log(res);
-    })
+    });
   }
+
+  deleteTag(id, i): void {
+    this.updateCategory.versions.splice(i,1);
+    this.http.deleteData('CategoryVersion', id);
+  };
 
   deleteCategory(){
     this.http.deleteData('CourseCategory',this.deletedCategoryId)
@@ -76,22 +80,33 @@ export class CategoriesComponent implements OnInit {
   }
 
   async update() {
+    let count = 0;
+    let self = this;
+    let done = (res) => {
+        self.toastrService.success('update successful','Successs',{positionClass:'toast-bottom-right'});
+        self.populateCatgory();
+        self.updateCategory = {};
+	self.updateBtnText = 'Update';
+	$('.modal').modal('hide');
+        self.uploadImgUrl = "/assets/images/upload.png";
+    };
     this.updateBtnText = 'Updating';
+    this.http.postCourse('CategoryVersion', this.updateCategory.versions).subscribe(res => {
+      count++;
+      if(count == 2) done(res);
+    });
     if (this.updateCategory.logo !== this.uploadImgUrl) this.updateCategory.logo = await this.uploadImage(this.updateCategory.logo);
     this.http.putData('CourseCategory',{
       id: this.updateCategory.id,
       data: this.updateCategory
     }).subscribe(res=>{
+      count++;
       if(res.statusCode===200){
-        this.toastrService.success(res.message,'Successs',{positionClass:'toast-bottom-right'});
-        this.populateCatgory();
-        this.updateCategory = {};
-	this.updateBtnText = 'Update';
-	$('.modal').modal('hide');
-        this.uploadImgUrl = "/assets/images/upload.png";
+        if (count == 2) done(res);
       }
       else{
         if(res.error.message !== "nothing was updated" ) this.toastrService.error(res.error,'Error',{positionClass:'toast-bottom-right'});
+        else if (count == 2) done(res);
       }
     })
   }
@@ -138,9 +153,5 @@ export class CategoriesComponent implements OnInit {
       reader.readAsDataURL(event.target.files[0]);
     }
   }
-
-
-
-
 
 }

@@ -129,9 +129,9 @@ export class CreateCourseComponent implements OnInit {
   addCourse(){
     this.http.postCourse('Course',{
       "category_id": this.categoryId,
-	    "label":this.courseName,
-	    "description":this.courseDescription,
-	    "created_by": this.createdBy,
+      "label":this.courseName,
+      "description":this.courseDescription,
+      "created_by": this.createdBy,
       "image_id":this.imageName.nativeElement.value,
       "price":this.course_price,
       "discount":this.course_discount

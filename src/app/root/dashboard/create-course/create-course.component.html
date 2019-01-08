@@ -1,134 +1,149 @@
 <body style="background:#f5f5f5; margin-left: 4%;">
 
-        <div id="wrapper">
-            <!-- Page Content -->
-            <div id="page-content-wrapper">
-              <div>
-                  <button style="background-color: transparent; border: 1px solid #72d5a4; color: #72d5a4; margin-left: 1%; cursor: pointer;" class="btn create-image-button float-left" routerLink="/root/dashboard/category"><i class="fa fa-arrow-left" aria-hidden="true"></i>
+  <div id="wrapper">
+    <!-- Page Content -->
+    <div id="page-content-wrapper">
+      <div>
+        <button style="background-color: transparent; border: 1px solid #72d5a4; color: #72d5a4; margin-left: 1%; cursor: pointer;"
+          class="btn create-image-button float-left" routerLink="/root/dashboard/category"><i class="fa fa-arrow-left" aria-hidden="true"></i>
                     Back</button>
-                  <button (click)="test();" style="background-color: transparent; border: 1px solid #72d5a4; color: #72d5a4; margin-right: 1%; cursor: pointer;" class="btn create-image-button float-right" data-toggle="modal" data-target="#bootstrapModelAdd"><i class="fa fa-plus" aria-hidden="true"></i> Course</button>
-              </div>
-              <br>
-                <div class="container-fluid">
-                    <!-- <a href="#menu-toggle" class="btn btn-secondary d-sm-none d-lg-none d-md-none" id="menu-toggle">Toggle Menu</a>
+        <button (click)="test();" style="background-color: transparent; border: 1px solid #72d5a4; color: #72d5a4; margin-right: 1%; cursor: pointer;"
+          class="btn create-image-button float-right" data-toggle="modal" data-target="#bootstrapModelAdd"><i class="fa fa-plus" aria-hidden="true"></i> Course</button>
+      </div>
+      <br>
+      <div class="container-fluid">
+        <!-- <a href="#menu-toggle" class="btn btn-secondary d-sm-none d-lg-none d-md-none" id="menu-toggle">Toggle Menu</a>
                     <button class="buttons-top">Hot</button>&nbsp;&nbsp;&nbsp;<button class="buttons-top">Trending</button> -->
-                    
-                    <!-- <app-loadiing *ngIf="loading"></app-loadiing> -->
-                    <div id="bootstrapModel" class="modal fade" role="dialog">
-                            <div class="modal-dialog">
-                              <!-- Modal content-->
-                              <div class="modal-content">
-                                <div class="modal-header">
-                                </div>
-                                <h6 class="modal-title" style="margin-left: 16px;">Are you sure delete the course ?</h6>
-                          <!-- model body section -->
-                                <div class="modal-body">
-                                  <br>
-                                </div>
-                                <div class="modal-footer">
-                                    <button type="button" class="btn btn-primary" data-dismiss="modal">cancel</button>
-                                  <button type="button" class="btn btn-primary" data-dismiss="modal"  (click)="deleteCourse();">ok</button>
-                                </div>
-                              </div>
-                            </div>
-                          </div>
 
-                    <div id="bootstrapModel1" class="modal fade" role="dialog">
-                            <div class="modal-dialog">
-                              <!-- Modal content-->
-                              <div class="modal-content">
-                                <div class="modal-header">
-                                </div>
-                                <h5 class="modal-title" style="margin-left: 16px;">Update course</h5>
-                                <!-- model body section -->
-                                <div class="modal-body">
-                                  <input id="form_name" type="text" name="courseName" class="form-control" placeholder="Course Name" required="required" data-error="Firstname is required." [(ngModel)]="course.label">
-                                  <br>
-                                  <textarea id="form_name" type="text" name="courseDes" class="form-control" placeholder="Course description" required="required" data-error="Firstname is required." [(ngModel)]="course.description"></textarea>
-                                  <br>
-                                  <input id="form_name" type="text" name="createdBy" class="form-control" placeholder="Created by" required="required" data-error="Firstname is required." [(ngModel)]="course.created_by">
-                                  <br>
-                                  <input id="form_name" type="text" name="price" class="form-control" placeholder="price" required="required" data-error="Firstname is required." [(ngModel)]="course.price">
-                                  <br>
-                                  <input id="form_name" type="text" name="discount" class="form-control" placeholder="discount" required="required" data-error="Firstname is required." [(ngModel)]="course.discount">
-                                  <br>
-                                  <div class="col-md-12">
-                                    <div class="form-group">
-                                      <select id="country" name="country" #cat [(ngModel)]="course.category_id">
+        <!-- <app-loadiing *ngIf="loading"></app-loadiing> -->
+        <div id="bootstrapModel" class="modal fade" role="dialog">
+          <div class="modal-dialog">
+            <!-- Modal content-->
+            <div class="modal-content">
+              <div class="modal-header">
+              </div>
+              <h6 class="modal-title" style="margin-left: 16px;">Are you sure delete the course ?</h6>
+              <!-- model body section -->
+              <div class="modal-body">
+                <br>
+              </div>
+              <div class="modal-footer">
+                <button type="button" class="btn btn-primary" data-dismiss="modal">cancel</button>
+                <button type="button" class="btn btn-primary" data-dismiss="modal" (click)="deleteCourse();">ok</button>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div id="bootstrapModel1" class="modal fade" role="dialog">
+          <div class="modal-dialog">
+            <!-- Modal content-->
+            <div class="modal-content">
+              <div class="modal-header">
+              </div>
+              <h5 class="modal-title" style="margin-left: 16px;">Update course</h5>
+              <!-- model body section -->
+              <div class="modal-body">
+                <input id="form_name" type="text" name="courseName" class="form-control" placeholder="Course Name"
+                  required="required" data-error="Firstname is required." [(ngModel)]="course.label">
+                <br>
+                <textarea id="form_name" type="text" name="courseDes" class="form-control" placeholder="Course description"
+                  required="required" data-error="Firstname is required." [(ngModel)]="course.description"></textarea>
+                <br>
+                <input id="form_name" type="text" name="createdBy" class="form-control" placeholder="Created by"
+                  required="required" data-error="Firstname is required." [(ngModel)]="course.created_by">
+                <br>
+                <input id="form_name" type="text" name="price" class="form-control" placeholder="price"
+                  required="required" data-error="Firstname is required." [(ngModel)]="course.price">
+                <br>
+                <input id="form_name" type="text" name="discount" class="form-control" placeholder="discount"
+                  required="required" data-error="Firstname is required." [(ngModel)]="course.discount">
+                <br>
+                <div class="col-md-12">
+                  <div class="form-group">
+                    <select id="country" name="country" #cat [(ngModel)]="course.category_id">
                                         <option *ngFor="let cat of allCourseCategory" [value]="cat.id">{{cat.label}}</option>
-                                      </select> 
-                                      <div class="help-block with-errors"></div>
-                                    </div>
-                                  </div>
-                                </div>
-                                <div class="modal-footer">
-                                  <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-                                  <button type="button" class="btn btn-primary" data-dismiss="modal" (click)="updateCourse();">Update</button>
-                                </div>
-                              </div>
-                            </div>
-                          </div>
-                          <div id="bootstrapModelAdd" class="modal fade" role="dialog">
-                              <div class="modal-dialog">
-                                <!-- Modal content-->
-                                <div class="modal-content">
-                                  <div class="modal-header">
-                                  </div>
-                                  <h5 class="modal-title" style="margin-left: 16px;">Add course</h5>
-                                  <!-- model body section -->
-                                  <div class="modal-body">
-                                    <input id="form_name" type="text" name="courseName" class="form-control" placeholder="Course Name" required="required" data-error="Firstname is required." [(ngModel)]="courseName">
-                                    <br>
-                                    <textarea id="form_name" type="text" name="courseDes" class="form-control" placeholder="Course description" required="required" data-error="Firstname is required." [(ngModel)]="courseDescription">courseDes</textarea>
-                                    <br>
-                                    <input id="form_name" type="text" name="createdBy" class="form-control" placeholder="Created by" required="required" data-error="Firstname is required." [(ngModel)]="createdBy">
-                                    <br>
-                                    <input id="form_name" type="text" name="price" class="form-control" placeholder="Course price" required="required" data-error="Firstname is required." [(ngModel)]="course_price">
-                                    <br>
-                                    <input id="form_name" type="text" name="discount" class="form-control" placeholder="Course discount in percentage" required="required" data-error="Firstname is required." [(ngModel)]="course_discount">
-                                    <br>
-                                    <div class="col-md-12">
-                                        <div class="form-group">
-                                          <select id="country" name="country" #image>
+                                      </select>
+                    <div class="help-block with-errors"></div>
+                  </div>
+                </div>
+              </div>
+              <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                <button type="button" class="btn btn-primary" data-dismiss="modal" (click)="updateCourse();">Update</button>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div id="bootstrapModelAdd" class="modal fade" role="dialog">
+          <div class="modal-dialog">
+            <!-- Modal content-->
+            <div class="modal-content">
+              <div class="modal-header">
+              </div>
+              <h5 class="modal-title" style="margin-left: 16px;">Add course</h5>
+              <!-- model body section -->
+              <div class="modal-body">
+                <input id="form_name" type="text" name="courseName" class="form-control" placeholder="Course Name"
+                  required="required" data-error="Firstname is required." [(ngModel)]="courseName">
+                <br>
+                <textarea id="form_name" type="text" name="courseDes" class="form-control" placeholder="Course description"
+                  required="required" data-error="Firstname is required." [(ngModel)]="courseDescription">courseDes</textarea>
+                <br>
+                <input id="form_name" type="text" name="createdBy" class="form-control" placeholder="Created by"
+                  required="required" data-error="Firstname is required." [(ngModel)]="createdBy">
+                <br>
+                <input id="form_name" type="text" name="price" class="form-control" placeholder="Course price"
+                  required="required" data-error="Firstname is required." [(ngModel)]="course_price">
+                <br>
+                <input id="form_name" type="text" name="discount" class="form-control" placeholder="Course discount in percentage"
+                  required="required" data-error="Firstname is required." [(ngModel)]="course_discount">
+                <br>
+                <div class="col-md-12">
+                  <div class="form-group">
+                    <select id="country" name="country" #image>
                                             <option *ngFor="let image of allImages" [value]="image.id">{{image.label}}</option>
-                                          </select> 
-                                          <div class="help-block with-errors"></div>
-                                        </div>
-                                      </div>
-                                  </div>
-                                  <div class="modal-footer">
-                                    <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-                                    <button type="button" class="btn btn-primary" data-dismiss="modal" (click)="addCourse();">Add</button>
-                                  </div>
-                                </div>
-                              </div>
-                            </div>
-                          <div class="row">
-                            <div class="col-md-4" *ngFor="let c of allCourses; let i=index;">
-                                      <div class="card" style="border:none;">
-                                        <div class="card-header" style="background:transparent;border: none;">
-                                          <a title="{{c.label}}" class="ellipsis" routerLink="/root/dashboard/createSection/{{c.id}}"><span class="glyphicon glyphicon-log-in"></span><span style="font-size:25px;">{{c.label}}</span></a>
-                                          <p class="mb-0 float-right" style="color:#ccc; font-size:14px;">Updated at {{c.updatedAt | date: 'dd MMM yyyy'}}</p>
-                                          <p class="mb-0" style="color:#ccc; font-size: 14px;">Created by <span style="color:#000; font-size: 14px;">{{c.created_by}}</span></p>
-                                          <button (click)="setDeleteCourseId(c.id,i)" class="float-right" style="border: none; background-color: transparent; cursor: pointer;" *ngIf="user" data-toggle="modal" data-target="#bootstrapModel">
+                                          </select>
+                    <div class="help-block with-errors"></div>
+                  </div>
+                </div>
+              </div>
+              <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                <button type="button" class="btn btn-primary" data-dismiss="modal" (click)="addCourse();">Add</button>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-md-4" *ngFor="let c of allCourses; let i=index;">
+            <div class="card" style="border:none;">
+              <div class="card-header" style="background:transparent;border: none;">
+                <a title="{{c.label}}" class="ellipsis" routerLink="/root/dashboard/createSection/{{c.id}}"><span class="glyphicon glyphicon-log-in"></span><span style="font-size:25px;">{{c.label}}</span></a>
+                <p class="mb-0 float-right" style="color:#ccc; font-size:14px;">Updated at {{c.updatedAt | date: 'dd MMM yyyy'}}</p>
+                <p class="mb-0" style="color:#ccc; font-size: 14px;">Created by <span style="color:#000; font-size: 14px;">{{c.created_by}}</span></p>
+                <button (click)="setDeleteCourseId(c.id,i)" class="float-right" style="border: none; background-color: transparent; cursor: pointer;"
+                  *ngIf="user" data-toggle="modal" data-target="#bootstrapModel">
                                             <i class="fa fa-trash" aria-hidden="true" style="color: rgb(235, 102, 102)"></i>
                                         </button>
-                                        <button data-toggle="modal" data-target="#bootstrapModel1" class="float-right" style="border: none; background-color: transparent; cursor: pointer;" (click)="setUpdateCourse(c,i);" *ngIf="user"><i class="fa fa-pencil" aria-hidden="true" style="color: #74d886"></i></button>
-                                      </div>
-                                        <!-- <div class="card-body"> 
+                <button data-toggle="modal" data-target="#bootstrapModel1" class="float-right"
+                  style="border: none; background-color: transparent; cursor: pointer;"
+                  (click)="setUpdateCourse(c,i);" *ngIf="user"><i class="fa fa-pencil" aria-hidden="true" style="color: #74d886"></i></button>
+              </div>
+              <!-- <div class="card-body"> 
                                           <p class="card-text" style="color:#827c7c; font-size: 14px;">
                                               {{c.description}}</p>
                                         </div> -->
-                                        <!-- <div class="card-footer text-muted" style="background-color:transparent;">
+              <!-- <div class="card-footer text-muted" style="background-color:transparent;">
                                           <a href="#" style="color:#ccc; font-size: 14px;" class=""><i class="fa fa-eye" aria-hidden="true"></i> 5 Views</a>&nbsp;&nbsp;&nbsp;
                                           <a href="#" style="color:#ccc; font-size: 14px;" class=""><i class="fa fa-comment-o" aria-hidden="true"></i> 2 Comments</a>
                                         </div> -->
-                                  </div>
-                                  <br>
-                          </div>
-                        </div>
-                </div>
             </div>
-            <!-- /#page-content-wrapper -->
+            <br>
+          </div>
         </div>
-    </body>
+      </div>
+    </div>
+    <!-- /#page-content-wrapper -->
+  </div>
+</body>
