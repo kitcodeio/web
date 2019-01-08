@@ -21,6 +21,7 @@ export class RootComponent implements OnInit {
   @ViewChild('searchResult') searchResult: ElementRef;
   courses: Observable<any[]>;
   private searchTerms = new Subject<string>();
+  private searchCategory = new Subject<any>();
 
   showForm: boolean = false;
   userName:string;
@@ -39,19 +40,30 @@ export class RootComponent implements OnInit {
   loginModelFlag: boolean =true;
 
   url:string;
-  tags:string;
+  tag: string;
+  tags = [];
   progress: number;
   loader: Function;
   interval: any;
   time: number;
   noRes: boolean;
   btnTxt: string = "Submit Course/Tutorial";
+  categories: any;
+  showLoader: boolean = false;
 
   constructor(private toastrService: ToastrService, private http: HttpService, private eRef: ElementRef, private router: Router, private userInfo: UserInfoService, private authService: AuthserviceService) {}
 
   //Method for search next string
   search(term: string): void {
     this.searchTerms.next(term);
+  }
+
+  searchtags(term: string): void {
+    if (term) if (term.length) {
+      this.searchCategory.next(term);
+      $('.search-box').show();
+      this.showLoader = true;
+    }
   }
 
   ngOnInit() {
@@ -71,6 +83,11 @@ export class RootComponent implements OnInit {
       distinctUntilChanged(),
       switchMap((term: string) => this.http.searchCourse(term))
     );
+    this.searchCategory.pipe(
+      debounceTime(100),
+      distinctUntilChanged(),
+      switchMap((term: string) => this.http.searchCourse(term, 'CourseCategory'))
+    ).subscribe(res => {this.categories = res; this.showLoader = false;});
   }
 
   logout(): void {
@@ -89,6 +106,7 @@ export class RootComponent implements OnInit {
   @HostListener('document:click', ['$event'])
   clickout(event) {
     try{
+    $('.search-box').hide();
     if(this.dd.nativeElement.contains(event.target)) $('.dropdown-menu').css("display","inline");
     else $('.dropdown-menu').hide();
 
@@ -98,10 +116,17 @@ export class RootComponent implements OnInit {
     catch(err){}
   }
 
-  
+
+  @HostListener('document:keyup', ['$event'])
+  keyout(event) {
+	  if(event.keyCode == 27) {
+		  $('.search-box').hide();
+		  this.showLoader = false;
+	  }
+  }
 
   //Event trigger when add or remove letters in search bar
-  onSearchChange(searchValue : string ) {  
+  onSearchChange(searchValue : string, from?:string ) {  
     if(searchValue==''){
       $('.search-result').hide();
     }
@@ -110,8 +135,14 @@ export class RootComponent implements OnInit {
     }
   }
 
-  hideOnClick(){
+  hideOnClick(label?:string){
     $('.search-result').hide();
+    $('.search-box').hide();
+    if(label) { 
+      this.tags.push(label);
+      this.tag = '';
+      this.showLoader = false;
+    }
   }
 
   toggleCourseForm(): any {
@@ -119,7 +150,14 @@ export class RootComponent implements OnInit {
     this.showForm = !this.showForm;
     this.btnTxt =  "Submit Course/Tutorial";
     this.url = '';
-    this.tags = '';
+    this.tags = [];
+    this.tag = '';
+    this.categories = [];
+    this.showLoader = false;
+  }
+
+  popTag(index: number): void {
+    this.tags.splice(index,  1);
   }
 
   resetBtn(): void {
@@ -137,14 +175,17 @@ export class RootComponent implements OnInit {
       } else if (self.progress >= 100) {
 	self.btnTxt = 'Saved';
 	self.url = "";
-	self.tags = "";
+	self.tags = [];
+        self.tag = '';
 	self.progress = 0;
-        return clearInterval(self.interval)
+	self.categories = [];
+        self.showLoader = false;
+	return clearInterval(self.interval)
       };
       self.progress = self.progress + 1;
       $('#myBar').css("width", self.progress + '%');
     };
-    if (regex.test(this.url)) {
+    if (regex.test(this.url) && this.tags.length) {
       this.btnTxt = "Saving";
       this.progress = 1;
       this.time = 10;
@@ -152,7 +193,7 @@ export class RootComponent implements OnInit {
       this.interval = setInterval(loader, this.time);
       this.http.createTutorial({
         link: this.url,
-	tags: this.tags
+	tags: this.tags.join(',')
       }).subscribe(res => {
         if (res.statusCode == 201) {
 	  clearInterval(this.interval);
@@ -161,7 +202,7 @@ export class RootComponent implements OnInit {
 	}
       });
     } else {
-      this.toastrService.error('invalid url','Error',{positionClass:'toast-bottom-right'});
+      this.toastrService.error('invalid url or no tags added','Error',{positionClass:'toast-bottom-right'});
     }
   }
 

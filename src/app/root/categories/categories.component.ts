@@ -55,6 +55,7 @@ export class CategoriesComponent implements OnInit {
   populateCatgory(){
     this.http.getcategory('CourseCategory').subscribe(res=>{
       this.allCourseCategory = res.entity;
+      console.log(res);
     })
   }
 
@@ -96,8 +97,7 @@ export class CategoriesComponent implements OnInit {
   }
 
   async addCategory(){
-
-      this.saveBtnText = 'Saving';
+    this.saveBtnText = 'Saving';
     if (this.newCategory.logo && this.newCategory.label) {
       this.saveBtnText = 'Saving';
       this.newCategory.logo = await this.uploadImage(this.newCategory.logo);

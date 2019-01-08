@@ -57,9 +57,25 @@
         Thanks! Your submission will be reviewed shortly. Submit another?
       </div>
       <p class="form-subheading">Paste the Course/Tutorial link below:</p>
-      <input [(ngModel)]="url" (click)="resetBtn()" class="form-control" type="text" placeholder="Insert course/tutorial link here">
+      <input [(ngModel)]="url" (click)="resetBtn()" class="form-control" type="text"
+        placeholder="Insert course/tutorial link here">
       <br>
-      <input [(ngModel)]="tags" class="form-control form-control-sm" id="tags" placeholder="insert tags here. eg. node, angular6, mysql">
+      <div class="inputholder">
+        <input autocomplete="off" [(ngModel)]="tag" (keyup)="searchtags(tag)" class="tag-input"
+          id="tags" placeholder="insert tags here">
+        <i class="fa fa-spinner fa-pulse fa-3x fa-fw" *ngIf="showLoader" style="float: right; font-size: xx-large;"></i>
+      </div>
+      <ul class="search-box">
+        <li *ngFor="let tag of categories">
+          <a type="click" (click)="hideOnClick(tag);">
+                    {{tag.label}}
+            </a>
+        </li>
+      </ul>
+      <br>
+      <div class="tags-holder">
+        tags: <span *ngFor="let tag of tags; let i = index" class="tag hoverable" (click)="popTag(i)">{{tag.label}}</span>
+      </div>
       <br>
       <!-- <ngx-multiselect [(ngModel)]="model" [options]="tags" [displayName]="'name'" [trackBy]="'id'" [multiple]="true"></ngx-multiselect> -->
       <button class="btn submit-button" (click)="submitCourse()">{{btnTxt}} <i *ngIf="btnTxt=='Saving'" style="font-size: inherit;" class="fa fa-spinner fa-pulse fa-3x fa-fw"></i></button>

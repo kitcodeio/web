@@ -80,9 +80,8 @@ export class HttpService {
     .pipe(catchError((error)=>{return of(error);}));
   }
 
-  searchCourse(term: string):Observable<any> {
-    
-    return this.http.get(this.url.baseUrl+'search/course/Course?term='+term)
+  searchCourse(term: string, model?:string):Observable<any> {
+    return this.http.get(this.url.baseUrl+'search/course/'+(model?model:'Course')+'?term='+term)
     .pipe(catchError((error)=>{return of(error);}));
   }
   
