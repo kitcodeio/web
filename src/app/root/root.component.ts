@@ -39,6 +39,7 @@ export class RootComponent implements OnInit {
   windowSize;
   loginModelFlag: boolean =true;
 
+  name: string;
   url:string;
   tag: string;
   tags = [];
@@ -185,13 +186,14 @@ export class RootComponent implements OnInit {
       self.progress = self.progress + 1;
       $('#myBar').css("width", self.progress + '%');
     };
-    if (regex.test(this.url) && this.tags.length) {
+    if (regex.test(this.url) && this.tags.length && this.name) {
       this.btnTxt = "Saving";
       this.progress = 1;
       this.time = 10;
       this.noRes = true;
       this.interval = setInterval(loader, this.time);
       this.http.createTutorial({
+        name: this.name,
         link: this.url,
 	tags: this.tags.map(tag => tag.label).join(',')
       }).subscribe(res => {

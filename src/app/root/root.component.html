@@ -57,6 +57,9 @@
         Thanks! Your submission will be reviewed shortly. Submit another?
       </div>
       <p class="form-subheading">Paste the Course/Tutorial link below:</p>
+      <input [(ngModel)]="name" (click)="resetBtn()" class="form-control" type="text"
+        placeholder="Insert course/tutorial name here">
+      <br>
       <input [(ngModel)]="url" (click)="resetBtn()" class="form-control" type="text"
         placeholder="Insert course/tutorial link here">
       <br>
@@ -74,7 +77,7 @@
       </ul>
       <br>
       <div class="tags-holder">
-        tags: <span *ngFor="let tag of tags; let i = index" class="tag hoverable" (click)="popTag(i)">{{tag.label}}</span>
+        <span *ngFor="let tag of tags; let i = index" class="tag hoverable" (click)="popTag(i)">{{tag.label}}</span>
       </div>
       <br>
       <!-- <ngx-multiselect [(ngModel)]="model" [options]="tags" [displayName]="'name'" [trackBy]="'id'" [multiple]="true"></ngx-multiselect> -->
