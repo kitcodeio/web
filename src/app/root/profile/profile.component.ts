@@ -34,8 +34,10 @@ export class ProfileComponent implements OnInit, OnDestroy {
   youtubeVideo:boolean;
   loadingButton:boolean;
   loadIde:boolean;
-  container_id: any;
+  image_id: any;
   isActive: boolean;
+  allContainers: any[];
+  container_id;
 
   max() {
     this.maxFlag = true;
@@ -68,12 +70,16 @@ export class ProfileComponent implements OnInit, OnDestroy {
     this.route.params.subscribe(params => {
       this.course_id = params.course;
       this.http.getCourseSection('CourseChapter', params.section).subscribe((res) => {
-        this.chapters = res.entity;
-        this.videos = this.chapters;
-        this.chapter = params.chapter;
-        this.youtubeUrl = this.domSanitizer.bypassSecurityTrustResourceUrl(this.chapters[params.chapter].url);
+	      console.log(res);
+	      this.allContainers = res.entity.Image.Containers;
+	      this.image_id = res.entity.image_id;
+	      this.title = res.entity.label;
+	      //this.chapters = res.entity;
+	      //this.videos = this.chapters;
+	      //this.chapter = params.chapter;
+        this.youtubeUrl = this.domSanitizer.bypassSecurityTrustResourceUrl(res.entity.link);
         this.youtubeVideo = this.youtubeUrl.changingThisBreaksApplicationSecurity.includes('youtube');
-      });
+	      });
     });
     this.user = this.authService.getUserData();
   }
@@ -93,13 +99,13 @@ export class ProfileComponent implements OnInit, OnDestroy {
     if(this.isActive) this.socket.emit('kide:closed');
   }
 
-  startContainer(): void {
+  startContainer(id): void {
     let self = this;
     this.loadindScreen = true;
     $('.loading').css("height", $(document).height());
     this.loadingButton = false;
     this.loadIde = true;
-    this.http.getContainer(this.course_id).subscribe(res => {
+    this.http.runContainer(id).subscribe(res => {
       if (res.statusCode == 200) {
 	this.container_id = res.entity.container_id;
 	this.loadIde = true;

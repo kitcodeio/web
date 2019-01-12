@@ -131,10 +131,13 @@ export class CoursesComponent implements OnInit {
   }
 
   getCourseId(course){
+	  /*
     this.populateSection(course.id);
     this.getCourse(course.id);
     this.course_id = course.id;
     this.popup=true
+           */
+    this.toProfile(course.id, 1);
   }
 
   subscribe(): void{
@@ -154,9 +157,7 @@ export class CoursesComponent implements OnInit {
   }
 
   toProfile(s_id, c_index){
-    if (this.courseDetail.status == 'purchased')
-      this.router.navigate(['/root/kide/'+this.course_id+'/'+s_id+'/'+c_index]);
-    else alert('Subscribe the course first');
+    this.router.navigate(['/root/kide/'+this.course_id+'/'+s_id+'/'+c_index]);
   }
 
   highlight(id: string): void {
