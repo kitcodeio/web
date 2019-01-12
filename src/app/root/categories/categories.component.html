@@ -68,29 +68,36 @@
         <input id="form_name" type="text" name="name" class="form-control" placeholder="Course Category"
           required="required" data-error="Firstname is required." [(ngModel)]="updateCategory.label">
         <br>
-        <div class="col-md-12">
-          <div class="form-group">
+
+        <div class="row">
+          <div class="col-lg-6">
             <label>Visibility</label> &nbsp;
             <select [(ngModel)]="updateCategory.visibility">
-                  <option [value]="true">true</option>
-                  <option [value]="false">false</option>
-                </select>
-            <div class="help-block with-errors"></div>
+              <option [value]="true">true</option>
+              <option [value]="false">false</option>
+            </select>
+          </div>
+          <div class="col-lg-6">
+            <label>Parent</label> &nbsp;
+            <select [(ngModel)]="updateCategory.parent_id">
+              <option [value]="null">null</option>
+	      <option *ngFor="let cat of allCourseCategory" [disabled]="cat.id == updateCategory.id" [value]="cat.id">{{cat.label}}</option>
+            </select>
           </div>
         </div>
         <hr>
         <h3>Versions</h3>
-          <div class="row">
-            <div class="col-lg-3">
-              <h6>Version</h6>
-	    </div>
-            <div class="col-lg-8">
-              <h6>Command</h6>
-	    </div>
-            <div class="col-lg-1">
-	    </div>
+        <div class="row">
+          <div class="col-lg-3">
+            <h6>Version</h6>
           </div>
-          <br>
+          <div class="col-lg-8">
+            <h6>Command</h6>
+          </div>
+          <div class="col-lg-1">
+          </div>
+        </div>
+        <br>
         <div *ngFor="let v of updateCategory.versions; let i = index;">
           <div class="row">
             <div class="col-lg-3">
@@ -138,14 +145,20 @@
         <input id="form_name" type="text" name="name" class="form-control" placeholder="Course Category"
           required="required" data-error="Firstname is required." [(ngModel)]="newCategory.label">
         <br>
-        <div class="col-md-12">
-          <div class="form-group">
+        <div class="row">
+          <div class="col-lg-6">
             <label>Visibility</label> &nbsp;
             <select [(ngModel)]="newCategory.visibility">
-                  <option [value]="true">true</option>
-                  <option [value]="false">false</option>
-                </select>
-            <div class="help-block with-errors"></div>
+              <option [value]="true">true</option>
+              <option [value]="false">false</option>
+            </select>
+          </div>
+          <div class="col-lg-6">
+            <label>Parent</label> &nbsp;
+            <select [(ngModel)]="newCategory.parent_id">
+              <option [value]="null">null</option>
+	      <option *ngFor="let cat of allCourseCategory" [disabled]="cat.id == updateCategory.id" [value]="cat.id">{{cat.label}}</option>
+            </select>
           </div>
         </div>
       </div>

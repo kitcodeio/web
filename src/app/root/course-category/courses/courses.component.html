@@ -1,122 +1,137 @@
 <body style="background:#f5f5f5;">
-        <div id="wrapper">
-            <!-- Page Content -->
-            <div id="page-content-wrapper">
-                <div class="container-fluid">
-                    <!-- <app-loadiing *ngIf="loading"></app-loadiing> -->
-                    <div class="course_list">
-                        <!-- <h2 *ngIf="allCourses.length == 0">The Category is empty</h2> -->
-                        <ul class="mt-4" style="list-style-type:none;padding-left:0;">
-                            <li class="mb-4" *ngFor="let c of allCourses; let i=index;">
-                                <div class="card" style="border:none;">
-                                  <div class="card-header" style="background:transparent;border: none;">
-                                      <a href="#DemoModal2" data-toggle="modal" (click)="getCourseId(c)"><span class="glyphicon glyphicon-log-in"></span><span style="font-size:25px;">{{c.label}}</span></a>
-                                    <p class="mb-0 float-right" style="color:#ccc; font-size:14px;">Updated at {{c.updatedAt | date: 'dd MMM yyyy'}}</p>
-                                    <p class="mb-0" style="color:#ccc; font-size: 14px;">Created by <span style="color:#000; font-size: 14px;">{{c.created_by}}</span></p>
-                                    
-                                     <!-- Modal content-->
- 
-                                </div>
-                                  <div class="card-body">
+  <div id="wrapper">
+    <!-- Page Content -->
+    <div id="page-content-wrapper">
+      <div class="container-fluid">
+        <!-- <app-loadiing *ngIf="loading"></app-loadiing> -->
+        <div class="course_list">
+          <!-- <h2 *ngIf="allCourses.length == 0">The Category is empty</h2> -->
+          <ul class="mt-4" style="list-style-type:none;padding-left:0;">
+            <li class="mb-4" *ngFor="let c of allCourses; let i=index;">
+              <div class="card" style="border:none;">
+                <div class="card-header" style="background:transparent;border: none;">
+                  <a href="#DemoModal2" data-toggle="modal" (click)="getCourseId(c)"><span class="glyphicon glyphicon-log-in"></span><span style="font-size:25px;">{{c.label}}</span></a>
+                  <p class="mb-0 float-right" style="color:#ccc; font-size:14px;">Updated at {{c.updatedAt | date: 'dd MMM yyyy'}}</p>
+                  <p class="mb-0" style="color:#ccc; font-size: 14px;">Created by <span style="color:#000; font-size: 14px;">{{c.created_by}}</span></p>
+
+
+                </div>
+                <div class="card-body">
+                  <!--
                                       <i *ngIf="c.discount!==0 && c.discount!==100" class="fa fa-inr float-right" aria-hidden="true" style="color: rgb(8, 187, 67);">{{c.price - c.price*c.discount/100  | number: '1.0-0'}}</i>
                                       <i *ngIf="c.discount===0 && c.discount!==100" class="fa fa-inr float-right" aria-hidden="true" style="color: rgb(8, 187, 67);">{{c.price}}</i>
                                       <i *ngIf="c.discount===100 && c.discount!==0" class="float-right" aria-hidden="true" style="color: rgb(8, 187, 67); font-style:inherit; margin-top: -5px;">Free</i>
                                       <i *ngIf="c.discount!==0" class="fa fa-inr float-right" aria-hidden="true" style="color: #ff5e2f; text-decoration: line-through; font-size: 14px;margin-right: 1%">{{c.price}}</i>&nbsp; &nbsp; &nbsp;
-                                        <p class="card-text" style="color:#827c7c; font-size: 14px;">
-                                        {{c.description}}</p>
-                                  </div>
-                                  <!-- <div class="card-footer text-muted" style="background-color:transparent;">
+                                        
+				      -->
+                  <p class="card-text" style="color:#827c7c; font-size: 14px;">
+                    {{c.description}}</p>
+                </div>
+                <!-- <div class="card-footer text-muted" style="background-color:transparent;">
                                     <a href="#" style="color:#ccc; font-size: 14px;" class=""><i class="fa fa-eye" aria-hidden="true"></i> 5 Views</a>&nbsp;&nbsp;&nbsp;
                                     <a href="#" style="color:#ccc; font-size: 14px;" class=""><i class="fa fa-comment-o" aria-hidden="true"></i> 2 Comments</a>
                                   </div> -->
-                                </div>
-                            </li>
-                        </ul>
-                    </div>
-                </div>
-            </div>
-            <!-- /#page-content-wrapper -->
-    
+              </div>
+            </li>
+          </ul>
         </div>
-    </body>
-        <!-- Modal Contents -->
-            <div id="DemoModal2" class="modal fade "> <!-- class modal and fade -->
-              
-            <div class="modal-dialog modal-lg">
-                <div class="modal-content">
-                  
-                   <div class="modal-header"> <!-- modal header -->
-                    <button type="button" class="close" 
-                     data-dismiss="modal" aria-hidden="true">×</button>
-                   </div>
-             
-             <div class="modal-body"> <!-- modal body -->
-              <body style="background:#f5f5f5;">
-                  <div id="wrapper">
-                      <!-- Page Content -->
-                      <div id="page-content-wrapper">
-                          <div class="container-fluid">
-                              <a href="#menu-toggle" class="btn btn-secondary d-sm-none d-lg-none d-md-none" id="menu-toggle">Toggle Menu</a>
-                              <!--<button class="buttons-top">Hot</button>&nbsp;&nbsp;&nbsp;<button class="buttons-top">Trending</button> -->
-                              <!-- <app-loadiing *ngIf="!allSections"></app-loadiing> -->
-          
-                              <div class="course_detail" *ngIf="allSections" style="border-top-left-radius: 20px;">
-                                <div class="card" style="border:none;">
-                                   <div class="card-header" style="background:transparent;border: none;">
-                                    <span style="font-size:25px;">{{courseLabel}}</span>
-                                    <p class="mb-0 float-right" style="color:#ccc;">Updated on {{courseUpdatedAt | date: 'dd MMM yyyy'}}</p>
-                                    <p class="mb-0" style="color:#ccc;">Created by <span style="color:#000;">{{courseCreated}}</span></p>
-                                    <!-- <div class="progress" *ngIf="user">
+      </div>
+    </div>
+    <!-- /#page-content-wrapper -->
+
+  </div>
+</body>
+<!-- Modal Contents -->
+<div id="DemoModal2" class="modal fade ">
+  <!-- class modal and fade -->
+
+  <div class="modal-dialog modal-lg">
+    <div class="modal-content">
+
+      <div class="modal-header">
+        <!-- modal header -->
+        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+      </div>
+
+      <div class="modal-body">
+        <!-- modal body -->
+
+        <body style="background:#f5f5f5;">
+          <div id="wrapper">
+            <!-- Page Content -->
+            <div id="page-content-wrapper">
+              <div class="container-fluid">
+                <a href="#menu-toggle" class="btn btn-secondary d-sm-none d-lg-none d-md-none"
+                  id="menu-toggle">Toggle Menu</a>
+                <!--<button class="buttons-top">Hot</button>&nbsp;&nbsp;&nbsp;<button class="buttons-top">Trending</button> -->
+                <!-- <app-loadiing *ngIf="!allSections"></app-loadiing> -->
+
+                <div class="course_detail" *ngIf="allSections" style="border-top-left-radius: 20px;">
+                  <div class="card" style="border:none;">
+                    <div class="card-header" style="background:transparent;border: none;">
+                      <span style="font-size:25px;">{{courseLabel}}</span>
+                      <p class="mb-0 float-right" style="color:#ccc;">Updated on {{courseUpdatedAt | date: 'dd MMM yyyy'}}</p>
+                      <p class="mb-0" style="color:#ccc;">Created by <span style="color:#000;">{{courseCreated}}</span></p>
+                      <!-- <div class="progress" *ngIf="user">
                                       <div class="progress-bar bg-success" role="progressbar" style="width: 25%" aria-valuenow="25" aria-valuemin="0" aria-valuemax="100">25% completed</div>
                                     </div>      -->
-                                    <i *ngIf="courseDiscount!==0 && courseDiscount!==100 && popup" class="fa fa-inr float-right" aria-hidden="true" style="color: rgb(8, 187, 67); margin-top: 2px;">{{pariceAfterDiscount | number: '1.0-0'}}</i>
-                                    <i *ngIf="courseDiscount===0 && courseDiscount!==100" class="fa fa-inr float-right" aria-hidden="true" style="color: rgb(8, 187, 67); margin-top: 2px;">{{coursePrice}}</i>
-                                    <i *ngIf="courseDiscount===100 && courseDiscount!==0" class="float-right" aria-hidden="true" style="color: rgb(8, 187, 67); font-style:inherit; margin-top: -3px;">Free</i>
-                                    <i *ngIf="courseDiscount!==0" class="fa fa-inr float-right" aria-hidden="true" style="color: #ff5e2f; text-decoration: line-through; font-size: 14px;margin-right: 1%; margin-top: 2px;">{{coursePrice}}</i>&nbsp; &nbsp; &nbsp;
-                                  </div>
-                                  <div class="card-body">                           
-                                      <button [disabled]="courseStatus !== 'not purchased'" class="float-right btn subscribeButton" (click)="subscribe();">{{btnTxt}}&nbsp; <i *ngIf="courseStatus=='purchased'" class="fa fa-check" aria-hidden="true"></i> <i *ngIf="subscribeFlag" class="fa fa-spinner fa-pulse fa-3x fa-fw" aria-hidden="true" style="font-size: 15px;"></i></button>
-                                    <p class="card-text" style="color:#827c7c;">{{courseDis}}</p>
-                                  </div>
-                                  <!-- <div class="card-footer text-muted" style="background-color:transparent;">
+                      <i *ngIf="courseDiscount!==0 && courseDiscount!==100 && popup" class="fa fa-inr float-right"
+                        aria-hidden="true" style="color: rgb(8, 187, 67); margin-top: 2px;">{{pariceAfterDiscount | number: '1.0-0'}}</i>
+                      <i *ngIf="courseDiscount===0 && courseDiscount!==100" class="fa fa-inr float-right"
+                        aria-hidden="true" style="color: rgb(8, 187, 67); margin-top: 2px;">{{coursePrice}}</i>
+                      <i *ngIf="courseDiscount===100 && courseDiscount!==0" class="float-right" aria-hidden="true"
+                        style="color: rgb(8, 187, 67); font-style:inherit; margin-top: -3px;">Free</i>
+                      <i *ngIf="courseDiscount!==0" class="fa fa-inr float-right" aria-hidden="true"
+                        style="color: #ff5e2f; text-decoration: line-through; font-size: 14px;margin-right: 1%; margin-top: 2px;">{{coursePrice}}</i>&nbsp;
+                      &nbsp; &nbsp;
+                    </div>
+                    <div class="card-body">
+                      <button [disabled]="courseStatus !== 'not purchased'" class="float-right btn subscribeButton"
+                        (click)="subscribe();">{{btnTxt}}&nbsp; <i *ngIf="courseStatus=='purchased'" class="fa fa-check" aria-hidden="true"></i> <i *ngIf="subscribeFlag" class="fa fa-spinner fa-pulse fa-3x fa-fw" aria-hidden="true" style="font-size: 15px;"></i></button>
+                      <p class="card-text" style="color:#827c7c;">{{courseDis}}</p>
+                    </div>
+                    <!-- <div class="card-footer text-muted" style="background-color:transparent;">
                                     <a href="#" style="color:#ccc;" class=""><i class="fa fa-eye" aria-hidden="true"></i> 5 Views</a>&nbsp;&nbsp;&nbsp;
                                     <a href="#" style="color:#ccc;" class=""><i class="fa fa-comment-o" aria-hidden="true"></i> 2 Comments</a>
                                   </div> -->
-                                </div>
-                                <br/>
-                                <div class="sections">
-                                  <div id="accordion">
-                                    <div class="card mb-5"  *ngFor="let s of allSections;let i=index;">
-                                      <div class="card-header bg-white" data-toggle="collapse" [attr.data-target]="'#'+i">
-                                        <h5 class="mb-0">
-                                            {{i+1}}. {{s.label}}
-                                        </h5>
-                                        <p>{{s.description}}</p>
-                                      </div>
-                                      <div id="{{i}}" class="collapse show" aria-labelledby="headingOne" data-parent="#accordion">  
-                                          <div class="list-group chapterList" id="list-tab" role="tablist"   *ngFor="let c of s.CourseChapters; let j=index;">
-                                            <span>
+                  </div>
+                  <br/>
+                  <div class="sections">
+                    <div id="accordion">
+                      <div class="card mb-5" *ngFor="let s of allSections;let i=index;">
+                        <div class="card-header bg-white" data-toggle="collapse" [attr.data-target]="'#'+i">
+                          <h5 class="mb-0">
+                            {{i+1}}. {{s.label}}
+                          </h5>
+                          <p>{{s.description}}</p>
+                        </div>
+                        <div id="{{i}}" class="collapse show" aria-labelledby="headingOne" data-parent="#accordion">
+                          <div class="list-group chapterList" id="list-tab" role="tablist" *ngFor="let c of s.CourseChapters; let j=index;">
+                            <span>
                                               <a data-dismiss="modal" type="click" style="display:inline-block;width:90%" class="list-group-item chapter-item active" id="list-home-list" data-toggle="list" href="#list-home" role="tab" aria-controls="home" (click)="toProfile(s.id, j);"><i class="fa fa-play-circle" aria-hidden="true"></i>&nbsp;&nbsp;&nbsp;{{i+1}}.{{j+1}}. {{c.label}}
                                             </a>
                                             </span>
-                                          </div>
-                                      </div>
-                                    </div>
-                                  </div>
-                                </div>
                           </div>
+                        </div>
                       </div>
-                      <!-- /#page-content-wrapper -->
-              
+                    </div>
                   </div>
                 </div>
-                  <!-- /#wrapper -->
-              </body>
-              <button type="button" class="btn btn-default float-right" data-dismiss="modal">close</button>
-             </div>
-                
-              </div> <!-- / .modal-content -->
-              
-            </div> <!-- / .modal-dialog -->
-              
-         </div><!-- / .modal -->
+              </div>
+              <!-- /#page-content-wrapper -->
+
+            </div>
+          </div>
+          <!-- /#wrapper -->
+        </body>
+        <button type="button" class="btn btn-default float-right" data-dismiss="modal">close</button>
+      </div>
+
+    </div>
+    <!-- / .modal-content -->
+
+  </div>
+  <!-- / .modal-dialog -->
+
+</div>
+<!-- / .modal -->

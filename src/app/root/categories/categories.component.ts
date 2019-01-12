@@ -60,7 +60,7 @@ export class CategoriesComponent implements OnInit {
 
   deleteTag(id, i): void {
     this.updateCategory.versions.splice(i,1);
-    this.http.deleteData('CategoryVersion', id);
+    this.http.deleteData('CategoryVersion', id).subscribe(res => {});
   };
 
   deleteCategory(){

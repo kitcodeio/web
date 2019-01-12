@@ -193,15 +193,16 @@ export class RootComponent implements OnInit {
       this.noRes = true;
       this.interval = setInterval(loader, this.time);
       this.http.createTutorial({
-        name: this.name,
+        label: this.name,
         link: this.url,
-	tags: this.tags.map(tag => tag.label).join(',')
+	tags: this.tags.map(tag => tag.label).join(','),
+        arr: this.tags
       }).subscribe(res => {
         if (res.statusCode == 201) {
 	  clearInterval(this.interval);
           this.noRes = false;
 	  this.interval = setInterval(loader, 5);
-	}
+	}; console.log(res);
       });
     } else {
       this.toastrService.error('invalid url or no tags added','Error',{positionClass:'toast-bottom-right'});

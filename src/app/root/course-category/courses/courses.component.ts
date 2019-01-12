@@ -53,6 +53,7 @@ export class CoursesComponent implements OnInit {
       .subscribe(res=>{
           this.allCourses = res.entity;
           this.categoryId = params.id;    
+        console.log(this.allCourses);
       });    
     });
   }
