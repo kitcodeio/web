@@ -36,7 +36,7 @@ export class ProfileComponent implements OnInit, OnDestroy {
   loadIde:boolean;
   image_id: any;
   isActive: boolean;
-  allContainers: any[];
+  allContainers: any[] = [];
   container_id;
 
   max() {
@@ -71,7 +71,7 @@ export class ProfileComponent implements OnInit, OnDestroy {
       this.course_id = params.course;
       this.http.getCourseSection('CourseChapter', params.section).subscribe((res) => {
 	      console.log(res);
-	      this.allContainers = res.entity.Image.Containers;
+	      if(res.entity.Image) this.allContainers = res.entity.Image.Containers;
 	      this.image_id = res.entity.image_id;
 	      this.title = res.entity.label;
 	      //this.chapters = res.entity;
