@@ -3,6 +3,15 @@
 	src:url('../../../assets/fonts/Montserrat-Medium.ttf');
 }
 
+.hoverable:hover{
+  cursor: pointer;
+}
+
+.new-btn {
+  text-align: center;
+  font-size: 75px;
+}
+
 .sidebar {
     position: fixed;
     top: 0;
