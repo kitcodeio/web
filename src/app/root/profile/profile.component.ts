@@ -117,7 +117,7 @@ export class ProfileComponent implements OnInit, OnDestroy {
         },5000);
       } else { 
         this.loadindScreen = false;
-	this.toastrService.error(res.error.error,'Error',{positionClass:'toast-bottom-right'});
+	this.toastrService.error(res.error.error, 'Error',{positionClass:'toast-bottom-right'});
       }
     });
   }

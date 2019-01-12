@@ -155,6 +155,7 @@ export class RootComponent implements OnInit {
     this.tag = '';
     this.categories = [];
     this.showLoader = false;
+    this.name = '';
   }
 
   popTag(index: number): void {
@@ -180,7 +181,8 @@ export class RootComponent implements OnInit {
         self.tag = '';
 	self.progress = 0;
 	self.categories = [];
-        self.showLoader = false;
+	self.showLoader = false;
+        self.name = '';
 	return clearInterval(self.interval)
       };
       self.progress = self.progress + 1;

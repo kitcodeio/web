@@ -62,6 +62,8 @@
       <br>
       <input [(ngModel)]="url" (click)="resetBtn()" class="form-control" type="text"
         placeholder="Insert course/tutorial link here">
+      <small><b>Note</b>: Please include the embeded link which can be opened in a iframe. <em>eg. https://www.youtube.com/embed/S_Asbq_2qFQ</em></small>
+      <br>
       <br>
       <div class="inputholder">
         <input autocomplete="off" [(ngModel)]="tag" (keyup)="searchtags(tag)" class="tag-input"
