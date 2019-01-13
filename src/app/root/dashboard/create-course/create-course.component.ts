@@ -73,9 +73,11 @@ export class CreateCourseComponent implements OnInit {
   }
 
   deleteCourse(){
-    this.http.deleteData('Course', this.deleteCourseId)
+    console.log(this.deleteCourseId);
+    this.http.deleteTutorial(this.deleteCourseId)
     .subscribe(res=>{
-      this.allCourses.splice(this.deletedCourseIndex,1);
+      console.log(res);
+      if(res.statusCode == 200) this.allCourses.splice(this.deletedCourseIndex,1);
     })
   }
 
