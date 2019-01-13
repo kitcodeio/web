@@ -71,6 +71,7 @@ export class ProfileComponent implements OnInit, OnDestroy {
       this.course_id = params.course;
       this.http.getCourseSection('CourseChapter', params.section).subscribe((res) => {
 	      console.log(res);
+	      this.startContainer(params.section);
 	      if(res.entity.Image) this.allContainers = res.entity.Image.Containers;
 	      this.image_id = res.entity.image_id;
 	      this.title = res.entity.label;
@@ -105,7 +106,7 @@ export class ProfileComponent implements OnInit, OnDestroy {
     $('.loading').css("height", $(document).height());
     this.loadingButton = false;
     this.loadIde = true;
-    this.http.runContainer(id).subscribe(res => {
+    this.http.getContainer(id).subscribe(res => {
       if (res.statusCode == 200) {
 	this.container_id = res.entity.container_id;
 	this.loadIde = true;
