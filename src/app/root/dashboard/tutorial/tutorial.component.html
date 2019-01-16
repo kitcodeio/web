@@ -15,7 +15,7 @@
         <td><a target="_blank" href="{{t.link}}">{{t.label}}</a></td>
         <td>{{t.tags}} <i style="float: right;" class="fa fa-pencil"></i></td>
 	<td>{{t.status}}</td>
-        <td><button class="btn" data-toggle="modal" *ngIf="t.statu=='error in building image'" data-target="#dockerfile" (click)="approve(t, i)">Retry</button></td>
+        <td><button class="btn" *ngIf="t.status=='error in building image'" (click)="approve(t, i)">Retry</button></td>
       </tr>
     </tbody>
   </table>
