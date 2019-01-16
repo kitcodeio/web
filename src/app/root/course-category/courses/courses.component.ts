@@ -137,13 +137,14 @@ export class CoursesComponent implements OnInit {
     this.course_id = course.id;
     this.popup=true
            */
+    this.course_id = course.label;
     this.toProfile(course.id, 1);
   }
 
   subscribe(): void{
     this.subscribeFlag=true;
     this.http.subscribeCourse(this.course_id)
-    .subscribe(res=>{
+      .subscribe(res=>{
       this.subscribeFlag = false;
       if(res.statusCode===200){
         this.courseDetail.status = 'purchased';

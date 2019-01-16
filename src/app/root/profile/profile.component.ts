@@ -28,7 +28,7 @@ export class ProfileComponent implements OnInit, OnDestroy {
   ide;
   sizeFlag: boolean;
   maxFlag: boolean = false;
-  loadindScreen:boolean;
+  loadindScreen:boolean = true;
   interval;
   chapter: number;
   youtubeVideo:boolean;
@@ -70,7 +70,6 @@ export class ProfileComponent implements OnInit, OnDestroy {
     this.route.params.subscribe(params => {
       this.course_id = params.course;
       this.http.getCourseSection('CourseChapter', params.section).subscribe((res) => {
-	      console.log(res);
 	      this.startContainer(params.section);
 	      if(res.entity.Image) this.allContainers = res.entity.Image.Containers;
 	      this.image_id = res.entity.image_id;
@@ -103,7 +102,6 @@ export class ProfileComponent implements OnInit, OnDestroy {
   startContainer(id): void {
     let self = this;
     this.loadindScreen = true;
-    $('.loading').css("height", $(document).height());
     this.loadingButton = false;
     this.loadIde = true;
     this.http.getContainer(id).subscribe(res => {
