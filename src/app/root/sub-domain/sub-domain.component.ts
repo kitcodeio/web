@@ -24,7 +24,7 @@ export class SubDomainComponent implements OnInit {
   addSubDomain(){
       this.http.postData('Subdomain',{"subdomain":this.domainName})
       .subscribe(res=>{
-      if(res.statusCode==201){
+      if(res.salt){
         this.toastrService.success('Sub Domain created successfully','Success',{positionClass:'toast-bottom-right'});
         this.populateDomain();
       }
@@ -38,17 +38,17 @@ export class SubDomainComponent implements OnInit {
     this.page = index;
     this.http.getData('Subdomain', index)
     .subscribe(res=>{
-      this.allSubDomain = res.entity.rows;
+      this.allSubDomain = res.rows;
     })
   }
 
   populateDomain(){
     this.http.getData('Subdomain')
     .subscribe(res=>{
-      let n = Math.ceil(res.entity.count/10);
+      let n = Math.ceil(res.count/10);
       this.pages = Array(n);
       for(var i = 0; i < n; i++) this.pages[i]=i+1;
-      this.allSubDomain = res.entity.rows;
+      this.allSubDomain = res.rows;
     })
   }
 }
