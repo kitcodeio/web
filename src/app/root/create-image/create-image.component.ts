@@ -96,7 +96,7 @@ export class CreateImageComponent implements OnInit, AfterViewInit {
           .postData('Image', {"label" : this.label, "file" : this.editor.value})
           .subscribe((res) => {
             console.log(res);
-            if (res.statusCode == 201) {
+            if (!res.error) {
 	      //$('#image-log').modal('show');
 	      this.btnText = 'Building';
 	    } else

@@ -29,14 +29,14 @@ export class ImagesComponent implements OnInit {
 
   populateImage(): void{
     this.http.getData('Image').subscribe((res) => {
-      this.allImages=res.entity.rows;
+      this.allImages=res.rows;
     })
   }
 
   run(image: any): void {
     this.selected = image;
     this.http.readContainer('image', image.id).subscribe(res => {
-      if (res.statusCode == 200) this.allContainers = res.entity.rows;
+      if (!res.error) this.allContainers = res.rows;
     });
   }
 }
