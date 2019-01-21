@@ -15,13 +15,13 @@ export class ContainersComponent implements OnInit {
 
   ngOnInit() {
     this.http.getData('Container').subscribe(res=>{
-      if(res.statusCode == 200) this.allContainers = res.entity.rows;
+      if(!res.error) this.allContainers = res;
     })
   }
 
   getContainerId(id){
     this.http.readContainer('container', id).subscribe(res=>{
-      this.users=res.entity.rows;
+      this.users=res;
     });
   }
 
