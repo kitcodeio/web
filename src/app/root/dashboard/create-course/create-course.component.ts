@@ -73,7 +73,6 @@ export class CreateCourseComponent implements OnInit {
   }
 
   deleteCourse(){
-    console.log(this.deleteCourseId);
     this.http.deleteTutorial(this.deleteCourseId)
     .subscribe(res=>{
       console.log(res);
@@ -114,7 +113,7 @@ export class CreateCourseComponent implements OnInit {
   populateImage(){
     this.http.getData('Image')
     .subscribe((res) => {
-      this.allImages=res.entity.rows;
+      this.allImages=res.rows;
     })
 
   }

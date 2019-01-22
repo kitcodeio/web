@@ -110,7 +110,8 @@ export class ProfileComponent implements OnInit, OnDestroy {
 	this.loadIde = true;
 	$('#kide').css("height", $(document).height() - 71);      
 	this.ide = this.domSanitizer.bypassSecurityTrustResourceUrl('https://' + res.entity.subdomain + '-kide.kitcode.io');
-        this.interval = setInterval(()=>{
+	this.interval = setInterval(()=>{
+	  console.log('reloading...');
           this.ide = this.domSanitizer.bypassSecurityTrustResourceUrl('https://' + res.entity.subdomain + '-kide.kitcode.io');
           this.youtubeVideo = this.youtubeUrl.changingThisBreaksApplicationSecurity.includes('youtube');
         },5000);
@@ -139,6 +140,6 @@ export class ProfileComponent implements OnInit, OnDestroy {
     else if(message.data == 'maximize') this.max();
     else if(message.data == 'close'){
     }
-    else console.log(message.data);
+    else console.log();
   }
 }
