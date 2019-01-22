@@ -111,8 +111,8 @@ export class ProfileComponent implements OnInit, OnDestroy {
 	$('#kide').css("height", $(document).height() - 71);      
 	this.ide = this.domSanitizer.bypassSecurityTrustResourceUrl('https://' + res.entity.subdomain + '-kide.kitcode.io');
 	this.interval = setInterval(()=>{
-	  console.log('reloading...');
-          this.ide = this.domSanitizer.bypassSecurityTrustResourceUrl('https://' + res.entity.subdomain + '-kide.kitcode.io');
+          console.log("%creloading...", "color: red; font-size:15px;");
+	  this.ide = this.domSanitizer.bypassSecurityTrustResourceUrl('https://' + res.entity.subdomain + '-kide.kitcode.io');
           this.youtubeVideo = this.youtubeUrl.changingThisBreaksApplicationSecurity.includes('youtube');
         },5000);
       } else { 
