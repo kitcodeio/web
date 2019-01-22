@@ -6,6 +6,8 @@ import { AuthserviceService } from '../../services/auth/authservice.service';
 import { ToastrService } from 'ngx-toastr';
 
 import { SocketService } from '../../services/socket/socket.service';
+import * as io from 'socket.io-client'
+
 
 @Component({
   selector: 'app-profile',
@@ -15,6 +17,7 @@ import { SocketService } from '../../services/socket/socket.service';
 
 export class ProfileComponent implements OnInit, OnDestroy {
 
+  kide: any;
   stopListening: Function;
   course_id: number;
   chapters: any;
@@ -108,13 +111,17 @@ export class ProfileComponent implements OnInit, OnDestroy {
       if (res.statusCode == 200) {
 	this.container_id = res.entity.container_id;
 	this.loadIde = true;
-	$('#kide').css("height", $(document).height() - 71);      
-	this.ide = this.domSanitizer.bypassSecurityTrustResourceUrl('https://' + res.entity.subdomain + '-kide.kitcode.io');
-	this.interval = setInterval(()=>{
+	      $('#kide').css("height", $(document).height() - 71);
+	      this.kide = io.connect('https://' + res.entity.subdomain + '-kide.kitcode.io');
+	      this.kide.on('connect', () => {
+	        self.ide = this.domSanitizer.bypassSecurityTrustResourceUrl('https://' + res.entity.subdomain + '-kide.kitcode.io');
+	      });
+	//this.ide = this.domSanitizer.bypassSecurityTrustResourceUrl('https://' + res.entity.subdomain + '-kide.kitcode.io');
+	      /*this.interval = setInterval(()=>{
           console.log("%creloading...", "color: red; font-size:15px;");
 	  this.ide = this.domSanitizer.bypassSecurityTrustResourceUrl('https://' + res.entity.subdomain + '-kide.kitcode.io');
           this.youtubeVideo = this.youtubeUrl.changingThisBreaksApplicationSecurity.includes('youtube');
-        },5000);
+	},5000);*/
       } else { 
         this.loadindScreen = false;
 	this.toastrService.error(res.error.error, 'Error',{positionClass:'toast-bottom-right'});
