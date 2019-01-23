@@ -36,7 +36,7 @@ export class ImagesComponent implements OnInit {
   run(image: any): void {
     this.selected = image;
     this.http.readContainer('image', image.id).subscribe(res => {
-      if (!res.error) this.allContainers = res.rows;
+      if (!res.error) this.allContainers = res;
     });
   }
 }
