@@ -48,7 +48,7 @@
 </div>
 
 <div id="bootstrapModelu" class="modal fade" role="dialog">
-  <div class="modal-dialog">
+  <div class="modal-dialog modal-lg">
     <!-- Modal content-->
     <div class="modal-content">
       <div class="modal-header">
@@ -91,8 +91,11 @@
           <div class="col-lg-3">
             <h6>Version</h6>
           </div>
-          <div class="col-lg-8">
+          <div class="col-lg-5">
             <h6>Command</h6>
+          </div>
+          <div class="col-lg-3">
+            <h6>Filename</h6>
           </div>
           <div class="col-lg-1">
           </div>
@@ -103,9 +106,12 @@
             <div class="col-lg-3">
               <input class="form-control" [(ngModel)]="v.version" type="text" placeholder="version number">
             </div>
-            <div class="col-lg-8">
-              <input class="form-control" [(ngModel)]="v.command" type="text" placeholder="installation command">
+            <div class="col-lg-5">
+		    <textarea class="form-control" [(ngModel)]="v.command" type="text" placeholder="installation command"></textarea>
             </div>
+	    <div class="col-lg-3">
+	    <input class="form-control" [(ngModel)]="v.file" type="text" placeholder="initial filename">
+	    </div>
             <div class="col-lg-1">
               <i style="color: red;" (click)="deleteTag(v.id, i)" class="fa fa-trash hoverable"></i>
             </div>
