@@ -110,7 +110,7 @@
 		    <textarea class="form-control" [(ngModel)]="v.command" type="text" placeholder="installation command"></textarea>
             </div>
 	    <div class="col-lg-3">
-	    <input class="form-control" [(ngModel)]="v.file" type="text" placeholder="initial filename">
+	    <input class="form-control" [(ngModel)]="v.filename" type="text" placeholder="initial filename">
 	    </div>
             <div class="col-lg-1">
               <i style="color: red;" (click)="deleteTag(v.id, i)" class="fa fa-trash hoverable"></i>
@@ -120,9 +120,6 @@
         </div>
         <button (click)="updateCategory.versions.push({category_id: updateCategory.id})"
           class="btn">Add Version</button>
-
-
-
       </div>
       <div class="modal-footer">
         <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>

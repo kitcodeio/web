@@ -1,5 +1,5 @@
 import { Component, OnInit, OnDestroy, Renderer2 } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { DomSanitizer } from "@angular/platform-browser";
 import * as io from 'socket.io-client';
 
@@ -23,7 +23,7 @@ export class KideComponent implements OnInit, OnDestroy {
   isActive: boolean = false;
   ideSocket: any;
 
-  constructor(private http: HttpService, private route: ActivatedRoute, private domSanitizer: DomSanitizer, private renderer: Renderer2, private socket: SocketService) {
+  constructor(private router: Router, private http: HttpService, private route: ActivatedRoute, private domSanitizer: DomSanitizer, private renderer: Renderer2, private socket: SocketService) {
     this.stopListening = renderer.listen('window', 'message', this.handleMessage.bind(this));
   }
 
@@ -45,6 +45,7 @@ export class KideComponent implements OnInit, OnDestroy {
     let self = this;
     this.http.runContainer(id).subscribe(res => { 
       this.container_id = res.entity.container_id;
+      if (id !== this.container_id) this.router.navigate(['/root/run'], { queryParams: { id: this.container_id }});
       this.ideSocket = io.connect('https://' + res.entity.subdomain + '-kide.kitcode.io');
       this.ideSocket.on('connect', () => {
 	console.log('connection with the container has been established');
