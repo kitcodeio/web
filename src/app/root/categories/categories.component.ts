@@ -154,4 +154,8 @@ export class CategoriesComponent implements OnInit {
     }
   }
 
+  openAdd(): void {
+    this.uploadImgUrl = "/assets/images/upload.png";
+  }
+
 }

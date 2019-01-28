@@ -81,7 +81,7 @@ export class HttpService {
   }
 
   searchCourse(term: string, model?:string):Observable<any> {
-    return this.http.get(this.url.baseUrl+'search/course/'+(model?model:'Course')+'?term='+term)
+    return this.http.get(this.url.baseUrl+'search/course/'+(model?model:'Tutorial')+'?term='+term)
     .pipe(catchError((error)=>{return of(error);}));
   }
   

@@ -17,7 +17,7 @@
             (click)="setDeleteCategory(cat.id)"><i class="fa fa-trash" aria-hidden="true" style="color: rgb(235, 102, 102); cursor: pointer;" ></i></a>
         </div>
         <div class="col-lg-2 col-md-4">
-          <a style="cursor: pointer;" data-toggle="modal" data-target="#bootstrapModel"><span class="glyphicon glyphicon-log-in"></span>
+          <a style="cursor: pointer;" (click)="openAdd()" data-toggle="modal" data-target="#bootstrapModel"><span class="glyphicon glyphicon-log-in"></span>
               <div style="text-align: center;" class="testimonial-item mx-auto mb-2">
                 <i class="fa fa-plus" aria-hidden="true"></i><p>Category</p>
               </div>
