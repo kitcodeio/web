@@ -66,7 +66,19 @@ export class CourseCategoryComponent implements OnInit {
     // Search
     this.courses = this.searchTerms.pipe(
         debounceTime(100), distinctUntilChanged(),
-        switchMap((term: string) => this.http.search('Tutorial', term)));
+        switchMap((term: string) => {
+          return new Observable<any>(observer => {
+            let arr = []; 
+            this.http.search('Tutorial', term).subscribe(res => {
+              arr = arr.concat(res);
+              observer.next(arr);
+            });
+            this.http.search('CourseCategory', term).subscribe(res => {
+              arr = arr.concat(res);
+              observer.next(arr);
+            });
+          });
+        }));
 
     $('.input-navbar-search').css("display", "none");
     function searchShow() {
@@ -101,6 +113,13 @@ export class CourseCategoryComponent implements OnInit {
       $('.search-result').show();
     }
   }
+
+  takeAction(course): void {
+    console.log(typeof course.id);
+    if(typeof course.id == 'string') this.router.navigate(['/root/kide/'+course.label+'/'+course.id+'/1']);
+    else this.router.navigate(['/root/course/detail/'+course.id]);
+  }
+
   populateCatgory(){
     this.http.getcategory('CourseCategory').subscribe(res=>{
       this.allCourseCategory = res.entity;

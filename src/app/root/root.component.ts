@@ -82,7 +82,19 @@ export class RootComponent implements OnInit {
     this.courses = this.searchTerms.pipe(
       debounceTime(100),
       distinctUntilChanged(),
-      switchMap((term: string) => this.http.search('Tutorial', term))
+      switchMap((term: string) => {
+          return new Observable<any>(observer => {
+            let arr = []; 
+            this.http.search('Tutorial', term).subscribe(res => {
+              arr = arr.concat(res);
+              observer.next(arr);
+            });
+            this.http.search('CourseCategory', term).subscribe(res => {
+              arr = arr.concat(res);
+              observer.next(arr);
+            });
+          });
+        })
     );
     this.searchCategory.pipe(
       debounceTime(100),
@@ -136,13 +148,17 @@ export class RootComponent implements OnInit {
     }
   }
 
-  hideOnClick(label?:string){
+  hideOnClick(label?:string, course?:any){
     $('.search-result').hide();
     $('.search-box').hide();
     if(label) { 
       this.tags.push(label);
       this.tag = '';
       this.showLoader = false;
+    }
+    if(course){
+      if(typeof course.id == 'string') this.router.navigate(['/root/kide/'+course.label+'/'+course.id+'/1']);
+      else this.router.navigate(['/root/course/detail/'+course.id]);
     }
   }
 

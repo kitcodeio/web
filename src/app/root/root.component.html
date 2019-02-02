@@ -16,7 +16,7 @@
           (keyup)="search(searchBox.value)" (input)="onSearchChange($event.target.value)">
         <ul class="search-result" #searchResult>
           <li *ngFor="let course of courses | async">
-          <a type="click" routerLink="/root/kide/{{course.label}}/{{course.id}}/1" (click)="hideOnClick();">
+          <a class="hoverable" type="click" (click)="hideOnClick(null, course);">
                     {{course.label}}
             </a>
           </li>

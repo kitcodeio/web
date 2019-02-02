@@ -1,4 +1,6 @@
-
+.hoverable:hover{
+  cursor: pointer;
+}
 .btn:focus,.btn:active,.btn:hover{
     box-shadow: none;
   }

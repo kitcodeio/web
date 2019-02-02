@@ -82,8 +82,8 @@ login(): void {
             this.toastrService.error(response.error.error,'Error',{positionClass:'toast-bottom-right'});
           }   
           else{
-        this.authService.setToken(response.token);
-        this.router.navigate(['root/category']);
+            this.authService.setToken(response.token);
+            this.router.navigate(['/']);
           }
         
     } else {
@@ -164,7 +164,7 @@ login(): void {
       this.authService.socialLogin(data).subscribe(res=>{
         if(!res.error){
         this.authService.setToken(res.token);
-        this.router.navigate(['root/category']);
+          this.router.navigate(['/']);
         }
         else{
           this.toastrService.error(res.error,'Error',{positionClass:'toast-bottom-right'});
@@ -178,7 +178,7 @@ login(): void {
       this.authService.socialLogin(data).subscribe(res=>{
         if(!res.error){
           this.authService.setToken(res.token);
-          this.router.navigate(['root/category']);
+          this.router.navigate(['/']);
           }
           else{
             this.toastrService.error(res.error,'Error',{positionClass:'toast-bottom-right'});
