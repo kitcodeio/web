@@ -3,6 +3,13 @@ import { HttpService } from '../../services/http/http.service';
 import { ActivatedRoute, Router } from '@angular/router';
 import { MalihuScrollbarService } from 'ngx-malihu-scrollbar';
 import { DataService } from '../../services/data/data.service';
+import { Observable, Subject } from 'rxjs';
+import { debounceTime, distinctUntilChanged, switchMap } from 'rxjs/operators';
+
+import { AuthserviceService } from '../../services/auth/authservice.service';
+import { UserInfoService } from '../../services/userInfo/user-info.service';
+
+declare var $: any;
 
 @Component({
   selector: 'app-course-category',
@@ -10,13 +17,33 @@ import { DataService } from '../../services/data/data.service';
   styleUrls: ['./course-category.component.css']
 })
 export class CourseCategoryComponent implements OnInit {
+  courses: Observable<any[]>;
+  private searchTerms = new Subject<string>();
+
+  userName: string;
+  flag: boolean = false;
+  userRole;
+  userHige: boolean;
+  loadingFlag: boolean = false;
+  url: any;
+  name: string;
+
 
   allCourseCategory=[]
   allSections=[];
   allChapters=[];
   course_id;
   user;
-  constructor(private ds:DataService, private route:ActivatedRoute, private http: HttpService, private scrollbarService: MalihuScrollbarService, private router: Router) { }
+  constructor(public userInfo: UserInfoService,
+              private useInfo: UserInfoService,
+              private authService: AuthserviceService, private ds:DataService, private route:ActivatedRoute, private http: HttpService, private scrollbarService: MalihuScrollbarService, private router: Router) { }
+
+  search(term: string): void { this.searchTerms.next(term); }
+
+  acceptApology() {
+    localStorage.setItem('apology', 'accepted');
+    $('#sorry-message').modal('hide');
+  }
 
   ngOnInit() {
     this.populateCatgory();
@@ -32,12 +59,48 @@ export class CourseCategoryComponent implements OnInit {
               theme:'dark'
           });
   });
+    if (localStorage.getItem('apology') !== 'accepted' &&
+        this.userInfo.getInfo())
+      $('#sorry-message').modal({backdrop : 'static', keyboard : false});
+
+    // Search
+    this.courses = this.searchTerms.pipe(
+        debounceTime(100), distinctUntilChanged(),
+        switchMap((term: string) => this.http.searchCourse(term)));
+
+    $('.input-navbar-search').css("display", "none");
+    function searchShow() {
+      try {
+        if ($(window).scrollTop() >= $('.testimonials').offset().top - 215) {
+          $('.input-navbar-search').css("display", "inline-flex");
+        } else {
+          $('.input-navbar-search').hide();
+        }
+      } catch (err) {
+      }
+    }
+
+    $(window).scroll(function() { searchShow(); });
+
+    /*$('#body').css("height", function(){
+      return $(document).height()-108;
+    });*/
+    this.populateCatgory();
+
   }
 
   ngAfterViewInit() {
     this.scrollbarService.initScrollbar('.scrollPane', { axis: 'y', theme: 'dark', scrollButtons: { enable: true } });
   }
 
+  // Event trigger when add or remove letters in search bar
+  onSearchChange(searchValue: string) {
+    if (searchValue == '') {
+      $('.search-result').hide();
+    } else {
+      $('.search-result').show();
+    }
+  }
   populateCatgory(){
     this.http.getcategory('CourseCategory').subscribe(res=>{
       this.allCourseCategory = res.entity;
