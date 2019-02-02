@@ -16,7 +16,7 @@ import { ContainersComponent } from './root/dashboard/containers/containers.comp
 import { TutorialComponent } from './root/dashboard/tutorial/tutorial.component';
 
 const routes: Routes = [
-    { path: '', redirectTo: 'root/category', pathMatch: 'full'},
+  { path: '', redirectTo: 'root/course/detail/1', pathMatch: 'full'},
     { path: 'login', loadChildren:'src/app/login/login.module#LoginModule' },	
     { path: 'create-image', loadChildren: './root/create-image/create-image.module#CreateImageModule' },
     { path: 'root', component: RootComponent, children: [
