@@ -49,7 +49,11 @@ export class CoursesComponent implements OnInit {
     this.user=this.authService.isAdmin();
 
     this.route.params.subscribe(params=>{
-      this.http.getDataWithId('Course',params.id)
+      if (params.id == 'all') this.http.getTutorials().subscribe(res => {
+      this.allCourses = res.entity;
+
+      });
+      else this.http.getDataWithId('Course',params.id)
       .subscribe(res=>{
           this.allCourses = res.entity;
           this.categoryId = params.id;    
