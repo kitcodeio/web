@@ -5,7 +5,7 @@
       <div class="container-fluid">
         <!-- <app-loadiing *ngIf="loading"></app-loadiing> -->
         <div class="course_list">
-          <!-- <h2 *ngIf="allCourses.length == 0">The Category is empty</h2> -->
+          <h2 *ngIf="allCourses.length == 0">This Category is empty</h2>
           <ul class="mt-4" style="list-style-type:none;padding-left:0;">
             <li class="mb-4" *ngFor="let c of allCourses; let i=index;">
               <div class="card" style="border:none;">

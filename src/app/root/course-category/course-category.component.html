@@ -22,7 +22,7 @@
 
                   <ul class="search-result" #searchResult>
                     <a style="text-decoration:none !important;" *ngFor="let course of courses | async"
-                      style="width:100%;" type="click" routerLink="/root/course/chapter/{{course.id}}">
+                      style="width:100%;" type="click" routerLink="/root/kide/{{course.label}}/{{course.id}}/1">
                       <li>
                         {{course.label}}
                       </li>
@@ -57,8 +57,8 @@
 
 </div>
 
-<div style="background:#f5f5f5;" style="margin-bottom:30px;">
-  <div id="wrapper">
+<div style="background:#f5f5f5;" id="allthecourses" style="margin-bottom:30px;">
+  <div id="wrapper" >
 
     <!-- Sidebar -->
     <div id="sidebar-wrapper" class="scrollPane">

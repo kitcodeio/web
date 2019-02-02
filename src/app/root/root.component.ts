@@ -82,7 +82,7 @@ export class RootComponent implements OnInit {
     this.courses = this.searchTerms.pipe(
       debounceTime(100),
       distinctUntilChanged(),
-      switchMap((term: string) => this.http.searchCourse(term))
+      switchMap((term: string) => this.http.search('Tutorial', term))
     );
     this.searchCategory.pipe(
       debounceTime(100),

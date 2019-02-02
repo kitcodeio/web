@@ -75,6 +75,12 @@ export class HttpService {
     .pipe(catchError((error)=>{return of(error);}));
   }
 
+  search(model, term): Observable<any> {
+    return this.http.get(this.url.baseUrl+'search/api/'+model+'?term='+term)
+    .pipe(catchError((error)=>{return of(error);}));
+  }
+
+
   getDataWithId(model:string,id:any):Observable<any>{
     return this.http.get(this.url.baseUrl+'read/course/'+model+'/'+id)
     .pipe(catchError((error)=>{return of(error);}));

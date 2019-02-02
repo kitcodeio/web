@@ -66,7 +66,7 @@ export class CourseCategoryComponent implements OnInit {
     // Search
     this.courses = this.searchTerms.pipe(
         debounceTime(100), distinctUntilChanged(),
-        switchMap((term: string) => this.http.searchCourse(term)));
+        switchMap((term: string) => this.http.search('Tutorial', term)));
 
     $('.input-navbar-search').css("display", "none");
     function searchShow() {

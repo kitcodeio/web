@@ -54,11 +54,16 @@ export class CoursesComponent implements OnInit {
 
       });
       else this.http.getDataWithId('Course',params.id)
-      .subscribe(res=>{
+        .subscribe(res=>{
           this.allCourses = res.entity;
           this.categoryId = params.id;    
-        console.log(this.allCourses);
-      });    
+      });
+
+      if (params.id !== 'all') {
+        let ele = document.getElementById('allthecourses');
+        ele.scrollIntoView({behavior: "smooth", block: "start", inline: "nearest"});
+      }
+
     });
   }
 
