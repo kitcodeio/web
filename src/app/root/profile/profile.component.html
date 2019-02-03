@@ -26,7 +26,7 @@
 <!-- </div>
 </div> -->
 
-<app-loadiing *ngIf="loadindScreen" ></app-loadiing>
+<app-loadiing *ngIf="loadindScreen"></app-loadiing>
 <section class="content-section">
   <div class="container-fluid">
     <div class="row">
@@ -57,12 +57,12 @@
                 </a> -->
       </div>
       <div *ngIf="!maxFlag && loadIde" id="kide" style="width:58.3%;height:100%; margin-top: 0; margin-left:0">
-        <iframe id="kide-iframe" style="width:100%;height:100%; margin-top: 0; margin-left:0"
+        <iframe *ngIf="ide" id="kide-iframe" style="width:100%;height:100%; margin-top: 0; margin-left:0"
           [src]="ide" frameborder="0" #iframe>
                 </iframe>
       </div>
       <div *ngIf="maxFlag && !loadindScreen" id="kide" style="width:100%; height:600px; margin-top: 0; margin-left:0">
-        <iframe id="kide-iframe" style="width:100%;height:100%; margin-top: 0; margin-left:0"
+        <iframe *ngIf="ide" id="kide-iframe" style="width:100%;height:100%; margin-top: 0; margin-left:0"
           [src]="ide" frameborder="0" #iframe>
                     </iframe>
       </div>
@@ -85,19 +85,21 @@
           <div class="col-sm-6" *ngFor="let container of allContainers;">
             <div class="card">
               <div class="card-body">
-		<h5 class="card-title">{{container.label || 'Untitled'}}</h5>
-		<p class="card-text">
-		  <i class="fa fa-circle" [ngStyle]="{color: container.state=='active'?'green':(container.state=='idle'?'yellow':'red')}" aria-hidden="true"></i> {{container.state}}
-		</p>
-		<p class="card-text">created at: {{container.createdAt | date}}<br>updated at: {{container.updatedAt | date}}</p>
-		<a (click)="startContainer(container.id);" class="btn btn-primary" data-dismiss="modal" >Run</a>
+                <h5 class="card-title">{{container.label || 'Untitled'}}</h5>
+                <p class="card-text">
+                  <i class="fa fa-circle" [ngStyle]="{color: container.state=='active'?'green':(container.state=='idle'?'yellow':'red')}"
+                    aria-hidden="true"></i> {{container.state}}
+                </p>
+                <p class="card-text">created at: {{container.createdAt | date}}<br>updated at: {{container.updatedAt
+                  | date}}</p>
+                <a (click)="startContainer(container.id);" class="btn btn-primary" data-dismiss="modal">Run</a>
               </div>
             </div>
           </div>
           <div class="col-sm-6 new-btn hoverable" (click)="startContainer(image_id)" data-dismiss="modal">
-	    <i class="fa fa-plus" aria-hidden="true"></i>
-           <h3>New</h3>
-	  </div>
+            <i class="fa fa-plus" aria-hidden="true"></i>
+            <h3>New</h3>
+          </div>
         </div>
       </div>
       <div class="modal-footer">
