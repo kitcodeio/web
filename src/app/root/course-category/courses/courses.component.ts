@@ -46,20 +46,23 @@ export class CoursesComponent implements OnInit {
 
   ngOnInit() {
 
+    let self = this;
+
     this.user=this.authService.isAdmin();
 
     this.route.params.subscribe(params=>{
-      if (params.id == 'all') this.http.getTutorials().subscribe(res => {
-      this.allCourses = res.entity;
-
-      });
-      else this.http.getDataWithId('Course',params.id)
-        .subscribe(res=>{
-          this.allCourses = res.entity;
-          this.categoryId = params.id;
-          let ele = document.getElementById('allthecourses');
-          ele.scrollIntoView({behavior: "smooth", block: "start", inline: "nearest"});
-      });
+      setTimeout(function(){
+        if (params.id == 'all') self.http.getTutorials().subscribe(res => {
+          self.allCourses = res.entity;
+        });
+        else self.http.getDataWithId('Course',params.id)
+          .subscribe(res=>{
+            self.allCourses = res.entity;
+            self.categoryId = params.id;
+            let ele = document.getElementById('allthecourses');
+            ele.scrollIntoView({behavior: "smooth", block: "start", inline: "nearest"});
+        });
+      }, 0);
     });
   }
 
