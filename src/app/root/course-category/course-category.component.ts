@@ -115,7 +115,6 @@ export class CourseCategoryComponent implements OnInit {
   }
 
   takeAction(course): void {
-    console.log(typeof course.id);
     if(typeof course.id == 'string') this.router.navigate(['/root/kide/'+course.label+'/'+course.id+'/1']);
     else this.router.navigate(['/root/course/detail/'+course.id]);
   }
