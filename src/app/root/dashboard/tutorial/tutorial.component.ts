@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, OnDestroy } from '@angular/core';
 import { HttpService } from '../../../services/http/http.service';
 
 @Component({
@@ -6,9 +6,10 @@ import { HttpService } from '../../../services/http/http.service';
   templateUrl: './tutorial.component.html',
   styleUrls: ['./tutorial.component.css']
 })
-export class TutorialComponent implements OnInit {
+export class TutorialComponent implements OnInit, OnDestroy {
 
   tutorials: any[] = [];
+  interval: any;
 
   constructor(private http: HttpService) { }
 
@@ -20,6 +21,13 @@ export class TutorialComponent implements OnInit {
 
   ngOnInit() {
     this.populate();
+    this.interval = setInterval((function(){
+      this.populate();
+    }).bind(this), 1000);
+  }
+
+  ngOnDestroy(){
+    clearInterval(this.interval);
   }
 
   approve(tutorial: any, i: number) {
