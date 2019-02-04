@@ -9,23 +9,25 @@ import { HttpService } from '../../../services/http/http.service';
 export class TutorialComponent implements OnInit {
 
   tutorials: any[] = [];
-  dockerFile: string[] = [];
 
   constructor(private http: HttpService) { }
 
-  ngOnInit() {
+  populate() {
     this.http.getTutorials().subscribe(res => {
       this.tutorials = res.entity;
     });
   }
 
+  ngOnInit() {
+    this.populate();
+  }
+
   approve(tutorial: any, i: number) {
     tutorial.approved = !tutorial.approved;
     this.http.updateTutorial(tutorial).subscribe(res => {	
-      console.log(res);
       if(!res.error) {
         this.tutorials[i] = tutorial;
-        this.dockerFile = res.dockerFile.split('\n');
+        this.populate();
       }
     });
   };
