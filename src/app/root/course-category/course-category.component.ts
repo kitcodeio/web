@@ -73,7 +73,7 @@ export class CourseCategoryComponent implements OnInit {
               arr = arr.concat(res);
               observer.next(arr);
             });
-            this.http.search('CourseCategory', term).subscribe(res => {
+            this.http.search('Category', term).subscribe(res => {
               arr = arr.concat(res);
               observer.next(arr);
             });

@@ -89,7 +89,7 @@ export class RootComponent implements OnInit {
               arr = arr.concat(res);
               observer.next(arr);
             });
-            this.http.search('CourseCategory', term).subscribe(res => {
+            this.http.search('Category', term).subscribe(res => {
               arr = arr.concat(res);
               observer.next(arr);
             });
@@ -99,7 +99,7 @@ export class RootComponent implements OnInit {
     this.searchCategory.pipe(
       debounceTime(100),
       distinctUntilChanged(),
-      switchMap((term: string) => this.http.searchCourse(term, 'CourseCategory'))
+      switchMap((term: string) => this.http.searchCourse(term, 'Category'))
     ).subscribe(res => {this.categories = res; this.showLoader = false;});
   }
 

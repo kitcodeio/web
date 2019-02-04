@@ -20,7 +20,7 @@
                     #searchBox id="search-box" (keyup)="search(searchBox.value)"
                     (input)="onSearchChange($event.target.value)" />
 
-                  <ul class="search-result" #searchResult>
+                  <ul style="z-index: 9" class="search-result" #searchResult>
                     <a style="text-decoration:none !important;" class="hoverable" *ngFor="let course of courses | async"
                       style="width:100%;" type="click" (click)="takeAction(course)">
                       <li>
