@@ -111,8 +111,8 @@ export class RootComponent implements OnInit {
     $('.dropdown-menu').hide();
   }
 
-  toDashboard(){
-    this.router.navigate(['root/dashboard/list-image']);
+  toDashboard(page){
+    this.router.navigate(['root/dashboard/' + page]);
     $('.dropdown-menu').hide();
   }
 

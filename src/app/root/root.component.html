@@ -16,13 +16,14 @@
           (keyup)="search(searchBox.value)" (input)="onSearchChange($event.target.value)">
         <ul class="search-result" #searchResult>
           <li *ngFor="let course of courses | async">
-          <a class="hoverable" type="click" (click)="hideOnClick(null, course);">
+            <a class="hoverable" type="click" (click)="hideOnClick(null, course);">
                     {{course.label}}
             </a>
           </li>
         </ul>
       </div>
     </form>
+
     <ul class="navbar-nav ml-auto">
       <li class="nav-item d-lg-none d-block" *ngIf="!flag && windowSize<=768">
         <a class="nav-link" routerLink="/root/dashboard" *ngIf="!flag && windowSize<=768 && user.role_type=='admin'">Dashboard<span class="sr-only">(current)</span></a>
@@ -38,11 +39,23 @@
         <img #image class="rounded-circle" style="width:50px; height:50px;" src="{{user.image}}">
       </li>
     </ul>
+
     <div class="dropdown-menu dropdown-menu-right" style="z-index: 10;" aria-labelledby="navbarDropdown">
-      <a class="dropdown-item" (click)="toDashboard();" *ngIf="user.role_type=='admin'
-                " style="cursor: pointer;">Dashboard</a>
+      <a class="dropdown-item" (click)="toDashboard('list-image');" *ngIf="user.role_type=='admin'
+                " style="cursor: pointer;">Images</a>
+      <a class="dropdown-item" (click)="toDashboard('category');" *ngIf="user.role_type=='admin'
+                " style="cursor: pointer;">Categories</a>
+
+      <a class="dropdown-item" (click)="toDashboard('sub-domain');" *ngIf="user.role_type=='admin'
+                " style="cursor: pointer;">Subdomains</a>
+      <a class="dropdown-item" (click)="toDashboard('container');" *ngIf="user.role_type=='admin'
+                " style="cursor: pointer;">Containers</a>
+      <a class="dropdown-item" (click)="toDashboard('tutorial');" *ngIf="user.role_type=='admin'
+                " style="cursor: pointer;">Tutorial</a>
+
       <a style="color: #212529" type="click" class="dropdown-item" href="#" (click)="logout();">Logout</a>
     </div>
+
   </div>
 </nav>
 

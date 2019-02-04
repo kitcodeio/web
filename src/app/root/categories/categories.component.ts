@@ -96,6 +96,7 @@ export class CategoriesComponent implements OnInit {
       if(count == 2) done(res);
     });
     if (this.updateCategory.logo !== this.uploadImgUrl) this.updateCategory.logo = await this.uploadImage(this.updateCategory.logo);
+    this.updateCategory.parent_id = this.updateCategory.parent_id == 'null'?null:this.updateCategory.parent_id;
     this.http.putData('Category',{
       id: this.updateCategory.id,
       data: this.updateCategory
@@ -116,6 +117,7 @@ export class CategoriesComponent implements OnInit {
     if (this.newCategory.logo && this.newCategory.label) {
       this.saveBtnText = 'Saving';
       this.newCategory.logo = await this.uploadImage(this.newCategory.logo);
+      this.newCategory.parent_id = this.newCategory.parent_id == 'null'?null:this.newCategory.parent_id;
       this.http.postcategory('Category', this.newCategory).subscribe(res=>{
         if(res.statusCode==201){
          this.toastrService.success('Category succusfully created','Successs',{positionClass:'toast-bottom-right'});

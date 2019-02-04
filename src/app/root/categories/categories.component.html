@@ -1,4 +1,4 @@
-<body style="margin-top: 7%;">
+<body class="container" style="margin-top: 7%;">
   <!-- Testimonials -->
   <section *ngIf="allCourseCategory" style="padding-top:0;padding-bottom:4rem;position:relative;top:-70px;"
     class="testimonials text-center">
@@ -80,7 +80,7 @@
           <div class="col-lg-6">
             <label>Parent</label> &nbsp;
             <select [(ngModel)]="updateCategory.parent_id">
-              <option [value]="null">null</option>
+              <option [value]="">null</option>
 	      <option *ngFor="let cat of allCourseCategory" [disabled]="cat.id == updateCategory.id" [value]="cat.id">{{cat.label}}</option>
             </select>
           </div>
@@ -159,7 +159,7 @@
           <div class="col-lg-6">
             <label>Parent</label> &nbsp;
             <select [(ngModel)]="newCategory.parent_id">
-              <option [value]="null">null</option>
+              <option [value]="">null</option>
 	      <option *ngFor="let cat of allCourseCategory" [disabled]="cat.id == updateCategory.id" [value]="cat.id">{{cat.label}}</option>
             </select>
           </div>
