@@ -64,7 +64,7 @@ export class CategoriesComponent implements OnInit {
   };
 
   deleteCategory(){
-    this.http.deleteData('CourseCategory',this.deletedCategoryId)
+    this.http.deleteData('Category',this.deletedCategoryId)
     .subscribe(res=>{
       this.populateCatgory();
     })
@@ -96,7 +96,7 @@ export class CategoriesComponent implements OnInit {
       if(count == 2) done(res);
     });
     if (this.updateCategory.logo !== this.uploadImgUrl) this.updateCategory.logo = await this.uploadImage(this.updateCategory.logo);
-    this.http.putData('CourseCategory',{
+    this.http.putData('Category',{
       id: this.updateCategory.id,
       data: this.updateCategory
     }).subscribe(res=>{
@@ -116,7 +116,7 @@ export class CategoriesComponent implements OnInit {
     if (this.newCategory.logo && this.newCategory.label) {
       this.saveBtnText = 'Saving';
       this.newCategory.logo = await this.uploadImage(this.newCategory.logo);
-      this.http.postcategory('CourseCategory', this.newCategory).subscribe(res=>{
+      this.http.postcategory('Category', this.newCategory).subscribe(res=>{
         if(res.statusCode==201){
          this.toastrService.success('Category succusfully created','Successs',{positionClass:'toast-bottom-right'});
          this.allCourseCategory.push(this.newCategory);
