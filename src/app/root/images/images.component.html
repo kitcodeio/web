@@ -12,14 +12,17 @@
         <div class="card-body">
           <h5 class="card-title">{{image.label}}</h5>
           <p class="image-desc-container card-text">{{image.description}}</p>
-          <i class="fa fa-key" aria-hidden="true"></i><a href="#." data-target="#getKeyInfo"
+          <i class="fa fa-lock" aria-hidden="true"></i><a href="#." data-target="#getKeyInfo"
             data-toggle="modal" class="text-uppercase getKeyInfo" (click)="change(image);">&nbsp;Key Info</a>&nbsp;
+        <!--  
           <i class="fa fa-play" aria-hidden="true"></i><a data-toggle="modal" data-target="#container"
             class="text-uppercase getKeyInfo hoverable" (click)="run(image)">&nbsp;Run</a>
+          -->
         </div>
       </div>
       <br>
     </div>
+<!--
     <div class="col-lg-3 col-md-3 col-sm-3">
       <div class="card image-container">
         <a style="text-decoration:none; color: rgb(32, 28, 28)" routerLink="/create-image">
@@ -30,6 +33,7 @@
       </div>
       <br>
     </div>
+    -->
   </div>
 </section>
 
