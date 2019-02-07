@@ -125,4 +125,12 @@ export class CourseCategoryComponent implements OnInit {
       this.ds.setCategory(this.allCourseCategory);
     })
   }
+
+  scroll(){
+         setTimeout(function(){
+            let ele = document.getElementById('allthecourses');
+            ele.scrollIntoView({behavior: "smooth", block: "start", inline: "nearest"});
+      }, 0);
+  }
+
 }
