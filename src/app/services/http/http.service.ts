@@ -54,7 +54,7 @@ export class HttpService {
   }
   
   getDataFromOne(model:string, id:number) {
-    return this.http.get(this.url.baseUrl+'read/course'+model+'/'+id)
+    return this.http.get(this.url.baseUrl+'read/course/'+model+'/'+id)
       .pipe(catchError((error)=>{return of(error);}));
   }
   getCourse(model: string): Observable<any> {

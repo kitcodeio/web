@@ -17,11 +17,55 @@
         <tr *ngFor="let t of tutorials; let i = index;">
           <th>{{ i + 1}}</th>
           <td><a target="_blank" href="{{t.link}}">{{t.label}}</a></td>
-          <td>{{t.tags}} <i style="float: right;" class="fa fa-pencil"></i></td>
+          <td>{{t.tags}} <i (click)="edit(t.id)" style="float: right;" class="fa fa-pencil"></i></td>
           <td>{{t.status}}</td>
           <td><button class="btn" *ngIf="t.status=='error in building image'" (click)="approve(t, i)">Retry</button></td>
         </tr>
       </tbody>
     </table>
+  </div>
+</div>
+
+<div id="edit-tutorial" class="modal fade" role="dialog">
+  <div class="modal-dialog">
+
+    <div class="modal-content">
+      <div class="modal-header">
+        <h4 class="modal-title">Edit Tutorial</h4>
+      </div>
+      <div class="modal-body">
+        <p class="form-subheading">Paste the Course/Tutorial link below:</p>
+      <input [(ngModel)]="tutorial.label" class="form-control" type="text"
+        placeholder="Insert course/tutorial name here">
+      <br>
+      <input [(ngModel)]="tutorial.link" class="form-control" type="text"
+        placeholder="Insert course/tutorial link here">
+      <small><b>Note</b>: Please include the embeded link which can be opened in a iframe. <em>eg. https://www.youtube.com/embed/S_Asbq_2qFQ</em></small>
+      <br>
+      <br>
+      <div class="inputholder">
+        <input autocomplete="off" [(ngModel)]="tag" (keyup)="searchtags(tag)" class="tag-input"
+          id="tags" placeholder="insert tags here">
+        <i class="fa fa-spinner fa-pulse fa-3x fa-fw" *ngIf="showLoader" style="float: right; font-size: xx-large;"></i>
+      </div>
+      <ul class="search-box">
+        <li *ngFor="let tag of categories" (click)="addtag(tag);">
+          <a type="click" >
+                    {{tag.label}}
+            </a>
+        </li>
+      </ul>
+      <br>
+      <div class="tags-holder">
+        <span *ngFor="let tag of tags; let i = index" class="tag hoverable" (click)="popTag(i)">{{tag.label}}</span>
+      </div>
+      <br>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-success" (click)="update()">Update</button>
+        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+      </div>
+    </div>
+
   </div>
 </div>
