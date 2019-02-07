@@ -103,4 +103,11 @@ export class TutorialComponent implements OnInit, OnDestroy {
     });
   }
 
+  delete(id) {
+    this.http.deleteTutorial(id).subscribe(res => {
+      console.log(res);
+      this.populate();
+    });
+  }
+
 }

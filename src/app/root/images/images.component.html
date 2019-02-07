@@ -1,3 +1,4 @@
+<!--
 <section class="container-fluid" style="margin-top: 2%; margin-left: 8%;">
   <div class="row no-gutters">
     <div class="col-lg-12 col-md-12 col-sm-12">
@@ -14,15 +15,12 @@
           <p class="image-desc-container card-text">{{image.description}}</p>
           <i class="fa fa-lock" aria-hidden="true"></i><a href="#." data-target="#getKeyInfo"
             data-toggle="modal" class="text-uppercase getKeyInfo" (click)="change(image);">&nbsp;Key Info</a>&nbsp;
-        <!--  
           <i class="fa fa-play" aria-hidden="true"></i><a data-toggle="modal" data-target="#container"
             class="text-uppercase getKeyInfo hoverable" (click)="run(image)">&nbsp;Run</a>
-          -->
         </div>
       </div>
       <br>
     </div>
-<!--
     <div class="col-lg-3 col-md-3 col-sm-3">
       <div class="card image-container">
         <a style="text-decoration:none; color: rgb(32, 28, 28)" routerLink="/create-image">
@@ -33,11 +31,9 @@
       </div>
       <br>
     </div>
-    -->
   </div>
 </section>
 
-<!--modal for get key information-->
 <div class="modal fade" id="getKeyInfo" tabindex="-1" role="dialog" *ngIf="allImages">
   <div class="modal-dialog" role="document">
     <div class="modal-content">
@@ -58,7 +54,6 @@
 </div>
 
 
-<!--modal for get container information-->
 <div class="modal fade" id="container" tabindex="-1" role="dialog">
   <div class="modal-dialog modal-lg" role="document">
     <div class="modal-content">
@@ -92,5 +87,29 @@
         <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
       </div>
     </div>
+  </div>
+</div> -->
+
+<div class="container">
+  <br>
+  <h1>Images</h1>
+  <br><br>
+  <div class="container">
+    <table class="table">
+      <thead>
+        <tr>
+          <th>Sr No.</th>
+          <th>Label</th>
+          <th>id</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let t of allImages; let i = index;">
+          <th>{{ i + 1}}</th>
+          <td>{{t.label}}</td>
+          <td>{{t.id}}</td>
+        </tr>
+      </tbody>
+    </table>
   </div>
 </div>
