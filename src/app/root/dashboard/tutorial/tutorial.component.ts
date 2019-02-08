@@ -37,10 +37,8 @@ export class TutorialComponent implements OnInit, OnDestroy {
     this.http.getDataFromOne('CourseChapter', id).subscribe(res => {
       this.tutorial = res.entity;
       this.tags = this.tutorial.TutorialTags.map(el => {
-        console.log(el);
         return el.Category;
       });
-      console.log(this.tags);
       $('#edit-tutorial').modal('show');
     });  
   }
@@ -88,7 +86,6 @@ export class TutorialComponent implements OnInit, OnDestroy {
   }
 
   update() {
-    console.log(this.tutorial, this.tags);
     this.tutorial.arr = this.tags;
     this.tutorial.tags = this.tags.map(tag => tag.label).join(',');
     this.http.putData('Tutorial', {
@@ -96,7 +93,8 @@ export class TutorialComponent implements OnInit, OnDestroy {
       data: this.tutorial
     }).subscribe(res => {
       if (res.statusCode == 200){
-       this.toastrService.success('','Success',{positionClass:'toast-bottom-right'});
+        this.toastrService.success('','Success',{positionClass:'toast-bottom-right'});
+        this.populate();
       }
        else this.toastrService.error('some error','Error',{positionClass:'toast-bottom-right'}); 
        $('#edit-tutorial').modal('hide');
@@ -105,7 +103,6 @@ export class TutorialComponent implements OnInit, OnDestroy {
 
   delete(id) {
     this.http.deleteTutorial(id).subscribe(res => {
-      console.log(res);
       this.populate();
     });
   }

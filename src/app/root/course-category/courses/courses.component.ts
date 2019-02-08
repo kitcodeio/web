@@ -52,15 +52,12 @@ export class CoursesComponent implements OnInit {
 
     this.route.params.subscribe(params=>{
       setTimeout(function(){
-        if (params.id == 'all') self.http.getTutorials().subscribe(res => {
-          self.allCourses = res.entity;
-        });
-        else self.http.getDataWithId('Course',params.id)
+        self.http.getDataWithId('Course',params.id)
           .subscribe(res=>{
             self.allCourses = res.entity;
             self.categoryId = params.id;
             let ele = document.getElementById('allthecourses');
-            ele.scrollIntoView({behavior: "smooth", block: "start", inline: "nearest"});
+            if(params.id !== 'all') ele.scrollIntoView({behavior: "smooth", block: "start", inline: "nearest"});
         });
       }, 0);
     });
