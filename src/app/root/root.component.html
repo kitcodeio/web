@@ -53,6 +53,7 @@
       <a class="dropdown-item" (click)="toDashboard('tutorial');" *ngIf="user.role_type=='admin'
                 " style="cursor: pointer;">Tutorial</a>
 
+      <a style="color: #212529" type="click" class="dropdown-item" href="#contact-us"  data-toggle="modal">Contact Us</a>
       <a style="color: #212529" type="click" class="dropdown-item" href="#" (click)="logout();">Logout</a>
     </div>
 
@@ -60,6 +61,7 @@
 </nav>
 
 <router-outlet *ngIf="!showForm"></router-outlet>
+
 <div class="form" *ngIf="showForm">
   <button class="close-btn hoverable" (click)="toggleCourseForm()">X</button>
   <div class="row">
@@ -102,5 +104,22 @@
       </div>
     </div>
     <div class="col-lg-4 col-md-4 col-sm-2 col-xs-1"></div>
+  </div>
+</div>
+
+<div id="contact-us" class="modal fade bd-example-modal-lg" tabindex="-1" role="dialog" aria-labelledby="contact-us" aria-hidden="true">
+  <div class="modal-dialog modal-lg">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title">Contact Us</h5>
+      </div>
+      <div class="modal-body">
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn">Submit</button>
+        <button type="button" class="btn" data-dismiss="modal">Close</button>
+      </div>
+    
+    </div>
   </div>
 </div>
