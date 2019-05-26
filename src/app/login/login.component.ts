@@ -19,7 +19,7 @@ declare var $:any;
 export class LoginComponent implements OnInit {
   emailLogin: string;
   passwordLogin: string;
-
+  registering: boolean;
   error: string;
   emailReg: string;
   passwordReg: string;
@@ -106,13 +106,14 @@ login(): void {
           if(this.emailReg.indexOf('@')!==-1 && this.emailReg.indexOf('.')){
   
             if(this.checked){
-  
+              this.registering = true; 
               this.authService.register(
                 this.company,
                 this.emailReg,
                 this.passwordReg
               )
                 .subscribe(response => {
+                  this.registering = false;
                   if(!response.error) {
                     this.emailLogin = this.emailReg;
                     this.passwordLogin = this.passwordReg;
