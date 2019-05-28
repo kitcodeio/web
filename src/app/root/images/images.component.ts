@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, OnDestroy } from '@angular/core';
 import { HttpService } from '../../services/http/http.service'
 import { Router } from '@angular/router';
 
@@ -11,11 +11,12 @@ declare var popover: any;
   templateUrl: './images.component.html',
   styleUrls: ['./images.component.css']
 })
-export class ImagesComponent implements OnInit {
+export class ImagesComponent implements OnInit, OnDestroy {
 
   selected: any;
   allImages: any= [];
   allContainers: any = [];
+  interval: any;
 
   constructor(private router: Router, private http :HttpService) { }
 
@@ -25,6 +26,13 @@ export class ImagesComponent implements OnInit {
 
   ngOnInit() {
     this.populateImage();
+    this.interval = setInterval((function(){
+      this.populateImage();
+    }).bind(this), 5000);
+  }
+
+  ngOnDestroy(){
+    clearInterval(this.interval);
   }
 
   populateImage(): void{
